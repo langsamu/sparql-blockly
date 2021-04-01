@@ -1,0 +1,50 @@
+{
+  "name": "sparql-blockly",
+  "version": "0.0.2",
+  "description": "",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "keywords": [ "sparql", "blockly" ],
+  "bugs": "https://github.com/langsamu/sparql-blockly/issues",
+  "author": {
+    "name": "Samu Lang",
+    "email": "langsamu@hotmail.com",
+    "url": "https://twitter.com/langsamu"
+  },
+  "repository": "langsamu/sparql-blockly",
+  "watch": {
+    "build": {
+      "patterns": [
+        "."
+      ],
+      "extensions": "ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "watch": "npm-watch",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.21",
+    "@types/node": "^14.14.7",
+    "@types/rdfjs__term-map": "^1.0.1",
+    "@types/rdfjs__term-set": "^1.0.2",
+    "jest": "^26.6.3",
+    "jest-editor-support": "^28.2.0",
+    "jest-xml-matcher": "^1.2.0",
+    "npm-watch": "^0.9.0",
+    "ts-jest": "^26.5.4",
+    "typescript": "^4.0.5",
+    "xmldom": "^0.5.0"
+  },
+  "dependencies": {
+    "@rdfjs/term-map": "^1.0.0",
+    "@rdfjs/term-set": "^1.0.1",
+    "blockly": "^4.20201217.0",
+    "sparqljs": "^3.4.1"
+  }
+}

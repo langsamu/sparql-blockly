@@ -1,0 +1,87 @@
+<tests>
+  <test name="String with apostrophe">
+    <sparql>"'"</sparql>
+    <xml>
+      <block type="sparql11_string">
+        <field name="value">'</field>
+      </block>
+    </xml>
+  </test>
+  <test name="String with quote">
+    <xml>
+      <block type="sparql11_string">
+        <field name="value">'"</field>
+      </block>
+    </xml>
+    <sparql>"'\""</sparql>
+  </test>
+  <test name="String with multiple lines">
+    <xml>
+      <block type="sparql11_string">
+        <field name="value">line1
+line2</field>
+      </block>
+    </xml>
+    <sparql>'''line1
+line2'''</sparql>
+  </test>
+  <test name="IRI reference empty">
+    <xml>
+      <block type="sparql11_irirefdefault"/>
+    </xml>
+    <sparql>&lt;&gt;</sparql>
+  </test>
+  <test name="IRI reference">
+    <xml>
+      <block type="sparql11_iriref">
+        <field name="value">x</field>
+      </block>
+    </xml>
+    <sparql>&lt;x&gt;</sparql>
+  </test>
+  <test name="Prefixed name">
+    <xml>
+      <block type="sparql11_prefixedname"/>
+    </xml>
+    <sparql>:</sparql>
+  </test>
+  <test name="Prefixed name with prefix">
+    <xml>
+      <block type="sparql11_prefixednameprefix">
+        <field name="prefix">prefix</field>
+      </block>
+    </xml>
+    <sparql>prefix:</sparql>
+  </test>
+  <test name="Prefixed name with local-name">
+    <xml>
+      <block type="sparql11_prefixednamelocalname">
+        <field name="localName">localName</field>
+      </block>
+    </xml>
+    <sparql>:localName</sparql>
+  </test>
+  <test name="Prefixed name with prefix and local-name">
+    <xml>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">prefix</field>
+        <field name="localName">localName</field>
+      </block>
+    </xml>
+    <sparql>prefix:localName</sparql>
+  </test>
+  <test name="Language-tagged string">
+    <xml>
+      <block type="sparql11_langstring">
+        <value name="value">
+          <block type="sparql11_string">
+            <field name="value">x</field>
+          </block>
+        </value>
+        <field name="language">en</field>
+      </block>
+    </xml>
+    <sparql>'x'@en</sparql>
+  </test>
+</tests>
+
