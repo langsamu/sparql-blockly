@@ -1,4 +1,13 @@
 import "./src/blocks"
+import BlockGenerator from "./BlockGenerator"
+import CodeGenerator from "./CodeGenerator"
+import * as SparqlJS from "sparqljs"
+import * as Blockly from "blockly"
 
-export { default as BlockGenerator } from "./BlockGenerator"
-export { default as CodeGenerator } from "./CodeGenerator"
+export function sparqlToBlockly(sparql: SparqlJS.SparqlQuery): Element {
+    return new BlockGenerator().visit(sparql)?.xml
+}
+
+export function blocklyToSparql(block: Blockly.Block): string | any[] {
+    return new CodeGenerator().blockToCode(block)
+}
