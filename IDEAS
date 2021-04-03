@@ -1,0 +1,12 @@
+TODO: fix base/prefix resolution `BASE <http://example.com> SELECT (<a> AS ?s) {}`
+TODO: clean toTriplesSameSubject mess
+TODO: normalise bnodes within pattern https://www.w3.org/TR/sparql11-query/#bgpBNodeLabels
+TODO: normalise collections
+TODO: Blockly.Names for variables?
+TODO: Blockly.Names for blanks?
+TODO: Blockly.Names for prefixes?
+
+TODO: Render block comment
+
+TODO: Restrict workspace to 1 top level block
+TODO: Can't compare roundtripping of blanks because missing bnode mapping

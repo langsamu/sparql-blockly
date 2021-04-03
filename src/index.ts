@@ -1,4 +1,4 @@
-import "./src/blocks"
+import "./blocks"
 import BlockGenerator from "./BlockGenerator"
 import CodeGenerator from "./CodeGenerator"
 import * as SparqlJS from "sparqljs"
