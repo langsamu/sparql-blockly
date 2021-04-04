@@ -15,7 +15,11 @@
     "email": "langsamu@hotmail.com",
     "url": "https://twitter.com/langsamu"
   },
-  "repository": "langsamu/sparql-blockly",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/langsamu/sparql-blockly.git",
+    "directory": "package"
+  },
   "files": [
     "dist",
     "index.d.ts"

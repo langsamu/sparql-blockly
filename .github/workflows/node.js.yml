@@ -1,23 +1,24 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
 name: Node.js CI
 
 on:
   push:
     branches: [ main ]
+    paths: [ package/** ]
   pull_request:
     branches: [ main ]
+    paths: [ package/** ]
 
 jobs:
   build:
+    defaults:
+      run:
+        working-directory: package
 
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node-version: [10.x, 12.x, 14.x, 15.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v2

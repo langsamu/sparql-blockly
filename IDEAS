@@ -1,3 +1,7 @@
+generate blocks from ontology
+	just uris
+	also statements etc
+
 TODO: fix base/prefix resolution `BASE <http://example.com> SELECT (<a> AS ?s) {}`
 TODO: clean toTriplesSameSubject mess
 TODO: normalise bnodes within pattern https://www.w3.org/TR/sparql11-query/#bgpBNodeLabels

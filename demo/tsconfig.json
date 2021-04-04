@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ESNext",
+    "lib": [ "ESNext", "dom" ],
+    "outDir": "transpiled"
+  },
+  "include": [
+    "src/index.ts"
+  ]
+}
