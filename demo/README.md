@@ -1,6 +1,8 @@
 # sparql-blockly demo app
 
-## Running the demo
+## [Online](https://langsamu.github.io/sparql-blockly/)
+
+## Running locally
 ```batch
 npm install
 npm run build
