@@ -1,31 +1,34 @@
 ﻿import * as SparqlJS from "sparqljs"
 import * as SparqlBlockly from "sparql-blockly"
 
-export class SparqlTextarea extends HTMLTextAreaElement {
+export class SparqlEditor extends HTMLElement {
     private async connectedCallback() {
-        this.addEventListener("input", this.input)
+        this.editorElement.addEventListener("input", this.input.bind(this))
     }
 
-    private get errorElement(): HTMLTextAreaElement {
-        return document.getElementById(this.getAttribute("error-element")) as HTMLTextAreaElement
+    private get editorElement(): HTMLTextAreaElement {
+        return this.querySelector("textarea") as HTMLTextAreaElement
+    }
+
+    private get errorElement(): HTMLSpanElement {
+        return this.querySelector("span") as HTMLSpanElement
     }
 
     private set error(value: string) {
-        this.errorElement.value = value
+        this.errorElement.innerText = value
     }
 
     public get value() {
-        return super.value
+        return this.editorElement.value
     }
 
     public set value(value: string) {
-        super.value = value
+        this.editorElement.value = value
         this.validate()
-        //this.input()
     }
 
     public setAndNotify(value: string) {
-        super.value = value
+        this.editorElement.value = value
         this.input()
     }
 

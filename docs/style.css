@@ -1,21 +1,21 @@
 ﻿@media screen and (min-height : 800px) {
-    [is = sparql-textarea] {
+    sparql-editor textarea {
         height: 200px
     }
 
-        [is = sparql-textarea] + textarea {
-            height: 80px
-        }
+    sparql-editor span {
+        height: 80px
+    }
 }
 
 @media screen and (max-height : 800px) {
-    [is = sparql-textarea] {
+    sparql-editor textarea {
         height: 100px
     }
 
-        [is = sparql-textarea] + textarea {
-            height: 50px
-        }
+    sparql-editor span {
+        height: 50px
+    }
 }
 
 body {
@@ -23,37 +23,50 @@ body {
     min-width: 320px;
 }
 
-[is = app-main] {
+app-main {
     height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-[is = blockly-section] {
-    flex-grow: 1;
-    min-height: 300px;
-}
+    app-main blockly-canvas {
+        flex-grow: 1;
+        min-height: 300px;
+    }
 
-#input {
-    flex-grow: 0;
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
-}
+        app-main blockly-canvas div.injectionDiv {
+            min-width: 300px;
+            min-height: 300px;
+        }
 
-[is = sparql-textarea] + textarea {
-    display: none;
-    border-top: none
-}
+    app-main sparql-editor {
+        flex-grow: 0;
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+    }
 
-[is = sparql-textarea].valid {
-    background-color: #eeffee
-}
+        app-main sparql-editor textarea:placeholder-shown {
+            text-align: center;
+            font-size: 250%;
+        }
 
-[is = sparql-textarea].invalid + textarea {
-    display: initial
-}
+        app-main sparql-editor span {
+            font-family: monospace;
+            display: none;
+            border: 1px solid;
+            border-top: none;
+            overflow: auto;
+        }
 
-[is = sparql-textarea].invalid {
-    background-color: #ffeeee
-}
+        app-main sparql-editor.valid textarea {
+            background-color: #eeffee;
+        }
+
+        app-main sparql-editor.invalid textarea {
+            background-color: #ffeeee;
+        }
+
+        app-main sparql-editor.invalid span {
+            display: initial;
+        }

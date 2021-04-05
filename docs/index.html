@@ -3,7 +3,7 @@
 <head>
     <title>SPARQL Blockly</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width = device-width" />
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0" />
     <meta name="description" content="A SPARQL builder and visualiser using Blockly" />
 
     <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
@@ -32,7 +32,7 @@
                 "url": ["https://twitter.com/langsamu", "https://github.com/langsamu/", "https://www.linkedin.com/in/langsamu/"]
             },
             "license": "https://github.com/langsamu/sparql-blockly/blob/main/LICENSE",
-            "browserRequirements": "Requires JavaScript.",
+            "browserRequirements": "Requires JavaScript. Requires Edge ^80, Firefox ^63, Chrome ^54, Opera ^41 or Safari ^10",
             "operatingSystem": "All",
             "softwareVersion": "0.0.4-5",
             "screenshot": "https://repository-images.githubusercontent.com/353815277/9e561900-93ad-11eb-8794-0b1b1645e92c",
@@ -46,12 +46,13 @@
     <script src="app.js" defer></script>
 </head>
 <body>
-    <main is="app-main">
-        <section id="input">
-            <textarea error-element="error" is="sparql-textarea"></textarea>
-            <textarea id="error"></textarea>
-        </section>
-        <section toolbox-data="toolbox.xml" is="blockly-section"></section>
-    </main>
+    <app-main>
+        <sparql-editor>
+            <label for="sparql" hidden>SPARQL editor</label>
+            <textarea placeholder="Write SPARQL here" name="sparql"></textarea>
+            <span></span>
+        </sparql-editor>
+        <blockly-canvas toolbox-data="toolbox.xml"></blockly-canvas>
+    </app-main>
 </body>
 </html>

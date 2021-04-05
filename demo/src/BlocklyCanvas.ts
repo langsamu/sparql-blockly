@@ -1,7 +1,7 @@
 ﻿import * as Blockly from "blockly"
 import * as SparqlBlockly from "sparql-blockly"
 
-export class BlocklySection extends HTMLElement {
+export class BlocklyCanvas extends HTMLElement {
     private typing = false
 
     private async getToolboxData(): Promise<string> {

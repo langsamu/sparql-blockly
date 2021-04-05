@@ -1,13 +1,13 @@
-﻿import { BlocklySection } from "./BlocklySection"
-import { SparqlTextarea } from "./SparqlTextarea"
+﻿import { BlocklyCanvas } from "./BlocklyCanvas"
+import { SparqlEditor } from "./SparqlEditor"
 
 export class AppMain extends HTMLElement {
-    private get sparql(): SparqlTextarea {
-        return this.querySelector("[is = sparql-textarea]")
+    private get sparql(): SparqlEditor {
+        return this.querySelector("sparql-editor")
     }
 
-    private get blockly(): BlocklySection {
-        return this.querySelector("[is = blockly-section]")
+    private get blockly(): BlocklyCanvas {
+        return this.querySelector("blockly-canvas")
     }
 
     private async connectedCallback() {
