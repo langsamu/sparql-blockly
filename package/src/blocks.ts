@@ -235,11 +235,14 @@ Blockly.Blocks["sparql11_typedliteral"] = {
 
 Blockly.Blocks["sparql11_langstring"] = {
     init: function () {
+        const language = new Blockly.FieldTextInput("")
+        language.setValidator(value => /^[a-zA-Z]+(-[a-zA-Z0-9]+)*$/.test(value) ? value : null)
+
         this.appendValueInput("value")
             .setCheck("string")
         this.appendDummyInput()
             .appendField("@")
-            .appendField(new Blockly.FieldTextInput(""), "language")
+            .appendField(language, "language")
         this.setInputsInline(true)
         this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "RDFLiteral", "GraphNode", "VarOrTerm", "GraphTerm", "DataBlockValue", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "ValueLogical", "RelationalExpression", "NumericExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression"])
         this.setColour(163)
@@ -870,11 +873,11 @@ Blockly.Blocks["sparql11_varorexpressionasvaritem"] = {
 
 Blockly.Blocks["sparql11_numericliteral"] = {
     init: function () {
-        const field = new Blockly.FieldTextInput("")
-        field.setValidator(value => { if (isNaN(parseFloat(value)) || !isFinite(value)) return null })
+        const valueField = new Blockly.FieldTextInput("")
+        valueField.setValidator(value => (isNaN(parseFloat(value)) || !isFinite(value)) ? null : value)
 
         this.appendDummyInput()
-            .appendField(field, "value")
+            .appendField(valueField, "value")
         this.setInputsInline(true)
         this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "NumericLiteral", "RDFLiteral", "GraphNode", "VarOrTerm", "GraphTerm", "DataBlockValue", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "ValueLogical", "RelationalExpression", "NumericExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression"])
         this.setColour(163)

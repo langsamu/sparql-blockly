@@ -1,4 +1,6 @@
-﻿import * as SparqlJS from "sparqljs"
+﻿import type { OperatorHierarchy, Quads, Using, Pattern, TriplesSameSubjectPattern, CollectionPattern, Verb, Value, OperatorDefinition, ObjectList, TriplesSameSubject, } from "./aliases"
+import { RDF, XSD } from "./aliases"
+import * as SparqlJS from "sparqljs"
 import { Block } from "./Block"
 import { StringifiedMap } from "./StringifiedMap"
 import TermSet = require("@rdfjs/term-set")
@@ -765,7 +767,6 @@ export default class BlockGenerator {
 
         return block
     }
-    // eslint-disable-next-line @typescript-eslint/camelcase
     private group_concat(aggregate: SparqlJS.AggregateExpression): Block {
         const block = new Block("group_concat")
 
@@ -1106,22 +1107,6 @@ export default class BlockGenerator {
     }
 }
 
-enum RDF {
-    type = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
-    langString = "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
-    nil = "http://www.w3.org/1999/02/22-rdf-syntax-ns#nil",
-    first = "http://www.w3.org/1999/02/22-rdf-syntax-ns#first",
-    rest = "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest",
-}
-
-enum XSD {
-    string = "http://www.w3.org/2001/XMLSchema#string",
-    integer = "http://www.w3.org/2001/XMLSchema#integer",
-    decimal = "http://www.w3.org/2001/XMLSchema#decimal",
-    double = "http://www.w3.org/2001/XMLSchema#double",
-    boolean = "http://www.w3.org/2001/XMLSchema#boolean",
-}
-
 function toCamel(value: string): string {
     return value.charAt(0).toLowerCase() + value.substr(1)
 }
@@ -1145,16 +1130,3 @@ function first<T>(collection: T[] | Set<T>): T {
 function deconstruct<T>(hierarchy: { [key: string]: T }): [string, T] {
     return first(Object.entries(hierarchy))
 }
-
-interface TriplesSameSubjectPattern { type: "triplesSameSubject"; subject: SparqlJS.Term; predicates: PropertyList }
-interface CollectionPattern { type: "collection"; items: SparqlJS.Term[] }
-type Pattern = SparqlJS.Pattern | TriplesSameSubjectPattern | CollectionPattern
-type Quads = SparqlJS.GraphQuads | TriplesSameSubjectPattern
-type ObjectList = Set<SparqlJS.Term>
-type Verb = SparqlJS.IriTerm | SparqlJS.VariableTerm | SparqlJS.PropertyPath
-type Value = SparqlJS.IriTerm | SparqlJS.BlankTerm | SparqlJS.LiteralTerm | undefined
-type PropertyList = Map<Verb, ObjectList>
-type TriplesSameSubject = Map<SparqlJS.Term, PropertyList>
-type OperatorDefinition = { operators: string[]; higher?: OperatorHierarchy }
-type OperatorHierarchy = { [key: string]: OperatorDefinition }
-type Using = { default: SparqlJS.IriTerm[]; named: SparqlJS.IriTerm[] }

@@ -1,11 +1,6 @@
+import type { CodeTuple } from "./aliases"
+import { Order } from "./aliases"
 import * as Blockly from "blockly"
-
-export enum Order {
-    None = 0,
-    Atomic = 1
-}
-
-type CodeTuple = [string, Order]
 
 function codeTuple(code: string): CodeTuple {
     return [code, Order.None]
@@ -13,6 +8,7 @@ function codeTuple(code: string): CodeTuple {
 function join(delimiter: string, ...clauses: string[]) {
     return clauses.filter(Boolean).join(delimiter)
 }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function joinO(delimiter: string, ...clauses: Array<[any, string] | string>): string {
     return clauses.filter(clause => clause instanceof Array ? clause[0] : clause).map(clause => clause instanceof Array ? clause[1] : clause).join(delimiter)
 }
@@ -386,14 +382,14 @@ export default class CodeGenerator extends Blockly.Generator {
 
         return codeTuple(code)
     }
-    public sparqlNamedGraphClause(block: Blockly.Block) {
+    public sparqlNamedGraphClause(block: Blockly.Block): CodeTuple {
         const value = this.valueToCode(block, "value")
 
         const code = `NAMED ${value}`
 
         return codeTuple(code)
     }
-    public sparqlSolutionModifier(block: Blockly.Block) {
+    public sparqlSolutionModifier(block: Blockly.Block): CodeTuple {
         const group = this.statementToCode(block, "group")
         const having = this.statementToCode(block, "having")
         const order = this.statementToCode(block, "order")
@@ -769,7 +765,6 @@ export default class CodeGenerator extends Blockly.Generator {
 
         return codeTuple(code)
     }
-    // eslint-disable-next-line @typescript-eslint/camelcase
     public sparqlGroup_Concat(block: Blockly.Block): CodeTuple {
         const arg1 = this.valueToCode(block, "arg1")
         const distinct = block.getFieldValue("distinct")
@@ -880,7 +875,7 @@ export default class CodeGenerator extends Blockly.Generator {
         return this.item(" .\n", block)
     }
 
-    public valueToCode(block: Blockly.Block, name: string) {
+    public valueToCode(block: Blockly.Block, name: string): string {
         return super.valueToCode(block, name, Order.Atomic)
     }
     private indent(code: string): string {

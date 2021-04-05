@@ -18,7 +18,7 @@ export class SparqlEditor extends HTMLElement {
         this.errorElement.innerText = value
     }
 
-    public get value() {
+    public get value(): string {
         return this.editorElement.value
     }
 
@@ -27,7 +27,7 @@ export class SparqlEditor extends HTMLElement {
         this.validate()
     }
 
-    public setAndNotify(value: string) {
+    public setAndNotify(value: string): void {
         this.editorElement.value = value
         this.input()
     }

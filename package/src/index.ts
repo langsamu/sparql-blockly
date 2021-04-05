@@ -8,6 +8,7 @@ export function sparqlToBlockly(sparql: SparqlJS.SparqlQuery): Element {
     return new BlockGenerator().visit(sparql)?.xml
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function blocklyToSparql(block: Blockly.Block): string | any[] {
-    return new CodeGenerator().blockToCode(block)
+    return new CodeGenerator().blockToCode(block) 
 }

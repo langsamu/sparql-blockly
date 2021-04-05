@@ -39,7 +39,7 @@ export interface SparqlParser {
 
 export interface SparqlGenerator {
     stringify(query: SparqlQuery): string;
-    createGenerator(): any;
+    createGenerator(): SparqlGenerator;
 }
 
 export class Wildcard {
@@ -291,7 +291,7 @@ export type Expression =
     | Term;
 
 // allow Expression circularly reference itself
-export interface Tuple extends Array<Expression> { }
+export type Tuple = Array<Expression>
 
 export interface BaseExpression {
     type: string;

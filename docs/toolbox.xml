@@ -1,4 +1,4 @@
-<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+<xml xmlns="https://developers.google.com/blockly/xml">
   <category name="Queries">
     <label text="Query"/>
     <block type="sparql11_query"/>
@@ -341,8 +341,12 @@
     <block type="sparql11_prefixednameprefix"/>
     <block type="sparql11_prefixednamelocalname"/>
     <block type="sparql11_prefixednameprefixlocalname"/>
-    <block type="sparql11_string"/>
-    <block type="sparql11_numericliteral"/>
+    <block type="sparql11_string">
+      <field name="value">lorem ipsum</field>
+    </block>
+    <block type="sparql11_numericliteral">
+      <field name="value">42</field>
+    </block>
     <block type="sparql11_booleanliteral"/>
     <block type="sparql11_typedliteral">
       <value name="value">
@@ -585,173 +589,245 @@
     <block type="sparql11_graphref"/>
   </category>
   <category name="Vocabularies">
-    <block type="sparql11_prologueitem">
-      <value name="value">
-        <block type="sparql11_prefixdecl">
-          <field name="prefix">dc</field>
-          <value name="value">
-            <block type="sparql11_iriref">
-              <field name="value">http://purl.org/dc/elements/1.1/</field>
-            </block>
-          </value>
-        </block>
-      </value>
-    </block>
-    <block type="sparql11_prologueitem">
-      <value name="value">
-        <block type="sparql11_prefixdecl">
-          <field name="prefix">dcat</field>
-          <value name="value">
-            <block type="sparql11_iriref">
-              <field name="value">http://www.w3.org/ns/dcat#</field>
-            </block>
-          </value>
-        </block>
-      </value>
-    </block>
-    <block type="sparql11_prologueitem">
-      <value name="value">
-        <block type="sparql11_prefixdecl">
-          <field name="prefix">dct</field>
-          <value name="value">
-            <block type="sparql11_iriref">
-              <field name="value">http://purl.org/dc/terms/</field>
-            </block>
-          </value>
-        </block>
-      </value>
-    </block>
-    <block type="sparql11_prologueitem">
-      <value name="value">
-        <block type="sparql11_prefixdecl">
-          <field name="prefix">ex</field>
-          <value name="value">
-            <block type="sparql11_iriref">
-              <field name="value">http://example.com/</field>
-            </block>
-          </value>
-        </block>
-      </value>
-    </block>
-    <block type="sparql11_prologueitem">
-      <value name="value">
-        <block type="sparql11_prefixdecl">
-          <field name="prefix">foaf</field>
-          <value name="value">
-            <block type="sparql11_iriref">
-              <field name="value">http://xmlns.com/foaf/0.1/</field>
-            </block>
-          </value>
-        </block>
-      </value>
-    </block>
-    <block type="sparql11_prologueitem">
-      <value name="value">
-        <block type="sparql11_prefixdecl">
-          <field name="prefix">org</field>
-          <value name="value">
-            <block type="sparql11_iriref">
-              <field name="value">http://www.w3.org/ns/org#</field>
-            </block>
-          </value>
-        </block>
-      </value>
-    </block>
-    <block type="sparql11_prologueitem">
-      <value name="value">
-        <block type="sparql11_prefixdecl">
-          <field name="prefix">owl</field>
-          <value name="value">
-            <block type="sparql11_iriref">
-              <field name="value">http://www.w3.org/2002/07/owl#</field>
-            </block>
-          </value>
-        </block>
-      </value>
-    </block>
-    <block type="sparql11_prologueitem">
-      <value name="value">
-        <block type="sparql11_prefixdecl">
-          <field name="prefix">prov</field>
-          <value name="value">
-            <block type="sparql11_iriref">
-              <field name="value">http://www.w3.org/ns/prov#</field>
-            </block>
-          </value>
-        </block>
-      </value>
-    </block>
-    <block type="sparql11_prologueitem">
-      <value name="value">
-        <block type="sparql11_prefixdecl">
-          <field name="prefix">rdf</field>
-          <value name="value">
-            <block type="sparql11_iriref">
-              <field name="value">http://www.w3.org/1999/02/22-rdf-syntax-ns#</field>
-            </block>
-          </value>
-        </block>
-      </value>
-    </block>
-    <block type="sparql11_prologueitem">
-      <value name="value">
-        <block type="sparql11_prefixdecl">
-          <field name="prefix">rdfs</field>
-          <value name="value">
-            <block type="sparql11_iriref">
-              <field name="value">http://www.w3.org/2000/01/rdf-schema#</field>
-            </block>
-          </value>
-        </block>
-      </value>
-    </block>
-    <block type="sparql11_prologueitem">
-      <value name="value">
-        <block type="sparql11_prefixdecl">
-          <field name="prefix">shacl</field>
-          <value name="value">
-            <block type="sparql11_iriref">
-              <field name="value">http://www.w3.org/ns/shacl#</field>
-            </block>
-          </value>
-        </block>
-      </value>
-    </block>
-    <block type="sparql11_prologueitem">
-      <value name="value">
-        <block type="sparql11_prefixdecl">
-          <field name="prefix">skos</field>
-          <value name="value">
-            <block type="sparql11_iriref">
-              <field name="value">http://www.w3.org/2004/02/skos/core#</field>
-            </block>
-          </value>
-        </block>
-      </value>
-    </block>
-    <block type="sparql11_prologueitem">
-      <value name="value">
-        <block type="sparql11_prefixdecl">
-          <field name="prefix">void</field>
-          <value name="value">
-            <block type="sparql11_iriref">
-              <field name="value">http://rdfs.org/ns/void#</field>
-            </block>
-          </value>
-        </block>
-      </value>
-    </block>
-    <block type="sparql11_prologueitem">
-      <value name="value">
-        <block type="sparql11_prefixdecl">
-          <field name="prefix">xsd</field>
-          <value name="value">
-            <block type="sparql11_iriref">
-              <field name="value">http://www.w3.org/2001/XMLSchema#</field>
-            </block>
-          </value>
-        </block>
-      </value>
-    </block>
+    <category name="RDF">
+      <block type="sparql11_prologueitem">
+        <value name="value">
+          <block type="sparql11_prefixdecl">
+            <field name="prefix">rdf</field>
+            <value name="value">
+              <block type="sparql11_iriref">
+                <field name="value">http://www.w3.org/1999/02/22-rdf-syntax-ns#</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdf</field>
+        <field name="localName">HTML</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdf</field>
+        <field name="localName">langString</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdf</field>
+        <field name="localName">PlainLiteral</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdf</field>
+        <field name="localName">type</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdf</field>
+        <field name="localName">Property</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdf</field>
+        <field name="localName">Statement</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdf</field>
+        <field name="localName">subject</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdf</field>
+        <field name="localName">predicate</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdf</field>
+        <field name="localName">object</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdf</field>
+        <field name="localName">Bag</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdf</field>
+        <field name="localName">Seq</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdf</field>
+        <field name="localName">Alt</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdf</field>
+        <field name="localName">value</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdf</field>
+        <field name="localName">List</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdf</field>
+        <field name="localName">nil</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdf</field>
+        <field name="localName">XMLLiteral</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdf</field>
+        <field name="localName">JSON</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdf</field>
+        <field name="localName">CompoundLiteral</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdf</field>
+        <field name="localName">language</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdf</field>
+        <field name="localName">direction</field>
+      </block>
+    </category>
+    <category name="Prefixes">
+      <block type="sparql11_prologueitem">
+        <value name="value">
+          <block type="sparql11_prefixdecl">
+            <field name="prefix">dcat</field>
+            <value name="value">
+              <block type="sparql11_iriref">
+                <field name="value">http://www.w3.org/ns/dcat#</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+      <block type="sparql11_prologueitem">
+        <value name="value">
+          <block type="sparql11_prefixdecl">
+            <field name="prefix">dc</field>
+            <value name="value">
+              <block type="sparql11_iriref">
+                <field name="value">http://purl.org/dc/terms/</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+      <block type="sparql11_prologueitem">
+        <value name="value">
+          <block type="sparql11_prefixdecl">
+            <field name="prefix">ex</field>
+            <value name="value">
+              <block type="sparql11_iriref">
+                <field name="value">http://example.com/</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+      <block type="sparql11_prologueitem">
+        <value name="value">
+          <block type="sparql11_prefixdecl">
+            <field name="prefix">foaf</field>
+            <value name="value">
+              <block type="sparql11_iriref">
+                <field name="value">http://xmlns.com/foaf/0.1/</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+      <block type="sparql11_prologueitem">
+        <value name="value">
+          <block type="sparql11_prefixdecl">
+            <field name="prefix">org</field>
+            <value name="value">
+              <block type="sparql11_iriref">
+                <field name="value">http://www.w3.org/ns/org#</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+      <block type="sparql11_prologueitem">
+        <value name="value">
+          <block type="sparql11_prefixdecl">
+            <field name="prefix">owl</field>
+            <value name="value">
+              <block type="sparql11_iriref">
+                <field name="value">http://www.w3.org/2002/07/owl#</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+      <block type="sparql11_prologueitem">
+        <value name="value">
+          <block type="sparql11_prefixdecl">
+            <field name="prefix">prov</field>
+            <value name="value">
+              <block type="sparql11_iriref">
+                <field name="value">http://www.w3.org/ns/prov#</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+      <block type="sparql11_prologueitem">
+        <value name="value">
+          <block type="sparql11_prefixdecl">
+            <field name="prefix">rdfs</field>
+            <value name="value">
+              <block type="sparql11_iriref">
+                <field name="value">http://www.w3.org/2000/01/rdf-schema#</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+      <block type="sparql11_prologueitem">
+        <value name="value">
+          <block type="sparql11_prefixdecl">
+            <field name="prefix">shacl</field>
+            <value name="value">
+              <block type="sparql11_iriref">
+                <field name="value">http://www.w3.org/ns/shacl#</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+      <block type="sparql11_prologueitem">
+        <value name="value">
+          <block type="sparql11_prefixdecl">
+            <field name="prefix">skos</field>
+            <value name="value">
+              <block type="sparql11_iriref">
+                <field name="value">http://www.w3.org/2004/02/skos/core#</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+      <block type="sparql11_prologueitem">
+        <value name="value">
+          <block type="sparql11_prefixdecl">
+            <field name="prefix">void</field>
+            <value name="value">
+              <block type="sparql11_iriref">
+                <field name="value">http://rdfs.org/ns/void#</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+      <block type="sparql11_prologueitem">
+        <value name="value">
+          <block type="sparql11_prefixdecl">
+            <field name="prefix">xsd</field>
+            <value name="value">
+              <block type="sparql11_iriref">
+                <field name="value">http://www.w3.org/2001/XMLSchema#</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </category>
   </category>
 </xml>

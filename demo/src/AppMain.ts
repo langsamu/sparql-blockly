@@ -34,12 +34,12 @@ export class AppMain extends HTMLElement {
     }
 
     private updateUrl() {
-        window.location.hash = this.sparql.value
+        window.location.hash = encodeURIComponent(this.sparql.value)
     }
 
     private blocksLoaded() {
-        const h = window.location.hash.split("#")[1]
-        if (h)
-            this.sparql.setAndNotify(decodeURI(h))
+        const hash = window.location.hash.split("#")[1]
+        if (hash)
+            this.sparql.setAndNotify(decodeURIComponent(hash))
     }
 }

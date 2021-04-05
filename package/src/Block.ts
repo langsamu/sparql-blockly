@@ -1,6 +1,5 @@
-﻿interface Processor<T> {
-    (item: T): Block;
-}
+﻿import type { Processor } from "./aliases"
+import BlockGenerator from "./BlockGenerator"
 
 export class Block {
     private type: string
@@ -28,16 +27,16 @@ export class Block {
         return doc.documentElement
     }
 
-    public addValue(name, value: Block) {
+    public addValue(name: string, value: Block): void {
         if (value)
             this.values.set(name, value)
     }
 
-    public addField(name: string, value: string) {
+    public addField(name: string, value: string): void {
         this.fields.set(name, value)
     }
 
-    public addItems<T>(name: string, items: T[], itemProcessor: Processor<T>, thisArg) {
+    public addItems<T>(name: string, items: T[], itemProcessor: Processor<T>, thisArg: BlockGenerator): void {
         const linearise = (acc: Block, i: T) => {
             const block = itemProcessor.call(thisArg, i)
             block.next = acc

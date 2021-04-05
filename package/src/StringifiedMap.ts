@@ -1,11 +1,13 @@
 ﻿export class StringifiedMap<K, V> extends Map {
     private keyMap = new Map<string, K>();
 
-    public set(key: K, value: V) {
+    public set(key: K, value: V): this {
         const keyString = JSON.stringify(key);
         this.keyMap.set(keyString, key);
 
-        return super.set(keyString, value);
+        super.set(keyString, value);
+
+        return this;
     }
 
     public get(key: K): V {
