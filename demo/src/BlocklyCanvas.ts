@@ -4,22 +4,6 @@ import * as SparqlBlockly from "sparql-blockly"
 export class BlocklyCanvas extends HTMLElement {
     private typing = false
 
-    private async getToolboxData(): Promise<string> {
-        const url = this.getAttribute("toolbox-data")
-        const response = await fetch(url)
-        return await response.text()
-    }
-
-    public set dom(value: Element) {
-        if (value) {
-            const workspace = Blockly.getMainWorkspace() as Blockly.WorkspaceSvg
-            workspace.clear()
-
-            this.typing = true
-            Blockly.Xml.domToWorkspace(value, workspace)
-        }
-    }
-
     private async connectedCallback() {
         const options: Blockly.BlocklyOptions = {
             sounds: false,
@@ -43,6 +27,22 @@ export class BlocklyCanvas extends HTMLElement {
         window.setInterval(() => Blockly.svgResize(workspace), 1000)
 
         this.dispatchEvent(new Event("load"))
+    }
+
+    public set dom(value: Element) {
+        if (value) {
+            const workspace = Blockly.getMainWorkspace() as Blockly.WorkspaceSvg
+            workspace.clear()
+
+            this.typing = true
+            Blockly.Xml.domToWorkspace(value, workspace)
+        }
+    }
+
+    private async getToolboxData(): Promise<string> {
+        const url = this.getAttribute("toolbox-data")
+        const response = await fetch(url)
+        return await response.text()
     }
 
     private workspaceChanged(e) {

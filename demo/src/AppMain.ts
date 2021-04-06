@@ -2,6 +2,13 @@
 import { SparqlEditor } from "./SparqlEditor"
 
 export class AppMain extends HTMLElement {
+    private monitorHash = true
+
+    private connectedCallback() {
+        document.addEventListener("DOMContentLoaded", this.onLoad.bind(this))
+        window.addEventListener("hashchange", this.onHash.bind(this))
+    }
+
     private get sparql(): SparqlEditor {
         return this.querySelector("sparql-editor")
     }
@@ -10,36 +17,49 @@ export class AppMain extends HTMLElement {
         return this.querySelector("blockly-canvas")
     }
 
-    private async connectedCallback() {
-        document.addEventListener("DOMContentLoaded", () => {
-
-            this.sparql.addEventListener("sparql", this.sparqlChanged.bind(this))
-            this.sparql.addEventListener("input", this.sparqlInput.bind(this))
-            this.blockly.addEventListener("blocks", this.blocksChanged.bind(this))
-            this.blockly.addEventListener("load", this.blocksLoaded.bind(this))
-        })
+    private onHash() {
+        if (this.monitorHash)
+            this.setFromHash()
     }
 
-    private sparqlChanged(e: CustomEvent<Element>) {
+    private onLoad() {
+        this.sparql.addEventListener("sparql", this.onSparql.bind(this))
+        this.sparql.addEventListener("input", this.onInput.bind(this))
+        this.blockly.addEventListener("blocks", this.onBlocks.bind(this))
+        this.blockly.addEventListener("load", this.onBlocklyLoad.bind(this))
+    }
+
+    private onSparql(e: CustomEvent<Element>) {
         this.blockly.dom = e.detail
     }
 
-    private sparqlInput() {
+    private onInput() {
         this.updateUrl()
     }
 
-    private blocksChanged(e: CustomEvent<string>) {
+    private onBlocks(e: CustomEvent<string>) {
         this.sparql.value = e.detail
         this.updateUrl()
     }
 
-    private updateUrl() {
-        window.location.hash = encodeURIComponent(this.sparql.value)
+    private onBlocklyLoad() {
+        this.setFromHash()
     }
 
-    private blocksLoaded() {
-        const hash = window.location.hash.split("#")[1]
-        if (hash)
-            this.sparql.setAndNotify(decodeURIComponent(hash))
+    private setFromHash() {
+        const sparqlFromLink = window.location.hash.split("#")[1]
+
+        if (sparqlFromLink)
+            this.sparql.setAndNotify(decodeURIComponent(sparqlFromLink))
+    }
+
+    private updateUrl() {
+        // Disable monitoring hash change to avoid double update
+        this.monitorHash = false
+
+        window.location.hash = encodeURIComponent(this.sparql.value)
+
+        // Delay enabling monitoring hash because that event is only dispatched after this listener returns
+        window.setTimeout(() => this.monitorHash = true, 500)
     }
 }
