@@ -205,7 +205,7 @@
     <label text="Object list item"/>
     <block type="sparql11_objectlistitem"/>
     <label text="Object list item with annotation pattern"/>
-    <block type="sparql11_objectlistitemanootationpattern">
+    <block type="sparql11_objectlistitemannotationpattern">
       <statement name="annotations">
         <block type="sparql11_propertylistnotempty">
           <statement name="objects">
@@ -385,7 +385,7 @@
     <label text="Object list item"/>
     <block type="sparql11_objectlistitem"/>
     <label text="Object list item with annotation pattern"/>
-    <block type="sparql11_objectlistitemanootationpattern">
+    <block type="sparql11_objectlistitemannotationpattern">
       <statement name="annotations">
         <block type="sparql11_propertylistnotempty">
           <statement name="objects">

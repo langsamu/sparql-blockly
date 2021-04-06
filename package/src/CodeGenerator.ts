@@ -784,7 +784,7 @@ export default class CodeGenerator extends Blockly.Generator {
 
         return codeTuple(code)
     }
-    public sparqlObjectListItemAnootationPattern(block: Blockly.Block): string {
+    public sparqlObjectListItemAnnotationPattern(block: Blockly.Block): string {
         const value = this.valueToCode(block, "value")
         const annotations = this.statementToCode(block, "annotations")
 

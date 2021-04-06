@@ -18,7 +18,7 @@ Blockly.Blocks["sparql11_embtp"] = {
     }
 }
 
-Blockly.Blocks["sparql11_objectlistitemanootationpattern"] = {
+Blockly.Blocks["sparql11_objectlistitemannotationpattern"] = {
     init: function () {
         this.appendValueInput("value")
             .appendField("{|")
