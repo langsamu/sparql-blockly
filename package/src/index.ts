@@ -1,4 +1,4 @@
-import "./blocks"
+import "./initialiseBlockly"
 import BlockGenerator from "./BlockGenerator"
 import CodeGenerator from "./CodeGenerator"
 import * as SparqlJS from "sparqljs"
@@ -10,5 +10,5 @@ export function sparqlToBlockly(sparql: SparqlJS.SparqlQuery): Element {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function blocklyToSparql(block: Blockly.Block): string | any[] {
-    return new CodeGenerator().blockToCode(block) 
+    return new CodeGenerator().blockToCode(block)
 }

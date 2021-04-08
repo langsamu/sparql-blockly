@@ -1,3 +1,4 @@
+import "../src/defineCustomBlocks"
 import "jest"
 import "jest-xml-matcher"
 import { readFileSync } from "fs"

@@ -18,7 +18,7 @@
     "ncp": "^2.0.0"
   },
   "dependencies": {
-    "sparql-blockly": "^0.0.4-13",
+    "sparql-blockly": "^0.0.4-14",
     "sparqljs": "^3.4.1",
     "blockly": "^5.20210325.0"
   }

@@ -1,4 +1,4 @@
-import "../src/blocks"
+import "../src/defineCustomBlocks"
 import "jest"
 import * as Blockly from "blockly"
 import { readFileSync } from "fs"
