@@ -1,6 +1,6 @@
 {
   "name": "sparql-blockly",
-  "version": "0.0.4-14",
+  "version": "0.0.4-15",
   "description": "A library for working with SPARQL in Blockly",
   "main": "dist/index.js",
   "license": "MIT",
@@ -22,13 +22,15 @@
   },
   "files": [
     "dist",
-    "index.d.ts"
+    "index.d.ts",
+    "sparql-blockly.min.js"
   ],
   "scripts": {
     "clean": "tsc --build --clean",
     "build": "tsc",
     "test": "jest",
-    "lint": "eslint --cache --ext .ts --ignore-path .gitignore ."
+    "lint": "eslint --cache --ext .ts --ignore-path .gitignore .",
+    "prepublishOnly": "tsc && webpack"
   },
   "devDependencies": {
     "@types/jest": "^26.0.22",
@@ -36,13 +38,18 @@
     "@types/rdfjs__term-map": "^1.0.1",
     "@types/rdfjs__term-set": "^1.0.2",
     "@types/sparqljs": "^3.1.1",
+    "@types/webpack": "^5.28.0",
     "@typescript-eslint/eslint-plugin": "^4.20.0",
     "@typescript-eslint/parser": "^4.20.0",
     "eslint": "^7.23.0",
     "jest": "^26.6.3",
     "jest-xml-matcher": "^1.2.0",
     "ts-jest": "^26.5.4",
-    "typescript": "^4.0.5",
+    "ts-loader": "^8.1.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4",
+    "webpack": "^5.31.2",
+    "webpack-cli": "^4.6.0",
     "xmldom": "^0.5.0"
   },
   "dependencies": {

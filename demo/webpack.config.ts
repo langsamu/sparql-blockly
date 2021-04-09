@@ -7,7 +7,8 @@ const config: webpack.Configuration = {
         filename: "app.js",
     },
     externals: {
-        "blockly": "Blockly"
+        "blockly": "Blockly",
+        "sparql-blockly": "SparqlBlockly"
     },
     resolve: {
         extensions: [".ts", ".js"]
