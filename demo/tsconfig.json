@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "CommonJS",
     "target": "ES6",
-    "lib": [ "ES6", "dom" ],
-    "outDir": "transpiled"
-  },
-  "include": [
-    "src/index.ts"
-  ]
+    "lib": [ "ES6", "dom" ]
+  }
 }
