@@ -75,7 +75,7 @@ export default class CodeGenerator extends Blockly.Generator {
         const subject = this.statementToCode(block, "subject")
         const where = this.valueToCode(block, "where")
 
-        const code = join("\n", join(" ", "DECRIBE", star, subject), where)
+        const code = join("\n", join(" ", "DESCRIBE", star, subject), where)
 
         return codeTuple(code)
     }

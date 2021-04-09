@@ -1,6 +1,8 @@
 ﻿import { BlocklyCanvas } from "./BlocklyCanvas"
 import { SparqlEditor } from "./SparqlEditor"
 
+const MONITOR_HASH_AFTER = 250
+
 export class AppMain extends HTMLElement {
     private monitorHash = true
 
@@ -60,6 +62,6 @@ export class AppMain extends HTMLElement {
         window.location.hash = encodeURIComponent(this.sparql.value)
 
         // Delay enabling monitoring hash because that event is only dispatched after this listener returns
-        window.setTimeout(() => this.monitorHash = true, 500)
+        window.setTimeout(() => this.monitorHash = true, MONITOR_HASH_AFTER)
     }
 }

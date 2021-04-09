@@ -1,6 +1,8 @@
 ﻿import * as Blockly from "blockly"
 import * as SparqlBlockly from "sparql-blockly"
 
+const RESIZE_BLOCKLY_EVERY = 1000
+
 export class BlocklyCanvas extends HTMLElement {
     private typing = false
 
@@ -24,7 +26,12 @@ export class BlocklyCanvas extends HTMLElement {
         const workspace = Blockly.inject(this, options)
         workspace.addChangeListener(this.workspaceChanged.bind(this))
 
-        window.setInterval(() => Blockly.svgResize(workspace), 1000)
+        // Periodically resize Blockly workspace to accommodate parse error display and window resizing
+        window.setInterval(() => Blockly.svgResize(workspace), RESIZE_BLOCKLY_EVERY)
+
+        workspace.registerButtonCallback("example", function (button: Blockly.FlyoutButton) {
+            window.location.hash = encodeURIComponent(button.info["query"])
+        })
 
         this.dispatchEvent(new Event("load"))
     }

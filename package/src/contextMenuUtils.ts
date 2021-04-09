@@ -3,8 +3,8 @@
 let separatorCounter = 0;
 
 export function vars(parentBlockType: string, inputName: string, prefix?: string): void {
-    property(parentBlockType, "sparql11_var1", inputName, "?v", prefix)
-    property(parentBlockType, "sparql11_var2", inputName, "$v", prefix)
+    property(parentBlockType, "sparql11_var1", inputName, "?s", prefix)
+    property(parentBlockType, "sparql11_var2", inputName, "$s", prefix)
 }
 export function varsOrIris(parentBlockType: string, inputName: string, prefix?: string): void {
     vars(parentBlockType, inputName, prefix)

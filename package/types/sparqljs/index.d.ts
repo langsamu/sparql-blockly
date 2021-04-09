@@ -105,7 +105,7 @@ export interface AskQuery extends BaseQuery {
 
 export interface DescribeQuery extends BaseQuery {
     queryType: 'DESCRIBE';
-    variables: Variable[] | [Wildcard];
+    variables: Term[] | [Wildcard];
 }
 
 export interface Update {

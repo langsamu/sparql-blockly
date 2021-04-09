@@ -98,7 +98,7 @@ export default class BlockGenerator {
         if (BlockGenerator.isWildcard(variables))
             block.addField("star", "*")
         else
-            block.addItems("template", variables as SparqlJS.VariableTerm[], this.varOrIriItem, this)
+            block.addItems("subject", variables as SparqlJS.Term[], this.varOrIriItem, this)
 
         return block
     }
@@ -1010,7 +1010,7 @@ export default class BlockGenerator {
     }
     private orderItem(item: SparqlJS.Ordering): Block {
         if (item.descending)
-            return this.descending(item.expression)
+            return new Block("orderconditionitem", this.descending(item.expression))
         else if ("termType" in item.expression)
             if (item.expression.termType === "Variable")
                 return new Block("orderconditionitem", this.term(item.expression as SparqlJS.Term))
@@ -1046,7 +1046,7 @@ export default class BlockGenerator {
 
         return items
     }
-    private static isWildcard(variables: SparqlJS.Variable[] | [SparqlJS.Wildcard]): variables is [SparqlJS.Wildcard] {
+    private static isWildcard(variables: SparqlJS.Variable[] | SparqlJS.Term[] | [SparqlJS.Wildcard]): variables is [SparqlJS.Wildcard] {
         return variables[0] instanceof SparqlJS.Wildcard
     }
     private static toTriplesSameSubject(triples: SparqlJS.Triple[]): TriplesSameSubject {
