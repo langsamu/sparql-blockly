@@ -1,6 +1,6 @@
 {
   "name": "sparql-blockly",
-  "version": "0.0.4-15",
+  "version": "0.0.4-16",
   "description": "A library for working with SPARQL in Blockly",
   "main": "dist/index.js",
   "license": "MIT",

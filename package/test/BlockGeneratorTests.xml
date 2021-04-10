@@ -508,5 +508,48 @@ WHERE {
       </block>
     </xml>
   </test>
+  <test name="Describe all">
+    <sparql>
+      <![CDATA[
+DESCRIBE *
+]]>
+    </sparql>
+    <xml>
+      <block type="sparql11_query">
+        <value name="value">
+          <block type="sparql11_describequery">
+            <field name="star">*</field>
+          </block>
+        </value>
+      </block>
+    </xml>
+  </test>
+  <test name="Select all">
+    <sparql>
+      <![CDATA[
+SELECT * {}
+]]>
+    </sparql>
+    <xml>
+      <block type="sparql11_query">
+        <value name="value">
+          <block type="sparql11_selectquery">
+            <value name="select">
+              <block type="sparql11_selectclause">
+                <field name="star">*</field>
+              </block>
+            </value>
+            <value name="where">
+              <block type="sparql11_querycommon">
+                <value name="pattern">
+                  <block type="sparql11_groupgraphpattern"/>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </xml>
+  </test>
 </tests>
 

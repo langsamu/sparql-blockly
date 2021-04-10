@@ -1047,7 +1047,7 @@ export default class BlockGenerator {
         return items
     }
     private static isWildcard(variables: SparqlJS.Variable[] | SparqlJS.Term[] | [SparqlJS.Wildcard]): variables is [SparqlJS.Wildcard] {
-        return variables[0] instanceof SparqlJS.Wildcard
+        return "termType" in variables[0] && variables[0].termType == "Wildcard"
     }
     private static toTriplesSameSubject(triples: SparqlJS.Triple[]): TriplesSameSubject {
         const process = (subjects: TriplesSameSubject, triple: SparqlJS.Triple) => {
