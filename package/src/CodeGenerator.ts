@@ -53,6 +53,18 @@ export default class CodeGenerator extends Blockly.Generator {
             .forEach(addToInstance)
     }
 
+    public scrub_(block: Blockly.Block, code: string, thisOnly?: boolean): string {
+        if (!thisOnly) {
+            const next = block.getNextBlock();
+
+            if (next) {
+                code += this.blockToCode(next)
+            }
+        }
+
+        return code
+    }
+
     public sparqlQuery(block: Blockly.Block): string {
         const prologue = this.statementToCode(block, "prologue")
         const value = this.valueToCode(block, "value")
@@ -82,7 +94,7 @@ export default class CodeGenerator extends Blockly.Generator {
     public sparqlAskQuery(block: Blockly.Block): CodeTuple {
         const value = this.valueToCode(block, "value")
 
-        const code = join(" ", "ASK", value)
+        const code = join("\n", "ASK", value)
 
         return codeTuple(code)
     }
@@ -900,7 +912,7 @@ export default class CodeGenerator extends Blockly.Generator {
         const next = this.blockToCode(block.getNextBlock())
 
         if (next) {
-            code += delimiter + next
+            code += delimiter
         }
 
         return code
