@@ -1,4 +1,5 @@
 {
+  "private": true,
   "homepage": "https://langsamu.github.io/sparql-blockly/",
   "scripts": {
     "start": "http-server ../docs",
@@ -21,7 +22,7 @@
   },
   "dependencies": {
     "blockly": "^5.20210325.0",
-    "sparql-blockly": "^0.0.4-15",
+    "sparql-blockly": "^0.0.4-16",
     "sparqljs": "^3.4.1"
   }
 }
