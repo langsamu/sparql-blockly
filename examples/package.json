@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "scripts": {
+    "prestart": "npm install",
+    "postinstall": "(cd node && npm install && npm run build)",
+    "start": "http-server"
+  },
+  "devDependencies": {
+    "http-server": "^0.12.3"
+  }
+}

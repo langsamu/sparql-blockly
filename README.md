@@ -9,3 +9,4 @@
 ## Repo structure
 - [Demo app](./demo)
 - [NPM package](./package)
+- [Examples](./examples)

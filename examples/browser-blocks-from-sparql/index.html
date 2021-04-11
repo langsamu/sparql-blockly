@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+    <script src="https://unpkg.com/sparql-blockly/sparql-blockly.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column
+        }
+
+        textarea {
+            height: 10em;
+            padding: 20px;
+        }
+
+        span {
+            font-family: monospace;
+            max-height: 5em;
+            overflow: auto;
+        }
+
+        section {
+            flex-grow: 1;
+        }
+    </style>
+    <script>
+        window.addEventListener("load", initialise)
+
+        function initialise() {
+            initialiseBlockly()
+
+            const textarea = document.querySelector("textarea")
+            textarea.addEventListener("input", textareaInput)
+        }
+
+        function initialiseBlockly() {
+            const options = { readOnly: true, sounds: false }
+            const container = document.querySelector("section")
+
+            Blockly.inject(container, options)
+        }
+
+        function textareaInput(e) {
+            const parseError = document.querySelector("span")
+            parseError.innerText = ""
+
+            const sparql = e.target.value
+
+            if (sparql) {
+                try {
+                    const blocklyDom = SparqlBlockly.sparqlToBlockly(sparql)
+                    const workspace = Blockly.getMainWorkspace()
+
+                    workspace.clear()
+
+                    Blockly.Xml.domToWorkspace(blocklyDom, workspace)
+                }
+                catch (ex) {
+                    parseError.innerText = ex.message
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <textarea placeholder="Type SPARQL code here to generate Blockly blocks below."></textarea>
+    <span></span>
+    <section></section>
+</body>
+</html>

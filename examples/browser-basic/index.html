@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+    <script src="https://unpkg.com/sparql-blockly/sparql-blockly.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+        }
+    </style>
+    <script>
+        window.addEventListener("load", initialiseBlockly)
+
+        async function initialiseBlockly() {
+            const toolbox = await getToolboxData()
+            const options = { toolbox, sounds: false }
+            const container = document.body
+
+            Blockly.inject(container, options)
+        }
+
+        async function getToolboxData() {
+            const response = await fetch("../toolbox.xml")
+            return await response.text()
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>
