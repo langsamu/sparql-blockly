@@ -683,14 +683,324 @@
         <field name="localName">direction</field>
       </block>
     </category>
-    <category name="Prefixes">
+    <category name="XSD">
       <block type="sparql11_prologueitem">
         <value name="value">
           <block type="sparql11_prefixdecl">
-            <field name="prefix">dcat</field>
+            <field name="prefix">xsd</field>
             <value name="value">
               <block type="sparql11_iriref">
-                <field name="value">http://www.w3.org/ns/dcat#</field>
+                <field name="value">http://www.w3.org/2001/XMLSchema#</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">xsd</field>
+        <field name="localName">integer</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">xsd</field>
+        <field name="localName">decimal</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">xsd</field>
+        <field name="localName">float</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">xsd</field>
+        <field name="localName">double</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">xsd</field>
+        <field name="localName">string</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">xsd</field>
+        <field name="localName">boolean</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">xsd</field>
+        <field name="localName">dateTime</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">xsd</field>
+        <field name="localName">nonPositiveInteger</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">xsd</field>
+        <field name="localName">negativeInteger</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">xsd</field>
+        <field name="localName">long</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">xsd</field>
+        <field name="localName">int</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">xsd</field>
+        <field name="localName">short</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">xsd</field>
+        <field name="localName">byte</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">xsd</field>
+        <field name="localName">nonNegativeInteger</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">xsd</field>
+        <field name="localName">unsignedLong</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">xsd</field>
+        <field name="localName">unsignedInt</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">xsd</field>
+        <field name="localName">unsignedShort</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">xsd</field>
+        <field name="localName">unsignedByte</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">xsd</field>
+        <field name="localName">positiveInteger</field>
+      </block>
+    </category>
+    <category name="RDFS">
+      <block type="sparql11_prologueitem">
+        <value name="value">
+          <block type="sparql11_prefixdecl">
+            <field name="prefix">rdfs</field>
+            <value name="value">
+              <block type="sparql11_iriref">
+                <field name="value">http://www.w3.org/2000/01/rdf-schema#</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdfs</field>
+        <field name="localName">integer</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdfs</field>
+        <field name="localName">Resource</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdfs</field>
+        <field name="localName">Class</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdfs</field>
+        <field name="localName">subClassOf</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdfs</field>
+        <field name="localName">subPropertyOf</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdfs</field>
+        <field name="localName">comment</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdfs</field>
+        <field name="localName">label</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdfs</field>
+        <field name="localName">domain</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdfs</field>
+        <field name="localName">range</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdfs</field>
+        <field name="localName">seeAlso</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdfs</field>
+        <field name="localName">isDefinedBy</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdfs</field>
+        <field name="localName">Literal</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdfs</field>
+        <field name="localName">Container</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdfs</field>
+        <field name="localName">ContainerMembershipProperty</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdfs</field>
+        <field name="localName">member</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">rdfs</field>
+        <field name="localName">Datatype</field>
+      </block>
+    </category>
+    <category name="SKOS">
+      <block type="sparql11_prologueitem">
+        <value name="value">
+          <block type="sparql11_prefixdecl">
+            <field name="prefix">skos</field>
+            <value name="value">
+              <block type="sparql11_iriref">
+                <field name="value">http://www.w3.org/1999/02/22-rdf-syntax-ns#</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">Collection</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">Concept</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">ConceptScheme</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">OrderedCollection</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">altLabel</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">broadMatch</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">broader</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">broaderTransitive</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">changeNote</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">closeMatch</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">definition</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">editorialNote</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">exactMatch</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">example</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">hasTopConcept</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">hiddenLabel</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">historyNote</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">inScheme</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">mappingRelation</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">member</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">memberList</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">narrowMatch</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">narrower</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">narrowerTransitive</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">notation</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">note</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">prefLabel</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">related</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">relatedMatch</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">scopeNote</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">semanticRelation</field>
+      </block>
+      <block type="sparql11_prefixednameprefixlocalname">
+        <field name="prefix">skos</field>
+        <field name="localName">topConceptOf</field>
+      </block>
+    </category>
+    <category name="Other prefixes">
+      <block type="sparql11_prologueitem">
+        <value name="value">
+          <block type="sparql11_prefixdecl">
+            <field name="prefix">dc</field>
+            <value name="value">
+              <block type="sparql11_iriref">
+                <field name="value">http://purl.org/dc/terms/</field>
               </block>
             </value>
           </block>
@@ -699,10 +1009,10 @@
       <block type="sparql11_prologueitem">
         <value name="value">
           <block type="sparql11_prefixdecl">
-            <field name="prefix">dc</field>
+            <field name="prefix">dcat</field>
             <value name="value">
               <block type="sparql11_iriref">
-                <field name="value">http://purl.org/dc/terms/</field>
+                <field name="value">http://www.w3.org/ns/dcat#</field>
               </block>
             </value>
           </block>
@@ -771,34 +1081,10 @@
       <block type="sparql11_prologueitem">
         <value name="value">
           <block type="sparql11_prefixdecl">
-            <field name="prefix">rdfs</field>
-            <value name="value">
-              <block type="sparql11_iriref">
-                <field name="value">http://www.w3.org/2000/01/rdf-schema#</field>
-              </block>
-            </value>
-          </block>
-        </value>
-      </block>
-      <block type="sparql11_prologueitem">
-        <value name="value">
-          <block type="sparql11_prefixdecl">
             <field name="prefix">shacl</field>
             <value name="value">
               <block type="sparql11_iriref">
                 <field name="value">http://www.w3.org/ns/shacl#</field>
-              </block>
-            </value>
-          </block>
-        </value>
-      </block>
-      <block type="sparql11_prologueitem">
-        <value name="value">
-          <block type="sparql11_prefixdecl">
-            <field name="prefix">skos</field>
-            <value name="value">
-              <block type="sparql11_iriref">
-                <field name="value">http://www.w3.org/2004/02/skos/core#</field>
               </block>
             </value>
           </block>
@@ -816,28 +1102,18 @@
           </block>
         </value>
       </block>
-      <block type="sparql11_prologueitem">
-        <value name="value">
-          <block type="sparql11_prefixdecl">
-            <field name="prefix">xsd</field>
-            <value name="value">
-              <block type="sparql11_iriref">
-                <field name="value">http://www.w3.org/2001/XMLSchema#</field>
-              </block>
-            </value>
-          </block>
-        </value>
-      </block>
     </category>
   </category>
   <category name="Examples">
-    <button text="SELECT *" callbackKey="example" query="SELECT *&#xD;&#xA;WHERE {&#xD;&#xA;	?s ?p ?o&#xD;&#xA;}"/>
-    <button text="Class popularity" callbackKey="example" query="PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;&#xD;&#xA;&#xD;&#xA;SELECT ?class (COUNT(?resource) AS ?count)&#xD;&#xA;WHERE {&#xD;&#xA;	?resource a ?class .&#xD;&#xA;}&#xD;&#xA;GROUP BY ?class&#xD;&#xA;ORDER BY DESC(COUNT(?resource))&#xD;&#xA;LIMIT 10"/>
-    <button text="Wikidata: Oscars/type" callbackKey="example" query="# See https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/queries/examples#Number_of_handed_out_academy_awards_per_award_type&#xD;&#xA;&#xD;&#xA;BASE &lt;http://www.wikidata.org/&gt;&#xD;&#xA;PREFIX p: &lt;prop/&gt;&#xD;&#xA;PREFIX pq: &lt;prop/qualifier/&gt;&#xD;&#xA;PREFIX ps: &lt;prop/statement/&gt;&#xD;&#xA;PREFIX wdt: &lt;prop/direct/&gt;&#xD;&#xA;PREFIX wd: &lt;entity/&gt;&#xD;&#xA;PREFIX bd: &lt;http://www.bigdata.com/rdf#&gt;&#xD;&#xA;PREFIX wikibase: &lt;http://wikiba.se/ontology#&gt;&#xD;&#xA;&#xD;&#xA;SELECT ?awardCount ?award ?awardLabel&#xD;&#xA;WHERE {&#xD;&#xA;	{&#xD;&#xA;		SELECT (COUNT(?award) AS ?awardCount) ?award&#xD;&#xA;		WHERE {&#xD;&#xA;			{&#xD;&#xA;				SELECT (SAMPLE(?human) AS ?human) ?award ?awardWork (SAMPLE(?director) AS ?director) (SAMPLE(?awardEdition) AS ?awardEdition) (SAMPLE(?time) AS ?time)&#xD;&#xA;				WHERE {&#xD;&#xA;					?award wdt:P31 wd:Q19020 .&#xD;&#xA;					{&#xD;&#xA;						?human&#xD;&#xA;							p:P166 ?awardStat ;&#xD;&#xA;							wdt:P31 wd:Q5 .&#xD;&#xA;						?awardStat&#xD;&#xA;							ps:P166 ?award ;&#xD;&#xA;							pq:P805 ?awardEdition ;&#xD;&#xA;							pq:P1686 ?awardWork&#xD;&#xA;					}&#xD;&#xA;					UNION&#xD;&#xA;					{&#xD;&#xA;						?awardWork&#xD;&#xA;							wdt:P31 wd:Q11424 ;&#xD;&#xA;							p:P166 ?awardStat .&#xD;&#xA;						?awardStat&#xD;&#xA;							ps:P166 ?award ;&#xD;&#xA;							pq:P805 ?awardEdition&#xD;&#xA;					} .&#xD;&#xA;					OPTIONAL {&#xD;&#xA;						?awardEdition wdt:P585 ?time .&#xD;&#xA;						?awardWork wdt:P57 ?director&#xD;&#xA;					}&#xD;&#xA;				}&#xD;&#xA;				GROUP BY ?awardWork ?award&#xD;&#xA;			}&#xD;&#xA;		}&#xD;&#xA;		GROUP BY ?award&#xD;&#xA;		ORDER BY ?awardCount&#xD;&#xA;	} .&#xD;&#xA;	SERVICE wikibase:label {&#xD;&#xA;		bd:serviceParam wikibase:language '[AUTO_LANGUAGE],en'&#xD;&#xA;	}&#xD;&#xA;}"/>
-    <button text="UK Parliament: Procedure" callbackKey="example" query="# See https://github.com/ukparliament/Query/blob/master/Parliament.Data.Api.FixedQuery/Sparql/work_package_by_id.sparql&#xD;&#xA;&#xD;&#xA;PREFIX ex: &lt;https://example.com/&gt;&#xD;&#xA;PREFIX : &lt;http://id.parliament.uk/schema/&gt;&#xD;&#xA;&#xD;&#xA;CONSTRUCT {&#xD;&#xA;	?package&#xD;&#xA;		a :WorkPackage ;&#xD;&#xA;		:workPackageHasWorkPackageableThing ?workPackaged ;&#xD;&#xA;		:workPackageHasProcedure ?procedure ;&#xD;&#xA;		:workPackageHasBusinessItem ?item .&#xD;&#xA;	?workPackaged&#xD;&#xA;		a :WorkPackageableThing, ?class ;&#xD;&#xA;		:workPackageableThingName ?workPackagedThingName ;&#xD;&#xA;		:workPackageableThingHasWorkPackageableThingWebLink ?workPackagedLink .&#xD;&#xA;	?procedure&#xD;&#xA;		a :Procedure ;&#xD;&#xA;		:procedureName ?procedureName .&#xD;&#xA;	?item&#xD;&#xA;		a :BusinessItem ;&#xD;&#xA;		:businessItemHasProcedureStep ?step ;&#xD;&#xA;		:businessItemDate ?itemDate ;&#xD;&#xA;		:businessItemHasBusinessItemWebLink ?itemLink .&#xD;&#xA;	?step&#xD;&#xA;		a :ProcedureStep, ex:Actualized ;&#xD;&#xA;		:procedureStepName ?stepName ;&#xD;&#xA;		:procedureStepHasHouse ?house ;&#xD;&#xA;		:procedureStepHasBusinessItem ?item ;&#xD;&#xA;		ex:ledTo ?otherStep ;&#xD;&#xA;		ex:canLeadTo ?otherStep .&#xD;&#xA;	?enablingStep&#xD;&#xA;		ex:enables ?possibleStep ;&#xD;&#xA;		ex:canLeadTo ?possibleStep .&#xD;&#xA;	?possibleStep&#xD;&#xA;		a :ProcedureStep, ex:Possible ;&#xD;&#xA;		:procedureStepName ?possibleName ;&#xD;&#xA;		:procedureStepHasHouse ?possibleHouse .&#xD;&#xA;	?rootStep a ex:Root .&#xD;&#xA;	?house&#xD;&#xA;		a :House ;&#xD;&#xA;		:houseName ?houseName .&#xD;&#xA;	?possibleHouse&#xD;&#xA;		a :House ;&#xD;&#xA;		:houseName ?possibleHouseName&#xD;&#xA;}&#xD;&#xA;WHERE {&#xD;&#xA;	BIND (?work_package_id AS ?package) .&#xD;&#xA;	?package :workPackageHasProcedure ?procedure .&#xD;&#xA;	?procedure :procedureName ?procedureName .&#xD;&#xA;	OPTIONAL {&#xD;&#xA;		?package :workPackageHasWorkPackagedThing ?workPackaged .&#xD;&#xA;		?workPackaged a ?class .&#xD;&#xA;		FILTER ((?class = :StatutoryInstrumentPaper || ?class = :ProposedNegativeStatutoryInstrumentPaper) || ?class = :Treaty) .&#xD;&#xA;		OPTIONAL {&#xD;&#xA;			?workPackaged :workPackagedThingName ?workPackagedThingName&#xD;&#xA;		} .&#xD;&#xA;		OPTIONAL {&#xD;&#xA;			?workPackaged :workPackagedThingHasWorkPackagedThingWebLink ?workPackagedLink&#xD;&#xA;		}&#xD;&#xA;	} .&#xD;&#xA;	OPTIONAL {&#xD;&#xA;		{&#xD;&#xA;			?enablingStep :procedureStepHasBusinessItem/:businessItemHasWorkPackage ?package .&#xD;&#xA;			?possibleRoute&#xD;&#xA;				:procedureRouteHasProcedure ?procedure ;&#xD;&#xA;				:procedureRouteIsFromProcedureStep ?enablingStep ;&#xD;&#xA;				:procedureRouteIsToProcedureStep ?possibleStep .&#xD;&#xA;			?possibleStep :procedureStepName ?possibleName .&#xD;&#xA;			OPTIONAL {&#xD;&#xA;				?possibleStep :procedureStepHasHouse ?possibleHouse .&#xD;&#xA;				?possibleHouse :houseName ?possibleHouseName&#xD;&#xA;			} .&#xD;&#xA;			FILTER NOT EXISTS {&#xD;&#xA;				?possibleStep :procedureStepHasBusinessItem/:businessItemHasWorkPackage ?package&#xD;&#xA;			} .&#xD;&#xA;			FILTER NOT EXISTS {&#xD;&#xA;				?precludingRoute&#xD;&#xA;					:procedureRouteHasProcedure ?procedure ;&#xD;&#xA;					:procedureRouteIsToProcedureStep ?possibleStep ;&#xD;&#xA;					:precludedProcedureRouteIsPrecludedByProcedureStep/:procedureStepHasBusinessItem/:businessItemHasWorkPackage ?package&#xD;&#xA;			} .&#xD;&#xA;			FILTER NOT EXISTS {&#xD;&#xA;				?requiringRoute&#xD;&#xA;					:procedureRouteHasProcedure ?procedure ;&#xD;&#xA;					:requiredProcedureRouteIsRequiredByProcedureStep ?possibleStep .&#xD;&#xA;				FILTER NOT EXISTS {&#xD;&#xA;					?requiringRoute :procedureRouteIsToProcedureStep/:procedureStepHasBusinessItem/:businessItemHasWorkPackage ?package&#xD;&#xA;				}&#xD;&#xA;			}&#xD;&#xA;		}&#xD;&#xA;		UNION&#xD;&#xA;		{&#xD;&#xA;			?item :businessItemHasWorkPackage ?package .&#xD;&#xA;			?package :workPackageHasProcedure ?procedure .&#xD;&#xA;			OPTIONAL {&#xD;&#xA;				?item :businessItemDate ?itemDate&#xD;&#xA;			} .&#xD;&#xA;			OPTIONAL {&#xD;&#xA;				?item :businessItemHasBusinessItemWebLink ?itemLink&#xD;&#xA;			} .&#xD;&#xA;			?step&#xD;&#xA;				:procedureStepHasBusinessItem ?item ;&#xD;&#xA;				:procedureStepName ?stepName .&#xD;&#xA;			OPTIONAL {&#xD;&#xA;				?step :procedureStepHasHouse ?house .&#xD;&#xA;				?house :houseName ?houseName&#xD;&#xA;			} .&#xD;&#xA;			OPTIONAL {&#xD;&#xA;				?actualizedRoute&#xD;&#xA;					:procedureRouteHasProcedure ?procedure ;&#xD;&#xA;					:causedProcedureRouteIsCausedByProcedureStep|:allowedProcedureRouteIsAllowedByProcedureStep ?step ;&#xD;&#xA;					:procedureRouteIsToProcedureStep ?otherStep .&#xD;&#xA;				?otherStep :procedureStepHasBusinessItem/:businessItemHasWorkPackage ?package .&#xD;&#xA;				FILTER (?otherStep != ?step)&#xD;&#xA;			}&#xD;&#xA;		}&#xD;&#xA;		UNION&#xD;&#xA;		{&#xD;&#xA;			?rootStep :procedureStepHasBusinessItem/:businessItemHasWorkPackage ?package .&#xD;&#xA;			OPTIONAL {&#xD;&#xA;				?higherRoute&#xD;&#xA;					:procedureRouteHasProcedure ?procedure ;&#xD;&#xA;					(:causedProcedureRouteIsCausedByProcedureStep|:allowedProcedureRouteIsAllowedByProcedureStep)/:procedureStepHasBusinessItem/:businessItemHasWorkPackage ?package ;&#xD;&#xA;					:procedureRouteIsToProcedureStep ?rootStep&#xD;&#xA;			} .&#xD;&#xA;			FILTER (!BOUND(?higherRoute))&#xD;&#xA;		}&#xD;&#xA;	}&#xD;&#xA;}"/>
-    <button text="EU ODP: Dataset with title" callbackKey="example" query="# See https://data.europa.eu/euodp/en/Sample_SPARQL_queries#ODP-Developerscorner-SampleSPARQLqueries-Retrievedatasetwithspecifictitle(eg.&apos;RegisterofCommissiondocuments&apos;)&#xD;&#xA;&#xD;&#xA;PREFIX dcat: &lt;http://www.w3.org/ns/dcat#&gt;&#xD;&#xA;PREFIX odp: &lt;http://data.europa.eu/euodp/ontologies/ec-odp#&gt;&#xD;&#xA;PREFIX dc: &lt;http://purl.org/dc/terms/&gt;&#xD;&#xA;PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;&#xD;&#xA;PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;&#xD;&#xA;&#xD;&#xA;SELECT ?Graph ?DatasetTitle ?Publisher ?DatasetURI&#xD;&#xA;WHERE {&#xD;&#xA;	GRAPH ?Graph {&#xD;&#xA;		?DatasetURI&#xD;&#xA;			a dcat:Dataset ;&#xD;&#xA;			dc:publisher ?Publisher ;&#xD;&#xA;			dc:title ?DatasetTitle .&#xD;&#xA;		FILTER REGEX(?DatasetTitle, 'Register of Commission documents', 'i')&#xD;&#xA;	}&#xD;&#xA;}&#xD;&#xA;LIMIT 10"/>
-    <button text="GraphDB: SPARQL*" callbackKey="example" query="# See https://graphdb.ontotext.com/documentation/9.2/free/devhub/rdf-sparql-star.html&#xD;&#xA;&#xD;&#xA;PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;&#xD;&#xA;PREFIX ex: &lt;http://example.com/&gt;&#xD;&#xA;&#xD;&#xA;SELECT ?p ?a ?c&#xD;&#xA;WHERE {&#xD;&#xA;	BIND (&lt;&lt; ?p foaf:age ?a &gt;&gt; AS ?t) .&#xD;&#xA;	?t ex:certainty ?c&#xD;&#xA;}"/>
-    <button text="Virtuoso: Insert example" callbackKey="example" query="# See http://vos.openlinksw.com/owiki/wiki/VOS/VirtTipsAndTricksSPARQL11Insert#INSERT%20%28Informative%29%20Examples&#xD;&#xA;&#xD;&#xA;BASE &lt;http://example.com&gt;&#xD;&#xA;PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;&#xD;&#xA;&#xD;&#xA;INSERT DATA {&#xD;&#xA;	GRAPH &lt;urn:sparql:tests:insert:informative&gt; {&#xD;&#xA;		&lt;#book1&gt;&#xD;&#xA;			&lt;http://purl.org/dc/elements/1.1/title&gt; 'Fundamentals of Compiler Design' ;&#xD;&#xA;			&lt;http://purl.org/dc/elements/1.1/date&gt; '1977-01-01T00:00:00-02:00'^^xsd:dateTime .&#xD;&#xA;		&lt;#book2&gt;&#xD;&#xA;			&lt;#price&gt; 42 ;&#xD;&#xA;			&lt;http://purl.org/dc/elements/1.1/title&gt; 'David Copperfield' ;&#xD;&#xA;			&lt;http://purl.org/dc/elements/1.1/creator&gt; 'Edmund Wells' ;&#xD;&#xA;			&lt;http://purl.org/dc/elements/1.1/date&gt; '1948-01-01T00:00:00-02:00'^^xsd:dateTime&#xD;&#xA;	}&#xD;&#xA;} ;&#xD;&#xA;&#xD;&#xA;INSERT DATA {&#xD;&#xA;	GRAPH &lt;urn:sparql:tests:insert:informative2&gt; {&#xD;&#xA;		&lt;#book4&gt; &lt;http://purl.org/dc/elements/1.1/title&gt; 'SPARQL 1.0 Tutorial'&#xD;&#xA;	}&#xD;&#xA;} ;&#xD;&#xA;&#xD;&#xA;INSERT {&#xD;&#xA;	GRAPH &lt;urn:sparql:tests:insert:informative2&gt; {&#xD;&#xA;		?book ?p ?v&#xD;&#xA;	}&#xD;&#xA;}&#xD;&#xA;WHERE {&#xD;&#xA;	GRAPH &lt;urn:sparql:tests:insert:informative&gt; {&#xD;&#xA;		?book &lt;http://purl.org/dc/elements/1.1/date&gt; ?date .&#xD;&#xA;		FILTER (?date &gt; '1970-01-01T00:00:00-02:00'^^xsd:dateTime) .&#xD;&#xA;		?book ?p ?v&#xD;&#xA;	}&#xD;&#xA;}"/>
+    <button text="SELECT *" callbackKey="example" query="SELECT *&#xD;&#xA;WHERE {&#xD;&#xA;&#009;?s ?p ?o&#xD;&#xA;}"/>
+    <button text="RDFS: Property details" callbackKey="example" query="PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;&#xD;&#xA;PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;&#xD;&#xA;&#xD;&#xA;CONSTRUCT {&#xD;&#xA;&#009;?property&#xD;&#xA;&#009;&#009;rdfs:isDefinedBy ?label ;&#xD;&#xA;&#009;&#009;rdfs:label ?label ;&#xD;&#xA;&#009;&#009;rdfs:comment ?comment ;&#xD;&#xA;&#009;&#009;rdfs:domain ?domain ;&#xD;&#xA;&#009;&#009;rdfs:range ?range ;&#xD;&#xA;&#009;&#009;rdfs:subPropertyOf ?superProperty .&#xD;&#xA;&#009;?subProperty rdfs:subPropertyOf ?property&#xD;&#xA;}&#xD;&#xA;WHERE {&#xD;&#xA;&#009;?property a rdf:Property .&#xD;&#xA;&#009;OPTIONAL {&#xD;&#xA;&#009;&#009;?property rdfs:isDefinedBy ?label&#xD;&#xA;&#009;} .&#xD;&#xA;&#009;OPTIONAL {&#xD;&#xA;&#009;&#009;?property rdfs:label ?label&#xD;&#xA;&#009;} .&#xD;&#xA;&#009;OPTIONAL {&#xD;&#xA;&#009;&#009;?property rdfs:comment ?comment&#xD;&#xA;&#009;} .&#xD;&#xA;&#009;OPTIONAL {&#xD;&#xA;&#009;&#009;?property rdfs:domain ?domain&#xD;&#xA;&#009;} .&#xD;&#xA;&#009;OPTIONAL {&#xD;&#xA;&#009;&#009;?property rdfs:range ?range&#xD;&#xA;&#009;} .&#xD;&#xA;&#009;OPTIONAL {&#xD;&#xA;&#009;&#009;?property rdfs:subPropertyOf ?superProperty&#xD;&#xA;&#009;} .&#xD;&#xA;&#009;OPTIONAL {&#xD;&#xA;&#009;&#009;?property ^rdfs:subPropertyOf ?subProperty&#xD;&#xA;&#009;}&#xD;&#xA;}"/>
+    <button text="SKOS: Collection details" callbackKey="example" query="# See https://github.com/ukparliament/VocabularyBrowser/blob/master/VocabularyBrowser/Controllers/CollectionController.cs#L51&#xD;&#xA;&#xD;&#xA;PREFIX : &lt;urn:&gt;&#xD;&#xA;PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;&#xD;&#xA;&#xD;&#xA;CONSTRUCT {&#xD;&#xA;&#009;?collection&#xD;&#xA;&#009;&#009;:selected true ;&#xD;&#xA;&#009;&#009;a skos:Collection ;&#xD;&#xA;&#009;&#009;skos:prefLabel ?collectionLabel ;&#xD;&#xA;&#009;&#009;skos:member ?concept, ?child .&#xD;&#xA;&#009;?concept&#xD;&#xA;&#009;&#009;a skos:Concept ;&#xD;&#xA;&#009;&#009;skos:prefLabel ?conceptLabel .&#xD;&#xA;&#009;?parent&#xD;&#xA;&#009;&#009;a skos:Collection ;&#xD;&#xA;&#009;&#009;skos:member ?collection ;&#xD;&#xA;&#009;&#009;skos:prefLabel ?parentLabel .&#xD;&#xA;&#009;?child&#xD;&#xA;&#009;&#009;a skos:Collection ;&#xD;&#xA;&#009;&#009;skos:prefLabel ?childLabel&#xD;&#xA;}&#xD;&#xA;WHERE {&#xD;&#xA;&#009;BIND (?parameter AS ?collection) .&#xD;&#xA;&#009;?collection skos:prefLabel ?collectionPrefLabel .&#xD;&#xA;&#009;BIND (STR(?collectionPrefLabel) AS ?collectionLabel) .&#xD;&#xA;&#009;OPTIONAL {&#xD;&#xA;&#009;&#009;?concept&#xD;&#xA;&#009;&#009;&#009;a skos:Concept ;&#xD;&#xA;&#009;&#009;&#009;^skos:member ?collection ;&#xD;&#xA;&#009;&#009;&#009;skos:prefLabel ?conceptPrefLabel .&#xD;&#xA;&#009;&#009;BIND (STR(?conceptPrefLabel) AS ?conceptLabel)&#xD;&#xA;&#009;} .&#xD;&#xA;&#009;OPTIONAL {&#xD;&#xA;&#009;&#009;?parent&#xD;&#xA;&#009;&#009;&#009;a skos:Collection ;&#xD;&#xA;&#009;&#009;&#009;skos:member ?collection ;&#xD;&#xA;&#009;&#009;&#009;skos:prefLabel ?parentPrefLabel .&#xD;&#xA;&#009;&#009;BIND (STR(?parentPrefLabel) AS ?parentLabel)&#xD;&#xA;&#009;} .&#xD;&#xA;&#009;OPTIONAL {&#xD;&#xA;&#009;&#009;?child&#xD;&#xA;&#009;&#009;&#009;a skos:Collection ;&#xD;&#xA;&#009;&#009;&#009;^skos:member ?collection ;&#xD;&#xA;&#009;&#009;&#009;skos:prefLabel ?childPrefLabel .&#xD;&#xA;&#009;&#009;BIND (STR(?childPrefLabel) AS ?childLabel)&#xD;&#xA;&#009;}&#xD;&#xA;}"/>
+    <button text="Class popularity" callbackKey="example" query="SELECT ?class (COUNT(?resource) AS ?count)&#xD;&#xA;WHERE {&#xD;&#xA;&#009;?resource a ?class .&#xD;&#xA;}&#xD;&#xA;GROUP BY ?class&#xD;&#xA;ORDER BY DESC(COUNT(?resource))&#xD;&#xA;LIMIT 10"/>
+    <button text="Wikidata: Oscars/type" callbackKey="example" query="# See https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/queries/examples#Number_of_handed_out_academy_awards_per_award_type&#xD;&#xA;&#xD;&#xA;BASE &lt;http://www.wikidata.org/&gt;&#xD;&#xA;PREFIX p: &lt;prop/&gt;&#xD;&#xA;PREFIX pq: &lt;prop/qualifier/&gt;&#xD;&#xA;PREFIX ps: &lt;prop/statement/&gt;&#xD;&#xA;PREFIX wdt: &lt;prop/direct/&gt;&#xD;&#xA;PREFIX wd: &lt;entity/&gt;&#xD;&#xA;PREFIX bd: &lt;http://www.bigdata.com/rdf#&gt;&#xD;&#xA;PREFIX wikibase: &lt;http://wikiba.se/ontology#&gt;&#xD;&#xA;&#xD;&#xA;SELECT ?awardCount ?award ?awardLabel&#xD;&#xA;WHERE {&#xD;&#xA;&#009;{&#xD;&#xA;&#009;&#009;SELECT (COUNT(?award) AS ?awardCount) ?award&#xD;&#xA;&#009;&#009;WHERE {&#xD;&#xA;&#009;&#009;&#009;{&#xD;&#xA;&#009;&#009;&#009;&#009;SELECT (SAMPLE(?human) AS ?human) ?award ?awardWork (SAMPLE(?director) AS ?director) (SAMPLE(?awardEdition) AS ?awardEdition) (SAMPLE(?time) AS ?time)&#xD;&#xA;&#009;&#009;&#009;&#009;WHERE {&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;?award wdt:P31 wd:Q19020 .&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;{&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;&#009;?human&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;&#009;&#009;p:P166 ?awardStat ;&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;&#009;&#009;wdt:P31 wd:Q5 .&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;&#009;?awardStat&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;&#009;&#009;ps:P166 ?award ;&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;&#009;&#009;pq:P805 ?awardEdition ;&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;&#009;&#009;pq:P1686 ?awardWork&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;}&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;UNION&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;{&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;&#009;?awardWork&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;&#009;&#009;wdt:P31 wd:Q11424 ;&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;&#009;&#009;p:P166 ?awardStat .&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;&#009;?awardStat&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;&#009;&#009;ps:P166 ?award ;&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;&#009;&#009;pq:P805 ?awardEdition&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;} .&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;OPTIONAL {&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;&#009;?awardEdition wdt:P585 ?time .&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;&#009;?awardWork wdt:P57 ?director&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;}&#xD;&#xA;&#009;&#009;&#009;&#009;}&#xD;&#xA;&#009;&#009;&#009;&#009;GROUP BY ?awardWork ?award&#xD;&#xA;&#009;&#009;&#009;}&#xD;&#xA;&#009;&#009;}&#xD;&#xA;&#009;&#009;GROUP BY ?award&#xD;&#xA;&#009;&#009;ORDER BY ?awardCount&#xD;&#xA;&#009;} .&#xD;&#xA;&#009;SERVICE wikibase:label {&#xD;&#xA;&#009;&#009;bd:serviceParam wikibase:language '[AUTO_LANGUAGE],en'&#xD;&#xA;&#009;}&#xD;&#xA;}"/>
+    <button text="UK Parliament: Procedure" callbackKey="example" query="# See https://github.com/ukparliament/Query/blob/master/Parliament.Data.Api.FixedQuery/Sparql/work_package_by_id.sparql&#xD;&#xA;&#xD;&#xA;PREFIX ex: &lt;https://example.com/&gt;&#xD;&#xA;PREFIX : &lt;http://id.parliament.uk/schema/&gt;&#xD;&#xA;&#xD;&#xA;CONSTRUCT {&#xD;&#xA;&#009;?package&#xD;&#xA;&#009;&#009;a :WorkPackage ;&#xD;&#xA;&#009;&#009;:workPackageHasWorkPackageableThing ?workPackaged ;&#xD;&#xA;&#009;&#009;:workPackageHasProcedure ?procedure ;&#xD;&#xA;&#009;&#009;:workPackageHasBusinessItem ?item .&#xD;&#xA;&#009;?workPackaged&#xD;&#xA;&#009;&#009;a :WorkPackageableThing, ?class ;&#xD;&#xA;&#009;&#009;:workPackageableThingName ?workPackagedThingName ;&#xD;&#xA;&#009;&#009;:workPackageableThingHasWorkPackageableThingWebLink ?workPackagedLink .&#xD;&#xA;&#009;?procedure&#xD;&#xA;&#009;&#009;a :Procedure ;&#xD;&#xA;&#009;&#009;:procedureName ?procedureName .&#xD;&#xA;&#009;?item&#xD;&#xA;&#009;&#009;a :BusinessItem ;&#xD;&#xA;&#009;&#009;:businessItemHasProcedureStep ?step ;&#xD;&#xA;&#009;&#009;:businessItemDate ?itemDate ;&#xD;&#xA;&#009;&#009;:businessItemHasBusinessItemWebLink ?itemLink .&#xD;&#xA;&#009;?step&#xD;&#xA;&#009;&#009;a :ProcedureStep, ex:Actualized ;&#xD;&#xA;&#009;&#009;:procedureStepName ?stepName ;&#xD;&#xA;&#009;&#009;:procedureStepHasHouse ?house ;&#xD;&#xA;&#009;&#009;:procedureStepHasBusinessItem ?item ;&#xD;&#xA;&#009;&#009;ex:ledTo ?otherStep ;&#xD;&#xA;&#009;&#009;ex:canLeadTo ?otherStep .&#xD;&#xA;&#009;?enablingStep&#xD;&#xA;&#009;&#009;ex:enables ?possibleStep ;&#xD;&#xA;&#009;&#009;ex:canLeadTo ?possibleStep .&#xD;&#xA;&#009;?possibleStep&#xD;&#xA;&#009;&#009;a :ProcedureStep, ex:Possible ;&#xD;&#xA;&#009;&#009;:procedureStepName ?possibleName ;&#xD;&#xA;&#009;&#009;:procedureStepHasHouse ?possibleHouse .&#xD;&#xA;&#009;?rootStep a ex:Root .&#xD;&#xA;&#009;?house&#xD;&#xA;&#009;&#009;a :House ;&#xD;&#xA;&#009;&#009;:houseName ?houseName .&#xD;&#xA;&#009;?possibleHouse&#xD;&#xA;&#009;&#009;a :House ;&#xD;&#xA;&#009;&#009;:houseName ?possibleHouseName&#xD;&#xA;}&#xD;&#xA;WHERE {&#xD;&#xA;&#009;BIND (?work_package_id AS ?package) .&#xD;&#xA;&#009;?package :workPackageHasProcedure ?procedure .&#xD;&#xA;&#009;?procedure :procedureName ?procedureName .&#xD;&#xA;&#009;OPTIONAL {&#xD;&#xA;&#009;&#009;?package :workPackageHasWorkPackagedThing ?workPackaged .&#xD;&#xA;&#009;&#009;?workPackaged a ?class .&#xD;&#xA;&#009;&#009;FILTER ((?class = :StatutoryInstrumentPaper || ?class = :ProposedNegativeStatutoryInstrumentPaper) || ?class = :Treaty) .&#xD;&#xA;&#009;&#009;OPTIONAL {&#xD;&#xA;&#009;&#009;&#009;?workPackaged :workPackagedThingName ?workPackagedThingName&#xD;&#xA;&#009;&#009;} .&#xD;&#xA;&#009;&#009;OPTIONAL {&#xD;&#xA;&#009;&#009;&#009;?workPackaged :workPackagedThingHasWorkPackagedThingWebLink ?workPackagedLink&#xD;&#xA;&#009;&#009;}&#xD;&#xA;&#009;} .&#xD;&#xA;&#009;OPTIONAL {&#xD;&#xA;&#009;&#009;{&#xD;&#xA;&#009;&#009;&#009;?enablingStep :procedureStepHasBusinessItem/:businessItemHasWorkPackage ?package .&#xD;&#xA;&#009;&#009;&#009;?possibleRoute&#xD;&#xA;&#009;&#009;&#009;&#009;:procedureRouteHasProcedure ?procedure ;&#xD;&#xA;&#009;&#009;&#009;&#009;:procedureRouteIsFromProcedureStep ?enablingStep ;&#xD;&#xA;&#009;&#009;&#009;&#009;:procedureRouteIsToProcedureStep ?possibleStep .&#xD;&#xA;&#009;&#009;&#009;?possibleStep :procedureStepName ?possibleName .&#xD;&#xA;&#009;&#009;&#009;OPTIONAL {&#xD;&#xA;&#009;&#009;&#009;&#009;?possibleStep :procedureStepHasHouse ?possibleHouse .&#xD;&#xA;&#009;&#009;&#009;&#009;?possibleHouse :houseName ?possibleHouseName&#xD;&#xA;&#009;&#009;&#009;} .&#xD;&#xA;&#009;&#009;&#009;FILTER NOT EXISTS {&#xD;&#xA;&#009;&#009;&#009;&#009;?possibleStep :procedureStepHasBusinessItem/:businessItemHasWorkPackage ?package&#xD;&#xA;&#009;&#009;&#009;} .&#xD;&#xA;&#009;&#009;&#009;FILTER NOT EXISTS {&#xD;&#xA;&#009;&#009;&#009;&#009;?precludingRoute&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;:procedureRouteHasProcedure ?procedure ;&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;:procedureRouteIsToProcedureStep ?possibleStep ;&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;:precludedProcedureRouteIsPrecludedByProcedureStep/:procedureStepHasBusinessItem/:businessItemHasWorkPackage ?package&#xD;&#xA;&#009;&#009;&#009;} .&#xD;&#xA;&#009;&#009;&#009;FILTER NOT EXISTS {&#xD;&#xA;&#009;&#009;&#009;&#009;?requiringRoute&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;:procedureRouteHasProcedure ?procedure ;&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;:requiredProcedureRouteIsRequiredByProcedureStep ?possibleStep .&#xD;&#xA;&#009;&#009;&#009;&#009;FILTER NOT EXISTS {&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;?requiringRoute :procedureRouteIsToProcedureStep/:procedureStepHasBusinessItem/:businessItemHasWorkPackage ?package&#xD;&#xA;&#009;&#009;&#009;&#009;}&#xD;&#xA;&#009;&#009;&#009;}&#xD;&#xA;&#009;&#009;}&#xD;&#xA;&#009;&#009;UNION&#xD;&#xA;&#009;&#009;{&#xD;&#xA;&#009;&#009;&#009;?item :businessItemHasWorkPackage ?package .&#xD;&#xA;&#009;&#009;&#009;?package :workPackageHasProcedure ?procedure .&#xD;&#xA;&#009;&#009;&#009;OPTIONAL {&#xD;&#xA;&#009;&#009;&#009;&#009;?item :businessItemDate ?itemDate&#xD;&#xA;&#009;&#009;&#009;} .&#xD;&#xA;&#009;&#009;&#009;OPTIONAL {&#xD;&#xA;&#009;&#009;&#009;&#009;?item :businessItemHasBusinessItemWebLink ?itemLink&#xD;&#xA;&#009;&#009;&#009;} .&#xD;&#xA;&#009;&#009;&#009;?step&#xD;&#xA;&#009;&#009;&#009;&#009;:procedureStepHasBusinessItem ?item ;&#xD;&#xA;&#009;&#009;&#009;&#009;:procedureStepName ?stepName .&#xD;&#xA;&#009;&#009;&#009;OPTIONAL {&#xD;&#xA;&#009;&#009;&#009;&#009;?step :procedureStepHasHouse ?house .&#xD;&#xA;&#009;&#009;&#009;&#009;?house :houseName ?houseName&#xD;&#xA;&#009;&#009;&#009;} .&#xD;&#xA;&#009;&#009;&#009;OPTIONAL {&#xD;&#xA;&#009;&#009;&#009;&#009;?actualizedRoute&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;:procedureRouteHasProcedure ?procedure ;&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;:causedProcedureRouteIsCausedByProcedureStep|:allowedProcedureRouteIsAllowedByProcedureStep ?step ;&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;:procedureRouteIsToProcedureStep ?otherStep .&#xD;&#xA;&#009;&#009;&#009;&#009;?otherStep :procedureStepHasBusinessItem/:businessItemHasWorkPackage ?package .&#xD;&#xA;&#009;&#009;&#009;&#009;FILTER (?otherStep != ?step)&#xD;&#xA;&#009;&#009;&#009;}&#xD;&#xA;&#009;&#009;}&#xD;&#xA;&#009;&#009;UNION&#xD;&#xA;&#009;&#009;{&#xD;&#xA;&#009;&#009;&#009;?rootStep :procedureStepHasBusinessItem/:businessItemHasWorkPackage ?package .&#xD;&#xA;&#009;&#009;&#009;OPTIONAL {&#xD;&#xA;&#009;&#009;&#009;&#009;?higherRoute&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;:procedureRouteHasProcedure ?procedure ;&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;(:causedProcedureRouteIsCausedByProcedureStep|:allowedProcedureRouteIsAllowedByProcedureStep)/:procedureStepHasBusinessItem/:businessItemHasWorkPackage ?package ;&#xD;&#xA;&#009;&#009;&#009;&#009;&#009;:procedureRouteIsToProcedureStep ?rootStep&#xD;&#xA;&#009;&#009;&#009;} .&#xD;&#xA;&#009;&#009;&#009;FILTER (!BOUND(?higherRoute))&#xD;&#xA;&#009;&#009;}&#xD;&#xA;&#009;}&#xD;&#xA;}"/>
+    <button text="EU ODP: Dataset with title" callbackKey="example" query="# See https://data.europa.eu/euodp/en/Sample_SPARQL_queries#ODP-Developerscorner-SampleSPARQLqueries-Retrievedatasetwithspecifictitle(eg.&apos;RegisterofCommissiondocuments&apos;)&#xD;&#xA;&#xD;&#xA;PREFIX dcat: &lt;http://www.w3.org/ns/dcat#&gt;&#xD;&#xA;PREFIX odp: &lt;http://data.europa.eu/euodp/ontologies/ec-odp#&gt;&#xD;&#xA;PREFIX dc: &lt;http://purl.org/dc/terms/&gt;&#xD;&#xA;PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;&#xD;&#xA;PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;&#xD;&#xA;&#xD;&#xA;SELECT ?Graph ?DatasetTitle ?Publisher ?DatasetURI&#xD;&#xA;WHERE {&#xD;&#xA;&#009;GRAPH ?Graph {&#xD;&#xA;&#009;&#009;?DatasetURI&#xD;&#xA;&#009;&#009;&#009;a dcat:Dataset ;&#xD;&#xA;&#009;&#009;&#009;dc:publisher ?Publisher ;&#xD;&#xA;&#009;&#009;&#009;dc:title ?DatasetTitle .&#xD;&#xA;&#009;&#009;FILTER REGEX(?DatasetTitle, 'Register of Commission documents', 'i')&#xD;&#xA;&#009;}&#xD;&#xA;}&#xD;&#xA;LIMIT 10"/>
+    <button text="GraphDB: SPARQL*" callbackKey="example" query="# See https://graphdb.ontotext.com/documentation/9.2/free/devhub/rdf-sparql-star.html&#xD;&#xA;&#xD;&#xA;PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;&#xD;&#xA;PREFIX ex: &lt;http://example.com/&gt;&#xD;&#xA;&#xD;&#xA;SELECT ?p ?a ?c&#xD;&#xA;WHERE {&#xD;&#xA;&#009;BIND (&lt;&lt; ?p foaf:age ?a &gt;&gt; AS ?t) .&#xD;&#xA;&#009;?t ex:certainty ?c&#xD;&#xA;}"/>
+    <button text="Virtuoso: Insert example" callbackKey="example" query="# See http://vos.openlinksw.com/owiki/wiki/VOS/VirtTipsAndTricksSPARQL11Insert#INSERT%20%28Informative%29%20Examples&#xD;&#xA;&#xD;&#xA;BASE &lt;http://example.com&gt;&#xD;&#xA;PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;&#xD;&#xA;&#xD;&#xA;INSERT DATA {&#xD;&#xA;&#009;GRAPH &lt;urn:sparql:tests:insert:informative&gt; {&#xD;&#xA;&#009;&#009;&lt;#book1&gt;&#xD;&#xA;&#009;&#009;&#009;&lt;http://purl.org/dc/elements/1.1/title&gt; 'Fundamentals of Compiler Design' ;&#xD;&#xA;&#009;&#009;&#009;&lt;http://purl.org/dc/elements/1.1/date&gt; '1977-01-01T00:00:00-02:00'^^xsd:dateTime .&#xD;&#xA;&#009;&#009;&lt;#book2&gt;&#xD;&#xA;&#009;&#009;&#009;&lt;#price&gt; 42 ;&#xD;&#xA;&#009;&#009;&#009;&lt;http://purl.org/dc/elements/1.1/title&gt; 'David Copperfield' ;&#xD;&#xA;&#009;&#009;&#009;&lt;http://purl.org/dc/elements/1.1/creator&gt; 'Edmund Wells' ;&#xD;&#xA;&#009;&#009;&#009;&lt;http://purl.org/dc/elements/1.1/date&gt; '1948-01-01T00:00:00-02:00'^^xsd:dateTime&#xD;&#xA;&#009;}&#xD;&#xA;} ;&#xD;&#xA;&#xD;&#xA;INSERT DATA {&#xD;&#xA;&#009;GRAPH &lt;urn:sparql:tests:insert:informative2&gt; {&#xD;&#xA;&#009;&#009;&lt;#book4&gt; &lt;http://purl.org/dc/elements/1.1/title&gt; 'SPARQL 1.0 Tutorial'&#xD;&#xA;&#009;}&#xD;&#xA;} ;&#xD;&#xA;&#xD;&#xA;INSERT {&#xD;&#xA;&#009;GRAPH &lt;urn:sparql:tests:insert:informative2&gt; {&#xD;&#xA;&#009;&#009;?book ?p ?v&#xD;&#xA;&#009;}&#xD;&#xA;}&#xD;&#xA;WHERE {&#xD;&#xA;&#009;GRAPH &lt;urn:sparql:tests:insert:informative&gt; {&#xD;&#xA;&#009;&#009;?book &lt;http://purl.org/dc/elements/1.1/date&gt; ?date .&#xD;&#xA;&#009;&#009;FILTER (?date &gt; '1970-01-01T00:00:00-02:00'^^xsd:dateTime) .&#xD;&#xA;&#009;&#009;?book ?p ?v&#xD;&#xA;&#009;}&#xD;&#xA;}"/>
     <block type="sparql11_faketallblock" disabled="true"/>
   </category>
 </xml>
