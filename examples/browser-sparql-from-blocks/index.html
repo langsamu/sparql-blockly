@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+    <script src="https://unpkg.com/sparql-blockly/sparql-blockly.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column
+        }
+
+        textarea {
+            height: 10em;
+            padding: 20px;
+        }
+
+        section {
+            flex-grow: 1;
+        }
+    </style>
+    <script>
+        window.addEventListener("load", initialiseBlockly)
+
+        async function initialiseBlockly() {
+            const toolbox = await getToolboxData()
+            const options = { toolbox, sounds: false }
+            const container = document.querySelector("section")
+
+            const workspace = Blockly.inject(container, options)
+
+            workspace.addChangeListener(blocklyChanged)
+        }
+
+        function blocklyChanged(e) {
+            switch (e.type) {
+                case Blockly.Events.CHANGE:
+                case Blockly.Events.DELETE:
+                case Blockly.Events.MOVE:
+                    generateCode()
+            }
+        }
+
+        function generateCode() {
+            const workspace = Blockly.getMainWorkspace()
+
+            populateTextarea("")
+
+            for (const block of workspace.getTopBlocks(false)) {
+                switch (block.type) {
+                    case "sparql11_query":
+                    case "sparql11_update":
+                        populateTextarea(SparqlBlockly.blocklyToSparql(block))
+                }
+            }
+        }
+
+        function populateTextarea(sparql) {
+            document.querySelector("textarea").value = sparql
+        }
+
+        async function getToolboxData() {
+            const response = await fetch("../toolbox.xml")
+            return await response.text()
+        }
+    </script>
+</head>
+<body>
+    <textarea placeholder="Interact with Blockly canvas below to generate SPARQL code here." readonly></textarea>
+    <section></section>
+</body>
+</html>

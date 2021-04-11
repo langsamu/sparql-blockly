@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+    <script src="https://unpkg.com/sparql-blockly/sparql-blockly.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column
+        }
+
+        textarea {
+            height: 10em;
+            padding: 20px;
+        }
+
+        span {
+            font-family: monospace;
+            max-height: 5em;
+            overflow: auto;
+        }
+
+        code {
+            padding: 20px;
+        }
+
+        section {
+            flex-grow: 1;
+        }
+    </style>
+    <script src="dist/main.js"></script>
+</head>
+<body>
+    <textarea placeholder="Type SPARQL code here to generate Blockly blocks below."></textarea>
+    <span></span>
+    <section></section>
+    <code>Interact with Blockly canvas above to generate SPARQL code here.</code>
+</body>
+</html>

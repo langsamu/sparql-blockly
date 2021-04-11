@@ -1,0 +1,591 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <category name="Queries">
+    <label text="Query"/>
+    <block type="sparql11_query"/>
+    <block type="sparql11_prologueitem">
+      <value name="value">
+        <block type="sparql11_base">
+          <value name="value">
+            <block type="sparql11_iriref"/>
+          </value>
+        </block>
+      </value>
+    </block>
+    <block type="sparql11_prologueitem">
+      <value name="value">
+        <block type="sparql11_prefixdecldefault">
+          <value name="value">
+            <block type="sparql11_iriref"/>
+          </value>
+        </block>
+      </value>
+    </block>
+    <block type="sparql11_prologueitem">
+      <value name="value">
+        <block type="sparql11_prefixdecl">
+          <value name="value">
+            <block type="sparql11_iriref"/>
+          </value>
+        </block>
+      </value>
+    </block>
+    <block type="sparql11_selectquery">
+      <value name="select">
+        <block type="sparql11_selectclause">
+          <statement name="vars">
+            <block type="sparql11_varorexpressionasvaritem"/>
+          </statement>
+        </block>
+      </value>
+    </block>
+    <block type="sparql11_expressionasvar">
+      <value name="name">
+        <block type="sparql11_var1"/>
+      </value>
+    </block>
+    <label text="Projection item"/>
+    <block type="sparql11_varorexpressionasvaritem"/>
+    <block type="sparql11_describequery">
+      <statement name="subject">
+        <block type="sparql11_varoririitem"/>
+      </statement>
+    </block>
+    <label text="Var / IRI item"/>
+    <block type="sparql11_varoririitem"/>
+    <block type="sparql11_askquery"/>
+    <block type="sparql11_simpleconstructquery">
+      <statement name="where">
+        <block type="sparql11_triplessamesubjectitem"/>
+      </statement>
+    </block>
+    <block type="sparql11_constructquery">
+      <statement name="template">
+        <block type="sparql11_triplessamesubjectitem"/>
+      </statement>
+    </block>
+    <label text="Triples same subject item"/>
+    <block type="sparql11_triplessamesubjectitem"/>
+    <block type="sparql11_querycommon">
+      <value name="pattern">
+        <block type="sparql11_groupgraphpattern"/>
+      </value>
+    </block>
+    <block type="sparql11_datasetclause">
+      <value name="value">
+        <block type="sparql11_iriref"/>
+      </value>
+    </block>
+    <block type="sparql11_datasetclause">
+      <value name="value">
+        <block type="sparql11_namedgraphclause">
+          <value name="value">
+            <block type="sparql11_iriref"/>
+          </value>
+        </block>
+      </value>
+    </block>
+    <block type="sparql11_solutionmodifier">
+      <statement name="group">
+        <block type="sparql11_groupconditionitem"/>
+      </statement>
+      <statement name="having">
+        <block type="sparql11_havingconditionitem"/>
+      </statement>
+      <statement name="order">
+        <block type="sparql11_orderconditionitem"/>
+      </statement>
+      <value name="limit">
+        <block type="sparql11_numericliteral"/>
+      </value>
+      <value name="offset">
+        <block type="sparql11_numericliteral"/>
+      </value>
+    </block>
+    <label text="Group condition item"/>
+    <block type="sparql11_groupconditionitem"/>
+    <label text="Having condition item"/>
+    <block type="sparql11_havingconditionitem"/>
+    <label text="Order condition item"/>
+    <block type="sparql11_orderconditionitem"/>
+    <block type="sparql11_ordercondition">
+      <value name="value">
+        <block type="sparql11_brackettedexpression"/>
+      </value>
+    </block>
+    <block type="sparql11_inlinedata">
+      <value name="value">
+        <block type="sparql11_inlinedataonevar">
+          <value name="variable">
+            <block type="sparql11_var1"/>
+          </value>
+          <statement name="values">
+            <block type="sparql11_datablockvalueitem">
+              <value name="value">
+                <block type="sparql11_undef"/>
+              </value>
+            </block>
+          </statement>
+        </block>
+      </value>
+    </block>
+    <label text="Data block value"/>
+    <block type="sparql11_datablockvalueitem"/>
+    <block type="sparql11_inlinedata">
+      <value name="value">
+        <block type="sparql11_inlinedatafull">
+          <statement name="variables">
+            <block type="sparql11_varitem">
+              <value name="value">
+                <block type="sparql11_var1"/>
+              </value>
+              <next>
+                <block type="sparql11_varitem">
+                  <value name="value">
+                    <block type="sparql11_var1"/>
+                  </value>
+                </block>
+              </next>
+            </block>
+          </statement>
+          <statement name="values">
+            <block type="sparql11_datablockvaluesitem">
+              <statement name="items">
+                <block type="sparql11_datablockvalueitem">
+                  <value name="value">
+                    <block type="sparql11_undef"/>
+                  </value>
+                  <next>
+                    <block type="sparql11_datablockvalueitem">
+                      <value name="value">
+                        <block type="sparql11_undef"/>
+                      </value>
+                    </block>
+                  </next>
+                </block>
+              </statement>
+            </block>
+          </statement>
+        </block>
+      </value>
+    </block>
+    <label text="Data block row"/>
+    <block type="sparql11_datablockvaluesitem"/>
+  </category>
+  <category name="Patterns">
+    <label text="Triples same subject"/>
+    <block type="sparql11_triplessamesubject">
+      <statement name="predicates">
+        <block type="sparql11_propertylistnotempty">
+          <statement name="objects">
+            <block type="sparql11_objectlistitem"/>
+          </statement>
+        </block>
+      </statement>
+    </block>
+    <block type="sparql11_blanknodepropertylist">
+      <statement name="predicates">
+        <block type="sparql11_propertylistnotempty">
+          <statement name="objects">
+            <block type="sparql11_objectlistitem"/>
+          </statement>
+        </block>
+      </statement>
+    </block>
+    <block type="sparql11_collection">
+      <statement name="items">
+        <block type="sparql11_graphnodeitem"/>
+      </statement>
+    </block>
+    <label text="Property list item"/>
+    <block type="sparql11_propertylistnotempty">
+      <statement name="objects">
+        <block type="sparql11_objectlistitem"/>
+      </statement>
+    </block>
+    <label text="Object list item"/>
+    <block type="sparql11_objectlistitem"/>
+    <label text="Object list item with annotation pattern"/>
+    <block type="sparql11_objectlistitemannotationpattern">
+      <statement name="annotations">
+        <block type="sparql11_propertylistnotempty">
+          <statement name="objects">
+            <block type="sparql11_objectlistitem"/>
+          </statement>
+        </block>
+      </statement>
+    </block>
+    <block type="sparql11_groupgraphpattern"/>
+    <label text="Group graph pattern sub"/>
+    <block type="sparql11_groupgraphpatternsub">
+      <statement name="items">
+        <block type="sparql11_groupgraphpatternsubitem"/>
+      </statement>
+    </block>
+    <label text="Pattern/subquery item"/>
+    <block type="sparql11_groupgraphpatternsubitem"/>
+    <label text="Subquery"/>
+    <block type="sparql11_subselect">
+      <value name="select">
+        <block type="sparql11_selectclause"/>
+      </value>
+      <value name="pattern">
+        <block type="sparql11_groupgraphpattern"/>
+      </value>
+    </block>
+    <block type="sparql11_bind">
+      <value name="value">
+        <block type="sparql11_expressionasvar">
+          <value name="name">
+            <block type="sparql11_var1"/>
+          </value>
+        </block>
+      </value>
+    </block>
+    <block type="sparql11_optionalgraphpattern">
+      <value name="value">
+        <block type="sparql11_groupgraphpattern"/>
+      </value>
+    </block>
+    <block type="sparql11_graphgraphpattern">
+      <value name="patterns">
+        <block type="sparql11_groupgraphpattern"/>
+      </value>
+    </block>
+    <block type="sparql11_servicegraphpattern">
+      <value name="patterns">
+        <block type="sparql11_groupgraphpattern"/>
+      </value>
+    </block>
+    <block type="sparql11_minusgraphpattern">
+      <value name="value">
+        <block type="sparql11_groupgraphpattern"/>
+      </value>
+    </block>
+    <block type="sparql11_grouporuniongraphpattern">
+      <statement name="items">
+        <block type="sparql11_groupgraphpatternitem">
+          <value name="value">
+            <block type="sparql11_groupgraphpattern"/>
+          </value>
+        </block>
+      </statement>
+    </block>
+    <label text="Union item"/>
+    <block type="sparql11_groupgraphpatternitem"/>
+    <block type="sparql11_filter"/>
+    <block type="sparql11_inlinedata">
+      <value name="value">
+        <block type="sparql11_inlinedataonevar">
+          <value name="variable">
+            <block type="sparql11_var1"/>
+          </value>
+          <statement name="values">
+            <block type="sparql11_datablockvalueitem">
+              <value name="value">
+                <block type="sparql11_undef"/>
+              </value>
+            </block>
+          </statement>
+        </block>
+      </value>
+    </block>
+    <label text="Data block value"/>
+    <block type="sparql11_datablockvalueitem"/>
+    <block type="sparql11_inlinedata">
+      <value name="value">
+        <block type="sparql11_inlinedatafull">
+          <statement name="variables">
+            <block type="sparql11_varitem">
+              <value name="value">
+                <block type="sparql11_var1"/>
+              </value>
+              <next>
+                <block type="sparql11_varitem">
+                  <value name="value">
+                    <block type="sparql11_var1"/>
+                  </value>
+                </block>
+              </next>
+            </block>
+          </statement>
+          <statement name="values">
+            <block type="sparql11_datablockvaluesitem">
+              <statement name="items">
+                <block type="sparql11_datablockvalueitem">
+                  <value name="value">
+                    <block type="sparql11_undef"/>
+                  </value>
+                  <next>
+                    <block type="sparql11_datablockvalueitem">
+                      <value name="value">
+                        <block type="sparql11_undef"/>
+                      </value>
+                    </block>
+                  </next>
+                </block>
+              </statement>
+            </block>
+          </statement>
+        </block>
+      </value>
+    </block>
+    <label text="Data block row"/>
+    <block type="sparql11_datablockvaluesitem"/>
+  </category>
+  <category name="Terms">
+    <block type="sparql11_var1"/>
+    <block type="sparql11_var2"/>
+    <block type="sparql11_irirefdefault"/>
+    <block type="sparql11_iriref"/>
+    <block type="sparql11_prefixedname"/>
+    <block type="sparql11_prefixednameprefix"/>
+    <block type="sparql11_prefixednamelocalname"/>
+    <block type="sparql11_prefixednameprefixlocalname"/>
+    <block type="sparql11_string">
+      <field name="value">lorem ipsum</field>
+    </block>
+    <block type="sparql11_numericliteral">
+      <field name="value">42</field>
+    </block>
+    <block type="sparql11_booleanliteral"/>
+    <block type="sparql11_typedliteral">
+      <value name="value">
+        <block type="sparql11_string"/>
+      </value>
+    </block>
+    <block type="sparql11_langstring">
+      <value name="value">
+        <block type="sparql11_string"/>
+      </value>
+      <field name="language">en</field>
+    </block>
+    <block type="sparql11_blanknodelabel"/>
+    <block type="sparql11_anon"/>
+    <block type="sparql11_nil"/>
+    <block type="sparql11_blanknodepropertylist">
+      <statement name="predicates">
+        <block type="sparql11_propertylistnotempty">
+          <statement name="objects">
+            <block type="sparql11_objectlistitem"/>
+          </statement>
+        </block>
+      </statement>
+    </block>
+    <block type="sparql11_collection">
+      <statement name="items">
+        <block type="sparql11_graphnodeitem"/>
+      </statement>
+    </block>
+    <label text="Property list item"/>
+    <block type="sparql11_propertylistnotempty">
+      <statement name="objects">
+        <block type="sparql11_objectlistitem"/>
+      </statement>
+    </block>
+    <label text="Object list item"/>
+    <block type="sparql11_objectlistitem"/>
+    <label text="Object list item with annotation pattern"/>
+    <block type="sparql11_objectlistitemannotationpattern">
+      <statement name="annotations">
+        <block type="sparql11_propertylistnotempty">
+          <statement name="objects">
+            <block type="sparql11_objectlistitem"/>
+          </statement>
+        </block>
+      </statement>
+    </block>
+    <block type="sparql11_embtp"/>
+  </category>
+  <category name="Verbs">
+    <block type="sparql11_var1"/>
+    <block type="sparql11_var2"/>
+    <block type="sparql11_irirefdefault"/>
+    <block type="sparql11_iriref">
+      <field name="value"/>
+    </block>
+    <block type="sparql11_prefixedname"/>
+    <block type="sparql11_prefixednameprefix">
+      <field name="prefix"/>
+    </block>
+    <block type="sparql11_prefixednamelocalname">
+      <field name="localName"/>
+    </block>
+    <block type="sparql11_prefixednameprefixlocalname">
+      <field name="prefix"/>
+      <field name="localName"/>
+    </block>
+    <block type="sparql11_a"/>
+    <block type="sparql11_negatedpath"/>
+    <block type="sparql11_bracketedpath"/>
+    <block type="sparql11_pathwithmodifier">
+      <field name="modifier"/>
+    </block>
+    <block type="sparql11_inversepath"/>
+    <block type="sparql11_pathalternative">
+      <statement name="items">
+        <block type="sparql11_pathalternativeitem"/>
+      </statement>
+    </block>
+    <label text="Alternative path item"/>
+    <block type="sparql11_pathalternativeitem"/>
+    <block type="sparql11_pathsequence">
+      <statement name="items">
+        <block type="sparql11_pathsequencitem"/>
+      </statement>
+    </block>
+    <label text="Path sequence item"/>
+    <block type="sparql11_pathsequencitem"/>
+    <label text="Inverse path (in negated)"/>
+    <block type="sparql11_inversepathoneinpropertyset"/>
+    <label text="Alternative path (in negated)"/>
+    <block type="sparql11_pathoneinpropertysetalternative">
+      <statement name="items">
+        <block type="sparql11_pathoneinpropertysetalternativeitem"/>
+      </statement>
+    </block>
+    <label text="Alternative path (in negated) item"/>
+    <block type="sparql11_pathoneinpropertysetalternativeitem"/>
+  </category>
+  <category name="Expressions">
+    <block type="sparql11_conditionalorexpression"/>
+    <block type="sparql11_conditionalandexpression"/>
+    <block type="sparql11_relationalexpression"/>
+    <block type="sparql11_relationalexpressionin">
+      <statement name="right">
+        <block type="sparql11_expressionlistitem"/>
+      </statement>
+    </block>
+    <block type="sparql11_additiveexpression"/>
+    <block type="sparql11_multiplicativeexpression"/>
+    <block type="sparql11_unaryexpression"/>
+    <block type="sparql11_brackettedexpression"/>
+    <block type="sparql11_builtincall0"/>
+    <block type="sparql11_builtincall1"/>
+    <block type="sparql11_builtincall2"/>
+    <block type="sparql11_builtincall3"/>
+    <block type="sparql11_builtincall4"/>
+    <block type="sparql11_bound">
+      <value name="value">
+        <block type="sparql11_var1"/>
+      </value>
+    </block>
+    <block type="sparql11_builtincalln">
+      <statement name="args">
+        <block type="sparql11_expressionlistitem"/>
+      </statement>
+    </block>
+    <block type="sparql11_iriorfunction">
+      <statement name="args">
+        <block type="sparql11_expressionlistitem"/>
+      </statement>
+    </block>
+    <label text="Expression list item"/>
+    <block type="sparql11_expressionlistitem"/>
+    <block type="sparql11_exists">
+      <value name="value">
+        <block type="sparql11_groupgraphpattern"/>
+      </value>
+    </block>
+    <block type="sparql11_aggregate"/>
+    <block type="sparql11_count"/>
+    <block type="sparql11_group_concat"/>
+  </category>
+  <category name="Update">
+    <label text="Update"/>
+    <block type="sparql11_update">
+      <statement name="items">
+        <block type="sparql11_updateitem"/>
+      </statement>
+    </block>
+    <label text="Update item"/>
+    <block type="sparql11_updateitem"/>
+    <block type="sparql11_prologueitem">
+      <value name="value">
+        <block type="sparql11_base">
+          <value name="value">
+            <block type="sparql11_iriref"/>
+          </value>
+        </block>
+      </value>
+    </block>
+    <block type="sparql11_prologueitem">
+      <value name="value">
+        <block type="sparql11_prefixdecldefault">
+          <value name="value">
+            <block type="sparql11_iriref"/>
+          </value>
+        </block>
+      </value>
+    </block>
+    <block type="sparql11_prologueitem">
+      <value name="value">
+        <block type="sparql11_prefixdecl">
+          <value name="value">
+            <block type="sparql11_iriref"/>
+          </value>
+        </block>
+      </value>
+    </block>
+    <block type="sparql11_modify">
+      <value name="delete">
+        <block type="sparql11_quadpattern">
+          <statement name="items">
+            <block type="sparql11_quadpatternitem"/>
+          </statement>
+        </block>
+      </value>
+      <value name="insert">
+        <block type="sparql11_quadpattern">
+          <statement name="items">
+            <block type="sparql11_quadpatternitem"/>
+          </statement>
+        </block>
+      </value>
+      <value name="where">
+        <block type="sparql11_groupgraphpattern"/>
+      </value>
+    </block>
+    <label text="Quad pattern item"/>
+    <block type="sparql11_quadpatternitem"/>
+    <block type="sparql11_usingclause">
+      <value name="value">
+        <block type="sparql11_iriref"/>
+      </value>
+    </block>
+    <block type="sparql11_usingclause">
+      <value name="value">
+        <block type="sparql11_namedgraphclause">
+          <value name="value">
+            <block type="sparql11_iriref">
+              <field name="value"/>
+            </block>
+          </value>
+        </block>
+      </value>
+    </block>
+    <block type="sparql11_insertdeletewhere">
+      <value name="pattern">
+        <block type="sparql11_quadpattern">
+          <statement name="items">
+            <block type="sparql11_quadpatternitem"/>
+          </statement>
+        </block>
+      </value>
+    </block>
+    <block type="sparql11_quadsnottriples">
+      <statement name="triples">
+        <block type="sparql11_triplessamesubjectitem"/>
+      </statement>
+    </block>
+    <label text="Triples same subject item"/>
+    <block type="sparql11_triplessamesubjectitem"/>
+    <block type="sparql11_load"/>
+    <block type="sparql11_cleardrop"/>
+    <block type="sparql11_create"/>
+    <block type="sparql11_addmovecopy"/>
+    <block type="sparql11_graphordefault"/>
+    <block type="sparql11_graphrefallall"/>
+    <block type="sparql11_graphrefallnamed"/>
+    <block type="sparql11_graphref"/>
+  </category>
+</xml>

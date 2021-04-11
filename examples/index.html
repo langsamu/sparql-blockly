@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>SPARQL Blockly examples</title>
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0" />
+    <style>
+        :root {
+            --pm: 20px;
+        }
+
+        html {
+            font-family: sans-serif;
+        }
+
+        body {
+            margin: unset;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        h1 {
+            margin: var(--pm);
+            margin-bottom: unset;
+            flex-grow: 0;
+        }
+
+        aside {
+            margin: var(--pm);
+        }
+
+        ul {
+            margin: var(--pm);
+            padding: unset;
+            display: flex;
+            list-style-type: none;
+            flex-wrap: wrap;
+        }
+
+        li {
+            margin-inline-end: var(--pm)
+        }
+
+        iframe {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>SPARQL Blockly examples</h1>
+    <nav>
+        <aside><small>Links open below. SHIFT/CTRL+click to open in new window/tab.</small></aside>
+        <ul>
+            <li><a href="browser-basic" target="example">Browser: Basic</a></li>
+            <li><a href="browser-sparql-from-blocks" target="example">Browser: SPARQL from blocks</a></li>
+            <li><a href="browser-blocks-from-sparql" target="example">Browser: Blocks from SPARQL</a></li>
+            <li><a href="typescript" target="example">TypeScript</a></li>
+        </ul>
+    </nav>
+    <iframe name="example"></iframe>
+</body>
+</html>
