@@ -9,8 +9,6 @@ Blocks["sparql11_prologueitem"] = {
         this.setPreviousStatement(true, "PrologueItem")
         this.setNextStatement(true, "PrologueItem")
         this.setColour(196)
-        this.setTooltip("PrologueItem")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_base"] = {
@@ -21,8 +19,6 @@ Blocks["sparql11_base"] = {
         this.setInputsInline(false)
         this.setOutput(true, "BaseDecl")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_prefixdecl"] = {
@@ -34,8 +30,6 @@ Blocks["sparql11_prefixdecl"] = {
             .appendField(":")
         this.setOutput(true, "PrefixDecl")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_prefixdecldefault"] = {
@@ -45,8 +39,6 @@ Blocks["sparql11_prefixdecldefault"] = {
             .appendField("PREFIX :")
         this.setOutput(true, "PrefixDecl")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 // #endregion
@@ -61,8 +53,6 @@ Blocks["sparql11_query"] = {
         this.appendValueInput("values")
             .setCheck("ValuesClause")
         this.setColour(196)
-        this.setTooltip("Query")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_selectquery"] = {
@@ -75,8 +65,6 @@ Blocks["sparql11_selectquery"] = {
         this.setInputsInline(false)
         this.setOutput(true, "SelectQuery")
         this.setColour(196)
-        this.setTooltip("SelectQuery")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_simpleconstructquery"] = {
@@ -93,8 +81,6 @@ Blocks["sparql11_simpleconstructquery"] = {
             .appendField("}")
         this.setOutput(true, "ConstructQuery")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_constructquery"] = {
@@ -107,8 +93,6 @@ Blocks["sparql11_constructquery"] = {
             .appendField("}")
         this.setOutput(true, "ConstructQuery")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_describequery"] = {
@@ -121,8 +105,6 @@ Blocks["sparql11_describequery"] = {
             .setCheck("QueryCommon")
         this.setOutput(true, "DescribeQuery")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_askquery"] = {
@@ -132,8 +114,6 @@ Blocks["sparql11_askquery"] = {
             .appendField("ASK")
         this.setOutput(true, "AskQuery")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_varoririitem"] = {
@@ -143,8 +123,6 @@ Blocks["sparql11_varoririitem"] = {
         this.setPreviousStatement(true, "VarOrIriItem")
         this.setNextStatement(true, "VarOrIriItem")
         this.setColour(196)
-        this.setTooltip("VarOrIriItem")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_triplessamesubjectitem"] = {
@@ -154,8 +132,6 @@ Blocks["sparql11_triplessamesubjectitem"] = {
         this.setPreviousStatement(true, "TriplesSameSubjectItem")
         this.setNextStatement(true, "TriplesSameSubjectItem")
         this.setColour(196)
-        this.setTooltip("TriplesSameSubjectItem")
-        this.setHelpUrl("")
     }
 }
 // #endregion
@@ -168,8 +144,6 @@ Blocks["sparql11_update"] = {
         this.appendStatementInput("items")
             .setCheck("UpdateItem")
         this.setColour(196)
-        this.setTooltip("Update")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_updateitem"] = {
@@ -179,8 +153,6 @@ Blocks["sparql11_updateitem"] = {
         this.setPreviousStatement(true, "UpdateItem")
         this.setNextStatement(true, "UpdateItem")
         this.setColour(196)
-        this.setTooltip("UpdateItem")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_insertdeletewhere"] = {
@@ -190,8 +162,6 @@ Blocks["sparql11_insertdeletewhere"] = {
             .appendField(new FieldDropdown([["INSERT DATA", "INSERT DATA"], ["DELETE DATA", "DELETE DATA"], ["DELETE WHERE", "DELETE WHERE"]]), "operator")
         this.setOutput(true, "Update1")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_quadpattern"] = {
@@ -205,8 +175,6 @@ Blocks["sparql11_quadpattern"] = {
         this.setInputsInline(false)
         this.setOutput(true, "QuadPattern")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_quadpatternitem"] = {
@@ -217,8 +185,6 @@ Blocks["sparql11_quadpatternitem"] = {
         this.setPreviousStatement(true, "QuadPatternItem")
         this.setNextStatement(true, "QuadPatternItem")
         this.setColour(196)
-        this.setTooltip("QuadPatternItem")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_quadsnottriples"] = {
@@ -233,8 +199,6 @@ Blocks["sparql11_quadsnottriples"] = {
         this.setInputsInline(false)
         this.setOutput(true, "QuadsNotTriples")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_modify"] = {
@@ -256,8 +220,6 @@ Blocks["sparql11_modify"] = {
         this.setInputsInline(false)
         this.setOutput(true, "Update1")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_usingclause"] = {
@@ -269,8 +231,6 @@ Blocks["sparql11_usingclause"] = {
         this.setPreviousStatement(true, "UsingClause")
         this.setNextStatement(true, "UsingClause")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_load"] = {
@@ -284,8 +244,6 @@ Blocks["sparql11_load"] = {
             .appendField("INTO")
         this.setOutput(true, "Update1")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_create"] = {
@@ -296,8 +254,6 @@ Blocks["sparql11_create"] = {
             .appendField(new FieldDropdown([["", ""], ["SILENT", "silent"]]), "silent")
         this.setOutput(true, "Update1")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_addmovecopy"] = {
@@ -311,8 +267,6 @@ Blocks["sparql11_addmovecopy"] = {
             .appendField("TO")
         this.setOutput(true, "Update1")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_cleardrop"] = {
@@ -323,8 +277,6 @@ Blocks["sparql11_cleardrop"] = {
             .appendField(new FieldDropdown([["", ""], ["SILENT", "SILENT"]]), "silent")
         this.setOutput(true, "Update1")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_graphref"] = {
@@ -334,8 +286,6 @@ Blocks["sparql11_graphref"] = {
             .appendField("GRAPH")
         this.setOutput(true, ["GraphRef", "GraphRefAll", "GraphOrDefault"])
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_graphrefallnamed"] = {
@@ -344,8 +294,6 @@ Blocks["sparql11_graphrefallnamed"] = {
             .appendField("NAMED")
         this.setOutput(true, "GraphRefAll")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_graphrefallall"] = {
@@ -354,8 +302,6 @@ Blocks["sparql11_graphrefallall"] = {
             .appendField("ALL")
         this.setOutput(true, "GraphRefAll")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_graphordefault"] = {
@@ -364,8 +310,6 @@ Blocks["sparql11_graphordefault"] = {
             .appendField("DEFAULT")
         this.setOutput(true, ["GraphRefAll", "GraphOrDefault"])
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 // #endregion
@@ -379,8 +323,6 @@ Blocks["sparql11_triplessamesubject"] = {
             .setCheck("PropertyListNotEmpty")
         this.setOutput(true, "TriplesSameSubject")
         this.setColour(0)
-        this.setTooltip("TriplesSameSubject")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_propertylistnotempty"] = {
@@ -392,8 +334,6 @@ Blocks["sparql11_propertylistnotempty"] = {
         this.setPreviousStatement(true, "PropertyListNotEmpty")
         this.setNextStatement(true, "PropertyListNotEmpty")
         this.setColour(131)
-        this.setTooltip("PropertyListNotEmpty")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_objectlistitem"] = {
@@ -403,8 +343,6 @@ Blocks["sparql11_objectlistitem"] = {
         this.setPreviousStatement(true, "ObjectListItem")
         this.setNextStatement(true, "ObjectListItem")
         this.setColour(294)
-        this.setTooltip("ObjectListItem")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_objectlistitemannotationpattern"] = {
@@ -419,8 +357,6 @@ Blocks["sparql11_objectlistitemannotationpattern"] = {
         this.setPreviousStatement(true, "ObjectListItem")
         this.setNextStatement(true, "ObjectListItem")
         this.setColour(294)
-        this.setTooltip("ObjectListItem")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_groupgraphpattern"] = {
@@ -434,8 +370,6 @@ Blocks["sparql11_groupgraphpattern"] = {
         this.setInputsInline(false)
         this.setOutput(true, "GroupGraphPattern")
         this.setColour(65)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_subselect"] = {
@@ -452,8 +386,6 @@ Blocks["sparql11_subselect"] = {
             .setCheck("ValuesClause")
         this.setOutput(true, "SubSelect")
         this.setColour(65)
-        this.setTooltip("SubSelect")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_groupgraphpatternsub"] = {
@@ -462,8 +394,6 @@ Blocks["sparql11_groupgraphpatternsub"] = {
             .setCheck("GroupGraphPatternSubItem")
         this.setOutput(true, "GroupGraphPatternSub")
         this.setColour(65)
-        this.setTooltip("GroupGraphPatternSub")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_groupgraphpatternsubitem"] = {
@@ -473,8 +403,6 @@ Blocks["sparql11_groupgraphpatternsubitem"] = {
         this.setPreviousStatement(true, "GroupGraphPatternSubItem")
         this.setNextStatement(true, "GroupGraphPatternSubItem")
         this.setColour(65)
-        this.setTooltip("GroupGraphPatternSubItem")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_graphgraphpattern"] = {
@@ -487,8 +415,6 @@ Blocks["sparql11_graphgraphpattern"] = {
         this.setInputsInline(false)
         this.setOutput(true, ["GraphGraphPattern", "GraphPatternNotTriples"])
         this.setColour(65)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_servicegraphpattern"] = {
@@ -501,8 +427,6 @@ Blocks["sparql11_servicegraphpattern"] = {
             .setCheck("GroupGraphPattern")
         this.setOutput(true, ["ServiceGraphPattern", "GraphPatternNotTriples"])
         this.setColour(65)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_bind"] = {
@@ -512,8 +436,6 @@ Blocks["sparql11_bind"] = {
             .appendField("BIND")
         this.setOutput(true, ["Bind", "GraphPatternNotTriples"])
         this.setColour(65)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_minusgraphpattern"] = {
@@ -523,8 +445,6 @@ Blocks["sparql11_minusgraphpattern"] = {
             .appendField("MINUS")
         this.setOutput(true, ["MinusGraphPattern", "GraphPatternNotTriples"])
         this.setColour(65)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_grouporuniongraphpattern"] = {
@@ -535,8 +455,6 @@ Blocks["sparql11_grouporuniongraphpattern"] = {
         this.setInputsInline(false)
         this.setOutput(true, ["GroupOrUnionGraphPattern", "GraphPatternNotTriples"])
         this.setColour(65)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_groupgraphpatternitem"] = {
@@ -546,8 +464,6 @@ Blocks["sparql11_groupgraphpatternitem"] = {
         this.setPreviousStatement(true, "GroupGraphPatternItem")
         this.setNextStatement(true, "GroupGraphPatternItem")
         this.setColour(65)
-        this.setTooltip("GroupGraphPatternItem")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_filter"] = {
@@ -557,8 +473,6 @@ Blocks["sparql11_filter"] = {
             .appendField("FILTER")
         this.setOutput(true, ["Filter", "GraphPatternNotTriples"])
         this.setColour(65)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_optionalgraphpattern"] = {
@@ -568,8 +482,6 @@ Blocks["sparql11_optionalgraphpattern"] = {
             .appendField("OPTIONAL")
         this.setOutput(true, "GraphPatternNotTriples")
         this.setColour(65)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_inlinedata"] = {
@@ -579,8 +491,6 @@ Blocks["sparql11_inlinedata"] = {
             .appendField("VALUES")
         this.setOutput(true, ["InlineData", "GraphPatternNotTriples", "ValuesClause"])
         this.setColour(65)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_inlinedataonevar"] = {
@@ -595,8 +505,6 @@ Blocks["sparql11_inlinedataonevar"] = {
             .appendField("}")
         this.setOutput(true, "DataBlock")
         this.setColour(65)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_inlinedatafull"] = {
@@ -615,8 +523,6 @@ Blocks["sparql11_inlinedatafull"] = {
             .appendField("}")
         this.setOutput(true, ["InlineDataFull", "DataBlock"])
         this.setColour(65)
-        this.setTooltip("InlineDataFull")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_datablockvaluesitem"] = {
@@ -630,8 +536,6 @@ Blocks["sparql11_datablockvaluesitem"] = {
         this.setPreviousStatement(true, "DataBlockValuesItem")
         this.setNextStatement(true, "DataBlockValuesItem")
         this.setColour(65)
-        this.setTooltip("DataBlockValuesItem")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_datablockvalueitem"] = {
@@ -641,8 +545,6 @@ Blocks["sparql11_datablockvalueitem"] = {
         this.setPreviousStatement(true, "DataBlockValueItem")
         this.setNextStatement(true, "DataBlockValueItem")
         this.setColour(65)
-        this.setTooltip("DataBlockValueItem")
-        this.setHelpUrl("")
     }
 }
 // #endregion
@@ -654,8 +556,6 @@ Blocks["sparql11_a"] = {
             .appendField("a")
         this.setOutput(true, ["a", "PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath", "PathOneInPropertySet", "PathNegatedPropertySet", "Verb"])
         this.setColour(228)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_negatedpath"] = {
@@ -666,8 +566,6 @@ Blocks["sparql11_negatedpath"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath"])
         this.setColour(228)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_bracketedpath"] = {
@@ -679,8 +577,6 @@ Blocks["sparql11_bracketedpath"] = {
             .appendField(")")
         this.setOutput(true, ["PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath"])
         this.setColour(228)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_pathwithmodifier"] = {
@@ -693,8 +589,6 @@ Blocks["sparql11_pathwithmodifier"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath"])
         this.setColour(228)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_inversepath"] = {
@@ -706,8 +600,6 @@ Blocks["sparql11_inversepath"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["PathEltOrInverse", "PathSequence", "Path", "VerbPath"])
         this.setColour(228)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_pathalternative"] = {
@@ -719,8 +611,6 @@ Blocks["sparql11_pathalternative"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["Path", "VerbPath"])
         this.setColour(228)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_pathsequence"] = {
@@ -732,8 +622,6 @@ Blocks["sparql11_pathsequence"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["PathSequence", "Path", "VerbPath"])
         this.setColour(228)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_inversepathoneinpropertyset"] = {
@@ -744,8 +632,6 @@ Blocks["sparql11_inversepathoneinpropertyset"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["PathOneInPropertySet", "PathNegatedPropertySet"])
         this.setColour(228)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_pathoneinpropertysetalternative"] = {
@@ -757,8 +643,6 @@ Blocks["sparql11_pathoneinpropertysetalternative"] = {
         this.setInputsInline(true)
         this.setOutput(true, "PathNegatedPropertySet")
         this.setColour(228)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_pathsequencitem"] = {
@@ -769,8 +653,6 @@ Blocks["sparql11_pathsequencitem"] = {
         this.setPreviousStatement(true, "PathSequenceItem")
         this.setNextStatement(true, "PathSequenceItem")
         this.setColour(228)
-        this.setTooltip("PathSequenceItem")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_pathalternativeitem"] = {
@@ -781,8 +663,6 @@ Blocks["sparql11_pathalternativeitem"] = {
         this.setPreviousStatement(true, "PathAlternativeItem")
         this.setNextStatement(true, "PathAlternativeItem")
         this.setColour(228)
-        this.setTooltip("PathAlternativeItem")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_pathoneinpropertysetalternativeitem"] = {
@@ -792,8 +672,6 @@ Blocks["sparql11_pathoneinpropertysetalternativeitem"] = {
         this.setPreviousStatement(true, "PathOneInPropertySetAlternativeItem")
         this.setNextStatement(true, "PathOneInPropertySetAlternativeItem")
         this.setColour(228)
-        this.setTooltip("PathOneInPropertySetAlternativeItem")
-        this.setHelpUrl("")
     }
 }
 // #endregion
@@ -810,8 +688,6 @@ Blocks["sparql11_querycommon"] = {
             .setCheck("SolutionModifier")
         this.setOutput(true, "QueryCommon")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_selectclause"] = {
@@ -822,8 +698,6 @@ Blocks["sparql11_selectclause"] = {
             .appendField(new FieldDropdown([["", ""], ["*", "*"]]), "star")
         this.setOutput(true, "SelectClause")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_expressionasvar"] = {
@@ -840,8 +714,6 @@ Blocks["sparql11_expressionasvar"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["ExpressionAsVar", "GroupCondition"])
         this.setColour(98)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_undef"] = {
@@ -850,8 +722,6 @@ Blocks["sparql11_undef"] = {
             .appendField("UNDEF")
         this.setOutput(true, "DataBlockValue")
         this.setColour(65)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_datasetclause"] = {
@@ -863,8 +733,6 @@ Blocks["sparql11_datasetclause"] = {
         this.setPreviousStatement(true, "DatasetClause")
         this.setNextStatement(true, "DatasetClause")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_namedgraphclause"] = {
@@ -874,8 +742,6 @@ Blocks["sparql11_namedgraphclause"] = {
             .appendField("NAMED")
         this.setOutput(true, "NamedGraphClause")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_solutionmodifier"] = {
@@ -897,8 +763,6 @@ Blocks["sparql11_solutionmodifier"] = {
             .appendField("OFFSET")
         this.setOutput(true, "SolutionModifier")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_ordercondition"] = {
@@ -908,8 +772,6 @@ Blocks["sparql11_ordercondition"] = {
             .appendField(new FieldDropdown([["ASC", "ASC"], ["DESC", "DESC"]]), "operator")
         this.setOutput(true, "OrderCondition")
         this.setColour(196)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_groupconditionitem"] = {
@@ -919,8 +781,6 @@ Blocks["sparql11_groupconditionitem"] = {
         this.setPreviousStatement(true, "GroupConditionItem")
         this.setNextStatement(true, "GroupConditionItem")
         this.setColour(196)
-        this.setTooltip("GroupConditionItem")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_havingconditionitem"] = {
@@ -930,8 +790,6 @@ Blocks["sparql11_havingconditionitem"] = {
         this.setPreviousStatement(true, "HavingConditionItem")
         this.setNextStatement(true, "HavingConditionItem")
         this.setColour(196)
-        this.setTooltip("HavingConditionItem")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_orderconditionitem"] = {
@@ -941,8 +799,6 @@ Blocks["sparql11_orderconditionitem"] = {
         this.setPreviousStatement(true, "OrderConditionItem")
         this.setNextStatement(true, "OrderConditionItem")
         this.setColour(196)
-        this.setTooltip("OrderConditionItem")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_varorexpressionasvaritem"] = {
@@ -953,8 +809,6 @@ Blocks["sparql11_varorexpressionasvaritem"] = {
         this.setPreviousStatement(true, "VarOrExpressionAsVarItem")
         this.setNextStatement(true, "VarOrExpressionAsVarItem")
         this.setColour(196)
-        this.setTooltip("VarOrExpressionAsVarItem")
-        this.setHelpUrl("")
     }
 }
 // #endregion
@@ -969,8 +823,6 @@ Blocks["sparql11_brackettedexpression"] = {
             .appendField(")")
         this.setOutput(true, ["BrackettedExpression", "PrimaryExpression", "UnaryExpression", "MultiplicativeExpression", "AdditiveExpression", "RelationalExpression", "ConditionalAndExpression", "ConditionalOrExpression", "Expression", "Constraint"])
         this.setColour(261)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_multiplicativeexpression"] = {
@@ -983,8 +835,6 @@ Blocks["sparql11_multiplicativeexpression"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["MultiplicativeExpression", "AdditiveExpression", "RelationalExpression", "ConditionalAndExpression", "ConditionalOrExpression", "Expression"])
         this.setColour(261)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_additiveexpression"] = {
@@ -997,8 +847,6 @@ Blocks["sparql11_additiveexpression"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["AdditiveExpression", "RelationalExpression", "ConditionalAndExpression", "ConditionalOrExpression", "Expression"])
         this.setColour(261)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_relationalexpression"] = {
@@ -1011,8 +859,6 @@ Blocks["sparql11_relationalexpression"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["RelationalExpression", "ConditionalAndExpression", "ConditionalOrExpression", "Expression"])
         this.setColour(261)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_relationalexpressionin"] = {
@@ -1025,8 +871,6 @@ Blocks["sparql11_relationalexpressionin"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["RelationalExpression", "ConditionalAndExpression", "ConditionalOrExpression", "Expression"])
         this.setColour(261)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_conditionalandexpression"] = {
@@ -1039,8 +883,6 @@ Blocks["sparql11_conditionalandexpression"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["ConditionalAndExpression", "ConditionalOrExpression", "Expression"])
         this.setColour(261)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_conditionalorexpression"] = {
@@ -1053,8 +895,6 @@ Blocks["sparql11_conditionalorexpression"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["ConditionalOrExpression", "Expression"])
         this.setColour(261)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_builtincall0"] = {
@@ -1065,8 +905,6 @@ Blocks["sparql11_builtincall0"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["BuiltInCall", "PrimaryExpression", "UnaryExpression", "MultiplicativeExpression", "AdditiveExpression", "RelationalExpression", "ConditionalAndExpression", "ConditionalOrExpression", "Expression", "GroupCondition", "Constraint"])
         this.setColour(261)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_builtincall1"] = {
@@ -1080,8 +918,6 @@ Blocks["sparql11_builtincall1"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["BuiltInCall", "PrimaryExpression", "UnaryExpression", "MultiplicativeExpression", "AdditiveExpression", "RelationalExpression", "ConditionalAndExpression", "ConditionalOrExpression", "Expression", "GroupCondition", "Constraint"])
         this.setColour(261)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_builtincall2"] = {
@@ -1098,8 +934,6 @@ Blocks["sparql11_builtincall2"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["BuiltInCall", "PrimaryExpression", "UnaryExpression", "MultiplicativeExpression", "AdditiveExpression", "RelationalExpression", "ConditionalAndExpression", "ConditionalOrExpression", "Expression", "GroupCondition", "Constraint"])
         this.setColour(261)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_builtincall3"] = {
@@ -1119,8 +953,6 @@ Blocks["sparql11_builtincall3"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["BuiltInCall", "PrimaryExpression", "UnaryExpression", "MultiplicativeExpression", "AdditiveExpression", "RelationalExpression", "ConditionalAndExpression", "ConditionalOrExpression", "Expression", "GroupCondition", "Constraint"])
         this.setColour(261)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_builtincall4"] = {
@@ -1143,8 +975,6 @@ Blocks["sparql11_builtincall4"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["BuiltInCall", "PrimaryExpression", "UnaryExpression", "MultiplicativeExpression", "AdditiveExpression", "RelationalExpression", "ConditionalAndExpression", "ConditionalOrExpression", "Expression", "GroupCondition", "Constraint"])
         this.setColour(261)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_builtincalln"] = {
@@ -1158,8 +988,6 @@ Blocks["sparql11_builtincalln"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["BuiltInCall", "PrimaryExpression", "UnaryExpression", "MultiplicativeExpression", "AdditiveExpression", "RelationalExpression", "ConditionalAndExpression", "ConditionalOrExpression", "Expression", "GroupCondition", "Constraint"])
         this.setColour(261)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_iriorfunction"] = {
@@ -1176,8 +1004,6 @@ Blocks["sparql11_iriorfunction"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["BuiltInCall", "PrimaryExpression", "UnaryExpression", "MultiplicativeExpression", "AdditiveExpression", "RelationalExpression", "ConditionalAndExpression", "ConditionalOrExpression", "Expression", "Constraint", "GroupCondition"])
         this.setColour(261)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_exists"] = {
@@ -1187,8 +1013,6 @@ Blocks["sparql11_exists"] = {
             .appendField(new FieldDropdown([["EXISTS", "EXISTS"], ["NOT EXISTS", "NOT EXISTS"]]), "operator")
         this.setOutput(true, ["BuiltInCall", "PrimaryExpression", "UnaryExpression", "MultiplicativeExpression", "AdditiveExpression", "RelationalExpression", "ConditionalAndExpression", "ConditionalOrExpression", "Expression", "GroupCondition", "Constraint"])
         this.setColour(261)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_bound"] = {
@@ -1201,8 +1025,6 @@ Blocks["sparql11_bound"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["BuiltInCall", "PrimaryExpression", "UnaryExpression", "MultiplicativeExpression", "AdditiveExpression", "RelationalExpression", "ConditionalAndExpression", "ConditionalOrExpression", "Expression", "GroupCondition", "Constraint"])
         this.setColour(261)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_unaryexpression"] = {
@@ -1213,8 +1035,6 @@ Blocks["sparql11_unaryexpression"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["UnaryExpression", "MultiplicativeExpression", "AdditiveExpression", "RelationalExpression", "ConditionalAndExpression", "ConditionalOrExpression", "Expression"])
         this.setColour(261)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_aggregate"] = {
@@ -1229,8 +1049,6 @@ Blocks["sparql11_aggregate"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["BuiltInCall", "PrimaryExpression", "UnaryExpression", "MultiplicativeExpression", "AdditiveExpression", "RelationalExpression", "ConditionalAndExpression", "ConditionalOrExpression", "Expression", "GroupCondition", "Constraint"])
         this.setColour(261)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_count"] = {
@@ -1245,8 +1063,6 @@ Blocks["sparql11_count"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["BuiltInCall", "PrimaryExpression", "UnaryExpression", "MultiplicativeExpression", "AdditiveExpression", "RelationalExpression", "ConditionalAndExpression", "ConditionalOrExpression", "Expression", "GroupCondition", "Constraint"])
         this.setColour(261)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_group_concat"] = {
@@ -1263,8 +1079,6 @@ Blocks["sparql11_group_concat"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["BuiltInCall", "PrimaryExpression", "UnaryExpression", "MultiplicativeExpression", "AdditiveExpression", "RelationalExpression", "ConditionalAndExpression", "ConditionalOrExpression", "Expression", "GroupCondition", "Constraint"])
         this.setColour(261)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_expressionlistitem"] = {
@@ -1274,8 +1088,6 @@ Blocks["sparql11_expressionlistitem"] = {
         this.setPreviousStatement(true, "ExpressionListItem")
         this.setNextStatement(true, "ExpressionListItem")
         this.setColour(261)
-        this.setTooltip("ExpressionListItem")
-        this.setHelpUrl("")
     }
 }
 // #endregion
@@ -1291,8 +1103,6 @@ Blocks["sparql11_blanknodepropertylist"] = {
             .appendField("]")
         this.setOutput(true, ["BlankNodePropertyList", "TriplesNode", "TriplesSameSubject", "GraphNode", "Object", "TriplesBlock"])
         this.setColour(0)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_prefixedname"] = {
@@ -1302,8 +1112,6 @@ Blocks["sparql11_prefixedname"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "iri", "VarOrIri", "GraphNode", "VarOrTerm", "GraphTerm", "Verb", "DataBlockValue", "PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath", "PathOneInPropertySet", "PathNegatedPropertySet", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "iriOrFunction", "GraphOrDefault"])
         this.setColour(326)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_prefixednameprefix"] = {
@@ -1314,8 +1122,6 @@ Blocks["sparql11_prefixednameprefix"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "iri", "VarOrIri", "GraphNode", "VarOrTerm", "GraphTerm", "Verb", "DataBlockValue", "PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath", "PathOneInPropertySet", "PathNegatedPropertySet", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "iriOrFunction", "GraphOrDefault"])
         this.setColour(326)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_prefixednamelocalname"] = {
@@ -1326,8 +1132,6 @@ Blocks["sparql11_prefixednamelocalname"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "iri", "VarOrIri", "GraphNode", "VarOrTerm", "GraphTerm", "Verb", "DataBlockValue", "PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath", "PathOneInPropertySet", "PathNegatedPropertySet", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "iriOrFunction", "GraphOrDefault"])
         this.setColour(326)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_prefixednameprefixlocalname"] = {
@@ -1339,8 +1143,6 @@ Blocks["sparql11_prefixednameprefixlocalname"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "iri", "VarOrIri", "GraphNode", "VarOrTerm", "GraphTerm", "Verb", "DataBlockValue", "PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath", "PathOneInPropertySet", "PathNegatedPropertySet", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "iriOrFunction", "GraphOrDefault"])
         this.setColour(326)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_embtp"] = {
@@ -1356,8 +1158,6 @@ Blocks["sparql11_embtp"] = {
             .appendField(">>")
         this.setOutput(true, ["GraphNode", "GraphNodePath", "VarOrTermOrEmbTP", "EmbSubjectOrObject", "EmbTP", "DataBlockValue"])
         this.setColour(0)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_iriref"] = {
@@ -1369,8 +1169,6 @@ Blocks["sparql11_iriref"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "IRIREF", "iri", "VarOrIri", "GraphNode", "VarOrTerm", "GraphTerm", "Verb", "DataBlockValue", "PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath", "PathOneInPropertySet", "PathNegatedPropertySet", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "iriOrFunction", "GraphOrDefault"])
         this.setColour(326)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_irirefdefault"] = {
@@ -1380,8 +1178,6 @@ Blocks["sparql11_irirefdefault"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "IRIREF", "iri", "VarOrIri", "GraphNode", "VarOrTerm", "GraphTerm", "Verb", "DataBlockValue", "PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath", "PathOneInPropertySet", "PathNegatedPropertySet", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "iriOrFunction", "GraphOrDefault"])
         this.setColour(326)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_typedliteral"] = {
@@ -1394,8 +1190,6 @@ Blocks["sparql11_typedliteral"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "RDFLiteral", "GraphNode", "VarOrTerm", "GraphTerm", "DataBlockValue", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression"])
         this.setColour(163)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_langstring"] = {
@@ -1410,8 +1204,6 @@ Blocks["sparql11_langstring"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "RDFLiteral", "GraphNode", "VarOrTerm", "GraphTerm", "DataBlockValue", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression"])
         this.setColour(163)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_collection"] = {
@@ -1424,8 +1216,6 @@ Blocks["sparql11_collection"] = {
             .appendField(")")
         this.setOutput(true, ["Collection", "TriplesNode", "TriplesSameSubject", "GraphNode", "Object", "TriplesBlock"])
         this.setColour(0)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_graphnodeitem"] = {
@@ -1435,8 +1225,6 @@ Blocks["sparql11_graphnodeitem"] = {
         this.setPreviousStatement(true, "GraphNodeItem")
         this.setNextStatement(true, "GraphNodeItem")
         this.setColour(294)
-        this.setTooltip("GraphNodeItem")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_anon"] = {
@@ -1445,8 +1233,6 @@ Blocks["sparql11_anon"] = {
             .appendField("[]")
         this.setOutput(true, ["EmbSubjectOrObject", "VarOrTermOrEmbTP", "BlankNode", "GraphTerm", "VarOrTerm", "GraphNode", "Object"])
         this.setColour(98)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_blanknodelabel"] = {
@@ -1457,8 +1243,6 @@ Blocks["sparql11_blanknodelabel"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["EmbSubjectOrObject", "VarOrTermOrEmbTP", "BlankNode", "GraphTerm", "VarOrTerm", "GraphNode"])
         this.setColour(98)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_nil"] = {
@@ -1467,8 +1251,6 @@ Blocks["sparql11_nil"] = {
             .appendField("()")
         this.setOutput(true, ["VarOrTermOrEmbTP", "NIL", "GraphTerm", "VarOrTerm", "GraphNode", "Object"])
         this.setColour(98)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_var1"] = {
@@ -1479,8 +1261,6 @@ Blocks["sparql11_var1"] = {
         this.setInputsInline(false)
         this.setOutput(true, ["EmbSubjectOrObject", "VarOrTermOrEmbTP", "Var", "VarOrIri", "Verb", "VarOrTerm", "GraphNode", "Object", "GroupCondition", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression"])
         this.setColour(33)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_var2"] = {
@@ -1491,8 +1271,6 @@ Blocks["sparql11_var2"] = {
         this.setInputsInline(false)
         this.setOutput(true, ["EmbSubjectOrObject", "VarOrTermOrEmbTP", "Var", "VarOrIri", "Verb", "VarOrTerm", "GraphNode", "Object", "GroupCondition", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression"])
         this.setColour(33)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_numericliteral"] = {
@@ -1504,8 +1282,6 @@ Blocks["sparql11_numericliteral"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "NumericLiteral", "RDFLiteral", "GraphNode", "VarOrTerm", "GraphTerm", "DataBlockValue", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression"])
         this.setColour(163)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_booleanliteral"] = {
@@ -1515,8 +1291,6 @@ Blocks["sparql11_booleanliteral"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "RDFLiteral", "GraphNode", "VarOrTerm", "GraphTerm", "DataBlockValue", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression"])
         this.setColour(163)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 Blocks["sparql11_string"] = {
@@ -1526,8 +1300,6 @@ Blocks["sparql11_string"] = {
         this.setInputsInline(true)
         this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "string", "RDFLiteral", "GraphNode", "VarOrTerm", "GraphTerm", "DataBlockValue", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression"])
         this.setColour(163)
-        this.setTooltip("")
-        this.setHelpUrl("")
     }
 }
 // #endregion
@@ -1541,8 +1313,6 @@ Blocks["sparql11_varitem"] = {
         this.setPreviousStatement(true, "VarItem")
         this.setNextStatement(true, "VarItem")
         this.setColour(65)
-        this.setTooltip("VarItem")
-        this.setHelpUrl("")
     }
 }
 // #endregion
