@@ -56,7 +56,7 @@ export class BlocklyCanvas extends HTMLElement {
     private workspaceChanged(e: Blockly.Events.Ui) {
         switch (e.type) {
             case Blockly.Events.CHANGE:
-            case Blockly.Events.DELETE:
+            case Blockly.Events.BLOCK_DELETE:
             case Blockly.Events.MOVE:
                 if (!this.typing) this.generateCode()
                 break

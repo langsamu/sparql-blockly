@@ -1,5 +1,4 @@
-﻿import * as SparqlJS from "sparqljs"
-import * as SparqlBlockly from "sparql-blockly"
+﻿import * as SparqlBlockly from "sparql-blockly"
 
 export class SparqlEditor extends HTMLElement {
     private async connectedCallback() {
@@ -36,11 +35,11 @@ export class SparqlEditor extends HTMLElement {
         const query = this.validate()
 
         if (query) {
-            this.dispatchEvent(new CustomEvent<Element>("sparql", { detail: SparqlBlockly.sparqlToBlockly(query) }))
+            this.dispatchEvent(new CustomEvent<Element>("sparql", { detail: query }))
         }
     }
 
-    private validate(): SparqlJS.SparqlQuery {
+    private validate(): Element {
         this.error = ""
         this.classList.remove("invalid")
         this.classList.remove("valid")
@@ -48,14 +47,12 @@ export class SparqlEditor extends HTMLElement {
         const sparql = this.value
 
         if (sparql) {
-            const parser = new SparqlJS.Parser({ sparqlStar: true })
-
             try {
-                const query = parser.parse(sparql)
+                const blocklyDom = SparqlBlockly.sparqlToBlockly(sparql)
 
                 this.classList.add("valid")
 
-                return query
+                return blocklyDom
             }
             catch (e) {
                 this.error = e.message
