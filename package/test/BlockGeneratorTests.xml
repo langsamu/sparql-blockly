@@ -408,24 +408,24 @@ VALUES (?1 ?2) {
             <next>
               <block type="sparql11_prologueitem">
                 <value name="value">
-                  <block type="sparql11_prefixdecldefault">
+                  <block type="sparql11_prefixdecl">
                     <value name="value">
                       <block type="sparql11_iriref">
-                        <field name="value">urn:default:</field>
+                        <field name="value">urn:p:</field>
                       </block>
                     </value>
+                    <field name="prefix">p</field>
                   </block>
                 </value>
                 <next>
                   <block type="sparql11_prologueitem">
                     <value name="value">
-                      <block type="sparql11_prefixdecl">
+                      <block type="sparql11_prefixdecldefault">
                         <value name="value">
                           <block type="sparql11_iriref">
-                            <field name="value">urn:p:</field>
+                            <field name="value">urn:default:</field>
                           </block>
                         </value>
-                        <field name="prefix">p</field>
                       </block>
                     </value>
                   </block>
@@ -521,6 +521,101 @@ DESCRIBE *
             <field name="star">*</field>
           </block>
         </value>
+      </block>
+    </xml>
+  </test>
+  <test name="Named node resolution">
+    <sparql>
+      <![CDATA[
+BASE <u:>
+PREFIX p: <u:/p/>
+PREFIX : <u:/>
+
+ASK { <u:a> <u:/a> <u:/p/a> } 
+]]>
+    </sparql>
+    <xml>
+      <block type="sparql11_query">
+        <value name="value">
+          <block type="sparql11_askquery">
+            <value name="value">
+              <block type="sparql11_querycommon">
+                <value name="pattern">
+                  <block type="sparql11_groupgraphpattern">
+                    <value name="value">
+                      <block type="sparql11_triplessamesubject">
+                        <value name="subject">
+                          <block type="sparql11_iriref">
+                            <field name="value">a</field>
+                          </block>
+                        </value>
+                        <statement name="predicates">
+                          <block type="sparql11_propertylistnotempty">
+                            <value name="predicate">
+                              <block type="sparql11_prefixednamelocalname">
+                                <field name="localName">a</field>
+                              </block>
+                            </value>
+                            <statement name="objects">
+                              <block type="sparql11_objectlistitem">
+                                <value name="value">
+                                  <block type="sparql11_prefixednameprefixlocalname">
+                                    <field name="localName">a</field>
+                                    <field name="prefix">p</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                          </block>
+                        </statement>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="prologue">
+          <block type="sparql11_prologueitem">
+            <value name="value">
+              <block type="sparql11_base">
+                <value name="value">
+                  <block type="sparql11_iriref">
+                    <field name="value">u:</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="sparql11_prologueitem">
+                <value name="value">
+                  <block type="sparql11_prefixdecldefault">
+                    <value name="value">
+                      <block type="sparql11_iriref">
+                        <field name="value">u:/</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="sparql11_prologueitem">
+                    <value name="value">
+                      <block type="sparql11_prefixdecl">
+                        <value name="value">
+                          <block type="sparql11_iriref">
+                            <field name="value">u:/p/</field>
+                          </block>
+                        </value>
+                        <field name="prefix">p</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
       </block>
     </xml>
   </test>

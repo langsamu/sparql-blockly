@@ -1041,7 +1041,8 @@ export default class BlockGenerator {
         }
 
         if (query.prefixes) {
-            Object.entries(query.prefixes).forEach(entry => items.push(entry))
+            // Resolve against longest namespace first so most specific prefix wins
+            Object.entries(query.prefixes).sort((a, b) => a[1].length - b[1].length).forEach(entry => items.push(entry))
         }
 
         return items
