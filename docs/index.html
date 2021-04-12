@@ -32,7 +32,7 @@
                 "url": ["https://twitter.com/langsamu", "https://github.com/langsamu/", "https://www.linkedin.com/in/langsamu/"]
             },
             "license": "https://github.com/langsamu/sparql-blockly/blob/main/LICENSE",
-            "browserRequirements": "Requires JavaScript. Requires Edge ^80, Firefox ^63, Chrome ^54, Opera ^41 or Safari ^10",
+            "browserRequirements": "Requires JavaScript. Requires Chrome ^54, Edge ^80, Firefox ^63, Opera ^41 or Safari ^10",
             "operatingSystem": "All",
             "softwareVersion": "0.0.4-5",
             "screenshot": "https://repository-images.githubusercontent.com/353815277/9e561900-93ad-11eb-8794-0b1b1645e92c",
@@ -63,25 +63,39 @@
         </summary>
         <section>
             <aside>TL;DR: <a href="#SELECT%20*%20WHERE%20%7B%20%3Fs%20%3Fp%20%3Fo%20.%20%7D">Visualise</a> this SPARQL query:<br /><code>SELECT * WHERE { ?s ?p ?o . }</code></aside>
+
             <h1>SPARQL Blockly</h1>
-            <ul>
-                <li>Source code on <a href="https://github.com/langsamu/sparql-blockly/">Github</a></li>
-                <li>Download the library from NPM <a href="https://github.com/langsamu/sparql-blockly/">Github</a></li>
-                <li>blah <a href="#ASK%20%7B%7D">ASK {}</a> blah</li>
-                <li>blah <a href="#SELECT%20*%20%7B%7D">SELECT * {}</a> blah</li>
-            </ul>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus fermentum et nisl quis aliquet. Nam suscipit magna ultrices, auctor mauris ut, elementum augue. Quisque ultricies sem eu nisl elementum, quis sodales libero lacinia. Duis porttitor non tortor vel luctus. Donec venenatis urna ligula. Aliquam quis eleifend mi. Nulla feugiat pellentesque quam. Nullam quis orci tellus. Donec congue, augue a dictum eleifend, lorem dolor luctus est, id consequat elit dolor eu nisl. Donec tincidunt interdum aliquet.</p>
-            <span>right click</span>
-            <iframe width="200" height="248" src="https://www.youtube.com/embed/HuSYr2h-vgA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus fermentum et nisl quis aliquet. Nam suscipit magna ultrices, auctor mauris ut, elementum augue. Quisque ultricies sem eu nisl elementum, quis sodales libero lacinia. Duis porttitor non tortor vel luctus. Donec venenatis urna ligula. Aliquam quis eleifend mi. Nulla feugiat pellentesque quam. Nullam quis orci tellus. Donec congue, augue a dictum eleifend, lorem dolor luctus est, id consequat elit dolor eu nisl. Donec tincidunt interdum aliquet.</p>
-            <span>drag&drop</span>
-            <iframe width="200" height="248" src="https://www.youtube.com/embed/Whyk-CIfbW4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus fermentum et nisl quis aliquet. Nam suscipit magna ultrices, auctor mauris ut, elementum augue. Quisque ultricies sem eu nisl elementum, quis sodales libero lacinia. Duis porttitor non tortor vel luctus. Donec venenatis urna ligula. Aliquam quis eleifend mi. Nulla feugiat pellentesque quam. Nullam quis orci tellus. Donec congue, augue a dictum eleifend, lorem dolor luctus est, id consequat elit dolor eu nisl. Donec tincidunt interdum aliquet.</p>
-            <span>type</span>
-            <iframe width="200" height="248" src="https://www.youtube.com/embed/oBKiRb92g58" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus fermentum et nisl quis aliquet. Nam suscipit magna ultrices, auctor mauris ut, elementum augue. Quisque ultricies sem eu nisl elementum, quis sodales libero lacinia. Duis porttitor non tortor vel luctus. Donec venenatis urna ligula. Aliquam quis eleifend mi. Nulla feugiat pellentesque quam. Nullam quis orci tellus. Donec congue, augue a dictum eleifend, lorem dolor luctus est, id consequat elit dolor eu nisl. Donec tincidunt interdum aliquet.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus fermentum et nisl quis aliquet. Nam suscipit magna ultrices, auctor mauris ut, elementum augue. Quisque ultricies sem eu nisl elementum, quis sodales libero lacinia. Duis porttitor non tortor vel luctus. Donec venenatis urna ligula. Aliquam quis eleifend mi. Nulla feugiat pellentesque quam. Nullam quis orci tellus. Donec congue, augue a dictum eleifend, lorem dolor luctus est, id consequat elit dolor eu nisl. Donec tincidunt interdum aliquet.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus fermentum et nisl quis aliquet. Nam suscipit magna ultrices, auctor mauris ut, elementum augue. Quisque ultricies sem eu nisl elementum, quis sodales libero lacinia. Duis porttitor non tortor vel luctus. Donec venenatis urna ligula. Aliquam quis eleifend mi. Nulla feugiat pellentesque quam. Nullam quis orci tellus. Donec congue, augue a dictum eleifend, lorem dolor luctus est, id consequat elit dolor eu nisl. Donec tincidunt interdum aliquet.</p>
+            <p>SPARQL Blockly is an app for visualising and constructing <a href="https://www.w3.org/TR/sparql11-query/">SPARQL queries</a>.</p>
+            <p>It supports SPARQL 1.1 Query <small>(<a href="#ASK%20%7B%7D">try</a>)</small>, Update <small>(<a href="#DROP%20ALL">try</a>)</small> and SPARQL* <small>(<a href="#SELECT%20(<<%20%3Fs%20%3Fp%20%3Fo%20>>%20AS%20%3Ft)%20%7B%7D">try</a>)</small>.</p>
+
+            <p><small>See the Source code on <a href="https://github.com/langsamu/sparql-blockly/">Github</a>.</small></p>
+            <p><small>Use the JavaScript library from <a href="https://github.com/langsamu/sparql-blockly/">npm</a>.</small></p>
+
+            <h2>Features</h2>
+
+            <h3>Parsing</h3>
+            <p>Text written into the textarea at the top is parsed by <a href="https://github.com/RubenVerborgh/SPARQL.js/">SPARQL.js</a>. Valid queries are visualised into blocks on the canvas below:</p>
+            <iframe width="200" height="248" src="https://www.youtube.com/embed/oBKiRb92g58" title="Parsing video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <p>The textarea will turn green for a valid and red for an invalid query.</p>
+            <p>Parsing errors for invalid queries are displayed below the textarea.</p>
+
+            <h3>Context menus</h3>
+            <p>Query blocks can be constructed by right-clicking the canvas and the blocks to add appropriate clauses from the context menus:</p>
+            <iframe width="200" height="248" src="https://www.youtube.com/embed/HuSYr2h-vgA" title="Context menus video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <p>Only appropriate blocks can be added, so the context menus enforce the SPARQL grammar.</p>
+
+            <h3>Drag & drop</h3>
+            <p>Queries can also be constructed by dragging blocks from the toolbox, dropping them unto the canvas and attaching them to existing blocks:</p>
+            <iframe width="200" height="248" src="https://www.youtube.com/embed/Whyk-CIfbW4" title="Drag & drop video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <p>Only appropriate blocks can be attached.</p>
+
+            <h3>Collapsing/expanding blocks</h3>
+            <p>Blocks can be collapsed from the context menus:</p>
+            <iframe width="200" height="248" src="https://www.youtube.com/embed/dK-l8aNd8hk" title="Collapse/expand video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <p>Collapsed blocks show the SPARQL they represent.</p>
+
+            <h3>Sharing</h3>
+            <p>The app takes URL-encoded SPARQL queries from the URL fragment, so queries and their visual representations can be shared.</p>
         </section>
     </details>
 </body>

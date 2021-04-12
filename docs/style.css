@@ -102,6 +102,7 @@ details {
         background: #f8f8f8;
         overflow: auto;
         max-height: 80vh;
+        max-width: 20em;
     }
 
         details > section > aside {

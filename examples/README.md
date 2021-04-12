@@ -1,8 +1,8 @@
 # SPARQL Blockly examples
 
 ## How to run
-1. Execute `npm start` on the command line in this folder.
-2. Navigate to [localhost:8080](http://127.0.0.1:8080/) in a browser
+1. Execute `npm start` in this folder.
+2. Navigate to [localhost:8080](http://127.0.0.1:8080/) in a browser.
 
 ## Examples
 - [Browser: Basic](./browser-basic/index.html)
