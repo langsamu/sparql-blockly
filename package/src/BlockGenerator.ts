@@ -283,7 +283,7 @@ export default class BlockGenerator {
             return new Block("groupgraphpattern")
         else if (isSingle(normalisedPatterns))
             return new Block("groupgraphpattern", this.pattern(first(normalisedPatterns)))
-        else if (normalisedPatterns.size > 1)
+        else // normalisedPatterns.size > 1
             return new Block("groupgraphpattern", this.groupGraphPatternSub([...normalisedPatterns]))
     }
     private groupGraphPatternSub(patterns: Pattern[]): Block {
@@ -367,6 +367,7 @@ export default class BlockGenerator {
             return block
         }
     }
+    // Not covered because parser normalises collections into blank nodes
     private collection(pattern: CollectionPattern): Block {
         const block = new Block("collection")
 
