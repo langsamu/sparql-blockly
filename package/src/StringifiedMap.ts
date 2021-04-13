@@ -18,11 +18,12 @@
         return super.has(JSON.stringify(key));
     }
 
-    public keys(): IterableIterator<K> {
-        return this.keyMap.values();
-    }
+    // Not used in this code-base but would be required otherwise
+    //public keys(): IterableIterator<K> {
+    //    return this.keyMap.values();
+    //}
 
-    public entries(): IterableIterator<[K, V]> {
+public entries(): IterableIterator<[K, V]> {
         return this[Symbol.iterator]();
     }
 
