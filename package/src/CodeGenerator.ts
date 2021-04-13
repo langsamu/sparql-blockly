@@ -909,9 +909,7 @@ export default class CodeGenerator extends Blockly.Generator {
         return this.generateNext(block, code, delimiter)
     }
     private generateNext(block: Blockly.Block, code: string, delimiter: string): string {
-        const next = this.blockToCode(block.getNextBlock())
-
-        if (next) {
+        if (block.getNextBlock()) {
             code += delimiter
         }
 
