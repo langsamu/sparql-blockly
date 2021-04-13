@@ -753,5 +753,313 @@ INSERT {
 WHERE {
 }]]></sparql>
   </test>
+  <test name="Terms">
+    <xml>
+      <block type="sparql11_query">
+        <statement name="prologue">
+          <block type="sparql11_prologueitem">
+            <value name="value">
+              <block type="sparql11_base">
+                <value name="value">
+                  <block type="sparql11_iriref">
+                    <field name="value">b:</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="sparql11_prologueitem">
+                <value name="value">
+                  <block type="sparql11_prefixdecl">
+                    <field name="prefix">p</field>
+                    <value name="value">
+                      <block type="sparql11_iriref">
+                        <field name="value">p:</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="sparql11_prologueitem">
+                    <value name="value">
+                      <block type="sparql11_prefixdecldefault">
+                        <value name="value">
+                          <block type="sparql11_iriref">
+                            <field name="value">dp:</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="value">
+          <block type="sparql11_askquery">
+            <value name="value">
+              <block type="sparql11_querycommon">
+                <value name="pattern">
+                  <block type="sparql11_groupgraphpattern">
+                    <value name="value">
+                      <block type="sparql11_groupgraphpatternsub">
+                        <statement name="items">
+                          <block type="sparql11_groupgraphpatternsubitem">
+                            <value name="value">
+                              <block type="sparql11_triplessamesubject">
+                                <value name="subject">
+                                  <block type="sparql11_var1">
+                                    <field name="value">s</field>
+                                  </block>
+                                </value>
+                                <statement name="predicates">
+                                  <block type="sparql11_propertylistnotempty">
+                                    <value name="predicate">
+                                      <block type="sparql11_var2">
+                                        <field name="value">p</field>
+                                      </block>
+                                    </value>
+                                    <statement name="objects">
+                                      <block type="sparql11_objectlistitem">
+                                        <value name="value">
+                                          <block type="sparql11_numericliteral">
+                                            <field name="value">0</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="sparql11_objectlistitem">
+                                            <value name="value">
+                                              <block type="sparql11_booleanliteral">
+                                                <field name="value">TRUE</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="sparql11_objectlistitem">
+                                                <value name="value">
+                                                  <block type="sparql11_booleanliteral">
+                                                    <field name="value">FALSE</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="sparql11_objectlistitem">
+                                                    <value name="value">
+                                                      <block type="sparql11_string">
+                                                        <field name="value"></field>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="sparql11_objectlistitem">
+                                                        <value name="value">
+                                                          <block type="sparql11_langstring">
+                                                            <field name="language">en</field>
+                                                            <value name="value">
+                                                              <block type="sparql11_string">
+                                                                <field name="value"></field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="sparql11_objectlistitem">
+                                                            <value name="value">
+                                                              <block type="sparql11_typedliteral">
+                                                                <value name="value">
+                                                                  <block type="sparql11_string">
+                                                                    <field name="value"></field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="datatype">
+                                                                  <block type="sparql11_prefixedname"></block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <next>
+                                                              <block type="sparql11_objectlistitem">
+                                                                <value name="value">
+                                                                  <block type="sparql11_irirefdefault"></block>
+                                                                </value>
+                                                                <next>
+                                                                  <block type="sparql11_objectlistitem">
+                                                                    <value name="value">
+                                                                      <block type="sparql11_iriref">
+                                                                        <field name="value">x</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <next>
+                                                                      <block type="sparql11_objectlistitem">
+                                                                        <value name="value">
+                                                                          <block type="sparql11_prefixednamelocalname">
+                                                                            <field name="localName">n</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <next>
+                                                                          <block type="sparql11_objectlistitem">
+                                                                            <value name="value">
+                                                                              <block type="sparql11_prefixednameprefix">
+                                                                                <field name="prefix">p</field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <next>
+                                                                              <block type="sparql11_objectlistitem">
+                                                                                <value name="value">
+                                                                                  <block type="sparql11_prefixednameprefixlocalname">
+                                                                                    <field name="prefix">p</field>
+                                                                                    <field name="localName">n</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <next>
+                                                                                  <block type="sparql11_objectlistitem">
+                                                                                    <value name="value">
+                                                                                      <block type="sparql11_anon"></block>
+                                                                                    </value>
+                                                                                    <next>
+                                                                                      <block type="sparql11_objectlistitem">
+                                                                                        <value name="value">
+                                                                                          <block type="sparql11_blanknodepropertylist">
+                                                                                            <statement name="predicates">
+                                                                                              <block type="sparql11_propertylistnotempty">
+                                                                                                <value name="predicate">
+                                                                                                  <block type="sparql11_a"></block>
+                                                                                                </value>
+                                                                                                <statement name="objects">
+                                                                                                  <block type="sparql11_objectlistitem">
+                                                                                                    <value name="value">
+                                                                                                      <block type="sparql11_numericliteral">
+                                                                                                        <field name="value">0</field>
+                                                                                                      </block>
+                                                                                                    </value>
+                                                                                                  </block>
+                                                                                                </statement>
+                                                                                              </block>
+                                                                                            </statement>
+                                                                                          </block>
+                                                                                        </value>
+                                                                                        <next>
+                                                                                          <block type="sparql11_objectlistitem">
+                                                                                            <value name="value">
+                                                                                              <block type="sparql11_nil"></block>
+                                                                                            </value>
+                                                                                            <next>
+                                                                                              <block type="sparql11_objectlistitem">
+                                                                                                <value name="value">
+                                                                                                  <block type="sparql11_collection">
+                                                                                                    <statement name="items">
+                                                                                                      <block type="sparql11_graphnodeitem">
+                                                                                                        <value name="value">
+                                                                                                          <block type="sparql11_numericliteral">
+                                                                                                            <field name="value">0</field>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                      </block>
+                                                                                                    </statement>
+                                                                                                  </block>
+                                                                                                </value>
+                                                                                                <next>
+                                                                                                  <block type="sparql11_objectlistitem">
+                                                                                                    <value name="value">
+                                                                                                      <block type="sparql11_blanknodelabel">
+                                                                                                        <field name="value">n</field>
+                                                                                                      </block>
+                                                                                                    </value>
+                                                                                                    <next>
+                                                                                                      <block type="sparql11_objectlistitem">
+                                                                                                        <value name="value">
+                                                                                                          <block type="sparql11_embtp">
+                                                                                                            <value name="subject">
+                                                                                                              <block type="sparql11_prefixedname"></block>
+                                                                                                            </value>
+                                                                                                            <value name="predicate">
+                                                                                                              <block type="sparql11_prefixedname"></block>
+                                                                                                            </value>
+                                                                                                            <value name="object">
+                                                                                                              <block type="sparql11_prefixedname"></block>
+                                                                                                            </value>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                        <next>
+                                                                                                          <block type="sparql11_objectlistitemannotationpattern">
+                                                                                                            <value name="value">
+                                                                                                              <block type="sparql11_prefixedname"></block>
+                                                                                                            </value>
+                                                                                                            <statement name="annotations">
+                                                                                                              <block type="sparql11_propertylistnotempty">
+                                                                                                                <value name="predicate">
+                                                                                                                  <block type="sparql11_a"></block>
+                                                                                                                </value>
+                                                                                                                <statement name="objects">
+                                                                                                                  <block type="sparql11_objectlistitem">
+                                                                                                                    <value name="value">
+                                                                                                                      <block type="sparql11_numericliteral">
+                                                                                                                        <field name="value">0</field>
+                                                                                                                      </block>
+                                                                                                                    </value>
+                                                                                                                  </block>
+                                                                                                                </statement>
+                                                                                                              </block>
+                                                                                                            </statement>
+                                                                                                          </block>
+                                                                                                        </next>
+                                                                                                      </block>
+                                                                                                    </next>
+                                                                                                  </block>
+                                                                                                </next>
+                                                                                              </block>
+                                                                                            </next>
+                                                                                          </block>
+                                                                                        </next>
+                                                                                      </block>
+                                                                                    </next>
+                                                                                  </block>
+                                                                                </next>
+                                                                              </block>
+                                                                            </next>
+                                                                          </block>
+                                                                        </next>
+                                                                      </block>
+                                                                    </next>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </statement>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </xml>
+    <sparql xml:space="preserve"><![CDATA[BASE <b:>
+PREFIX p: <p:>
+PREFIX : <dp:>
+
+ASK
+WHERE {
+	?s $p 0, true, false, '', ''@en, ''^^:, <>, <x>, :n, p:, p:n, [], [ a 0 ], (), (0), _:n, << : : : >>, : {|
+		a 0
+	|}
+}]]></sparql>
+  </test>
 </tests>
 
