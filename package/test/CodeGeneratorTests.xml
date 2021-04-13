@@ -1,6 +1,6 @@
 <tests>
   <test name="String with apostrophe">
-    <sparql>"'"</sparql>
+    <sparql xml:space="preserve">"'"</sparql>
     <xml>
       <block type="sparql11_string">
         <field name="value">'</field>
@@ -13,7 +13,7 @@
         <field name="value">'"</field>
       </block>
     </xml>
-    <sparql>"'\""</sparql>
+    <sparql xml:space="preserve">"'\""</sparql>
   </test>
   <test name="String with multiple lines">
     <xml>
@@ -22,14 +22,14 @@
 line2</field>
       </block>
     </xml>
-    <sparql>'''line1
+    <sparql xml:space="preserve">'''line1
 line2'''</sparql>
   </test>
   <test name="IRI reference empty">
     <xml>
       <block type="sparql11_irirefdefault"/>
     </xml>
-    <sparql>&lt;&gt;</sparql>
+    <sparql xml:space="preserve">&lt;&gt;</sparql>
   </test>
   <test name="IRI reference">
     <xml>
@@ -37,13 +37,13 @@ line2'''</sparql>
         <field name="value">x</field>
       </block>
     </xml>
-    <sparql>&lt;x&gt;</sparql>
+    <sparql xml:space="preserve">&lt;x&gt;</sparql>
   </test>
   <test name="Prefixed name">
     <xml>
       <block type="sparql11_prefixedname"/>
     </xml>
-    <sparql>:</sparql>
+    <sparql xml:space="preserve">:</sparql>
   </test>
   <test name="Prefixed name with prefix">
     <xml>
@@ -51,7 +51,7 @@ line2'''</sparql>
         <field name="prefix">prefix</field>
       </block>
     </xml>
-    <sparql>prefix:</sparql>
+    <sparql xml:space="preserve">prefix:</sparql>
   </test>
   <test name="Prefixed name with local-name">
     <xml>
@@ -59,7 +59,7 @@ line2'''</sparql>
         <field name="localName">localName</field>
       </block>
     </xml>
-    <sparql>:localName</sparql>
+    <sparql xml:space="preserve">:localName</sparql>
   </test>
   <test name="Prefixed name with prefix and local-name">
     <xml>
@@ -68,7 +68,7 @@ line2'''</sparql>
         <field name="localName">localName</field>
       </block>
     </xml>
-    <sparql>prefix:localName</sparql>
+    <sparql xml:space="preserve">prefix:localName</sparql>
   </test>
   <test name="Language-tagged string">
     <xml>
@@ -81,7 +81,7 @@ line2'''</sparql>
         <field name="language">en</field>
       </block>
     </xml>
-    <sparql>'x'@en</sparql>
+    <sparql xml:space="preserve">'x'@en</sparql>
   </test>
   <test name="Describe">
     <xml>
@@ -145,9 +145,612 @@ line2'''</sparql>
         </value>
       </block>
     </xml>
-    <sparql><![CDATA[DESCRIBE ?s <http://example.com/>
+    <sparql xml:space="preserve"><![CDATA[DESCRIBE ?s <http://example.com/>
 WHERE {
 	?s ?p ?o
+}]]></sparql>
+  </test>
+  <test name="Updates">
+    <xml>
+      <block type="sparql11_update">
+        <statement name="prologue">
+          <block type="sparql11_prologueitem">
+            <value name="value">
+              <block type="sparql11_prefixdecldefault">
+                <value name="value">
+                  <block type="sparql11_iriref">
+                    <field name="value">u:d</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <statement name="items">
+          <block type="sparql11_updateitem">
+            <value name="value">
+              <block type="sparql11_load">
+                <value name="source">
+                  <block type="sparql11_prefixednamelocalname">
+                    <field name="localName">s</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="sparql11_updateitem">
+                <value name="value">
+                  <block type="sparql11_load">
+                    <value name="source">
+                      <block type="sparql11_prefixednamelocalname">
+                        <field name="localName">s</field>
+                      </block>
+                    </value>
+                    <value name="destination">
+                      <block type="sparql11_graphref">
+                        <value name="value">
+                          <block type="sparql11_prefixednamelocalname">
+                            <field name="localName">d</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <field name="silent">SILENT</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="sparql11_updateitem">
+                    <value name="value">
+                      <block type="sparql11_cleardrop">
+                        <value name="graph">
+                          <block type="sparql11_graphordefault"/>
+                        </value>
+                        <field name="operator">CLEAR</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="sparql11_updateitem">
+                        <value name="value">
+                          <block type="sparql11_cleardrop">
+                            <value name="graph">
+                              <block type="sparql11_graphordefault"/>
+                            </value>
+                            <field name="operator">CLEAR</field>
+                            <field name="silent">SILENT</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="sparql11_updateitem">
+                            <value name="value">
+                              <block type="sparql11_cleardrop">
+                                <value name="graph">
+                                  <block type="sparql11_graphrefallnamed"/>
+                                </value>
+                                <field name="operator">CLEAR</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="sparql11_updateitem">
+                                <value name="value">
+                                  <block type="sparql11_cleardrop">
+                                    <value name="graph">
+                                      <block type="sparql11_graphrefallall"/>
+                                    </value>
+                                    <field name="operator">CLEAR</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="sparql11_updateitem">
+                                    <value name="value">
+                                      <block type="sparql11_cleardrop">
+                                        <value name="graph">
+                                          <block type="sparql11_graphref">
+                                            <value name="value">
+                                              <block type="sparql11_prefixednamelocalname">
+                                                <field name="localName">d</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <field name="operator">CLEAR</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="sparql11_updateitem">
+                                        <value name="value">
+                                          <block type="sparql11_cleardrop">
+                                            <value name="graph">
+                                              <block type="sparql11_graphordefault"/>
+                                            </value>
+                                            <field name="operator">DROP</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="sparql11_updateitem">
+                                            <value name="value">
+                                              <block type="sparql11_cleardrop">
+                                                <value name="graph">
+                                                  <block type="sparql11_graphordefault"/>
+                                                </value>
+                                                <field name="operator">DROP</field>
+                                                <field name="silent">SILENT</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="sparql11_updateitem">
+                                                <value name="value">
+                                                  <block type="sparql11_cleardrop">
+                                                    <value name="graph">
+                                                      <block type="sparql11_graphrefallnamed"/>
+                                                    </value>
+                                                    <field name="operator">DROP</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="sparql11_updateitem">
+                                                    <value name="value">
+                                                      <block type="sparql11_cleardrop">
+                                                        <value name="graph">
+                                                          <block type="sparql11_graphrefallall"/>
+                                                        </value>
+                                                        <field name="operator">DROP</field>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="sparql11_updateitem">
+                                                        <value name="value">
+                                                          <block type="sparql11_cleardrop">
+                                                            <value name="graph">
+                                                              <block type="sparql11_graphref">
+                                                                <value name="value">
+                                                                  <block type="sparql11_prefixednamelocalname">
+                                                                    <field name="localName">d</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <field name="operator">DROP</field>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="sparql11_updateitem">
+                                                            <value name="value">
+                                                              <block type="sparql11_addmovecopy">
+                                                                <value name="source">
+                                                                  <block type="sparql11_graphordefault"/>
+                                                                </value>
+                                                                <value name="destination">
+                                                                  <block type="sparql11_graphordefault"/>
+                                                                </value>
+                                                                <field name="operator">ADD</field>
+                                                              </block>
+                                                            </value>
+                                                            <next>
+                                                              <block type="sparql11_updateitem">
+                                                                <value name="value">
+                                                                  <block type="sparql11_addmovecopy">
+                                                                    <value name="source">
+                                                                      <block type="sparql11_graphordefault"/>
+                                                                    </value>
+                                                                    <value name="destination">
+                                                                      <block type="sparql11_graphordefault"/>
+                                                                    </value>
+                                                                    <field name="operator">ADD</field>
+                                                                    <field name="silent">SILENT</field>
+                                                                  </block>
+                                                                </value>
+                                                                <next>
+                                                                  <block type="sparql11_updateitem">
+                                                                    <value name="value">
+                                                                      <block type="sparql11_addmovecopy">
+                                                                        <value name="source">
+                                                                          <block type="sparql11_graphref">
+                                                                            <value name="value">
+                                                                              <block type="sparql11_prefixednamelocalname">
+                                                                                <field name="localName">s</field>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="destination">
+                                                                          <block type="sparql11_graphref">
+                                                                            <value name="value">
+                                                                              <block type="sparql11_prefixednamelocalname">
+                                                                                <field name="localName">d</field>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                        <field name="operator">ADD</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <next>
+                                                                      <block type="sparql11_updateitem">
+                                                                        <value name="value">
+                                                                          <block type="sparql11_addmovecopy">
+                                                                            <value name="source">
+                                                                              <block type="sparql11_graphordefault"/>
+                                                                            </value>
+                                                                            <value name="destination">
+                                                                              <block type="sparql11_graphordefault"/>
+                                                                            </value>
+                                                                            <field name="operator">MOVE</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <next>
+                                                                          <block type="sparql11_updateitem">
+                                                                            <value name="value">
+                                                                              <block type="sparql11_addmovecopy">
+                                                                                <value name="source">
+                                                                                  <block type="sparql11_graphordefault"/>
+                                                                                </value>
+                                                                                <value name="destination">
+                                                                                  <block type="sparql11_graphordefault"/>
+                                                                                </value>
+                                                                                <field name="operator">COPY</field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <next>
+                                                                              <block type="sparql11_updateitem">
+                                                                                <value name="value">
+                                                                                  <block type="sparql11_create">
+                                                                                    <value name="graph">
+                                                                                      <block type="sparql11_graphref">
+                                                                                        <value name="value">
+                                                                                          <block type="sparql11_prefixednamelocalname">
+                                                                                            <field name="localName">d</field>
+                                                                                          </block>
+                                                                                        </value>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <next>
+                                                                                  <block type="sparql11_updateitem">
+                                                                                    <value name="value">
+                                                                                      <block type="sparql11_create">
+                                                                                        <value name="graph">
+                                                                                          <block type="sparql11_graphref">
+                                                                                            <value name="value">
+                                                                                              <block type="sparql11_prefixednamelocalname">
+                                                                                                <field name="localName">d</field>
+                                                                                              </block>
+                                                                                            </value>
+                                                                                          </block>
+                                                                                        </value>
+                                                                                        <field name="silent">SILENT</field>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                    <next>
+                                                                                      <block type="sparql11_updateitem">
+                                                                                        <value name="value">
+                                                                                          <block type="sparql11_insertdeletewhere">
+                                                                                            <value name="pattern">
+                                                                                              <block type="sparql11_quadpattern">
+                                                                                                <statement name="items">
+                                                                                                  <block type="sparql11_quadpatternitem">
+                                                                                                    <value name="value">
+                                                                                                      <block type="sparql11_triplessamesubject">
+                                                                                                        <value name="subject">
+                                                                                                          <block type="sparql11_prefixednamelocalname">
+                                                                                                            <field name="localName">d</field>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                        <statement name="predicates">
+                                                                                                          <block type="sparql11_propertylistnotempty">
+                                                                                                            <value name="predicate">
+                                                                                                              <block type="sparql11_a"/>
+                                                                                                            </value>
+                                                                                                            <statement name="objects">
+                                                                                                              <block type="sparql11_objectlistitem">
+                                                                                                                <value name="value">
+                                                                                                                  <block type="sparql11_numericliteral">
+                                                                                                                    <field name="value">0</field>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                              </block>
+                                                                                                            </statement>
+                                                                                                          </block>
+                                                                                                        </statement>
+                                                                                                      </block>
+                                                                                                    </value>
+                                                                                                  </block>
+                                                                                                </statement>
+                                                                                              </block>
+                                                                                            </value>
+                                                                                            <field name="operator">INSERT DATA</field>
+                                                                                          </block>
+                                                                                        </value>
+                                                                                        <next>
+                                                                                          <block type="sparql11_updateitem">
+                                                                                            <value name="value">
+                                                                                              <block type="sparql11_insertdeletewhere">
+                                                                                                <value name="pattern">
+                                                                                                  <block type="sparql11_quadpattern">
+                                                                                                    <statement name="items">
+                                                                                                      <block type="sparql11_quadpatternitem">
+                                                                                                        <value name="value">
+                                                                                                          <block type="sparql11_quadsnottriples">
+                                                                                                            <value name="name">
+                                                                                                              <block type="sparql11_prefixednamelocalname">
+                                                                                                                <field name="localName">g</field>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                            <statement name="triples">
+                                                                                                              <block type="sparql11_triplessamesubjectitem">
+                                                                                                                <value name="value">
+                                                                                                                  <block type="sparql11_triplessamesubject">
+                                                                                                                    <value name="subject">
+                                                                                                                      <block type="sparql11_prefixednamelocalname">
+                                                                                                                        <field name="localName">d</field>
+                                                                                                                      </block>
+                                                                                                                    </value>
+                                                                                                                    <statement name="predicates">
+                                                                                                                      <block type="sparql11_propertylistnotempty">
+                                                                                                                        <value name="predicate">
+                                                                                                                          <block type="sparql11_a"/>
+                                                                                                                        </value>
+                                                                                                                        <statement name="objects">
+                                                                                                                          <block type="sparql11_objectlistitem">
+                                                                                                                            <value name="value">
+                                                                                                                              <block type="sparql11_numericliteral">
+                                                                                                                                <field name="value">0</field>
+                                                                                                                              </block>
+                                                                                                                            </value>
+                                                                                                                          </block>
+                                                                                                                        </statement>
+                                                                                                                      </block>
+                                                                                                                    </statement>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                              </block>
+                                                                                                            </statement>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                      </block>
+                                                                                                    </statement>
+                                                                                                  </block>
+                                                                                                </value>
+                                                                                                <field name="operator">DELETE DATA</field>
+                                                                                              </block>
+                                                                                            </value>
+                                                                                            <next>
+                                                                                              <block type="sparql11_updateitem">
+                                                                                                <value name="value">
+                                                                                                  <block type="sparql11_insertdeletewhere">
+                                                                                                    <value name="pattern">
+                                                                                                      <block type="sparql11_quadpattern"/>
+                                                                                                    </value>
+                                                                                                    <field name="operator">DELETE WHERE</field>
+                                                                                                  </block>
+                                                                                                </value>
+                                                                                                <next>
+                                                                                                  <block type="sparql11_updateitem">
+                                                                                                    <value name="value">
+                                                                                                      <block type="sparql11_modify">
+                                                                                                        <value name="delete">
+                                                                                                          <block type="sparql11_quadpattern">
+                                                                                                            <statement name="items">
+                                                                                                              <block type="sparql11_quadpatternitem">
+                                                                                                                <value name="value">
+                                                                                                                  <block type="sparql11_triplessamesubject">
+                                                                                                                    <value name="subject">
+                                                                                                                      <block type="sparql11_prefixednamelocalname">
+                                                                                                                        <field name="localName">d</field>
+                                                                                                                      </block>
+                                                                                                                    </value>
+                                                                                                                    <statement name="predicates">
+                                                                                                                      <block type="sparql11_propertylistnotempty">
+                                                                                                                        <value name="predicate">
+                                                                                                                          <block type="sparql11_a"/>
+                                                                                                                        </value>
+                                                                                                                        <statement name="objects">
+                                                                                                                          <block type="sparql11_objectlistitem">
+                                                                                                                            <value name="value">
+                                                                                                                              <block type="sparql11_numericliteral">
+                                                                                                                                <field name="value">0</field>
+                                                                                                                              </block>
+                                                                                                                            </value>
+                                                                                                                          </block>
+                                                                                                                        </statement>
+                                                                                                                      </block>
+                                                                                                                    </statement>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                              </block>
+                                                                                                            </statement>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                        <value name="where">
+                                                                                                          <block type="sparql11_groupgraphpattern"/>
+                                                                                                        </value>
+                                                                                                        <statement name="using">
+                                                                                                          <block type="sparql11_usingclause">
+                                                                                                            <value name="value">
+                                                                                                              <block type="sparql11_prefixednamelocalname">
+                                                                                                                <field name="localName">u</field>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                            <next>
+                                                                                                              <block type="sparql11_usingclause">
+                                                                                                                <value name="value">
+                                                                                                                  <block type="sparql11_namedgraphclause">
+                                                                                                                    <value name="value">
+                                                                                                                      <block type="sparql11_prefixednamelocalname">
+                                                                                                                        <field name="localName">un</field>
+                                                                                                                      </block>
+                                                                                                                    </value>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                              </block>
+                                                                                                            </next>
+                                                                                                          </block>
+                                                                                                        </statement>
+                                                                                                      </block>
+                                                                                                    </value>
+                                                                                                    <next>
+                                                                                                      <block type="sparql11_updateitem">
+                                                                                                        <value name="value">
+                                                                                                          <block type="sparql11_modify">
+                                                                                                            <value name="iri">
+                                                                                                              <block type="sparql11_prefixednamelocalname">
+                                                                                                                <field name="localName">w</field>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                            <value name="insert">
+                                                                                                              <block type="sparql11_quadpattern">
+                                                                                                                <statement name="items">
+                                                                                                                  <block type="sparql11_quadpatternitem">
+                                                                                                                    <value name="value">
+                                                                                                                      <block type="sparql11_triplessamesubject">
+                                                                                                                        <value name="subject">
+                                                                                                                          <block type="sparql11_prefixednamelocalname">
+                                                                                                                            <field name="localName">d</field>
+                                                                                                                          </block>
+                                                                                                                        </value>
+                                                                                                                        <statement name="predicates">
+                                                                                                                          <block type="sparql11_propertylistnotempty">
+                                                                                                                            <value name="predicate">
+                                                                                                                              <block type="sparql11_a"/>
+                                                                                                                            </value>
+                                                                                                                            <statement name="objects">
+                                                                                                                              <block type="sparql11_objectlistitem">
+                                                                                                                                <value name="value">
+                                                                                                                                  <block type="sparql11_numericliteral">
+                                                                                                                                    <field name="value">0</field>
+                                                                                                                                  </block>
+                                                                                                                                </value>
+                                                                                                                              </block>
+                                                                                                                            </statement>
+                                                                                                                          </block>
+                                                                                                                        </statement>
+                                                                                                                      </block>
+                                                                                                                    </value>
+                                                                                                                  </block>
+                                                                                                                </statement>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                            <value name="where">
+                                                                                                              <block type="sparql11_groupgraphpattern"/>
+                                                                                                            </value>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                      </block>
+                                                                                                    </next>
+                                                                                                  </block>
+                                                                                                </next>
+                                                                                              </block>
+                                                                                            </next>
+                                                                                          </block>
+                                                                                        </next>
+                                                                                      </block>
+                                                                                    </next>
+                                                                                  </block>
+                                                                                </next>
+                                                                              </block>
+                                                                            </next>
+                                                                          </block>
+                                                                        </next>
+                                                                      </block>
+                                                                    </next>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </xml>
+    <sparql xml:space="preserve"><![CDATA[PREFIX : <u:d>
+
+LOAD :s ;
+
+LOAD SILENT :s INTO GRAPH :d ;
+
+CLEAR DEFAULT ;
+
+CLEAR SILENT DEFAULT ;
+
+CLEAR NAMED ;
+
+CLEAR ALL ;
+
+CLEAR GRAPH :d ;
+
+DROP DEFAULT ;
+
+DROP SILENT DEFAULT ;
+
+DROP NAMED ;
+
+DROP ALL ;
+
+DROP GRAPH :d ;
+
+ADD DEFAULT TO DEFAULT ;
+
+ADD SILENT DEFAULT TO DEFAULT ;
+
+ADD GRAPH :s TO GRAPH :d ;
+
+MOVE DEFAULT TO DEFAULT ;
+
+COPY DEFAULT TO DEFAULT ;
+
+CREATE GRAPH :d ;
+
+CREATE SILENT GRAPH :d ;
+
+INSERT DATA {
+	:d a 0
+} ;
+
+DELETE DATA {
+	GRAPH :g {
+		:d a 0
+	}
+} ;
+
+DELETE WHERE {
+} ;
+
+DELETE {
+	:d a 0
+}
+USING :u
+USING NAMED :un
+WHERE {
+} ;
+
+WITH :w
+INSERT {
+	:d a 0
+}
+WHERE {
 }]]></sparql>
   </test>
 </tests>

@@ -238,7 +238,7 @@ Blocks["sparql11_load"] = {
         this.appendValueInput("source")
             .setCheck("iri")
             .appendField("LOAD")
-            .appendField(new FieldDropdown([["", ""], ["SILENT", "silent"]]), "silent")
+            .appendField(new FieldDropdown([["", ""], ["SILENT", "SILENT"]]), "silent")
         this.appendValueInput("destination")
             .setCheck("GraphRef")
             .appendField("INTO")
@@ -251,7 +251,7 @@ Blocks["sparql11_create"] = {
         this.appendValueInput("graph")
             .setCheck("GraphRef")
             .appendField("CREATE")
-            .appendField(new FieldDropdown([["", ""], ["SILENT", "silent"]]), "silent")
+            .appendField(new FieldDropdown([["", ""], ["SILENT", "SILENT"]]), "silent")
         this.setOutput(true, "Update1")
         this.setColour(196)
     }

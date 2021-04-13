@@ -175,7 +175,7 @@ export default class BlockGenerator {
 
         block.addValue("source", this.namedNode(update.source))
         if (update.destination) block.addValue("destination", this.graphRef(update.destination as SparqlJS.IriTerm))
-        if (update.silent) block.addField("silent", "silent")
+        if (update.silent) block.addField("silent", "SILENT")
 
         return block
     }
@@ -183,7 +183,7 @@ export default class BlockGenerator {
         const block = new Block("create")
 
         block.addValue("graph", this.graphRef(update.graph.name))
-        if (update.silent) block.addField("silent", "silent")
+        if (update.silent) block.addField("silent", "SILENT")
 
         return block
     }
@@ -239,7 +239,7 @@ export default class BlockGenerator {
             return new Block("graphrefallall")
         else if (graph.default)
             return new Block("graphordefault")
-        else if (graph.named)
+        else // graph.named
             return new Block("graphrefallnamed")
     }
     private graphRef(iri: SparqlJS.IriTerm): Block {
