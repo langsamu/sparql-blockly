@@ -1563,5 +1563,361 @@ WHERE {
       </block>
     </xml>
   </test>
+  <test name="Verbs">
+    <sparql>
+      <![CDATA[
+PREFIX : <p:>
+
+ASK
+WHERE {
+	[
+		a : ;
+		a? : ;
+		a* : ;
+		a+ : ;
+		(a/a)? : ;
+		^a : ;
+		^(a/a) : ;
+		a|a : ;
+		a/a : ;
+		!a : ;
+		!^a : ;
+		!(a|a) :
+	]
+}]]>
+    </sparql>
+    <xml>
+      <block type="sparql11_query">
+        <value name="value">
+          <block type="sparql11_askquery">
+            <value name="value">
+              <block type="sparql11_querycommon">
+                <value name="pattern">
+                  <block type="sparql11_groupgraphpattern">
+                    <value name="value">
+                      <block type="sparql11_triplessamesubject">
+                        <value name="subject">
+                          <block type="sparql11_blanknodelabel">
+                            <field name="value">g_3</field>
+                          </block>
+                        </value>
+                        <statement name="predicates">
+                          <block type="sparql11_propertylistnotempty">
+                            <value name="predicate">
+                              <block type="sparql11_a"/>
+                            </value>
+                            <statement name="objects">
+                              <block type="sparql11_objectlistitem">
+                                <value name="value">
+                                  <block type="sparql11_prefixedname"/>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="sparql11_propertylistnotempty">
+                                <value name="predicate">
+                                  <block type="sparql11_pathwithmodifier">
+                                    <value name="value">
+                                      <block type="sparql11_a"/>
+                                    </value>
+                                    <field name="modifier">?</field>
+                                  </block>
+                                </value>
+                                <statement name="objects">
+                                  <block type="sparql11_objectlistitem">
+                                    <value name="value">
+                                      <block type="sparql11_prefixedname"/>
+                                    </value>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <block type="sparql11_propertylistnotempty">
+                                    <value name="predicate">
+                                      <block type="sparql11_pathwithmodifier">
+                                        <value name="value">
+                                          <block type="sparql11_a"/>
+                                        </value>
+                                        <field name="modifier">*</field>
+                                      </block>
+                                    </value>
+                                    <statement name="objects">
+                                      <block type="sparql11_objectlistitem">
+                                        <value name="value">
+                                          <block type="sparql11_prefixedname"/>
+                                        </value>
+                                      </block>
+                                    </statement>
+                                    <next>
+                                      <block type="sparql11_propertylistnotempty">
+                                        <value name="predicate">
+                                          <block type="sparql11_pathwithmodifier">
+                                            <value name="value">
+                                              <block type="sparql11_a"/>
+                                            </value>
+                                            <field name="modifier">+</field>
+                                          </block>
+                                        </value>
+                                        <statement name="objects">
+                                          <block type="sparql11_objectlistitem">
+                                            <value name="value">
+                                              <block type="sparql11_prefixedname"/>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="sparql11_propertylistnotempty">
+                                            <value name="predicate">
+                                              <block type="sparql11_pathwithmodifier">
+                                                <value name="value">
+                                                  <block type="sparql11_bracketedpath">
+                                                    <value name="value">
+                                                      <block type="sparql11_pathsequence">
+                                                        <statement name="items">
+                                                          <block type="sparql11_pathsequencitem">
+                                                            <value name="value">
+                                                              <block type="sparql11_a"/>
+                                                            </value>
+                                                            <next>
+                                                              <block type="sparql11_pathsequencitem">
+                                                                <value name="value">
+                                                                  <block type="sparql11_a"/>
+                                                                </value>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </statement>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <field name="modifier">?</field>
+                                              </block>
+                                            </value>
+                                            <statement name="objects">
+                                              <block type="sparql11_objectlistitem">
+                                                <value name="value">
+                                                  <block type="sparql11_prefixedname"/>
+                                                </value>
+                                              </block>
+                                            </statement>
+                                            <next>
+                                              <block type="sparql11_propertylistnotempty">
+                                                <value name="predicate">
+                                                  <block type="sparql11_inversepath">
+                                                    <value name="value">
+                                                      <block type="sparql11_a"/>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <statement name="objects">
+                                                  <block type="sparql11_objectlistitem">
+                                                    <value name="value">
+                                                      <block type="sparql11_prefixedname"/>
+                                                    </value>
+                                                  </block>
+                                                </statement>
+                                                <next>
+                                                  <block type="sparql11_propertylistnotempty">
+                                                    <value name="predicate">
+                                                      <block type="sparql11_inversepath">
+                                                        <value name="value">
+                                                          <block type="sparql11_bracketedpath">
+                                                            <value name="value">
+                                                              <block type="sparql11_pathsequence">
+                                                                <statement name="items">
+                                                                  <block type="sparql11_pathsequencitem">
+                                                                    <value name="value">
+                                                                      <block type="sparql11_a"/>
+                                                                    </value>
+                                                                    <next>
+                                                                      <block type="sparql11_pathsequencitem">
+                                                                        <value name="value">
+                                                                          <block type="sparql11_a"/>
+                                                                        </value>
+                                                                      </block>
+                                                                    </next>
+                                                                  </block>
+                                                                </statement>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <statement name="objects">
+                                                      <block type="sparql11_objectlistitem">
+                                                        <value name="value">
+                                                          <block type="sparql11_prefixedname"/>
+                                                        </value>
+                                                      </block>
+                                                    </statement>
+                                                    <next>
+                                                      <block type="sparql11_propertylistnotempty">
+                                                        <value name="predicate">
+                                                          <block type="sparql11_pathalternative">
+                                                            <statement name="items">
+                                                              <block type="sparql11_pathalternativeitem">
+                                                                <value name="value">
+                                                                  <block type="sparql11_a"/>
+                                                                </value>
+                                                                <next>
+                                                                  <block type="sparql11_pathalternativeitem">
+                                                                    <value name="value">
+                                                                      <block type="sparql11_a"/>
+                                                                    </value>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </statement>
+                                                          </block>
+                                                        </value>
+                                                        <statement name="objects">
+                                                          <block type="sparql11_objectlistitem">
+                                                            <value name="value">
+                                                              <block type="sparql11_prefixedname"/>
+                                                            </value>
+                                                          </block>
+                                                        </statement>
+                                                        <next>
+                                                          <block type="sparql11_propertylistnotempty">
+                                                            <value name="predicate">
+                                                              <block type="sparql11_pathsequence">
+                                                                <statement name="items">
+                                                                  <block type="sparql11_pathsequencitem">
+                                                                    <value name="value">
+                                                                      <block type="sparql11_a"/>
+                                                                    </value>
+                                                                    <next>
+                                                                      <block type="sparql11_pathsequencitem">
+                                                                        <value name="value">
+                                                                          <block type="sparql11_a"/>
+                                                                        </value>
+                                                                      </block>
+                                                                    </next>
+                                                                  </block>
+                                                                </statement>
+                                                              </block>
+                                                            </value>
+                                                            <statement name="objects">
+                                                              <block type="sparql11_objectlistitem">
+                                                                <value name="value">
+                                                                  <block type="sparql11_prefixedname"/>
+                                                                </value>
+                                                              </block>
+                                                            </statement>
+                                                            <next>
+                                                              <block type="sparql11_propertylistnotempty">
+                                                                <value name="predicate">
+                                                                  <block type="sparql11_negatedpath">
+                                                                    <value name="value">
+                                                                      <block type="sparql11_a"/>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <statement name="objects">
+                                                                  <block type="sparql11_objectlistitem">
+                                                                    <value name="value">
+                                                                      <block type="sparql11_prefixedname"/>
+                                                                    </value>
+                                                                  </block>
+                                                                </statement>
+                                                                <next>
+                                                                  <block type="sparql11_propertylistnotempty">
+                                                                    <value name="predicate">
+                                                                      <block type="sparql11_negatedpath">
+                                                                        <value name="value">
+                                                                          <block type="sparql11_inversepathoneinpropertyset">
+                                                                            <value name="value">
+                                                                              <block type="sparql11_a"/>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                    <statement name="objects">
+                                                                      <block type="sparql11_objectlistitem">
+                                                                        <value name="value">
+                                                                          <block type="sparql11_prefixedname"/>
+                                                                        </value>
+                                                                      </block>
+                                                                    </statement>
+                                                                    <next>
+                                                                      <block type="sparql11_propertylistnotempty">
+                                                                        <value name="predicate">
+                                                                          <block type="sparql11_negatedpath">
+                                                                            <value name="value">
+                                                                              <block type="sparql11_pathoneinpropertysetalternative">
+                                                                                <statement name="items">
+                                                                                  <block type="sparql11_pathoneinpropertysetalternativeitem">
+                                                                                    <value name="value">
+                                                                                      <block type="sparql11_a"/>
+                                                                                    </value>
+                                                                                    <next>
+                                                                                      <block type="sparql11_pathoneinpropertysetalternativeitem">
+                                                                                        <value name="value">
+                                                                                          <block type="sparql11_a"/>
+                                                                                        </value>
+                                                                                      </block>
+                                                                                    </next>
+                                                                                  </block>
+                                                                                </statement>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                        <statement name="objects">
+                                                                          <block type="sparql11_objectlistitem">
+                                                                            <value name="value">
+                                                                              <block type="sparql11_prefixedname"/>
+                                                                            </value>
+                                                                          </block>
+                                                                        </statement>
+                                                                      </block>
+                                                                    </next>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="prologue">
+          <block type="sparql11_prologueitem">
+            <value name="value">
+              <block type="sparql11_prefixdecldefault">
+                <value name="value">
+                  <block type="sparql11_iriref">
+                    <field name="value">p:</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+    </xml>  </test>
 </tests>
 

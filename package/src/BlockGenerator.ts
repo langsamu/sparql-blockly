@@ -389,25 +389,20 @@ export default class BlockGenerator {
         switch (path.pathType) {
             case "|":
                 return this.pathAlternative(path)
-                break
 
             case "/":
                 return this.pathSequence(path)
-                break
 
             case "^":
                 return this.pathInverse(path)
-                break
 
             case "?":
             case "+":
             case "*":
                 return this.pathModifier(path)
-                break
 
             case "!":
                 return this.pathNegated(path)
-                break
         }
     }
     private pathAlternative(path: SparqlJS.PropertyPath): Block {
@@ -460,7 +455,7 @@ export default class BlockGenerator {
                     return new Block("negatedpath", this.inversePathOneInPropertySet(verb))
             }
         else
-            return this.verb(verb)
+            return new Block("negatedpath", this.verb(verb))
     }
     private inversePathOneInPropertySet(verb: SparqlJS.PropertyPath): Block {
         return new Block("inversepathoneinpropertyset", this.verb(first(verb.items)))
