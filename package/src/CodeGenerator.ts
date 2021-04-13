@@ -605,9 +605,6 @@ export default class CodeGenerator extends Blockly.Generator {
         return codeTuple(code)
     }
 
-    public sparqlGraphRefAllDefault(): CodeTuple {
-        return codeTuple("DEFAULT")
-    }
     public sparqlGraphRefAllNamed(): CodeTuple {
         return codeTuple("NAMED")
     }
@@ -782,7 +779,7 @@ export default class CodeGenerator extends Blockly.Generator {
         const distinct = block.getFieldValue("distinct")
         const separator = this.valueToCode(block, "separator")
 
-        const code = joinO("", "GROUP_CONCAT(", join(" ", distinct, arg1), [separator !== "' '", join(" ", "; SEPARATOR =", separator)], ")")
+        const code = joinO("", "GROUP_CONCAT(", join(" ", distinct, arg1), [separator, join(" ", "; SEPARATOR =", separator)], ")")
 
         return codeTuple(code)
     }
@@ -842,15 +839,6 @@ export default class CodeGenerator extends Blockly.Generator {
     }
     public sparqlGraphNodeItem(block: Blockly.Block): string {
         return this.item(" ", block)
-    }
-    public sparqlUnaryExpressionItem(block: Blockly.Block): string {
-        return this.item("", block)
-    }
-    public sparqlConditionalAndExpressionItem(block: Blockly.Block): string {
-        return this.item("", block)
-    }
-    public sparqlMultiplicativeExpressionItem(block: Blockly.Block): string {
-        return this.item("", block)
     }
     public sparqlGroupGraphPatternItem(block: Blockly.Block): string {
         return this.item("\nUNION\n", block)

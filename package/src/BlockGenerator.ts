@@ -319,7 +319,7 @@ export default class BlockGenerator {
     private filter(pattern: SparqlJS.FilterPattern): Block {
         if (
             "termType" in pattern.expression
-            || "operator" in pattern.expression && ["||", "&&", "=", "!=", "<", ">", "<=", ">=", "in", "notin", "!", "+", "UMINUS", "*", "/"].includes(pattern.expression.operator)) {
+            || "operator" in pattern.expression && ["||", "&&", "=", "!=", "<", ">", "<=", ">=", "in", "notin", "!", "+", "-", "UMINUS", "*", "/"].includes(pattern.expression.operator)) {
             return new Block("filter", this.bracketted(pattern.expression))
         }
         else {
@@ -581,8 +581,8 @@ export default class BlockGenerator {
     private expression(expression: SparqlJS.Expression): Block {
         if ("type" in expression)
             return this[expression.type](expression)
-        else if ("termType" in expression)
-            return this.term(expression)
+        else
+            return this.term(expression as SparqlJS.Term)
     }
     private operation(expression: SparqlJS.OperationExpression): Block {
         switch (expression.operator) {
@@ -725,11 +725,12 @@ export default class BlockGenerator {
 
             block.addValue("left", this.bracketArgument(expression.args[0], definition))
 
-            if (expression.args.length > 1) {
+            if (expression.args.length > 1)
                 block.addValue("right", this.bracketArgument(expression.args[1], definition))
-            }
 
-            if (!["&&", "||"].includes(expression.operator)) block.addField("operator", expression.operator)
+
+            if (!["&&", "||"].includes(expression.operator))
+                block.addField("operator", expression.operator)
 
             return block
         }
@@ -1015,6 +1016,7 @@ export default class BlockGenerator {
         else
             return new Block("orderconditionitem", this.bracketArgument(item.expression))
     }
+    // Not covered because parser normalises collections into blank nodes
     private graphNodeItem(object: SparqlJS.Term): Block {
         return new Block("graphnodeitem", this.term(object))
     }
@@ -1036,10 +1038,8 @@ export default class BlockGenerator {
             items.push(query.base)
         }
 
-        if (query.prefixes) {
-            // Resolve against longest namespace first so most specific prefix wins
-            Object.entries(query.prefixes).sort((a, b) => a[1].length - b[1].length).forEach(entry => items.push(entry))
-        }
+        // Resolve against longest namespace first so most specific prefix wins
+        Object.entries(query.prefixes).sort((a, b) => a[1].length - b[1].length).forEach(entry => items.push(entry))
 
         return items
     }
@@ -1068,8 +1068,7 @@ export default class BlockGenerator {
     private static normalisePatterns(patterns: SparqlJS.Pattern[]): Set<Pattern> {
         const process = (results: Set<Pattern>, pattern: SparqlJS.Pattern) => {
             if (pattern.type === "bgp") {
-                //Visitor.y(pattern.triples)
-                const triplesSameSubject = this.toTriplesSameSubject(pattern.triples ?? [])
+                const triplesSameSubject = this.toTriplesSameSubject(pattern.triples)
 
                 for (const [subject, predicates] of triplesSameSubject) {
                     results.add({ type: "triplesSameSubject", subject, predicates })
