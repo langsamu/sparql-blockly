@@ -1,6 +1,6 @@
 {
   "name": "sparql-blockly",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A library for working with SPARQL in Blockly",
   "main": "dist/index.js",
   "license": "MIT",
@@ -20,6 +20,7 @@
     "url": "https://github.com/langsamu/sparql-blockly.git",
     "directory": "package"
   },
+  "homepage": "https://langsamu.github.io/sparql-blockly/",
   "files": [
     "dist",
     "index.d.ts",
