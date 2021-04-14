@@ -29,6 +29,7 @@ export class AppMain extends HTMLElement {
         this.sparql.addEventListener("input", this.onInput.bind(this))
         this.blockly.addEventListener("blocks", this.onBlocks.bind(this))
         this.blockly.addEventListener("load", this.onBlocklyLoad.bind(this))
+        this.blockly.addEventListener("execute", this.onBlocklyExecute.bind(this))
     }
 
     private onSparql(e: CustomEvent<Element>) {
@@ -46,6 +47,10 @@ export class AppMain extends HTMLElement {
 
     private onBlocklyLoad() {
         this.setFromHash()
+    }
+
+    private onBlocklyExecute(e: CustomEvent<string>) {
+        window.open(`${e.detail}${encodeURIComponent(this.sparql.value)}`)
     }
 
     private setFromHash() {

@@ -33,6 +33,7 @@ export class BlocklyCanvas extends HTMLElement {
         window.setInterval(() => Blockly.svgResize(workspace), RESIZE_BLOCKLY_EVERY)
 
         workspace.registerButtonCallback("example", BlocklyCanvas.exampleButtonClicked)
+        workspace.registerButtonCallback("execute", this.executeButtonClicked.bind(this))
 
         this.dispatchEvent(new Event("load"))
     }
@@ -83,12 +84,16 @@ export class BlocklyCanvas extends HTMLElement {
         window.location.hash = encodeURIComponent(button.info["query"])
         button.getTargetWorkspace().getFlyout().hide()
     }
+
+    private executeButtonClicked(button: Blockly.FlyoutButton) {
+        this.dispatchEvent(new CustomEvent<string>("execute", { detail: button.info["endpoint"] }))
+    }
 }
 
 /** Used in example category of toolbox to make flyout tall enough in horizontal layout. */
 function registerTallBlock() {
     Blockly.Blocks['sparql11_faketallblock'] = {
-        init: function() {
+        init: function () {
             this.appendDummyInput()
             this.appendDummyInput()
         }
