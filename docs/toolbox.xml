@@ -1127,6 +1127,7 @@
     <button text="UK Parliament" callbackKey="execute" endpoint="https://api.parliament.uk/sparql#query="/>
     <button text="EU ODP" callbackKey="execute" endpoint="https://data.europa.eu/euodp/en/linked-data#query="/>
     <button text="Wikidata" callbackKey="execute" endpoint="https://query.wikidata.org/#"/>
+    <button text="URIBurner" callbackKey="execute" endpoint="http://uriburner.com/sparql?query="/>
     <block type="sparql11_faketallblock" disabled="true"/>
   </category>
 </xml>
