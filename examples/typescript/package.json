@@ -15,6 +15,6 @@
   },
   "dependencies": {
     "blockly": "^5.20210325.0",
-    "sparql-blockly": "^0.0.4-18"
+    "sparql-blockly": "^1.0.0"
   }
 }
