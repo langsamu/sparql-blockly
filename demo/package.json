@@ -8,7 +8,7 @@
     "lint": "eslint --cache --ext .ts --ignore-path .gitignore ."
   },
   "devDependencies": {
-    "@types/node": "^14.14.37",
+    "@types/node": "^15.12.2",
     "@types/webpack": "^5.28.0",
     "@typescript-eslint/eslint-plugin": "^4.20.0",
     "@typescript-eslint/parser": "^4.26.1",
