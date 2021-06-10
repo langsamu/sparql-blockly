@@ -1,0 +1,18 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/package"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "npm"
+    directory: "/examples"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "npm"
+    directory: "/examples/typescript"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "npm"
+    directory: "/demo"
+    schedule:
+      interval: "daily"
