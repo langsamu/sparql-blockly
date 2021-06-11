@@ -23,6 +23,6 @@
   "dependencies": {
     "blockly": "^5.20210325.1",
     "sparql-blockly": "^1.0.0",
-    "sparqljs": "^3.4.1"
+    "sparqljs": "^3.4.2"
   }
 }
