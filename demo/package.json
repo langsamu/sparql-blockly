@@ -8,10 +8,10 @@
     "lint": "eslint --cache --ext .ts --ignore-path .gitignore ."
   },
   "devDependencies": {
-    "@types/node": "^16.0.1",
+    "@types/node": "^16.4.3",
     "@types/webpack": "^5.28.0",
     "@typescript-eslint/eslint-plugin": "^4.28.4",
-    "@typescript-eslint/parser": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.5",
     "eslint": "^7.31.0",
     "http-server": "^0.12.3",
     "ts-loader": "^9.2.3",
