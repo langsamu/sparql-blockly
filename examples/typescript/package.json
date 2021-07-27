@@ -4,7 +4,7 @@
     "build": "webpack"
   },
   "devDependencies": {
-    "@types/node": "^16.0.0",
+    "@types/node": "^16.4.3",
     "@types/webpack": "^5.28.0",
     "http-server": "^0.12.3",
     "ts-loader": "^9.2.3",
