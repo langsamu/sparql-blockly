@@ -3,16 +3,16 @@ updates:
   - package-ecosystem: "npm"
     directory: "/package"
     schedule:
-      interval: "daily"
+      interval: "monthly"
   - package-ecosystem: "npm"
     directory: "/examples"
     schedule:
-      interval: "daily"
+      interval: "monthly"
   - package-ecosystem: "npm"
     directory: "/examples/typescript"
     schedule:
-      interval: "daily"
+      interval: "monthly"
   - package-ecosystem: "npm"
     directory: "/demo"
     schedule:
-      interval: "daily"
+      interval: "monthly"
