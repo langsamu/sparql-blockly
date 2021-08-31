@@ -1,6 +1,6 @@
 {
   "name": "sparql-blockly",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A library for working with SPARQL in Blockly",
   "main": "dist/index.js",
   "license": "MIT",
@@ -56,7 +56,7 @@
   "dependencies": {
     "@rdfjs/term-map": "^1.0.0",
     "@rdfjs/term-set": "^1.0.1",
-    "blockly": "^5.20210325.0",
+    "blockly": "^6.20210701.0",
     "sparqljs": "^3.4.1"
   }
 }

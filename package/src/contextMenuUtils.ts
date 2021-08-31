@@ -224,7 +224,7 @@ export function collection(parentBlockType: string, newBlockType: string, inputN
         const x = sb.getInput(inputName).connection;
         const xtb = x.targetBlock();
         if (xtb)
-            block.previousConnection.connect(xtb.lastConnectionInStack());
+            block.previousConnection.connect(xtb.lastConnectionInStack(true));
 
         else
             block.previousConnection.connect(x);
