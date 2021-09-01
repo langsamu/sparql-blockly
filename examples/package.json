@@ -6,6 +6,6 @@
     "start": "http-server"
   },
   "devDependencies": {
-    "http-server": "^0.12.3"
+    "http-server": "^13.0.1"
   }
 }
