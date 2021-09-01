@@ -34,7 +34,7 @@
     "prepublishOnly": "tsc && webpack"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.22",
+    "@types/jest": "^27.0.1",
     "@types/node": "^16.0.0",
     "@types/rdfjs__term-map": "^1.0.1",
     "@types/rdfjs__term-set": "^1.0.2",
