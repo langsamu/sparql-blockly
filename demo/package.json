@@ -11,7 +11,7 @@
     "@types/node": "^16.11.6",
     "@types/webpack": "^5.28.0",
     "@typescript-eslint/eslint-plugin": "^4.32.0",
-    "@typescript-eslint/parser": "^4.32.0",
+    "@typescript-eslint/parser": "^4.33.0",
     "eslint": "^7.32.0",
     "http-server": "^14.0.0",
     "ts-loader": "^9.2.6",
