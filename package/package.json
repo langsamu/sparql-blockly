@@ -37,7 +37,7 @@
     "@types/jest": "^27.0.1",
     "@types/node": "^17.0.7",
     "@types/rdfjs__term-map": "^1.0.1",
-    "@types/rdfjs__term-set": "^1.0.2",
+    "@types/rdfjs__term-set": "^2.0.0",
     "@types/sparqljs": "^3.1.1",
     "@types/webpack": "^5.28.0",
     "@typescript-eslint/eslint-plugin": "^4.20.0",
