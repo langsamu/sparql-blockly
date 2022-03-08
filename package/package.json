@@ -54,7 +54,7 @@
     "xmldom": "^0.6.0"
   },
   "dependencies": {
-    "@rdfjs/term-map": "^1.0.0",
+    "@rdfjs/term-map": "^2.0.0",
     "@rdfjs/term-set": "^1.0.1",
     "blockly": "^6.20210701.0",
     "sparqljs": "^3.4.1"
