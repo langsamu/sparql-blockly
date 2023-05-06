@@ -1276,7 +1276,7 @@ Blocks["sparql11_var2"] = {
 Blocks["sparql11_numericliteral"] = {
     init: function () {
         const valueField = new FieldTextInput("")
-        valueField.setValidator(value => (isNaN(parseFloat(value)) || !isFinite(value)) ? null : value)
+        valueField.setValidator(value => (isNaN(parseFloat(value)) || !isFinite(Number(value))) ? null : value)
         this.appendDummyInput()
             .appendField(valueField, "value")
         this.setInputsInline(true)
