@@ -10,7 +10,7 @@
   "devDependencies": {
     "@types/node": "^20.2.5",
     "@types/webpack": "^5.28.1",
-    "@typescript-eslint/eslint-plugin": "^5.59.8",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^5.59.9",
     "eslint": "^8.44.0",
     "http-server": "^14.1.1",
