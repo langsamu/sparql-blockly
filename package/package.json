@@ -36,7 +36,7 @@
   "devDependencies": {
     "@types/jest": "^29.5.1",
     "@types/node": "^20.1.0",
-    "@types/rdfjs__term-map": "^1.0.2",
+    "@types/rdfjs__term-map": "^2.0.10",
     "@types/rdfjs__term-set": "^1.0.3",
     "@types/sparqljs": "^3.1.4",
     "@types/webpack": "^5.28.1",
@@ -55,7 +55,7 @@
     "xmldom": "^0.6.0"
   },
   "dependencies": {
-    "@rdfjs/term-map": "^1.1.0",
+    "@rdfjs/term-map": "^2.0.2",
     "@rdfjs/term-set": "^1.1.0",
     "blockly": "^10.0.2",
     "sparqljs": "^3.6.2"
