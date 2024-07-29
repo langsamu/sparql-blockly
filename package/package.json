@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@types/jest": "^29.5.1",
-    "@types/node": "^20.1.0",
+    "@types/node": "^22.0.0",
     "@types/rdfjs__term-map": "^1.0.2",
     "@types/rdfjs__term-set": "^1.0.3",
     "@types/sparqljs": "^3.1.4",
