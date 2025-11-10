@@ -57,7 +57,7 @@
   "dependencies": {
     "@rdfjs/term-map": "^1.1.0",
     "@rdfjs/term-set": "^1.1.0",
-    "blockly": "^10.0.2",
+    "blockly": "^12.3.1",
     "sparqljs": "^3.6.2"
   }
 }
