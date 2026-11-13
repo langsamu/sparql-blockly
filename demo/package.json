@@ -21,7 +21,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "blockly": "^10.2.0",
+    "blockly": "^13.4.0",
     "sparql-blockly": "file:../package",
     "sparqljs": "^3.7.1"
   }
