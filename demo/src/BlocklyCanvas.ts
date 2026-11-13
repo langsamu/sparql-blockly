@@ -54,7 +54,7 @@ export class BlocklyCanvas extends HTMLElement {
         return await response.text()
     }
 
-    private workspaceChanged(e: Blockly.Events.Ui) {
+    private workspaceChanged(e: Blockly.Events.Abstract) {
         switch (e.type) {
             case Blockly.Events.CHANGE:
             case Blockly.Events.DELETE:

@@ -40,7 +40,7 @@ export default class CodeGenerator extends Blockly.Generator {
         const toWrappedGenerator = generatorName => block => this[generatorName](block)
         const addPropertyName = generatorName => [toPropertyName(generatorName), generatorName]
         const closeOverThis = ([propertyName, generatorName]) => [propertyName, toWrappedGenerator(generatorName)]
-        const addToInstance = ([propertyName, generatorFunction]) => this[propertyName] = generatorFunction
+        const addToInstance = ([propertyName, generatorFunction]) => this.forBlock[propertyName] = generatorFunction
 
         // Generator functions on this class are the ones prefixed with 'sparql'.
         // Blockly expects them to be properties of the generator instance.
