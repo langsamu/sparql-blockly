@@ -3,7 +3,7 @@ import { RDF, XSD } from "./aliases"
 import * as SparqlJS from "sparqljs"
 import { Block } from "./Block"
 import { StringifiedMap } from "./StringifiedMap"
-import TermSet = require("@rdfjs/term-set")
+import TermSet from "@rdfjs/term-set"
 import TermMap = require("@rdfjs/term-map")
 
 export default class BlockGenerator {
