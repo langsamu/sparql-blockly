@@ -55,9 +55,10 @@
     "xmldom": "^0.6.0"
   },
   "dependencies": {
+    "@blockly/field-multilineinput": "^13.4.0",
     "@rdfjs/term-map": "^1.1.0",
     "@rdfjs/term-set": "^1.1.0",
-    "blockly": "^10.0.2",
+    "blockly": "^13.4.0",
     "sparqljs": "^3.6.2"
   }
 }
