@@ -70,7 +70,7 @@ export default class BlockGenerator {
 
         block.addItems("prologue", query.context, this.prologueItem, this)
         block.addValue("value", this.queryType(query))
-        if (query.values) block.addValue("values", this.values(query.values.values))
+        if (query.values) block.addValue("values", this.values(query.values))
 
         return block
     }
@@ -139,7 +139,7 @@ export default class BlockGenerator {
 
         block.addValue("select", this.selectClause(query))
         block.addValue("pattern", this.group(query.where.patterns))
-        if (query.values) block.addValue("values", this.values(query.values.values))
+        if (query.values) block.addValue("values", this.values(query.values))
         block.addValue("modifiers", this.solutionModifiers(query.solutionModifiers))
 
         return block
@@ -305,7 +305,7 @@ export default class BlockGenerator {
                 return this.group(pattern.patterns)
 
             case "values":
-                return this.values(pattern.values)
+                return this.values(pattern)
 
             case "bind":
                 return this.bind(pattern)
@@ -864,8 +864,9 @@ export default class BlockGenerator {
 
         return block
     }
-    private values(rows: T12.ValuePatternRow[]): Block {
-        const variables = rows.length ? Object.keys(rows[0]) : []
+    private values(pattern: T12.PatternValues): Block {
+        const { variables: vars, values: rows } = pattern as T12.PatternValues & { variables: T12.TermVariable[] }
+        const variables = vars.map(variable => variable.value)
         const values = rows.map(row => variables.map(variable => row[variable]))
 
         if (variables.length === 1)

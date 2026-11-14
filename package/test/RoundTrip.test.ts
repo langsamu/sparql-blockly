@@ -55,3 +55,20 @@ describe("Literal round trip", function () {
         })
     }
 })
+
+describe("VALUES round trip", function () {
+    const cases: [string, string, string[]][] = [
+        ["empty, one variable", "VALUES ?x {}", ["?x"]],
+        ["empty, more than one variable", "VALUES (?x ?y) {}", ["?x", "?y"]],
+        ["UNDEF, one variable", "VALUES ?x { UNDEF 1 }", ["?x", "UNDEF", "1"]],
+        ["UNDEF, more than one variable", "VALUES (?x ?y) { (UNDEF 1) (2 UNDEF) }", ["?x", "?y", "UNDEF", "1", "2"]],
+    ]
+
+    for (const [name, values, expected] of cases) {
+        it(name, function () {
+            const result = roundTrip(`SELECT * WHERE { ${values} }`)
+
+            for (const fragment of expected) expect(result).toContain(fragment)
+        })
+    }
+})
