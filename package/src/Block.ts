@@ -1,5 +1,5 @@
 ﻿import type { Processor } from "./aliases"
-import BlockGenerator from "./BlockGenerator"
+import type BlockGenerator from "./BlockGenerator"
 
 export class Block {
     private type: string

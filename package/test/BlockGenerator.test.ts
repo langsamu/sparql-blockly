@@ -3,7 +3,7 @@ import "jest"
 import "jest-xml-matcher"
 import { readFileSync } from "fs"
 import BlockGenerator from "../src/BlockGenerator"
-import * as SparqlJS from "sparqljs";
+import { parseSparql } from "../src/parser"
 
 describe("Block generation", function () {
     const text = readFileSync("test/BlockGeneratorTests.xml", "utf-8")
@@ -14,8 +14,7 @@ describe("Block generation", function () {
         const testName = test.getAttribute("name")
 
         const sparql = test.getElementsByTagName("sparql")[0].textContent
-        const parser = new SparqlJS.Parser({ sparqlStar: true });
-        const query = parser.parse(sparql)
+        const query = parseSparql(sparql)
         const expected = test.getElementsByTagName("xml")[0] as Element
 
         it(testName, function () {

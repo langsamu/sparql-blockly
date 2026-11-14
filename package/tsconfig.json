@@ -3,9 +3,6 @@
     "module": "CommonJS",
     "target": "ES2019",
     "lib": [ "ES2019", "dom" ],
-    "paths": {
-      "*": [ "./types/*" ]
-    },
     "outDir": "dist"
   },
   "include": [
