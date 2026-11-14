@@ -179,7 +179,6 @@ export function separator(parentBlockType: string): void {
     const menuItem = {
         displayText: () => "==========",
         preconditionFn: (scope: Blockly.ContextMenuRegistry.Scope) => scope.block.type === parentBlockType ? "disabled" : "hidden",
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
         callback: () => { },
         scopeType: Blockly.ContextMenuRegistry.ScopeType.BLOCK,
         id: `separator${++separatorCounter}`,

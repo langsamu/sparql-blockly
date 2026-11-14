@@ -1,4 +1,3 @@
-import * as SparqlJS from "sparqljs";
 import * as Blockly from "blockly";
 
 export declare function sparqlToBlockly(sparql: string): Element;
