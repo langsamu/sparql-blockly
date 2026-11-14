@@ -545,6 +545,76 @@ export default class TraqulaBlockGenerator {
     // #endregion
 
     // #region Clauses
+    private prefix(definition: T12.ContextDefinitionPrefix): Block {
+        if (definition.key)
+            return this.prefixDecl(definition.key, definition.value)
+        else
+            return this.prefixDeclDefault(definition.value)
+    }
+    private prefixDecl(prefix: string, value: T12.TermIri): Block {
+        const block = new Block("prefixdecl", this.namedNode(value))
+
+        block.addField("prefix", prefix)
+
+        return block
+    }
+    private prefixDeclDefault(value: T12.TermIri): Block {
+        return new Block("prefixdecldefault", this.namedNode(value))
+    }
+    private base(definition: T12.ContextDefinitionBase): Block {
+        return new Block("base", this.namedNode(definition.value))
+    }
+    private dataset(block: Block, clauses: T12.DatasetClauses["clauses"]): void {
+        block.addItems("datasets", clauses, this.from, this)
+    }
+    private from(clause: T12.DatasetClauses["clauses"][number]): Block {
+        return new Block("datasetclause", this.graphClauseValue(clause))
+    }
+    private graphClauseValue(clause: T12.DatasetClauses["clauses"][number]): Block {
+        if (clause.clauseType === "named")
+            return this.named(clause.value)
+        else
+            return this.namedNode(clause.value)
+    }
+    private named(iri: T12.TermIri): Block {
+        return new Block("namedgraphclause", this.namedNode(iri))
+    }
+    private selectClause(query: T12.QuerySelect): Block {
+        const block = new Block("selectclause")
+
+        if (query.distinct) block.addField("distinctOrReduced", "DISTINCT")
+        if (query.reduced) block.addField("distinctOrReduced", "REDUCED")
+
+        const variables = query.variables
+        if (variables[0].type === "wildcard")
+            block.addField("star", "*")
+        else
+            block.addItems("vars", variables as (T12.TermVariable | T12.PatternBind)[], this.varOrExpressionAsVarItem, this)
+
+        return block
+    }
+    private solutionModifiers(modifiers: T12.SolutionModifiers): Block {
+        const { group, having, order, limitOffset } = modifiers
+
+        if (group || having || order || limitOffset) {
+            const block = new Block("solutionmodifier")
+
+            if (limitOffset?.limit !== undefined) block.addValue("limit", this.numeric(limitOffset.limit.toString()))
+            if (limitOffset?.offset !== undefined) block.addValue("offset", this.numeric(limitOffset.offset.toString()))
+            if (group) block.addItems("group", group.groupings, this.groupingItem, this)
+            if (having) block.addItems("having", having.having, this.havingItem, this)
+            if (order) block.addItems("order", order.orderDefs, this.orderItem, this)
+
+            return block
+        }
+    }
+    private descending(expression: T12.Expression): Block {
+        const block = new Block("ordercondition", this.bracketted(expression))
+
+        block.addField("operator", "DESC")
+
+        return block
+    }
     private values(rows: T12.ValuePatternRow[]): Block {
         const variables = rows.length ? Object.keys(rows[0]) : []
         const values = rows.map(row => variables.map(variable => row[variable]))
@@ -721,6 +791,49 @@ export default class TraqulaBlockGenerator {
     // #endregion
 
     // #region Collection items
+    private prologueItem(definition: T12.ContextDefinition): Block {
+        switch (definition.subType) {
+            case "prefix":
+                return new Block("prologueitem", this.prefix(definition))
+
+            case "base":
+                return new Block("prologueitem", this.base(definition))
+
+            case "version":
+                throw new Error("Unsupported SPARQL 1.2 construct: VERSION")
+        }
+    }
+    private varOrExpressionAsVarItem(variable: T12.TermVariable | T12.PatternBind): Block {
+        if (variable.type === "pattern")
+            return new Block("varorexpressionasvaritem", this.expressionAsVar(variable.expression, variable.variable))
+        else
+            return new Block("varorexpressionasvaritem", this.variable(variable))
+    }
+    private groupingItem(item: T12.SolutionModifierGroup["groupings"][number]): Block {
+        if ("variable" in item)
+            return new Block("groupconditionitem", this.expressionAsVar(item.value, item.variable))
+        else
+            return new Block("groupconditionitem", this.expression(item))
+    }
+    private havingItem(item: T12.Expression): Block {
+        if (item.type === "term")
+            return new Block("havingconditionitem", this.bracketted(item))
+        else
+            return new Block("havingconditionitem", this.bracketArgument(item))
+    }
+    private orderItem(item: T12.Ordering): Block {
+        const [expression, descending] = "descending" in item ? [item.expression, item.descending] : [item, false]
+
+        if (descending)
+            return new Block("orderconditionitem", this.descending(expression))
+        else if (expression.type === "term")
+            if (expression.subType === "variable")
+                return new Block("orderconditionitem", this.term(expression))
+            else
+                return new Block("orderconditionitem", this.bracketted(expression))
+        else
+            return new Block("orderconditionitem", this.bracketArgument(expression))
+    }
     private dataBlockValueItem(item: DataValue): Block {
         if (item)
             return new Block("datablockvalueitem", this.term(item))
