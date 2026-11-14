@@ -1,9 +1,8 @@
+const { createJsWithTsPreset } = require("ts-jest")
+
 module.exports = {
+    ...createJsWithTsPreset({ tsconfig: { allowJs: true } }),
     testEnvironment: "jsdom",
-    transform: {
-        "^.+\\.ts$": "ts-jest",
-        "^.+\\.js$": "<rootDir>/jest.esm-transformer.js"
-    },
     transformIgnorePatterns: [
         "/node_modules/(?!@rdfjs/)"
     ],
