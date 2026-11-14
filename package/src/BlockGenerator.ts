@@ -601,25 +601,10 @@ export default class BlockGenerator {
         if (unsupportedOperators.includes(expression.operator))
             throw new Error(`Unsupported SPARQL 1.2 function: ${expression.operator.toUpperCase()}`)
 
-        switch (expression.args.length) {
-            case 0:
-                return this.builtInCall0(expression)
+        if (expression.args.length > 4)
+            throw new Error(`Unsupported number of arguments for ${expression.operator.toUpperCase()}: ${expression.args.length}`)
 
-            case 1:
-                return this.builtInCall1(expression)
-
-            case 2:
-                return this.builtInCall2(expression)
-
-            case 3:
-                return this.builtInCall3(expression)
-
-            case 4:
-                return this.builtInCall4(expression)
-
-            default:
-                throw new Error(`Unsupported number of arguments for ${expression.operator.toUpperCase()}: ${expression.args.length}`)
-        }
+        return this.builtInCallFixed(expression)
     }
     private functionCall(expression: T12.ExpressionFunctionCall): Block {
         const block = new Block("iriorfunction")
@@ -657,47 +642,10 @@ export default class BlockGenerator {
 
         return block
     }
-    private builtInCall0(expression: T12.ExpressionOperation): Block {
-        const block = new Block("builtincall0")
+    private builtInCallFixed(expression: T12.ExpressionOperation): Block {
+        const block = new Block(`builtincall${expression.args.length}`)
 
-        block.addField("operator", expression.operator.toUpperCase())
-
-        return block
-    }
-    private builtInCall1(expression: T12.ExpressionOperation): Block {
-        const block = new Block("builtincall1")
-
-        block.addValue("arg1", this.expression(expression.args[0]))
-        block.addField("operator", expression.operator.toUpperCase())
-
-        return block
-    }
-    private builtInCall2(expression: T12.ExpressionOperation): Block {
-        const block = new Block("builtincall2")
-
-        block.addValue("arg1", this.expression(expression.args[0]))
-        block.addValue("arg2", this.expression(expression.args[1]))
-        block.addField("operator", expression.operator.toUpperCase())
-
-        return block
-    }
-    private builtInCall3(expression: T12.ExpressionOperation): Block {
-        const block = new Block("builtincall3")
-
-        block.addValue("arg1", this.expression(expression.args[0]))
-        block.addValue("arg2", this.expression(expression.args[1]))
-        block.addValue("arg3", this.expression(expression.args[2]))
-        block.addField("operator", expression.operator.toUpperCase())
-
-        return block
-    }
-    private builtInCall4(expression: T12.ExpressionOperation): Block {
-        const block = new Block("builtincall4")
-
-        block.addValue("arg1", this.expression(expression.args[0]))
-        block.addValue("arg2", this.expression(expression.args[1]))
-        block.addValue("arg3", this.expression(expression.args[2]))
-        block.addValue("arg4", this.expression(expression.args[3]))
+        expression.args.forEach((arg, i) => block.addValue(`arg${i + 1}`, this.expression(arg)))
         block.addField("operator", expression.operator.toUpperCase())
 
         return block
