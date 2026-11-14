@@ -8,6 +8,13 @@ const F = new AstFactory()
 
 type DataValue = T12.TermIri | T12.TermLiteral | undefined
 
+const shortForms: Record<string, RegExp> = {
+    [CommonIRIs.INTEGER]: /^[+-]?[0-9]+$/,
+    [CommonIRIs.DECIMAL]: /^[+-]?[0-9]*\.[0-9]+$/,
+    [CommonIRIs.DOUBLE]: /^[+-]?([0-9]+\.[0-9]*|\.?[0-9]+)[eE][+-]?[0-9]+$/,
+    [CommonIRIs.BOOLEAN]: /^(true|false)$/,
+}
+
 const unsupportedOperators = ["langdir", "strlangdir", "haslang", "haslangdir", "istriple", "triple", "subject", "predicate", "object"]
 
 export default class BlockGenerator {
@@ -995,10 +1002,14 @@ export default class BlockGenerator {
                 case CommonIRIs.INTEGER:
                 case CommonIRIs.DECIMAL:
                 case CommonIRIs.DOUBLE:
-                    return this.numeric(term.value)
+                    return shortForms[datatype.value].test(term.value)
+                        ? this.numeric(term.value)
+                        : this.typedLiteral(term, datatype)
 
                 case CommonIRIs.BOOLEAN:
-                    return this.boolean(term.value)
+                    return shortForms[datatype.value].test(term.value)
+                        ? this.boolean(term.value)
+                        : this.typedLiteral(term, datatype)
 
                 default:
                     return this.typedLiteral(term, datatype)
