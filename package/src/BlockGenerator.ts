@@ -27,7 +27,7 @@ export default class BlockGenerator {
                             operators: ["+", "-"],
                             higher: {
                                 relationalexpression: {
-                                    operators: ["=", "!=", "<", ">", "<=", ">="],
+                                    operators: ["=", "!=", "<", ">", "<=", ">=", "in", "notin"],
                                     higher: {
                                         conditionalandexpression: {
                                             operators: ["&&"],
