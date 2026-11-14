@@ -414,7 +414,7 @@ export default class BlockGenerator {
     private collection(collection: T12.TripleCollectionList): Block {
         const block = new Block("collection")
 
-        const items = collection.triples.filter((_, index) => index % 2 === 0).map(triple => triple.object)
+        const items = collection.triples.filter(triple => this.isIri(triple.predicate, CommonIRIs.FIRST)).map(triple => triple.object)
 
         block.addItems("items", items, this.graphNodeItem, this)
 
@@ -446,10 +446,13 @@ export default class BlockGenerator {
     private verb(verb: T12.Path | T12.TermVariable): Block {
         if (verb.type === "path")
             return this.path(verb)
-        else if (F.isTermNamed(verb) && !F.isTermNamedPrefixed(verb) && verb.value === CommonIRIs.TYPE)
+        else if (this.isIri(verb, CommonIRIs.TYPE))
             return new Block("a")
         else
             return this.term(verb)
+    }
+    private isIri(node: T12.Path | T12.Term, iri: string): boolean {
+        return F.isTermNamed(node) && !F.isTermNamedPrefixed(node) && node.value === iri
     }
     private path(path: T12.PathPure): Block {
         switch (path.subType) {
@@ -895,7 +898,7 @@ export default class BlockGenerator {
                 return this.variable(term)
 
             case "namedNode":
-                if (!F.isTermNamedPrefixed(term) && term.value === CommonIRIs.NIL)
+                if (this.isIri(term, CommonIRIs.NIL))
                     return new Block("nil")
                 else
                     return this.namedNode(term)
