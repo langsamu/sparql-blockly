@@ -20,7 +20,6 @@
     sequencePaths,
     functionExpressions,
     constraints,
-    triplesNodes,
     verbs,
     graphNodes,
     groupGraphPatternSubs,
