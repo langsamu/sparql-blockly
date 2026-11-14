@@ -6,6 +6,8 @@ import { Block } from "./Block"
 
 const F = new AstFactory()
 
+type DataValue = T12.TermIri | T12.TermLiteral | undefined
+
 const unsupportedOperators = ["langdir", "strlangdir", "haslang", "haslangdir", "istriple", "triple", "subject", "predicate", "object"]
 
 export default class TraqulaBlockGenerator {
@@ -43,6 +45,163 @@ export default class TraqulaBlockGenerator {
     public visit(node: T12.Term): Block {
         return this.term(node)
     }
+
+    // #region Patterns
+    private pattern(pattern: T12.Pattern): Block {
+        if (pattern.type === "query")
+            throw new Error("Unsupported pattern: sub-select")
+
+        switch (pattern.subType) {
+            case "bgp":
+                return this.triplesSameSubject(pattern.triples)
+
+            case "group":
+                return this.group(pattern.patterns)
+
+            case "values":
+                return this.values(pattern.values)
+
+            case "bind":
+                return this.bind(pattern)
+
+            case "service":
+                return this.service(pattern)
+
+            case "optional":
+                return this.optional(pattern)
+
+            case "graph":
+                return this.graph(pattern)
+
+            case "filter":
+                return this.filter(pattern)
+
+            case "minus":
+                return this.minus(pattern)
+
+            case "union":
+                return this.union(pattern)
+        }
+    }
+    private group(patterns: T12.Pattern[]): Block {
+        const normalisedPatterns = TraqulaBlockGenerator.normalisePatterns(patterns)
+
+        if (normalisedPatterns.length === 0)
+            return new Block("groupgraphpattern")
+        else if (normalisedPatterns.length === 1)
+            return new Block("groupgraphpattern", this.pattern(normalisedPatterns[0]))
+        else
+            return new Block("groupgraphpattern", this.groupGraphPatternSub(normalisedPatterns))
+    }
+    private groupGraphPatternSub(patterns: T12.Pattern[]): Block {
+        const block = new Block("groupgraphpatternsub")
+
+        block.addItems("items", patterns, this.groupSubItem, this)
+
+        return block
+    }
+    private bind(pattern: T12.PatternBind): Block {
+        return new Block("bind", this.expressionAsVar(pattern.expression, pattern.variable))
+    }
+    private service(pattern: T12.PatternService): Block {
+        const block = new Block("servicegraphpattern")
+
+        block.addValue("iri", this.term(pattern.name))
+        block.addValue("patterns", this.group(pattern.patterns))
+        block.addField("silent", pattern.silent ? "SILENT" : "")
+
+        return block
+    }
+    private optional(pattern: T12.PatternOptional): Block {
+        return new Block("optionalgraphpattern", this.group(pattern.patterns))
+    }
+    private graph(pattern: T12.PatternGraph): Block {
+        const block = new Block("graphgraphpattern")
+
+        block.addValue("iri", this.term(pattern.name))
+        block.addValue("patterns", this.group(pattern.patterns))
+
+        return block
+    }
+    private filter(pattern: T12.PatternFilter): Block {
+        const expression = pattern.expression
+
+        if (
+            expression.type === "term"
+            || expression.subType === "operation" && ["||", "&&", "=", "!=", "<", ">", "<=", ">=", "in", "notin", "!", "+", "-", "uminus", "uplus", "*", "/"].includes(expression.operator)) {
+            return new Block("filter", this.bracketted(expression))
+        }
+        else {
+            return new Block("filter", this.expression(expression))
+        }
+    }
+    private minus(pattern: T12.PatternMinus): Block {
+        return new Block("minusgraphpattern", this.group(pattern.patterns))
+    }
+    private union(pattern: T12.PatternUnion): Block {
+        const block = new Block("grouporuniongraphpattern")
+
+        block.addItems("items", pattern.patterns, this.groupItem, this)
+
+        return block
+    }
+    private triplesSameSubject(triples: T12.BasicGraphPattern): Block {
+        const [head, ...tail] = triples
+        const block = new Block("triplessamesubject")
+
+        if (head.type === "tripleCollection") {
+            block.addValue("subject", this.graphNode(head))
+            block.addItems("predicates", TraqulaBlockGenerator.groupByPredicate(tail as T12.TripleNesting[]), this.propertyList, this)
+        }
+        else {
+            block.addValue("subject", this.graphNode(head.subject))
+            block.addItems("predicates", TraqulaBlockGenerator.groupByPredicate(triples as T12.TripleNesting[]), this.propertyList, this)
+        }
+
+        return block
+    }
+    private tripleCollection(collection: T12.TripleCollection): Block {
+        switch (collection.subType) {
+            case "list":
+                return this.collection(collection)
+
+            case "blankNodeProperties":
+                return this.blankNodePropertyList(collection)
+
+            case "reifiedTriple":
+                return this.reifiedTriple(collection)
+        }
+    }
+    private collection(collection: T12.TripleCollectionList): Block {
+        const block = new Block("collection")
+
+        const items = collection.triples.filter((_, index) => index % 2 === 0).map(triple => triple.object)
+
+        block.addItems("items", items, this.graphNodeItem, this)
+
+        return block
+    }
+    private blankNodePropertyList(collection: T12.TripleCollectionBlankNodeProperties): Block {
+        const block = new Block("blanknodepropertylist")
+
+        block.addItems("predicates", TraqulaBlockGenerator.groupByPredicate(collection.triples), this.propertyList, this)
+
+        return block
+    }
+    private reifiedTriple(collection: T12.TripleCollectionReifiedTriple): Block {
+        if (!F.isSourceLocationNoMaterialize(collection.identifier.loc))
+            throw new Error("Unsupported syntax: explicit reifier")
+
+        const triple = collection.triples[0]
+        const block = new Block("embtp")
+
+        block.addValue("subject", this.graphNode(triple.subject))
+        block.addValue("predicate", this.verb(triple.predicate))
+        block.addValue("object", this.graphNode(triple.object))
+
+        return block
+    }
+    // #endregion
 
     // #region Paths
     private verb(verb: T12.Path | T12.TermVariable): Block {
@@ -156,7 +315,7 @@ export default class TraqulaBlockGenerator {
                 return this.aggregate(expression)
 
             case "patternOperation":
-                throw new Error(`Unsupported expression: ${expression.operator.toUpperCase()}`)
+                return this.exists(expression)
         }
     }
     private operation(expression: T12.ExpressionOperation): Block {
@@ -240,6 +399,14 @@ export default class TraqulaBlockGenerator {
             default:
                 throw new Error(`Unsupported aggregate: ${expression.aggregation.toUpperCase()}`)
         }
+    }
+    private exists(expression: T12.ExpressionPatternOperation): Block {
+        const block = new Block("exists")
+
+        block.addValue("value", this.group(expression.args.patterns))
+        block.addField("operator", expression.operator.toUpperCase().replace("NOTEXISTS", "NOT EXISTS"))
+
+        return block
     }
     private builtInCall0(expression: T12.ExpressionOperation): Block {
         const block = new Block("builtincall0")
@@ -377,6 +544,41 @@ export default class TraqulaBlockGenerator {
     }
     // #endregion
 
+    // #region Clauses
+    private values(rows: T12.ValuePatternRow[]): Block {
+        const variables = rows.length ? Object.keys(rows[0]) : []
+        const values = rows.map(row => variables.map(variable => row[variable]))
+
+        if (variables.length === 1)
+            return new Block("inlinedata", this.inlineDataOneVar(variables[0], values.flat()))
+        else
+            return new Block("inlinedata", this.inlineDataFull(variables, values))
+    }
+    private inlineDataOneVar(variable: string, values: DataValue[]): Block {
+        const block = new Block("inlinedataonevar")
+
+        block.addValue("variable", new Block("var1", variable))
+        block.addItems("values", values, this.dataBlockValueItem, this)
+
+        return block
+    }
+    private inlineDataFull(variables: string[], values: DataValue[][]): Block {
+        const block = new Block("inlinedatafull")
+
+        block.addItems("variables", variables, this.variableItem, this)
+        block.addItems("values", values, this.dataBlockValuesItem, this)
+
+        return block
+    }
+    private expressionAsVar(expression: T12.Expression, variable: T12.TermVariable): Block {
+        const block = new Block("expressionasvar", this.expression(expression))
+
+        block.addValue("name", this.variable(variable))
+
+        return block
+    }
+    // #endregion
+
     // #region Terms
     private term(term: T12.Term): Block {
         switch (term.subType) {
@@ -398,6 +600,12 @@ export default class TraqulaBlockGenerator {
             case "triple":
                 return this.triple(term)
         }
+    }
+    private graphNode(node: T12.GraphNode): Block {
+        if (node.type === "tripleCollection")
+            return this.tripleCollection(node)
+        else
+            return this.term(node)
     }
     private namedNode(term: T12.TermIri): Block {
         if (F.isTermNamedPrefixed(term)) {
@@ -513,6 +721,42 @@ export default class TraqulaBlockGenerator {
     // #endregion
 
     // #region Collection items
+    private dataBlockValueItem(item: DataValue): Block {
+        if (item)
+            return new Block("datablockvalueitem", this.term(item))
+        else
+            return new Block("datablockvalueitem", new Block("undef"))
+    }
+    private dataBlockValuesItem(values: DataValue[]): Block {
+        const block = new Block("datablockvaluesitem")
+
+        block.addItems("items", values, this.dataBlockValueItem, this)
+
+        return block
+    }
+    private groupItem(pattern: T12.PatternGroup): Block {
+        return new Block("groupgraphpatternitem", this.pattern(pattern))
+    }
+    private variableItem(variable: string): Block {
+        return new Block("varitem", new Block("var1", variable))
+    }
+    private groupSubItem(pattern: T12.Pattern): Block {
+        return new Block("groupgraphpatternsubitem", this.pattern(pattern))
+    }
+    private propertyList([property, objects]: [T12.Path | T12.TermVariable, T12.GraphNode[]]): Block {
+        const block = new Block("propertylistnotempty")
+
+        block.addValue("predicate", this.verb(property))
+        block.addItems("objects", objects, this.objectListItem, this)
+
+        return block
+    }
+    private objectListItem(object: T12.GraphNode): Block {
+        return new Block("objectlistitem", this.graphNode(object))
+    }
+    private graphNodeItem(object: T12.GraphNode): Block {
+        return new Block("graphnodeitem", this.graphNode(object))
+    }
     private expressionListItem(expression: T12.Expression): Block {
         return new Block("expressionlistitem", this.expression(expression))
     }
@@ -533,6 +777,39 @@ export default class TraqulaBlockGenerator {
     }
     // #endregion
 
+    private static groupByPredicate(triples: T12.TripleNesting[]): [T12.Path | T12.TermVariable, T12.GraphNode[]][] {
+        const groups: [T12.Path | T12.TermVariable, T12.GraphNode[]][] = []
+
+        for (const triple of triples) {
+            if (triple.annotations?.length)
+                throw new Error("Unsupported syntax: annotation")
+
+            const last = groups[groups.length - 1]
+            if (last && last[0] === triple.predicate)
+                last[1].push(triple.object)
+            else
+                groups.push([triple.predicate, [triple.object]])
+        }
+
+        return groups
+    }
+    private static splitBgp(bgp: T12.PatternBgp): T12.PatternBgp[] {
+        const slices: T12.BasicGraphPattern[] = []
+
+        for (const item of bgp.triples) {
+            const current = slices[slices.length - 1]
+
+            if (current && item.type === "triple" && item.subject.loc && F.isSourceLocationNoMaterialize(item.subject.loc))
+                current.push(item)
+            else
+                slices.push([item])
+        }
+
+        return slices.map(triples => ({ ...bgp, triples }))
+    }
+    private static normalisePatterns(patterns: T12.Pattern[]): T12.Pattern[] {
+        return patterns.flatMap((pattern): T12.Pattern[] => pattern.subType === "bgp" ? TraqulaBlockGenerator.splitBgp(pattern) : [pattern])
+    }
     private static operatorField(operator: string): string {
         switch (operator) {
             case "uminus":
