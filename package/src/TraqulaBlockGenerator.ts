@@ -11,6 +11,11 @@ type DataValue = T12.TermIri | T12.TermLiteral | undefined
 const unsupportedOperators = ["langdir", "strlangdir", "haslang", "haslangdir", "istriple", "triple", "subject", "predicate", "object"]
 
 export default class TraqulaBlockGenerator {
+    private static dataOperators = {
+        insertdata: "INSERT DATA",
+        deletedata: "DELETE DATA",
+        deletewhere: "DELETE WHERE"
+    }
     private static hierarchy: OperatorHierarchy = {
         unaryexpression: {
             operators: ["uminus", "uplus", "!"],
@@ -42,14 +47,248 @@ export default class TraqulaBlockGenerator {
         }
     }
 
-    public visit(node: T12.Term): Block {
-        return this.term(node)
+    public visit(node: T12.SparqlQuery): Block {
+        switch (node.type) {
+            case "query":
+                return this.query(node)
+
+            case "update":
+                return this.update(node)
+        }
     }
+
+    // #region Queries
+    private query(query: T12.Query): Block {
+        const block = new Block("query")
+
+        block.addItems("prologue", query.context, this.prologueItem, this)
+        block.addValue("value", this.queryType(query))
+        if (query.values) block.addValue("values", this.values(query.values.values))
+
+        return block
+    }
+    private queryType(query: T12.Query): Block {
+        switch (query.subType) {
+            case "select":
+                return this.select(query)
+
+            case "construct":
+                return this.construct(query)
+
+            case "describe":
+                return this.describe(query)
+
+            case "ask":
+                return this.ask(query)
+        }
+    }
+    private select(query: T12.QuerySelect): Block {
+        const block = new Block("selectquery")
+
+        block.addValue("select", this.selectClause(query))
+        block.addValue("where", this.queryCommon(query))
+
+        return block
+    }
+    private construct(query: T12.QueryConstruct): Block {
+        const template = TraqulaBlockGenerator.splitBgp(query.template).map(slice => slice.triples)
+
+        if (F.isSourceLocationNoMaterialize(query.where.loc)) {
+            const block = new Block("simpleconstructquery")
+
+            block.addValue("modifiers", this.solutionModifiers(query.solutionModifiers))
+            block.addItems("where", template, this.triplesSameSubjectItem, this)
+            this.dataset(block, query.datasets.clauses)
+
+            return block
+        }
+        else {
+            const block = new Block("constructquery")
+
+            block.addValue("where", this.queryCommon(query))
+            block.addItems("template", template, this.triplesSameSubjectItem, this)
+
+            return block
+        }
+    }
+    private describe(query: T12.QueryDescribe): Block {
+        const variables = query.variables
+
+        const block = new Block("describequery")
+
+        if (query.where) block.addValue("where", this.queryCommon(query))
+        if (variables[0].type === "wildcard")
+            block.addField("star", "*")
+        else
+            block.addItems("subject", variables as (T12.TermVariable | T12.TermIri)[], this.varOrIriItem, this)
+
+        return block
+    }
+    private ask(query: T12.QueryAsk): Block {
+        return new Block("askquery", this.queryCommon(query))
+    }
+    private subSelect(query: T12.SubSelect): Block {
+        const block = new Block("subselect")
+
+        block.addValue("select", this.selectClause(query))
+        block.addValue("pattern", this.group(query.where.patterns))
+        if (query.values) block.addValue("values", this.values(query.values.values))
+        block.addValue("modifiers", this.solutionModifiers(query.solutionModifiers))
+
+        return block
+    }
+    private queryCommon(query: T12.Query): Block {
+        const block = new Block("querycommon")
+
+        block.addValue("pattern", this.group(query.where.patterns))
+        block.addValue("modifiers", this.solutionModifiers(query.solutionModifiers))
+        this.dataset(block, query.datasets.clauses)
+
+        return block
+    }
+    // #endregion
+
+    // #region Update
+    private update(update: T12.Update): Block {
+        const block = new Block("update")
+
+        block.addItems("prologue", update.updates.flatMap(item => item.context), this.prologueItem, this)
+        block.addItems("items", update.updates.flatMap(item => item.operation ?? []), this.updateItem, this)
+
+        return block
+    }
+    private updateItem(operation: T12.UpdateOperation): Block {
+        return new Block("updateitem", this.updateOperation(operation))
+    }
+    private updateOperation(operation: T12.UpdateOperation): Block {
+        switch (operation.subType) {
+            case "clear":
+            case "drop":
+                return this.clearDrop(operation)
+
+            case "add":
+            case "move":
+            case "copy":
+                return this.addMoveCopy(operation)
+
+            case "load":
+                return this.load(operation)
+
+            case "create":
+                return this.create(operation)
+
+            case "insertdata":
+            case "deletedata":
+            case "deletewhere":
+                return this.insertDeleteWhere(operation)
+
+            case "modify":
+                return this.modify(operation)
+        }
+    }
+    private clearDrop(operation: T12.UpdateOperationClear | T12.UpdateOperationDrop): Block {
+        const block = new Block("cleardrop")
+
+        block.addValue("graph", this.graphRefAll(operation.destination))
+        block.addField("operator", operation.subType.toUpperCase())
+        if (operation.silent) block.addField("silent", "SILENT")
+
+        return block
+    }
+    private addMoveCopy(operation: T12.UpdateOperationAdd | T12.UpdateOperationMove | T12.UpdateOperationCopy): Block {
+        const block = new Block("addmovecopy")
+
+        block.addValue("source", this.graphRefAll(operation.source))
+        block.addValue("destination", this.graphRefAll(operation.destination))
+        block.addField("operator", operation.subType.toUpperCase())
+        if (operation.silent) block.addField("silent", "SILENT")
+
+        return block
+    }
+    private load(operation: T12.UpdateOperationLoad): Block {
+        const block = new Block("load")
+
+        block.addValue("source", this.namedNode(operation.source))
+        if (operation.destination) block.addValue("destination", this.graphRef(operation.destination))
+        if (operation.silent) block.addField("silent", "SILENT")
+
+        return block
+    }
+    private create(operation: T12.UpdateOperationCreate): Block {
+        const block = new Block("create")
+
+        block.addValue("graph", this.graphRef(operation.destination))
+        if (operation.silent) block.addField("silent", "SILENT")
+
+        return block
+    }
+    private insertDeleteWhere(operation: T12.UpdateOperationInsertData | T12.UpdateOperationDeleteData | T12.UpdateOperationDeleteWhere): Block {
+        const block = new Block("insertdeletewhere")
+
+        block.addValue("pattern", this.quadPattern(operation.data))
+        block.addField("operator", TraqulaBlockGenerator.dataOperators[operation.subType])
+
+        return block
+    }
+    private quadPattern(items: T12.Quads[]): Block {
+        const block = new Block("quadpattern")
+
+        block.addItems("items", TraqulaBlockGenerator.normaliseQuads(items), this.quadPatternItem, this)
+
+        return block
+    }
+    private quadPatternItem(item: T12.Quads): Block {
+        if (item.type === "graph")
+            return new Block("quadpatternitem", this.quadsNotTriples(item))
+        else
+            return new Block("quadpatternitem", this.triplesSameSubject(item.triples))
+    }
+    private quadsNotTriples(item: T12.GraphQuads): Block {
+        const block = new Block("quadsnottriples")
+
+        block.addValue("name", this.term(item.graph))
+        block.addItems("triples", TraqulaBlockGenerator.splitBgp(item.triples).map(slice => slice.triples), this.triplesSameSubjectItem, this)
+
+        return block
+    }
+    private modify(operation: T12.UpdateOperationModify): Block {
+        const block = new Block("modify")
+
+        if (operation.graph) block.addValue("iri", this.namedNode(operation.graph))
+        if (operation.delete.length) block.addValue("delete", this.quadPattern(operation.delete))
+        if (operation.insert.length) block.addValue("insert", this.quadPattern(operation.insert))
+        block.addValue("where", this.group(operation.where.patterns))
+        block.addItems("using", operation.from.clauses, this.using, this)
+
+        return block
+    }
+    private graphRefAll(graph: T12.GraphRef): Block {
+        switch (graph.subType) {
+            case "specific":
+                return this.graphRef(graph)
+
+            case "all":
+                return new Block("graphrefallall")
+
+            case "default":
+                return new Block("graphordefault")
+
+            case "named":
+                return new Block("graphrefallnamed")
+        }
+    }
+    private graphRef(graph: T12.GraphRefSpecific): Block {
+        return new Block("graphref", this.namedNode(graph.graph))
+    }
+    private using(clause: T12.DatasetClauses["clauses"][number]): Block {
+        return new Block("usingclause", this.graphClauseValue(clause))
+    }
+    // #endregion
 
     // #region Patterns
     private pattern(pattern: T12.Pattern): Block {
         if (pattern.type === "query")
-            throw new Error("Unsupported pattern: sub-select")
+            return this.subSelect(pattern)
 
         switch (pattern.subType) {
             case "bgp":
@@ -847,6 +1086,12 @@ export default class TraqulaBlockGenerator {
 
         return block
     }
+    private triplesSameSubjectItem(triples: T12.BasicGraphPattern): Block {
+        return new Block("triplessamesubjectitem", this.triplesSameSubject(triples))
+    }
+    private varOrIriItem(term: T12.TermVariable | T12.TermIri): Block {
+        return new Block("varoririitem", this.term(term))
+    }
     private groupItem(pattern: T12.PatternGroup): Block {
         return new Block("groupgraphpatternitem", this.pattern(pattern))
     }
@@ -919,6 +1164,9 @@ export default class TraqulaBlockGenerator {
         }
 
         return slices.map(triples => ({ ...bgp, triples }))
+    }
+    private static normaliseQuads(quads: T12.Quads[]): T12.Quads[] {
+        return quads.flatMap((quad): T12.Quads[] => quad.type === "pattern" ? TraqulaBlockGenerator.splitBgp(quad) : [quad])
     }
     private static normalisePatterns(patterns: T12.Pattern[]): T12.Pattern[] {
         return patterns.flatMap((pattern): T12.Pattern[] => pattern.subType === "bgp" ? TraqulaBlockGenerator.splitBgp(pattern) : [pattern])
