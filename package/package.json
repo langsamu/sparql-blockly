@@ -58,6 +58,9 @@
     "@blockly/field-multilineinput": "^13.4.0",
     "@rdfjs/term-map": "^2.0.2",
     "@rdfjs/term-set": "^2.0.3",
+    "@traqula/parser-sparql-1-2": "1.4.0",
+    "@traqula/rules-sparql-1-1": "1.4.0",
+    "@traqula/rules-sparql-1-2": "1.4.0",
     "blockly": "^13.4.0",
     "sparqljs": "^3.6.2"
   }
