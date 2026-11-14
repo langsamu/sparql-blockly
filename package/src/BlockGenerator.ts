@@ -3,8 +3,8 @@ import { RDF, XSD } from "./aliases"
 import * as SparqlJS from "sparqljs"
 import { Block } from "./Block"
 import { StringifiedMap } from "./StringifiedMap"
-import TermSet = require("@rdfjs/term-set")
-import TermMap = require("@rdfjs/term-map")
+import TermSet from "@rdfjs/term-set"
+import TermMap from "@rdfjs/term-map"
 
 export default class BlockGenerator {
     private static hierarchy: OperatorHierarchy = {

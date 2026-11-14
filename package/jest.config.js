@@ -1,6 +1,11 @@
+const { createJsWithTsPreset } = require("ts-jest")
+
 module.exports = {
-    preset: "ts-jest",
+    ...createJsWithTsPreset({ tsconfig: { allowJs: true } }),
     testEnvironment: "jsdom",
+    transformIgnorePatterns: [
+        "/node_modules/(?!@rdfjs/)"
+    ],
     verbose: true,
     testRegex: "/test/.*\\.test\\.ts$",
     coverageDirectory: "./coverage/",
