@@ -1,5 +1,4 @@
 ﻿import type { Processor } from "./aliases"
-import BlockGenerator from "./BlockGenerator"
 
 export class Block {
     private type: string
@@ -36,7 +35,7 @@ export class Block {
         this.fields.set(name, value)
     }
 
-    public addItems<T>(name: string, items: T[], itemProcessor: Processor<T>, thisArg: BlockGenerator): void {
+    public addItems<T>(name: string, items: T[], itemProcessor: Processor<T>, thisArg: object): void {
         const linearise = (acc: Block, i: T) => {
             const block = itemProcessor.call(thisArg, i)
             block.next = acc
