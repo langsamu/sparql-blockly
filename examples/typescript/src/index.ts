@@ -24,7 +24,7 @@ function generateCode(): void {
     }
 }
 
-function blocklyChanged(e: Blockly.Events.Ui): void {
+function blocklyChanged(e: Blockly.Events.Abstract): void {
     switch (e.type) {
         case Blockly.Events.BLOCK_CHANGE:
         case Blockly.Events.BLOCK_DELETE:
