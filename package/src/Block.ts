@@ -47,7 +47,7 @@ export class Block {
         const firstItem = items.reduceRight(linearise, null)
 
         if (firstItem)
-            this.statements.set(name, items.reduceRight(linearise, null))
+            this.statements.set(name, firstItem)
     }
 
     private asDom(document: XMLDocument): Element {
