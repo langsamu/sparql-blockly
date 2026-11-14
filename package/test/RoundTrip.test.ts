@@ -1,5 +1,6 @@
+import { describe, it } from "node:test"
+import * as assert from "node:assert/strict"
 import "../src/defineCustomBlocks"
-import "jest"
 import * as Blockly from "blockly"
 import BlockGenerator from "../src/BlockGenerator"
 import CodeGenerator from "../src/CodeGenerator"
@@ -27,7 +28,8 @@ describe("Round trip", function () {
 
     for (const [name, expression] of cases) {
         it(name, function () {
-            expect(roundTrip(`SELECT * WHERE { FILTER(${expression}) }`)).toContain(`FILTER (${expression})`)
+            const actual = roundTrip(`SELECT * WHERE { FILTER(${expression}) }`)
+            assert.ok(actual.includes(`FILTER (${expression})`), actual)
         })
     }
 })
@@ -51,7 +53,8 @@ describe("Literal round trip", function () {
 
     for (const [input, expected] of cases) {
         it(input, function () {
-            expect(roundTrip(`ASK { ?s ?p ${input} }`)).toContain(`?s ?p ${expected}`)
+            const actual = roundTrip(`ASK { ?s ?p ${input} }`)
+            assert.ok(actual.includes(`?s ?p ${expected}`), actual)
         })
     }
 })
@@ -68,7 +71,7 @@ describe("VALUES round trip", function () {
         it(name, function () {
             const result = roundTrip(`SELECT * WHERE { ${values} }`)
 
-            for (const fragment of expected) expect(result).toContain(fragment)
+            for (const fragment of expected) assert.ok(result.includes(fragment), result)
         })
     }
 })

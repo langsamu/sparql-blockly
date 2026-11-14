@@ -1,7 +1,6 @@
 # SPARQL Blockly
 
 [![Build Status](https://github.com/langsamu/sparql-blockly/actions/workflows/ci.yml/badge.svg)](https://github.com/langsamu/sparql-blockly/actions)
-[![code coverage](https://codecov.io/gh/langsamu/sparql-blockly/branch/main/graph/badge.svg?token=X55Y21AMAE)](https://codecov.io/gh/langsamu/sparql-blockly)
 
 SPARQL Blockly is a library for visualising and building SPARQL.
 
