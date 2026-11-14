@@ -12,4 +12,7 @@ npm start
 
 and navigate to [localhost:8080](http://localhost:8080/)
 
-Static assests are in the [webroot folder](../docs).
+The build writes `app.js` into the [public folder](public), which `npm start` serves.
+Static assets are in the same folder.
+
+The `pages.yml` workflow builds and deploys the demo to GitHub Pages on pushes to `main`.

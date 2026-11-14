@@ -2,8 +2,8 @@
   "private": true,
   "homepage": "https://langsamu.github.io/sparql-blockly/",
   "scripts": {
-    "start": "http-server ../docs",
-    "build": "webpack",
+    "start": "http-server public",
+    "build": "webpack --mode production",
     "clean": "tsc --build --clean",
     "lint": "eslint --cache ."
   },
