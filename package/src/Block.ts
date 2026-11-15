@@ -1,4 +1,4 @@
-﻿import { utils } from "blockly"
+import { utils } from "blockly"
 import type { Processor } from "./aliases.ts"
 import type BlockGenerator from "./BlockGenerator.ts"
 

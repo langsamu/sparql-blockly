@@ -1,4 +1,4 @@
-﻿import type { Block } from "./Block.ts"
+import type { Block } from "./Block.ts"
 
 export interface Processor<T> {
     (item: T): Block;

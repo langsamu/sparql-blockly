@@ -1,4 +1,4 @@
-﻿import "./defineCustomBlocks.ts"
+import "./defineCustomBlocks.ts"
 import "./unregisterDefaultMenuItems.ts"
 import "./registerCustomMenuItems.ts"
 import * as Blockly from "blockly"
