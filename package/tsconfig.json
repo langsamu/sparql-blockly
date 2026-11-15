@@ -5,7 +5,8 @@
     "lib": [ "ES2019", "dom" ],
     "outDir": "dist",
     "rootDir": "src",
-    "strict": false
+    "strict": false,
+    "erasableSyntaxOnly": true
   },
   "include": [
     "src/index.ts"
