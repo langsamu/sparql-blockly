@@ -1,5 +1,5 @@
-﻿import { BlocklyCanvas } from "./BlocklyCanvas"
-import { SparqlEditor } from "./SparqlEditor"
+﻿import { BlocklyCanvas } from "./BlocklyCanvas.ts"
+import { SparqlEditor } from "./SparqlEditor.ts"
 
 const MONITOR_HASH_AFTER = 250
 

@@ -1,10 +1,8 @@
-import * as path from "path"
-import * as webpack from "webpack"
-
-const config: webpack.Configuration = {
+/** @type {import("webpack").Configuration} */
+export default {
     entry: "./src/index.ts",
     output: {
-        path: path.resolve(__dirname, "public"),
+        path: import.meta.dirname + "/public",
         filename: "app.js",
     },
     externals: {
@@ -12,7 +10,10 @@ const config: webpack.Configuration = {
         "sparql-blockly": "SparqlBlockly"
     },
     resolve: {
-        extensions: [".ts", ".js"]
+        extensions: [".ts", ".js"],
+        extensionAlias: {
+            ".js": [".ts", ".js"]
+        }
     },
     module: {
         rules: [
@@ -21,6 +22,4 @@ const config: webpack.Configuration = {
             }
         ]
     }
-};
-
-export default config;
+}
