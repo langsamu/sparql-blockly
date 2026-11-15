@@ -25,4 +25,4 @@ It enables several ways of visual interaction with SPARQL:
 - Collapsing/expanding parts of a query assemblage.
 - Sharing URLs of visual representations.
 
-SPARQL is parsed using [SPARQL.js](https://github.com/RubenVerborgh/SPARQL.js/).
+SPARQL is parsed using [Traqula](https://github.com/comunica/traqula).
