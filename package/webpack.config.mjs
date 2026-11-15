@@ -1,10 +1,8 @@
-import * as path from "path"
-import * as webpack from "webpack"
-
-const config: webpack.Configuration = {
-    entry:"./dist/index.js",
+/** @type {import("webpack").Configuration} */
+export default {
+    entry: "./dist/index.js",
     output: {
-        path: path.resolve(__dirname, "."),
+        path: import.meta.dirname,
         filename: "sparql-blockly.min.js",
         library: {
             name: "SparqlBlockly",
@@ -15,5 +13,3 @@ const config: webpack.Configuration = {
         "blockly": "Blockly"
     }
 }
-
-export default config
