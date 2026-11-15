@@ -1,6 +1,6 @@
 ﻿import { utils } from "blockly"
-import type { Processor } from "./aliases"
-import type BlockGenerator from "./BlockGenerator"
+import type { Processor } from "./aliases.ts"
+import type BlockGenerator from "./BlockGenerator.ts"
 
 export class Block {
     private type: string

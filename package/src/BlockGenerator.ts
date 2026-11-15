@@ -1,8 +1,8 @@
 import type * as T12 from "@traqula/rules-sparql-1-2"
 import { AstFactory } from "@traqula/rules-sparql-1-2"
 import { CommonIRIs } from "@traqula/rules-sparql-1-1"
-import type { OperatorDefinition, OperatorHierarchy } from "./aliases"
-import { Block } from "./Block"
+import type { OperatorDefinition, OperatorHierarchy } from "./aliases.ts"
+import { Block } from "./Block.ts"
 
 const F = new AstFactory()
 

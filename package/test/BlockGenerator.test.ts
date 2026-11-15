@@ -1,16 +1,16 @@
 import { describe, it } from "node:test"
 import { readFileSync } from "node:fs"
 import { utils } from "blockly"
-import "../src/defineCustomBlocks"
-import BlockGenerator from "../src/BlockGenerator"
-import { parseSparql } from "../src/parser"
-import { assertXmlEqual } from "../support/xml"
+import "../src/defineCustomBlocks.ts"
+import BlockGenerator from "../src/BlockGenerator.ts"
+import { parseSparql } from "../src/parser.ts"
+import { assertXmlEqual } from "../support/xml.ts"
 
 describe("Block generation", function () {
-    const text = readFileSync("test/BlockGeneratorTests.xml", "utf-8")
+    const text = readFileSync(new URL("./BlockGeneratorTests.xml", import.meta.url), "utf-8")
     const suite = utils.xml.textToDom(text)
 
-    for (const test of Array.from(suite.getElementsByTagName("test"))) {
+    for (const test of suite.getElementsByTagName("test")) {
         const testName = test.getAttribute("name")
 
         const sparql = test.getElementsByTagName("sparql")[0].textContent

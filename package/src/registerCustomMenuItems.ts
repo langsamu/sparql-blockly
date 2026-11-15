@@ -29,7 +29,7 @@
     sameSubjectTriples,
     updateGraphRefAll,
     updateGraphOrDefault,
-} from "./contextMenuUtils"
+} from "./contextMenuUtils.ts"
 
 // #region Prologue
 property("sparql11_prologueitem", "sparql11_base", "value", "Base")

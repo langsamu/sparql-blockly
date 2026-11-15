@@ -1,7 +1,7 @@
-import "./initialiseBlockly"
-import BlockGenerator from "./BlockGenerator"
-import CodeGenerator from "./CodeGenerator"
-import { parseSparql } from "./parser"
+import "./initialiseBlockly.ts"
+import BlockGenerator from "./BlockGenerator.ts"
+import CodeGenerator from "./CodeGenerator.ts"
+import { parseSparql } from "./parser.ts"
 import * as Blockly from "blockly"
 
 export function sparqlToBlockly(sparql: string): Element {

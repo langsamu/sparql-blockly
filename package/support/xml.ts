@@ -1,4 +1,4 @@
-import * as assert from "node:assert/strict"
+import assert from "node:assert/strict"
 import { utils } from "blockly"
 
 export function assertXmlEqual(actual: Element, expected: Element): void {

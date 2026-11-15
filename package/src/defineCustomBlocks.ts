@@ -1,5 +1,6 @@
 import { Blocks, FieldDropdown, FieldTextInput, FieldCheckbox } from "blockly"
-import { FieldMultilineInput } from "@blockly/field-multilineinput"
+import multilineInput from "@blockly/field-multilineinput"
+const { FieldMultilineInput } = multilineInput
 
 // #region Prologue
 Blocks["sparql11_prologueitem"] = {

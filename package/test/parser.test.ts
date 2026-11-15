@@ -1,8 +1,8 @@
 import { describe, it } from "node:test"
-import * as assert from "node:assert/strict"
+import assert from "node:assert/strict"
 import { AstFactory } from "@traqula/rules-sparql-1-2"
 import type * as T12 from "@traqula/rules-sparql-1-2"
-import { parseSparql } from "../src/parser"
+import { parseSparql } from "../src/parser.ts"
 
 describe("Parser", function () {
     it("parses a query and marks repeated subjects as noMaterialize", function () {

@@ -1,10 +1,10 @@
 import { describe, it } from "node:test"
-import * as assert from "node:assert/strict"
-import "../src/defineCustomBlocks"
+import assert from "node:assert/strict"
+import "../src/defineCustomBlocks.ts"
 import * as Blockly from "blockly"
-import BlockGenerator from "../src/BlockGenerator"
-import CodeGenerator from "../src/CodeGenerator"
-import { parseSparql } from "../src/parser"
+import BlockGenerator from "../src/BlockGenerator.ts"
+import CodeGenerator from "../src/CodeGenerator.ts"
+import { parseSparql } from "../src/parser.ts"
 
 function roundTrip(sparql: string): string {
     const block = new BlockGenerator().visit(parseSparql(sparql))
