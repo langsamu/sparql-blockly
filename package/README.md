@@ -8,6 +8,8 @@ SPARQL Blockly is a library for visualising and building SPARQL.
 - **[Try it online](https://langsamu.github.io/sparql-blockly/)**
 - See the [examples](../examples)
 
+The npm package is ESM only and needs Node.js 22.12 or later. In the browser, load `sparql-blockly.min.js`, which defines `window.SparqlBlockly`.
+
 ## Features
 
 SPARQL Blockly implements the [SPARQL](https://www.w3.org/TR/sparql11-query/) grammar in [Blockly](https://developers.google.com/blockly).
