@@ -6,6 +6,6 @@
     "sourceMap": true,
     "types": [ "node" ]
   },
-  "include": [ "test" ],
+  "include": [ "test", "support" ],
   "exclude": [ "test/dist" ]
 }

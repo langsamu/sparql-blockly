@@ -4,7 +4,7 @@ import { utils } from "blockly"
 import "../src/defineCustomBlocks"
 import BlockGenerator from "../src/BlockGenerator"
 import { parseSparql } from "../src/parser"
-import { assertXmlEqual } from "./xml"
+import { assertXmlEqual } from "../support/xml"
 
 describe("Block generation", function () {
     const text = readFileSync("test/BlockGeneratorTests.xml", "utf-8")

@@ -13,7 +13,7 @@ function withoutWhitespace(element: Element): Element {
 
 function removeWhitespace(node: Node): void {
     for (const child of Array.from(node.childNodes)) {
-        if (child.nodeType === 3 && !child.textContent.trim()) {
+        if (child.nodeType === child.TEXT_NODE && !child.textContent?.trim()) {
             child.remove()
         } else {
             removeWhitespace(child)
