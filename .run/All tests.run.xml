@@ -3,7 +3,7 @@
     <node-interpreter value="project" />
     <working-dir value="$PROJECT_DIR$/package" />
     <language value="TYPE_SCRIPT" />
-    <typescript-loader value="TS_NODE" />
+    <typescript-loader value="MANUAL_SETUP_IN_NODE_OPTION" />
     <envs />
     <scope-kind value="DIRECTORY" />
     <test-directory value="$PROJECT_DIR$/package/test" />
