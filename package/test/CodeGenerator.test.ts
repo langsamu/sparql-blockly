@@ -1,13 +1,12 @@
 import { describe, it } from "node:test"
 import * as assert from "node:assert/strict"
 import { readFileSync } from "node:fs"
-import { join } from "node:path"
 import "../src/defineCustomBlocks"
 import * as Blockly from "blockly"
 import CodeGenerator from "../src/CodeGenerator"
 
 describe("Code generation", function () {
-    const text = readFileSync(join(__dirname, "..", "..", "CodeGeneratorTests.xml"), "utf-8")
+    const text = readFileSync("test/CodeGeneratorTests.xml", "utf-8")
     const suite = Blockly.utils.xml.textToDom(text)
 
     for (const test of Array.from(suite.getElementsByTagName("test"))) {
