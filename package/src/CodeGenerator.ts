@@ -1,5 +1,5 @@
-import type { CodeTuple } from "./aliases"
-import { Order } from "./aliases"
+import type { CodeTuple } from "./aliases.ts"
+import { Order } from "./aliases.ts"
 import * as Blockly from "blockly"
 
 function codeTuple(code: string): CodeTuple {

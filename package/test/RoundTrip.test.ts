@@ -1,9 +1,10 @@
-import "../src/defineCustomBlocks"
-import "jest"
+import { describe, it } from "node:test"
+import assert from "node:assert/strict"
+import "../src/defineCustomBlocks.ts"
 import * as Blockly from "blockly"
-import BlockGenerator from "../src/BlockGenerator"
-import CodeGenerator from "../src/CodeGenerator"
-import { parseSparql } from "../src/parser"
+import BlockGenerator from "../src/BlockGenerator.ts"
+import CodeGenerator from "../src/CodeGenerator.ts"
+import { parseSparql } from "../src/parser.ts"
 
 function roundTrip(sparql: string): string {
     const block = new BlockGenerator().visit(parseSparql(sparql))
@@ -27,7 +28,8 @@ describe("Round trip", function () {
 
     for (const [name, expression] of cases) {
         it(name, function () {
-            expect(roundTrip(`SELECT * WHERE { FILTER(${expression}) }`)).toContain(`FILTER (${expression})`)
+            const actual = roundTrip(`SELECT * WHERE { FILTER(${expression}) }`)
+            assert.ok(actual.includes(`FILTER (${expression})`), actual)
         })
     }
 })
@@ -51,7 +53,8 @@ describe("Literal round trip", function () {
 
     for (const [input, expected] of cases) {
         it(input, function () {
-            expect(roundTrip(`ASK { ?s ?p ${input} }`)).toContain(`?s ?p ${expected}`)
+            const actual = roundTrip(`ASK { ?s ?p ${input} }`)
+            assert.ok(actual.includes(`?s ?p ${expected}`), actual)
         })
     }
 })
@@ -68,7 +71,7 @@ describe("VALUES round trip", function () {
         it(name, function () {
             const result = roundTrip(`SELECT * WHERE { ${values} }`)
 
-            for (const fragment of expected) expect(result).toContain(fragment)
+            for (const fragment of expected) assert.ok(result.includes(fragment), result)
         })
     }
 })

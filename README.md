@@ -2,9 +2,8 @@
 
 [![Build Status](https://github.com/langsamu/sparql-blockly/actions/workflows/ci.yml/badge.svg)](https://github.com/langsamu/sparql-blockly/actions)
 [![npm package](https://badge.fury.io/js/sparql-blockly.svg)](https://www.npmjs.com/package/sparql-blockly)
-[![code coverage](https://codecov.io/gh/langsamu/sparql-blockly/branch/main/graph/badge.svg?token=X55Y21AMAE)](https://codecov.io/gh/langsamu/sparql-blockly)
 
-SPARQL Blockly is an application for visualising and building SPARQL.
+SPARQL Blockly is a library for visualising and building SPARQL.
 
 ## Usage
 - **[Try it online](https://langsamu.github.io/sparql-blockly/)**
@@ -26,7 +25,7 @@ It enables several ways of visual interaction with SPARQL:
 - Collapsing/expanding parts of a query assemblage.
 - Sharing URLs of visual representations.
 
-SPARQL is parsed using [SPARQL.js](https://github.com/RubenVerborgh/SPARQL.js/).
+SPARQL is parsed using [Traqula](https://github.com/comunica/traqula).
 
 ## Repo structure
 This code-base consists of three parts:

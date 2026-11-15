@@ -1,4 +1,4 @@
-<tests>
+<tests xmlns="https://developers.google.com/blockly/xml">
   <test name="Select">
     <sparql>
       <![CDATA[

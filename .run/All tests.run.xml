@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="All tests" type="NodeJsTestRunner">
+    <node-interpreter value="project" />
+    <working-dir value="$PROJECT_DIR$/package" />
+    <language value="TYPE_SCRIPT" />
+    <typescript-loader value="MANUAL_SETUP_IN_NODE_OPTION" />
+    <envs />
+    <scope-kind value="DIRECTORY" />
+    <test-directory value="$PROJECT_DIR$/package/test" />
+    <method v="2" />
+  </configuration>
+</component>

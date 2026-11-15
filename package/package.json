@@ -1,14 +1,17 @@
 {
   "name": "sparql-blockly",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "A library for working with SPARQL in Blockly",
-  "main": "dist/index.js",
+  "type": "module",
   "license": "MIT",
   "keywords": [
     "sparql",
     "blockly"
   ],
-  "types": "index.d.ts",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
   "bugs": "https://github.com/langsamu/sparql-blockly/issues",
   "author": {
     "name": "Samu Lang",
@@ -23,33 +26,23 @@
   "homepage": "https://langsamu.github.io/sparql-blockly/",
   "files": [
     "dist",
-    "index.d.ts",
     "sparql-blockly.min.js"
   ],
   "scripts": {
-    "clean": "tsc --build --clean",
-    "build": "tsc",
-    "test": "jest",
+    "build": "tsc -p tsconfig.build.json && webpack",
+    "test": "node --test",
+    "typecheck": "tsc",
     "lint": "eslint --cache .",
-    "prepublishOnly": "tsc && webpack"
+    "prepack": "npm run build"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@types/jest": "^30.0.0",
-    "@types/node": "^26.6.6",
-    "@types/webpack": "^5.28.1",
+    "@types/node": "^22.20.5",
     "eslint": "^10.15.0",
-    "jest": "^30.5.2",
-    "jest-environment-jsdom": "^30.5.2",
-    "jest-xml-matcher": "^1.2.0",
-    "ts-jest": "^29.4.15",
-    "ts-loader": "^9.4.2",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.0.4",
+    "typescript": "^6.0.3",
     "typescript-eslint": "^8.72.2",
     "webpack": "^5.82.0",
-    "webpack-cli": "^7.3.1",
-    "xmldom": "^0.6.0"
+    "webpack-cli": "^7.3.1"
   },
   "dependencies": {
     "@blockly/field-multilineinput": "^13.4.0",
@@ -60,5 +53,11 @@
   },
   "engines": {
     "node": ">=22.12.0"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": ">=22.18.0"
+    }
   }
 }

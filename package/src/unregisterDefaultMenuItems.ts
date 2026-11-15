@@ -1,4 +1,4 @@
-﻿import { ContextMenuRegistry } from "blockly";
+import { ContextMenuRegistry } from "blockly";
 
 ContextMenuRegistry.registry.unregister("undoWorkspace");
 ContextMenuRegistry.registry.unregister("redoWorkspace");

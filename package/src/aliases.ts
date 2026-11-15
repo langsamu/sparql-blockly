@@ -1,4 +1,4 @@
-﻿import { Block } from "./Block"
+import type { Block } from "./Block.ts"
 
 export interface Processor<T> {
     (item: T): Block;
@@ -12,7 +12,8 @@ export type OperatorHierarchy = {
 }
 export type CodeTuple = [string, Order]
 
-export enum Order {
-    None = 0,
-    Atomic = 1,
-}
+export const Order = {
+    None: 0,
+    Atomic: 1,
+} as const
+export type Order = typeof Order[keyof typeof Order]

@@ -1,8 +1,8 @@
-﻿import "./defineCustomBlocks"
-import "./unregisterDefaultMenuItems"
-import "./registerCustomMenuItems"
+import "./defineCustomBlocks.ts"
+import "./unregisterDefaultMenuItems.ts"
+import "./registerCustomMenuItems.ts"
 import * as Blockly from "blockly"
-import CodeGenerator from "./CodeGenerator"
+import CodeGenerator from "./CodeGenerator.ts"
 
 // This is what's displayed when block collapsed
 Blockly.Block.prototype.toString = function () {
@@ -13,9 +13,5 @@ Blockly.Block.prototype.toString = function () {
     else
         return code
 }
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const blockly = Blockly as any
-blockly.COLLAPSE_CHARS = 3000
 
 Blockly.Field.prototype.maxDisplayLength = 3000

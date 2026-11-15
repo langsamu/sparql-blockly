@@ -1,33 +1,26 @@
-import "../src/defineCustomBlocks"
-import "jest"
-import "jest-xml-matcher"
-import { readFileSync } from "fs"
-import BlockGenerator from "../src/BlockGenerator"
-import { parseSparql } from "../src/parser"
+import { describe, it } from "node:test"
+import { readFileSync } from "node:fs"
+import { utils } from "blockly"
+import "../src/defineCustomBlocks.ts"
+import BlockGenerator from "../src/BlockGenerator.ts"
+import { parseSparql } from "../src/parser.ts"
+import { assertXmlEqual } from "../support/xml.ts"
 
 describe("Block generation", function () {
-    const text = readFileSync("test/BlockGeneratorTests.xml", "utf-8")
-    const suite = new DOMParser().parseFromString(text, "text/xml")
+    const text = readFileSync(new URL("./BlockGeneratorTests.xml", import.meta.url), "utf-8")
+    const suite = utils.xml.textToDom(text)
 
-    const tests = suite.evaluate("test", suite.documentElement, null, 4)
-    for (let test = tests.iterateNext() as Element; test; test = tests.iterateNext() as Element) {
+    for (const test of suite.getElementsByTagName("test")) {
         const testName = test.getAttribute("name")
 
         const sparql = test.getElementsByTagName("sparql")[0].textContent
         const query = parseSparql(sparql)
-        const expected = test.getElementsByTagName("xml")[0] as Element
+        const expected = test.getElementsByTagName("xml")[0]
 
         it(testName, function () {
             const visitor = new BlockGenerator()
             const block = visitor.visit(query)
-            const actual = block.xml
-
-            compare(actual, expected)
+            assertXmlEqual(block.xml, expected)
         })
     }
 })
-
-function compare(a, b) {
-    const s = new XMLSerializer()
-    expect(s.serializeToString(a)).toEqualXML(s.serializeToString(b))
-}

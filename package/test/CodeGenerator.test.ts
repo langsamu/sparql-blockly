@@ -1,18 +1,18 @@
-import "../src/defineCustomBlocks"
-import "jest"
+import { describe, it } from "node:test"
+import assert from "node:assert/strict"
+import { readFileSync } from "node:fs"
+import "../src/defineCustomBlocks.ts"
 import * as Blockly from "blockly"
-import { readFileSync } from "fs"
-import CodeGenerator from "../src/CodeGenerator"
+import CodeGenerator from "../src/CodeGenerator.ts"
 
 describe("Code generation", function () {
-    const text = readFileSync("test/CodeGeneratorTests.xml", "utf-8");
-    const suite = new DOMParser().parseFromString(text, "text/xml");
+    const text = readFileSync(new URL("./CodeGeneratorTests.xml", import.meta.url), "utf-8")
+    const suite = Blockly.utils.xml.textToDom(text)
 
-    const tests = suite.evaluate("test", suite.documentElement, null, 4);
-    for (let test = tests.iterateNext() as Element; test; test = tests.iterateNext() as Element) {
+    for (const test of suite.getElementsByTagName("test")) {
         const testName = test.getAttribute("name")
         const expected = test.getElementsByTagName("sparql")[0].textContent
-        const blocklyElement = test.getElementsByTagName("xml")[0] as Element
+        const blocklyElement = test.getElementsByTagName("xml")[0]
 
         it(testName, function () {
             const generator = new CodeGenerator()
@@ -20,7 +20,7 @@ describe("Code generation", function () {
             Blockly.Xml.domToWorkspace(blocklyElement, demoWorkspace)
             const actual = generator.workspaceToCode(demoWorkspace)
 
-            expect(actual).toStrictEqual(expected);
+            assert.equal(actual, expected)
         })
     }
 })

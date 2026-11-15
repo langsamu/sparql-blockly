@@ -1,5 +1,6 @@
-﻿import type { Processor } from "./aliases"
-import type BlockGenerator from "./BlockGenerator"
+import { utils } from "blockly"
+import type { Processor } from "./aliases.ts"
+import type BlockGenerator from "./BlockGenerator.ts"
 
 export class Block {
     private type: string
@@ -22,9 +23,9 @@ export class Block {
     }
 
     public get xml(): Element {
-        const doc = document.implementation.createDocument(null, "xml")
-        doc.documentElement.appendChild(this.asDom(doc))
-        return doc.documentElement
+        const xml = utils.xml.createElement("xml")
+        xml.appendChild(this.asDom())
+        return xml
     }
 
     public addValue(name: string, value: Block): void {
@@ -50,36 +51,36 @@ export class Block {
             this.statements.set(name, firstItem)
     }
 
-    private asDom(document: XMLDocument): Element {
-        const blockElement = document.createElement("block")
+    private asDom(): Element {
+        const blockElement = utils.xml.createElement("block")
         blockElement.setAttribute("type", `sparql11_${this.type}`)
 
         for (const [name, value] of this.values) {
-            const valueElement = document.createElement("value")
+            const valueElement = utils.xml.createElement("value")
             valueElement.setAttribute("name", name)
-            const valueDom = value.asDom(document)
+            const valueDom = value.asDom()
             valueElement.appendChild(valueDom)
             blockElement.appendChild(valueElement)
         }
 
         for (const [name, value] of this.fields) {
-            const valueElement = document.createElement("field")
+            const valueElement = utils.xml.createElement("field")
             valueElement.setAttribute("name", name)
             valueElement.textContent = value
             blockElement.appendChild(valueElement)
         }
 
         for (const [name, value] of this.statements) {
-            const statementElement = document.createElement("statement")
+            const statementElement = utils.xml.createElement("statement")
             statementElement.setAttribute("name", name)
-            const statementDom = value.asDom(document)
+            const statementDom = value.asDom()
             statementElement.appendChild(statementDom)
             blockElement.appendChild(statementElement)
         }
 
         if (this.next) {
-            const nextElement = document.createElement("next")
-            const nextDom = this.next.asDom(document)
+            const nextElement = utils.xml.createElement("next")
+            const nextDom = this.next.asDom()
             nextElement.appendChild(nextDom)
             blockElement.appendChild(nextElement)
         }
