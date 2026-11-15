@@ -3,7 +3,8 @@
   "compilerOptions": {
     "outDir": "test/dist",
     "rootDir": ".",
-    "sourceMap": true
+    "sourceMap": true,
+    "types": [ "node" ]
   },
   "include": [ "test" ],
   "exclude": [ "test/dist" ]

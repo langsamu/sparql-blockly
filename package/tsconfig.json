@@ -3,7 +3,9 @@
     "module": "CommonJS",
     "target": "ES2019",
     "lib": [ "ES2019", "dom" ],
-    "outDir": "dist"
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": false
   },
   "include": [
     "src/index.ts"
