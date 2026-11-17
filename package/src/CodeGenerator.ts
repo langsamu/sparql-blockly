@@ -8,7 +8,6 @@ function codeTuple(code: string): CodeTuple {
 function join(delimiter: string, ...clauses: string[]) {
     return clauses.filter(Boolean).join(delimiter)
 }
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function joinO(delimiter: string, ...clauses: Array<[any, string] | string>): string {
     return clauses.filter(clause => clause instanceof Array ? clause[0] : clause).map(clause => clause instanceof Array ? clause[1] : clause).join(delimiter)
 }

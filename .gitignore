@@ -3,5 +3,4 @@ node_modules
 .idea
 obj
 bin
-.eslintcache
 demo/public/app.js
