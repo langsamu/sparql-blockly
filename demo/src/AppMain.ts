@@ -1,4 +1,5 @@
-﻿import { BlocklyCanvas } from "./BlocklyCanvas.ts"
+﻿import * as SparqlBlockly from "sparql-blockly"
+import { BlocklyCanvas } from "./BlocklyCanvas.ts"
 import { SparqlEditor } from "./SparqlEditor.ts"
 
 const MONITOR_HASH_AFTER = 250
@@ -32,8 +33,8 @@ export class AppMain extends HTMLElement {
         this.blockly.addEventListener("execute", this.onBlocklyExecute.bind(this))
     }
 
-    private onSparql(e: CustomEvent<Element>) {
-        this.blockly.dom = e.detail
+    private onSparql(e: CustomEvent<SparqlBlockly.WorkspaceState>) {
+        this.blockly.state = e.detail
     }
 
     private onInput() {

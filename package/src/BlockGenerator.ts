@@ -1,10 +1,13 @@
 import type * as T12 from "@traqula/rules-sparql-1-2"
+import type { serialization } from "blockly"
 import { AstFactory } from "@traqula/rules-sparql-1-2"
 import { CommonIRIs } from "@traqula/rules-sparql-1-1"
 import type { OperatorDefinition, OperatorHierarchy } from "./aliases.ts"
-import { Block } from "./Block.ts"
+import { block, chain, wrap } from "./blocks.ts"
 
 const F = new AstFactory()
+
+type State = serialization.blocks.State
 
 type DataValue = T12.TermIri | T12.TermLiteral | undefined
 
@@ -54,7 +57,7 @@ export default class BlockGenerator {
         }
     }
 
-    public visit(node: T12.SparqlQuery): Block {
+    public visit(node: T12.SparqlQuery): State {
         switch (node.type) {
             case "query":
                 return this.query(node)
@@ -65,16 +68,16 @@ export default class BlockGenerator {
     }
 
     // #region Queries
-    private query(query: T12.Query): Block {
-        const block = new Block("query")
-
-        block.addItems("prologue", query.context, this.prologueItem, this)
-        block.addValue("value", this.queryType(query))
-        if (query.values) block.addValue("values", this.values(query.values))
-
-        return block
+    private query(query: T12.Query): State {
+        return block("sparql11_query", {
+            inputs: {
+                prologue: { block: chain(query.context.map(i => this.prologueItem(i))) },
+                value: { block: this.queryType(query) },
+                values: { block: query.values && this.values(query.values) }
+            }
+        })
     }
-    private queryType(query: T12.Query): Block {
+    private queryType(query: T12.Query): State {
         switch (query.subType) {
             case "select":
                 return this.select(query)
@@ -89,85 +92,89 @@ export default class BlockGenerator {
                 return this.ask(query)
         }
     }
-    private select(query: T12.QuerySelect): Block {
-        const block = new Block("selectquery")
-
-        block.addValue("select", this.selectClause(query))
-        block.addValue("where", this.queryCommon(query))
-
-        return block
+    private select(query: T12.QuerySelect): State {
+        return block("sparql11_selectquery", {
+            inputs: {
+                select: { block: this.selectClause(query) },
+                where: { block: this.queryCommon(query) }
+            }
+        })
     }
-    private construct(query: T12.QueryConstruct): Block {
+    private construct(query: T12.QueryConstruct): State {
         const template = BlockGenerator.splitBgp(query.template).map(slice => slice.triples)
 
         if (F.isSourceLocationNoMaterialize(query.where.loc)) {
-            const block = new Block("simpleconstructquery")
-
-            block.addValue("modifiers", this.solutionModifiers(query.solutionModifiers))
-            block.addItems("where", template, this.triplesSameSubjectItem, this)
-            this.dataset(block, query.datasets.clauses)
-
-            return block
+            return block("sparql11_simpleconstructquery", {
+                inputs: {
+                    modifiers: { block: this.solutionModifiers(query.solutionModifiers) },
+                    where: { block: chain(template.map(i => this.triplesSameSubjectItem(i))) },
+                    datasets: { block: chain(query.datasets.clauses.map(i => this.from(i))) }
+                }
+            })
         }
         else {
-            const block = new Block("constructquery")
-
-            block.addValue("where", this.queryCommon(query))
-            block.addItems("template", template, this.triplesSameSubjectItem, this)
-
-            return block
+            return block("sparql11_constructquery", {
+                inputs: {
+                    where: { block: this.queryCommon(query) },
+                    template: { block: chain(template.map(i => this.triplesSameSubjectItem(i))) }
+                }
+            })
         }
     }
-    private describe(query: T12.QueryDescribe): Block {
+    private describe(query: T12.QueryDescribe): State {
         const variables = query.variables
 
-        const block = new Block("describequery")
-
-        if (query.where) block.addValue("where", this.queryCommon(query))
-        if (variables[0].type === "wildcard")
-            block.addField("star", "*")
-        else
-            block.addItems("subject", variables as (T12.TermVariable | T12.TermIri)[], this.varOrIriItem, this)
-
-        return block
+        return block("sparql11_describequery", {
+            fields: {
+                star: variables[0].type === "wildcard" ? "*" : undefined
+            },
+            inputs: {
+                where: { block: query.where ? this.queryCommon(query) : undefined },
+                subject: {
+                    block: variables[0].type === "wildcard"
+                        ? undefined
+                        : chain((variables as (T12.TermVariable | T12.TermIri)[]).map(i => this.varOrIriItem(i)))
+                }
+            }
+        })
     }
-    private ask(query: T12.QueryAsk): Block {
-        return new Block("askquery", this.queryCommon(query))
+    private ask(query: T12.QueryAsk): State {
+        return wrap("sparql11_askquery", this.queryCommon(query))
     }
-    private subSelect(query: T12.SubSelect): Block {
-        const block = new Block("subselect")
-
-        block.addValue("select", this.selectClause(query))
-        block.addValue("pattern", this.group(query.where.patterns))
-        if (query.values) block.addValue("values", this.values(query.values))
-        block.addValue("modifiers", this.solutionModifiers(query.solutionModifiers))
-
-        return block
+    private subSelect(query: T12.SubSelect): State {
+        return block("sparql11_subselect", {
+            inputs: {
+                select: { block: this.selectClause(query) },
+                pattern: { block: this.group(query.where.patterns) },
+                values: { block: query.values && this.values(query.values) },
+                modifiers: { block: this.solutionModifiers(query.solutionModifiers) }
+            }
+        })
     }
-    private queryCommon(query: T12.Query): Block {
-        const block = new Block("querycommon")
-
-        block.addValue("pattern", this.group(query.where.patterns))
-        block.addValue("modifiers", this.solutionModifiers(query.solutionModifiers))
-        this.dataset(block, query.datasets.clauses)
-
-        return block
+    private queryCommon(query: T12.Query): State {
+        return block("sparql11_querycommon", {
+            inputs: {
+                pattern: { block: this.group(query.where.patterns) },
+                modifiers: { block: this.solutionModifiers(query.solutionModifiers) },
+                datasets: { block: chain(query.datasets.clauses.map(i => this.from(i))) }
+            }
+        })
     }
     // #endregion
 
     // #region Update
-    private update(update: T12.Update): Block {
-        const block = new Block("update")
-
-        block.addItems("prologue", update.updates.flatMap(item => item.context), this.prologueItem, this)
-        block.addItems("items", update.updates.flatMap(item => item.operation ?? []), this.updateItem, this)
-
-        return block
+    private update(update: T12.Update): State {
+        return block("sparql11_update", {
+            inputs: {
+                prologue: { block: chain(update.updates.flatMap(item => item.context).map(i => this.prologueItem(i))) },
+                items: { block: chain(update.updates.flatMap(item => item.operation ?? []).map(i => this.updateItem(i))) }
+            }
+        })
     }
-    private updateItem(operation: T12.UpdateOperation): Block {
-        return new Block("updateitem", this.updateOperation(operation))
+    private updateItem(operation: T12.UpdateOperation): State {
+        return wrap("sparql11_updateitem", this.updateOperation(operation))
     }
-    private updateOperation(operation: T12.UpdateOperation): Block {
+    private updateOperation(operation: T12.UpdateOperation): State {
         switch (operation.subType) {
             case "clear":
             case "drop":
@@ -193,107 +200,117 @@ export default class BlockGenerator {
                 return this.modify(operation)
         }
     }
-    private clearDrop(operation: T12.UpdateOperationClear | T12.UpdateOperationDrop): Block {
-        const block = new Block("cleardrop")
-
-        block.addValue("graph", this.graphRefAll(operation.destination))
-        block.addField("operator", operation.subType.toUpperCase())
-        if (operation.silent) block.addField("silent", "SILENT")
-
-        return block
+    private clearDrop(operation: T12.UpdateOperationClear | T12.UpdateOperationDrop): State {
+        return block("sparql11_cleardrop", {
+            fields: {
+                operator: operation.subType.toUpperCase(),
+                silent: operation.silent ? "SILENT" : undefined
+            },
+            inputs: {
+                graph: { block: this.graphRefAll(operation.destination) }
+            }
+        })
     }
-    private addMoveCopy(operation: T12.UpdateOperationAdd | T12.UpdateOperationMove | T12.UpdateOperationCopy): Block {
-        const block = new Block("addmovecopy")
-
-        block.addValue("source", this.graphRefAll(operation.source))
-        block.addValue("destination", this.graphRefAll(operation.destination))
-        block.addField("operator", operation.subType.toUpperCase())
-        if (operation.silent) block.addField("silent", "SILENT")
-
-        return block
+    private addMoveCopy(operation: T12.UpdateOperationAdd | T12.UpdateOperationMove | T12.UpdateOperationCopy): State {
+        return block("sparql11_addmovecopy", {
+            fields: {
+                operator: operation.subType.toUpperCase(),
+                silent: operation.silent ? "SILENT" : undefined
+            },
+            inputs: {
+                source: { block: this.graphRefAll(operation.source) },
+                destination: { block: this.graphRefAll(operation.destination) }
+            }
+        })
     }
-    private load(operation: T12.UpdateOperationLoad): Block {
-        const block = new Block("load")
-
-        block.addValue("source", this.namedNode(operation.source))
-        if (operation.destination) block.addValue("destination", this.graphRef(operation.destination))
-        if (operation.silent) block.addField("silent", "SILENT")
-
-        return block
+    private load(operation: T12.UpdateOperationLoad): State {
+        return block("sparql11_load", {
+            fields: {
+                silent: operation.silent ? "SILENT" : undefined
+            },
+            inputs: {
+                source: { block: this.namedNode(operation.source) },
+                destination: { block: operation.destination && this.graphRef(operation.destination) }
+            }
+        })
     }
-    private create(operation: T12.UpdateOperationCreate): Block {
-        const block = new Block("create")
-
-        block.addValue("graph", this.graphRef(operation.destination))
-        if (operation.silent) block.addField("silent", "SILENT")
-
-        return block
+    private create(operation: T12.UpdateOperationCreate): State {
+        return block("sparql11_create", {
+            fields: {
+                silent: operation.silent ? "SILENT" : undefined
+            },
+            inputs: {
+                graph: { block: this.graphRef(operation.destination) }
+            }
+        })
     }
-    private insertDeleteWhere(operation: T12.UpdateOperationInsertData | T12.UpdateOperationDeleteData | T12.UpdateOperationDeleteWhere): Block {
-        const block = new Block("insertdeletewhere")
-
-        block.addValue("pattern", this.quadPattern(operation.data))
-        block.addField("operator", BlockGenerator.dataOperators[operation.subType])
-
-        return block
+    private insertDeleteWhere(operation: T12.UpdateOperationInsertData | T12.UpdateOperationDeleteData | T12.UpdateOperationDeleteWhere): State {
+        return block("sparql11_insertdeletewhere", {
+            fields: {
+                operator: BlockGenerator.dataOperators[operation.subType]
+            },
+            inputs: {
+                pattern: { block: this.quadPattern(operation.data) }
+            }
+        })
     }
-    private quadPattern(items: T12.Quads[]): Block {
-        const block = new Block("quadpattern")
-
-        block.addItems("items", BlockGenerator.normaliseQuads(items), this.quadPatternItem, this)
-
-        return block
+    private quadPattern(items: T12.Quads[]): State {
+        return block("sparql11_quadpattern", {
+            inputs: {
+                items: { block: chain(BlockGenerator.normaliseQuads(items).map(i => this.quadPatternItem(i))) }
+            }
+        })
     }
-    private quadPatternItem(item: T12.Quads): Block {
+    private quadPatternItem(item: T12.Quads): State {
         if (item.type === "graph")
-            return new Block("quadpatternitem", this.quadsNotTriples(item))
+            return wrap("sparql11_quadpatternitem", this.quadsNotTriples(item))
         else
-            return new Block("quadpatternitem", this.triplesSameSubject(item.triples))
+            return wrap("sparql11_quadpatternitem", this.triplesSameSubject(item.triples))
     }
-    private quadsNotTriples(item: T12.GraphQuads): Block {
-        const block = new Block("quadsnottriples")
-
-        block.addValue("name", this.term(item.graph))
-        block.addItems("triples", BlockGenerator.splitBgp(item.triples).map(slice => slice.triples), this.triplesSameSubjectItem, this)
-
-        return block
+    private quadsNotTriples(item: T12.GraphQuads): State {
+        return block("sparql11_quadsnottriples", {
+            inputs: {
+                name: { block: this.term(item.graph) },
+                triples: { block: chain(BlockGenerator.splitBgp(item.triples).map(slice => slice.triples).map(i => this.triplesSameSubjectItem(i))) }
+            }
+        })
     }
-    private modify(operation: T12.UpdateOperationModify): Block {
-        const block = new Block("modify")
-
-        if (operation.graph) block.addValue("iri", this.namedNode(operation.graph))
-        if (operation.delete.length) block.addValue("delete", this.quadPattern(operation.delete))
-        if (operation.insert.length) block.addValue("insert", this.quadPattern(operation.insert))
-        block.addValue("where", this.group(operation.where.patterns))
-        block.addItems("using", operation.from.clauses, this.using, this)
-
-        return block
+    private modify(operation: T12.UpdateOperationModify): State {
+        return block("sparql11_modify", {
+            inputs: {
+                iri: { block: operation.graph && this.namedNode(operation.graph) },
+                delete: { block: operation.delete.length ? this.quadPattern(operation.delete) : undefined },
+                insert: { block: operation.insert.length ? this.quadPattern(operation.insert) : undefined },
+                where: { block: this.group(operation.where.patterns) },
+                using: { block: chain(operation.from.clauses.map(i => this.using(i))) }
+            }
+        })
     }
-    private graphRefAll(graph: T12.GraphRef): Block {
+    private graphRefAll(graph: T12.GraphRef): State {
         switch (graph.subType) {
             case "specific":
                 return this.graphRef(graph)
 
             case "all":
-                return new Block("graphrefallall")
+                return block("sparql11_graphrefallall")
 
             case "default":
-                return new Block("graphordefault")
+                return block("sparql11_graphordefault")
 
             case "named":
-                return new Block("graphrefallnamed")
+                return block("sparql11_graphrefallnamed")
         }
     }
-    private graphRef(graph: T12.GraphRefSpecific): Block {
-        return new Block("graphref", this.namedNode(graph.graph))
+    private graphRef(graph: T12.GraphRefSpecific): State {
+        return wrap("sparql11_graphref", this.namedNode(graph.graph))
     }
-    private using(clause: T12.DatasetClauses["clauses"][number]): Block {
-        return new Block("usingclause", this.graphClauseValue(clause))
+    private using(clause: T12.DatasetClauses["clauses"][number]): State {
+        return wrap("sparql11_usingclause", this.graphClauseValue(clause))
     }
     // #endregion
 
     // #region Patterns
-    private pattern(pattern: T12.Pattern): Block {
+    private pattern(pattern: T12.Pattern): State {
         if (pattern.type === "query")
             return this.subSelect(pattern)
 
@@ -329,84 +346,91 @@ export default class BlockGenerator {
                 return this.union(pattern)
         }
     }
-    private group(patterns: T12.Pattern[]): Block {
+    private group(patterns: T12.Pattern[]): State {
         const normalisedPatterns = BlockGenerator.normalisePatterns(patterns)
 
         if (normalisedPatterns.length === 0)
-            return new Block("groupgraphpattern")
+            return block("sparql11_groupgraphpattern")
         else if (normalisedPatterns.length === 1)
-            return new Block("groupgraphpattern", this.pattern(normalisedPatterns[0]))
+            return wrap("sparql11_groupgraphpattern", this.pattern(normalisedPatterns[0]))
         else
-            return new Block("groupgraphpattern", this.groupGraphPatternSub(normalisedPatterns))
+            return wrap("sparql11_groupgraphpattern", this.groupGraphPatternSub(normalisedPatterns))
     }
-    private groupGraphPatternSub(patterns: T12.Pattern[]): Block {
-        const block = new Block("groupgraphpatternsub")
-
-        block.addItems("items", patterns, this.groupSubItem, this)
-
-        return block
+    private groupGraphPatternSub(patterns: T12.Pattern[]): State {
+        return block("sparql11_groupgraphpatternsub", {
+            inputs: {
+                items: { block: chain(patterns.map(i => this.groupSubItem(i))) }
+            }
+        })
     }
-    private bind(pattern: T12.PatternBind): Block {
-        return new Block("bind", this.expressionAsVar(pattern.expression, pattern.variable))
+    private bind(pattern: T12.PatternBind): State {
+        return wrap("sparql11_bind", this.expressionAsVar(pattern.expression, pattern.variable))
     }
-    private service(pattern: T12.PatternService): Block {
-        const block = new Block("servicegraphpattern")
-
-        block.addValue("iri", this.term(pattern.name))
-        block.addValue("patterns", this.group(pattern.patterns))
-        block.addField("silent", pattern.silent ? "SILENT" : "")
-
-        return block
+    private service(pattern: T12.PatternService): State {
+        return block("sparql11_servicegraphpattern", {
+            fields: {
+                silent: pattern.silent ? "SILENT" : undefined
+            },
+            inputs: {
+                iri: { block: this.term(pattern.name) },
+                patterns: { block: this.group(pattern.patterns) }
+            }
+        })
     }
-    private optional(pattern: T12.PatternOptional): Block {
-        return new Block("optionalgraphpattern", this.group(pattern.patterns))
+    private optional(pattern: T12.PatternOptional): State {
+        return wrap("sparql11_optionalgraphpattern", this.group(pattern.patterns))
     }
-    private graph(pattern: T12.PatternGraph): Block {
-        const block = new Block("graphgraphpattern")
-
-        block.addValue("iri", this.term(pattern.name))
-        block.addValue("patterns", this.group(pattern.patterns))
-
-        return block
+    private graph(pattern: T12.PatternGraph): State {
+        return block("sparql11_graphgraphpattern", {
+            inputs: {
+                iri: { block: this.term(pattern.name) },
+                patterns: { block: this.group(pattern.patterns) }
+            }
+        })
     }
-    private filter(pattern: T12.PatternFilter): Block {
+    private filter(pattern: T12.PatternFilter): State {
         const expression = pattern.expression
 
         if (
             expression.type === "term"
             || expression.subType === "operation" && ["||", "&&", "=", "!=", "<", ">", "<=", ">=", "in", "notin", "!", "+", "-", "uminus", "uplus", "*", "/"].includes(expression.operator)) {
-            return new Block("filter", this.bracketted(expression))
+            return wrap("sparql11_filter", this.bracketted(expression))
         }
         else {
-            return new Block("filter", this.expression(expression))
+            return wrap("sparql11_filter", this.expression(expression))
         }
     }
-    private minus(pattern: T12.PatternMinus): Block {
-        return new Block("minusgraphpattern", this.group(pattern.patterns))
+    private minus(pattern: T12.PatternMinus): State {
+        return wrap("sparql11_minusgraphpattern", this.group(pattern.patterns))
     }
-    private union(pattern: T12.PatternUnion): Block {
-        const block = new Block("grouporuniongraphpattern")
-
-        block.addItems("items", pattern.patterns, this.groupItem, this)
-
-        return block
+    private union(pattern: T12.PatternUnion): State {
+        return block("sparql11_grouporuniongraphpattern", {
+            inputs: {
+                items: { block: chain(pattern.patterns.map(i => this.groupItem(i))) }
+            }
+        })
     }
-    private triplesSameSubject(triples: T12.BasicGraphPattern): Block {
+    private triplesSameSubject(triples: T12.BasicGraphPattern): State {
         const [head, ...tail] = triples
-        const block = new Block("triplessamesubject")
 
         if (head.type === "tripleCollection") {
-            block.addValue("subject", this.graphNode(head))
-            block.addItems("predicates", BlockGenerator.groupByPredicate(tail as T12.TripleNesting[]), this.propertyList, this)
+            return block("sparql11_triplessamesubject", {
+                inputs: {
+                    subject: { block: this.graphNode(head) },
+                    predicates: { block: chain(BlockGenerator.groupByPredicate(tail as T12.TripleNesting[]).map(i => this.propertyList(i))) }
+                }
+            })
         }
         else {
-            block.addValue("subject", this.graphNode(head.subject))
-            block.addItems("predicates", BlockGenerator.groupByPredicate(triples as T12.TripleNesting[]), this.propertyList, this)
+            return block("sparql11_triplessamesubject", {
+                inputs: {
+                    subject: { block: this.graphNode(head.subject) },
+                    predicates: { block: chain(BlockGenerator.groupByPredicate(triples as T12.TripleNesting[]).map(i => this.propertyList(i))) }
+                }
+            })
         }
-
-        return block
     }
-    private tripleCollection(collection: T12.TripleCollection): Block {
+    private tripleCollection(collection: T12.TripleCollection): State {
         switch (collection.subType) {
             case "list":
                 return this.collection(collection)
@@ -418,50 +442,51 @@ export default class BlockGenerator {
                 return this.reifiedTriple(collection)
         }
     }
-    private collection(collection: T12.TripleCollectionList): Block {
-        const block = new Block("collection")
-
+    private collection(collection: T12.TripleCollectionList): State {
         const items = collection.triples.filter(triple => this.isIri(triple.predicate, CommonIRIs.FIRST)).map(triple => triple.object)
 
-        block.addItems("items", items, this.graphNodeItem, this)
-
-        return block
+        return block("sparql11_collection", {
+            inputs: {
+                items: { block: chain(items.map(i => this.graphNodeItem(i))) }
+            }
+        })
     }
-    private blankNodePropertyList(collection: T12.TripleCollectionBlankNodeProperties): Block {
-        const block = new Block("blanknodepropertylist")
-
-        block.addItems("predicates", BlockGenerator.groupByPredicate(collection.triples), this.propertyList, this)
-
-        return block
+    private blankNodePropertyList(collection: T12.TripleCollectionBlankNodeProperties): State {
+        return block("sparql11_blanknodepropertylist", {
+            inputs: {
+                predicates: { block: chain(BlockGenerator.groupByPredicate(collection.triples).map(i => this.propertyList(i))) }
+            }
+        })
     }
-    private reifiedTriple(collection: T12.TripleCollectionReifiedTriple): Block {
+    private reifiedTriple(collection: T12.TripleCollectionReifiedTriple): State {
         if (!F.isSourceLocationNoMaterialize(collection.identifier.loc))
             throw new Error("Unsupported syntax: explicit reifier")
 
         const triple = collection.triples[0]
-        const block = new Block("embtp")
 
-        block.addValue("subject", this.graphNode(triple.subject))
-        block.addValue("predicate", this.verb(triple.predicate))
-        block.addValue("object", this.graphNode(triple.object))
-
-        return block
+        return block("sparql11_embtp", {
+            inputs: {
+                subject: { block: this.graphNode(triple.subject) },
+                predicate: { block: this.verb(triple.predicate) },
+                object: { block: this.graphNode(triple.object) }
+            }
+        })
     }
     // #endregion
 
     // #region Paths
-    private verb(verb: T12.Path | T12.TermVariable): Block {
+    private verb(verb: T12.Path | T12.TermVariable): State {
         if (verb.type === "path")
             return this.path(verb)
         else if (this.isIri(verb, CommonIRIs.TYPE))
-            return new Block("a")
+            return block("sparql11_a")
         else
             return this.term(verb)
     }
     private isIri(node: T12.Path | T12.Term, iri: string): boolean {
         return F.isTermNamed(node) && !F.isTermNamedPrefixed(node) && node.value === iri
     }
-    private path(path: T12.PathPure): Block {
+    private path(path: T12.PathPure): State {
         switch (path.subType) {
             case "|":
                 return this.pathAlternative(path)
@@ -481,75 +506,76 @@ export default class BlockGenerator {
                 return this.pathNegated(path)
         }
     }
-    private pathAlternative(path: T12.PropertyPathChain): Block {
-        const block = new Block("pathalternative")
-
-        block.addItems("items", path.items, this.pathAlternativeItem, this)
-
-        return block
+    private pathAlternative(path: T12.PropertyPathChain): State {
+        return block("sparql11_pathalternative", {
+            inputs: {
+                items: { block: chain(path.items.map(i => this.pathAlternativeItem(i))) }
+            }
+        })
     }
-    private pathSequence(path: T12.PropertyPathChain): Block {
-        const block = new Block("pathsequence")
-
-        block.addItems("items", path.items, this.pathSequenceItem, this)
-
-        return block
+    private pathSequence(path: T12.PropertyPathChain): State {
+        return block("sparql11_pathsequence", {
+            inputs: {
+                items: { block: chain(path.items.map(i => this.pathSequenceItem(i))) }
+            }
+        })
     }
-    private pathModifier(path: T12.PathModified): Block {
-        const block = new Block("pathwithmodifier")
-
+    private pathModifier(path: T12.PathModified): State {
         const verb = path.items[0]
-        if (verb.type === "path" && ["/", "|", "^"].includes(verb.subType))
-            block.addValue("value", this.brackettedPath(verb))
-        else
-            block.addValue("value", this.verb(verb))
 
-        block.addField("modifier", path.subType)
-
-        return block
+        return block("sparql11_pathwithmodifier", {
+            fields: {
+                modifier: path.subType
+            },
+            inputs: {
+                value: {
+                    block: verb.type === "path" && ["/", "|", "^"].includes(verb.subType)
+                        ? this.brackettedPath(verb)
+                        : this.verb(verb)
+                }
+            }
+        })
     }
-    private pathInverse(path: T12.PathModified): Block {
-        const block = new Block("inversepath")
-
+    private pathInverse(path: T12.PathModified): State {
         const verb = path.items[0]
-        if (verb.type === "path" && ["/", "|"].includes(verb.subType))
-            block.addValue("value", this.brackettedPath(verb))
-        else
-            block.addValue("value", this.verb(verb))
 
-        return block
+        return wrap(
+            "sparql11_inversepath",
+            verb.type === "path" && ["/", "|"].includes(verb.subType)
+                ? this.brackettedPath(verb)
+                : this.verb(verb))
     }
-    private pathNegated(path: T12.PathNegated): Block {
+    private pathNegated(path: T12.PathNegated): State {
         const verb = path.items[0]
 
         if (verb.type === "path")
             switch (verb.subType) {
                 case "|":
-                    return new Block("negatedpath", this.pathOneInPropertySetAlternative(verb))
+                    return wrap("sparql11_negatedpath", this.pathOneInPropertySetAlternative(verb))
 
                 case "^":
-                    return new Block("negatedpath", this.inversePathOneInPropertySet(verb))
+                    return wrap("sparql11_negatedpath", this.inversePathOneInPropertySet(verb))
             }
         else
-            return new Block("negatedpath", this.verb(verb))
+            return wrap("sparql11_negatedpath", this.verb(verb))
     }
-    private inversePathOneInPropertySet(verb: T12.PathNegatedElt): Block {
-        return new Block("inversepathoneinpropertyset", this.verb(verb.items[0]))
+    private inversePathOneInPropertySet(verb: T12.PathNegatedElt): State {
+        return wrap("sparql11_inversepathoneinpropertyset", this.verb(verb.items[0]))
     }
-    private pathOneInPropertySetAlternative(verb: T12.PathAlternativeLimited): Block {
-        const block = new Block("pathoneinpropertysetalternative")
-
-        block.addItems("items", verb.items, this.pathOneInPropertySetAlternativeItem, this)
-
-        return block
+    private pathOneInPropertySetAlternative(verb: T12.PathAlternativeLimited): State {
+        return block("sparql11_pathoneinpropertysetalternative", {
+            inputs: {
+                items: { block: chain(verb.items.map(i => this.pathOneInPropertySetAlternativeItem(i))) }
+            }
+        })
     }
-    private brackettedPath(verb: T12.Path): Block {
-        return new Block("bracketedpath", this.verb(verb))
+    private brackettedPath(verb: T12.Path): State {
+        return wrap("sparql11_bracketedpath", this.verb(verb))
     }
     // #endregion
 
     // #region Expressions
-    private expression(expression: T12.Expression): Block {
+    private expression(expression: T12.Expression): State {
         if (expression.type === "term")
             return this.term(expression)
 
@@ -567,7 +593,7 @@ export default class BlockGenerator {
                 return this.exists(expression)
         }
     }
-    private operation(expression: T12.ExpressionOperation): Block {
+    private operation(expression: T12.ExpressionOperation): State {
         switch (expression.operator) {
             case "||":
             case "&&":
@@ -606,16 +632,18 @@ export default class BlockGenerator {
 
         return this.builtInCallFixed(expression)
     }
-    private functionCall(expression: T12.ExpressionFunctionCall): Block {
-        const block = new Block("iriorfunction")
-
-        block.addValue("iri", this.namedNode(expression.function))
-        if (expression.distinct) block.addField("distinct", "DISTINCT")
-        block.addItems("args", expression.args, this.expressionListItem, this)
-
-        return block
+    private functionCall(expression: T12.ExpressionFunctionCall): State {
+        return block("sparql11_iriorfunction", {
+            fields: {
+                distinct: expression.distinct ? "DISTINCT" : undefined
+            },
+            inputs: {
+                iri: { block: this.namedNode(expression.function) },
+                args: { block: chain(expression.args.map(i => this.expressionListItem(i))) }
+            }
+        })
     }
-    private aggregate(expression: T12.ExpressionAggregate): Block {
+    private aggregate(expression: T12.ExpressionAggregate): State {
         switch (expression.aggregation) {
             case "sum":
             case "min":
@@ -634,57 +662,59 @@ export default class BlockGenerator {
                 throw new Error(`Unsupported aggregate: ${expression.aggregation.toUpperCase()}`)
         }
     }
-    private exists(expression: T12.ExpressionPatternOperation): Block {
-        const block = new Block("exists")
-
-        block.addValue("value", this.group(expression.args.patterns))
-        block.addField("operator", expression.operator.toUpperCase().replace("NOTEXISTS", "NOT EXISTS"))
-
-        return block
+    private exists(expression: T12.ExpressionPatternOperation): State {
+        return block("sparql11_exists", {
+            fields: {
+                operator: expression.operator.toUpperCase().replace("NOTEXISTS", "NOT EXISTS")
+            },
+            inputs: {
+                value: { block: this.group(expression.args.patterns) }
+            }
+        })
     }
-    private builtInCallFixed(expression: T12.ExpressionOperation): Block {
-        const block = new Block(`builtincall${expression.args.length}`)
-
-        expression.args.forEach((arg, i) => block.addValue(`arg${i + 1}`, this.expression(arg)))
-        block.addField("operator", expression.operator.toUpperCase())
-
-        return block
+    private builtInCallFixed(expression: T12.ExpressionOperation): State {
+        return block(`sparql11_builtincall${expression.args.length}`, {
+            fields: {
+                operator: expression.operator.toUpperCase()
+            },
+            inputs: Object.fromEntries(expression.args.map((arg, i) => [`arg${i + 1}`, { block: this.expression(arg) }]))
+        })
     }
-    private builtInCallN(expression: T12.ExpressionOperation): Block {
-        const block = new Block("builtincalln")
-
-        block.addField("operator", expression.operator.toUpperCase())
-        block.addItems("args", expression.args, this.expressionListItem, this)
-
-        return block
+    private builtInCallN(expression: T12.ExpressionOperation): State {
+        return block("sparql11_builtincalln", {
+            fields: {
+                operator: expression.operator.toUpperCase()
+            },
+            inputs: {
+                args: { block: chain(expression.args.map(i => this.expressionListItem(i))) }
+            }
+        })
     }
-    private bound(expression: T12.ExpressionOperation): Block {
-        return new Block("bound", this.expression(expression.args[0]))
+    private bound(expression: T12.ExpressionOperation): State {
+        return wrap("sparql11_bound", this.expression(expression.args[0]))
     }
-    private bracketted(expression: T12.Expression): Block {
-        return new Block("brackettedexpression", this.expression(expression))
+    private bracketted(expression: T12.Expression): State {
+        return wrap("sparql11_brackettedexpression", this.expression(expression))
     }
-    private unibinary(expression: T12.ExpressionOperation, hierarchy: OperatorHierarchy = BlockGenerator.hierarchy): Block {
+    private unibinary(expression: T12.ExpressionOperation, hierarchy: OperatorHierarchy = BlockGenerator.hierarchy): State {
         const [name, definition] = Object.entries(hierarchy)[0]
 
         if (definition.operators.includes(expression.operator)) {
-            const block = new Block(name)
-
-            block.addValue("left", this.bracketArgument(expression.args[0], definition))
-
-            if (expression.args.length > 1)
-                block.addValue("right", this.bracketArgument(expression.args[1], definition))
-
-            if (!["&&", "||"].includes(expression.operator))
-                block.addField("operator", BlockGenerator.operatorField(expression.operator))
-
-            return block
+            return block(`sparql11_${name}`, {
+                fields: {
+                    operator: ["&&", "||"].includes(expression.operator) ? undefined : BlockGenerator.operatorField(expression.operator)
+                },
+                inputs: {
+                    left: { block: this.bracketArgument(expression.args[0], definition) },
+                    right: { block: expression.args.length > 1 ? this.bracketArgument(expression.args[1], definition) : undefined }
+                }
+            })
         }
         else {
             return this.unibinary(expression, definition.higher)
         }
     }
-    private bracketArgument(argument: T12.Expression, definition: OperatorDefinition = BlockGenerator.hierarchy.unaryexpression): Block {
+    private bracketArgument(argument: T12.Expression, definition: OperatorDefinition = BlockGenerator.hierarchy.unaryexpression): State {
         if (argument.type === "expression" && argument.subType === "operation") {
             if (definition.operators.includes(argument.operator)) {
                 return this.bracketted(argument)
@@ -698,164 +728,178 @@ export default class BlockGenerator {
 
         return this.expression(argument)
     }
-    private in(expression: T12.ExpressionOperation): Block {
+    private in(expression: T12.ExpressionOperation): State {
         const [left, ...right] = expression.args
-        const block = new Block("relationalexpressionin")
 
-        block.addValue("left", this.expression(left))
-        block.addField("operator", expression.operator.toUpperCase().replace("NOTIN", "NOT IN"))
-        block.addItems("right", right, this.expressionListItem, this)
-
-        return block
+        return block("sparql11_relationalexpressionin", {
+            fields: {
+                operator: expression.operator.toUpperCase().replace("NOTIN", "NOT IN")
+            },
+            inputs: {
+                left: { block: this.expression(left) },
+                right: { block: chain(right.map(i => this.expressionListItem(i))) }
+            }
+        })
     }
-    private group_concat(aggregate: T12.ExpressionAggregate): Block {
-        const block = new Block("group_concat")
-
-        block.addValue("arg1", this.expression(aggregate.expression[0] as T12.Expression))
-        block.addValue("separator", this.string("separator" in aggregate ? aggregate.separator : " "))
-        if (aggregate.distinct) block.addField("distinct", "DISTINCT")
-
-        return block
+    private group_concat(aggregate: T12.ExpressionAggregate): State {
+        return block("sparql11_group_concat", {
+            fields: {
+                distinct: aggregate.distinct ? "DISTINCT" : undefined
+            },
+            inputs: {
+                arg1: { block: this.expression(aggregate.expression[0] as T12.Expression) },
+                separator: { block: this.string("separator" in aggregate ? aggregate.separator : " ") }
+            }
+        })
     }
-    private count(aggregate: T12.ExpressionAggregate): Block {
-        const block = new Block("count")
-
-        if (aggregate.distinct) block.addField("distinct", "DISTINCT")
-
+    private count(aggregate: T12.ExpressionAggregate): State {
         const argument = aggregate.expression[0]
-        if (argument.type === "wildcard")
-            block.addField("star", "*")
-        else
-            block.addValue("arg1", this.expression(argument))
 
-        return block
+        return block("sparql11_count", {
+            fields: {
+                distinct: aggregate.distinct ? "DISTINCT" : undefined,
+                star: argument.type === "wildcard" ? "*" : undefined
+            },
+            inputs: {
+                arg1: { block: argument.type === "wildcard" ? undefined : this.expression(argument) }
+            }
+        })
     }
-    private aggregateCommon(aggregate: T12.ExpressionAggregate): Block {
-        const block = new Block("aggregate")
-
-        block.addValue("arg1", this.expression(aggregate.expression[0] as T12.Expression))
-        block.addField("operator", aggregate.aggregation.toUpperCase())
-        if (aggregate.distinct) block.addField("distinct", "DISTINCT")
-
-        return block
+    private aggregateCommon(aggregate: T12.ExpressionAggregate): State {
+        return block("sparql11_aggregate", {
+            fields: {
+                operator: aggregate.aggregation.toUpperCase(),
+                distinct: aggregate.distinct ? "DISTINCT" : undefined
+            },
+            inputs: {
+                arg1: { block: this.expression(aggregate.expression[0] as T12.Expression) }
+            }
+        })
     }
     // #endregion
 
     // #region Clauses
-    private prefix(definition: T12.ContextDefinitionPrefix): Block {
+    private prefix(definition: T12.ContextDefinitionPrefix): State {
         if (definition.key)
             return this.prefixDecl(definition.key, definition.value)
         else
             return this.prefixDeclDefault(definition.value)
     }
-    private prefixDecl(prefix: string, value: T12.TermIri): Block {
-        const block = new Block("prefixdecl", this.namedNode(value))
-
-        block.addField("prefix", prefix)
-
-        return block
+    private prefixDecl(prefix: string, value: T12.TermIri): State {
+        return block("sparql11_prefixdecl", {
+            fields: {
+                prefix
+            },
+            inputs: {
+                value: { block: this.namedNode(value) }
+            }
+        })
     }
-    private prefixDeclDefault(value: T12.TermIri): Block {
-        return new Block("prefixdecldefault", this.namedNode(value))
+    private prefixDeclDefault(value: T12.TermIri): State {
+        return wrap("sparql11_prefixdecldefault", this.namedNode(value))
     }
-    private base(definition: T12.ContextDefinitionBase): Block {
-        return new Block("base", this.namedNode(definition.value))
+    private base(definition: T12.ContextDefinitionBase): State {
+        return wrap("sparql11_base", this.namedNode(definition.value))
     }
-    private dataset(block: Block, clauses: T12.DatasetClauses["clauses"]): void {
-        block.addItems("datasets", clauses, this.from, this)
+    private from(clause: T12.DatasetClauses["clauses"][number]): State {
+        return wrap("sparql11_datasetclause", this.graphClauseValue(clause))
     }
-    private from(clause: T12.DatasetClauses["clauses"][number]): Block {
-        return new Block("datasetclause", this.graphClauseValue(clause))
-    }
-    private graphClauseValue(clause: T12.DatasetClauses["clauses"][number]): Block {
+    private graphClauseValue(clause: T12.DatasetClauses["clauses"][number]): State {
         if (clause.clauseType === "named")
             return this.named(clause.value)
         else
             return this.namedNode(clause.value)
     }
-    private named(iri: T12.TermIri): Block {
-        return new Block("namedgraphclause", this.namedNode(iri))
+    private named(iri: T12.TermIri): State {
+        return wrap("sparql11_namedgraphclause", this.namedNode(iri))
     }
-    private selectClause(query: T12.QuerySelect): Block {
-        const block = new Block("selectclause")
-
-        if (query.distinct) block.addField("distinctOrReduced", "DISTINCT")
-        if (query.reduced) block.addField("distinctOrReduced", "REDUCED")
-
+    private selectClause(query: T12.QuerySelect): State {
         const variables = query.variables
-        if (variables[0].type === "wildcard")
-            block.addField("star", "*")
-        else
-            block.addItems("vars", variables as (T12.TermVariable | T12.PatternBind)[], this.varOrExpressionAsVarItem, this)
 
-        return block
+        return block("sparql11_selectclause", {
+            fields: {
+                distinctOrReduced: query.reduced ? "REDUCED" : query.distinct ? "DISTINCT" : undefined,
+                star: variables[0].type === "wildcard" ? "*" : undefined
+            },
+            inputs: {
+                vars: {
+                    block: variables[0].type === "wildcard"
+                        ? undefined
+                        : chain((variables as (T12.TermVariable | T12.PatternBind)[]).map(i => this.varOrExpressionAsVarItem(i)))
+                }
+            }
+        })
     }
-    private solutionModifiers(modifiers: T12.SolutionModifiers): Block {
+    private solutionModifiers(modifiers: T12.SolutionModifiers): State | undefined {
         const { group, having, order, limitOffset } = modifiers
 
         if (group || having || order || limitOffset) {
-            const block = new Block("solutionmodifier")
-
-            if (limitOffset?.limit !== undefined) block.addValue("limit", this.numeric(limitOffset.limit.toString()))
-            if (limitOffset?.offset !== undefined) block.addValue("offset", this.numeric(limitOffset.offset.toString()))
-            if (group) block.addItems("group", group.groupings, this.groupingItem, this)
-            if (having) block.addItems("having", having.having, this.havingItem, this)
-            if (order) block.addItems("order", order.orderDefs, this.orderItem, this)
-
-            return block
+            return block("sparql11_solutionmodifier", {
+                inputs: {
+                    limit: { block: limitOffset?.limit !== undefined ? this.numeric(limitOffset.limit.toString()) : undefined },
+                    offset: { block: limitOffset?.offset !== undefined ? this.numeric(limitOffset.offset.toString()) : undefined },
+                    group: { block: group && chain(group.groupings.map(i => this.groupingItem(i))) },
+                    having: { block: having && chain(having.having.map(i => this.havingItem(i))) },
+                    order: { block: order && chain(order.orderDefs.map(i => this.orderItem(i))) }
+                }
+            })
         }
     }
-    private descending(expression: T12.Expression): Block {
-        const block = new Block("ordercondition", this.bracketted(expression))
-
-        block.addField("operator", "DESC")
-
-        return block
+    private descending(expression: T12.Expression): State {
+        return block("sparql11_ordercondition", {
+            fields: {
+                operator: "DESC"
+            },
+            inputs: {
+                value: { block: this.bracketted(expression) }
+            }
+        })
     }
-    private values(pattern: T12.PatternValues): Block {
+    private values(pattern: T12.PatternValues): State {
         const { variables: vars, values: rows } = pattern as T12.PatternValues & { variables: T12.TermVariable[] }
         const variables = vars.map(variable => variable.value)
         const values = rows.map(row => variables.map(variable => row[variable]))
 
         if (variables.length === 1)
-            return new Block("inlinedata", this.inlineDataOneVar(variables[0], values.flat()))
+            return wrap("sparql11_inlinedata", this.inlineDataOneVar(variables[0], values.flat()))
         else
-            return new Block("inlinedata", this.inlineDataFull(variables, values))
+            return wrap("sparql11_inlinedata", this.inlineDataFull(variables, values))
     }
-    private inlineDataOneVar(variable: string, values: DataValue[]): Block {
-        const block = new Block("inlinedataonevar")
-
-        block.addValue("variable", new Block("var1", variable))
-        block.addItems("values", values, this.dataBlockValueItem, this)
-
-        return block
+    private inlineDataOneVar(variable: string, values: DataValue[]): State {
+        return block("sparql11_inlinedataonevar", {
+            inputs: {
+                variable: { block: block("sparql11_var1", { fields: { value: variable } }) },
+                values: { block: chain(values.map(i => this.dataBlockValueItem(i))) }
+            }
+        })
     }
-    private inlineDataFull(variables: string[], values: DataValue[][]): Block {
-        const block = new Block("inlinedatafull")
-
-        block.addItems("variables", variables, this.variableItem, this)
-        block.addItems("values", values, this.dataBlockValuesItem, this)
-
-        return block
+    private inlineDataFull(variables: string[], values: DataValue[][]): State {
+        return block("sparql11_inlinedatafull", {
+            inputs: {
+                variables: { block: chain(variables.map(i => this.variableItem(i))) },
+                values: { block: chain(values.map(i => this.dataBlockValuesItem(i))) }
+            }
+        })
     }
-    private expressionAsVar(expression: T12.Expression, variable: T12.TermVariable): Block {
-        const block = new Block("expressionasvar", this.expression(expression))
-
-        block.addValue("name", this.variable(variable))
-
-        return block
+    private expressionAsVar(expression: T12.Expression, variable: T12.TermVariable): State {
+        return block("sparql11_expressionasvar", {
+            inputs: {
+                value: { block: this.expression(expression) },
+                name: { block: this.variable(variable) }
+            }
+        })
     }
     // #endregion
 
     // #region Terms
-    private term(term: T12.Term): Block {
+    private term(term: T12.Term): State {
         switch (term.subType) {
             case "variable":
                 return this.variable(term)
 
             case "namedNode":
                 if (this.isIri(term, CommonIRIs.NIL))
-                    return new Block("nil")
+                    return block("sparql11_nil")
                 else
                     return this.namedNode(term)
 
@@ -869,13 +913,13 @@ export default class BlockGenerator {
                 return this.triple(term)
         }
     }
-    private graphNode(node: T12.GraphNode): Block {
+    private graphNode(node: T12.GraphNode): State {
         if (node.type === "tripleCollection")
             return this.tripleCollection(node)
         else
             return this.term(node)
     }
-    private namedNode(term: T12.TermIri): Block {
+    private namedNode(term: T12.TermIri): State {
         if (F.isTermNamedPrefixed(term)) {
             if (term.prefix)
                 if (term.value)
@@ -892,49 +936,36 @@ export default class BlockGenerator {
         if (term.value)
             return this.iriref(term.value)
         else
-            return new Block("irirefdefault")
+            return block("sparql11_irirefdefault")
     }
-    private triple(term: T12.TermTriple): Block {
-        const block = new Block("embtp")
-
-        block.addValue("subject", this.term(term.subject))
-        block.addValue("predicate", this.verb(term.predicate))
-        block.addValue("object", this.term(term.object))
-
-        return block
+    private triple(term: T12.TermTriple): State {
+        return block("sparql11_embtp", {
+            inputs: {
+                subject: { block: this.term(term.subject) },
+                predicate: { block: this.verb(term.predicate) },
+                object: { block: this.term(term.object) }
+            }
+        })
     }
-    private prefixedName(): Block {
-        return new Block("prefixedname")
+    private prefixedName(): State {
+        return block("sparql11_prefixedname")
     }
-    private prefixedNameLocalName(localName: string): Block {
-        const block = new Block("prefixednamelocalname")
-
-        block.addField("localName", localName)
-
-        return block
+    private prefixedNameLocalName(localName: string): State {
+        return block("sparql11_prefixednamelocalname", { fields: { localName } })
     }
-    private prefixedNamePrefix(prefix: string): Block {
-        const block = new Block("prefixednameprefix")
-
-        block.addField("prefix", prefix)
-
-        return block
+    private prefixedNamePrefix(prefix: string): State {
+        return block("sparql11_prefixednameprefix", { fields: { prefix } })
     }
-    private prefixedNamePrefixLocalName(prefix: string, localName: string): Block {
-        const block = new Block("prefixednameprefixlocalname")
-
-        block.addField("localName", localName)
-        block.addField("prefix", prefix)
-
-        return block
+    private prefixedNamePrefixLocalName(prefix: string, localName: string): State {
+        return block("sparql11_prefixednameprefixlocalname", { fields: { localName, prefix } })
     }
-    private iriref(iri: string): Block {
-        return new Block("iriref", iri)
+    private iriref(iri: string): State {
+        return block("sparql11_iriref", { fields: { value: iri } })
     }
-    private blankNode(term: T12.TermBlank): Block {
-        return new Block("blanknodelabel", term.label)
+    private blankNode(term: T12.TermBlank): State {
+        return block("sparql11_blanknodelabel", { fields: { value: term.label } })
     }
-    private literal(term: T12.TermLiteral): Block {
+    private literal(term: T12.TermLiteral): State {
         const datatype = term.langOrIri
 
         if (datatype === undefined)
@@ -964,137 +995,141 @@ export default class BlockGenerator {
                     return this.typedLiteral(term, datatype)
             }
     }
-    private string(value: string): Block {
-        return new Block("string", value)
+    private string(value: string): State {
+        return block("sparql11_string", { fields: { value } })
     }
-    private langString(term: T12.TermLiteral, language: string): Block {
-        const block = new Block("langstring", this.string(term.value))
-
-        block.addField("language", language)
-
-        return block
+    private langString(term: T12.TermLiteral, language: string): State {
+        return block("sparql11_langstring", {
+            fields: {
+                language
+            },
+            inputs: {
+                value: { block: this.string(term.value) }
+            }
+        })
     }
-    private numeric(value: string): Block {
-        return new Block("numericliteral", value)
+    private numeric(value: string): State {
+        return block("sparql11_numericliteral", { fields: { value } })
     }
-    private boolean(value: string): Block {
-        return new Block("booleanliteral", value.toUpperCase())
+    private boolean(value: string): State {
+        return block("sparql11_booleanliteral", { fields: { value: value.toUpperCase() === "TRUE" } })
     }
-    private typedLiteral(term: T12.TermLiteral, datatype: T12.TermIri): Block {
-        const block = new Block("typedliteral", this.string(term.value))
-
-        block.addValue("datatype", this.namedNode(datatype))
-
-        return block
+    private typedLiteral(term: T12.TermLiteral, datatype: T12.TermIri): State {
+        return block("sparql11_typedliteral", {
+            inputs: {
+                value: { block: this.string(term.value) },
+                datatype: { block: this.namedNode(datatype) }
+            }
+        })
     }
-    private variable(term: T12.TermVariable): Block {
-        return new Block("var1", term.value)
+    private variable(term: T12.TermVariable): State {
+        return block("sparql11_var1", { fields: { value: term.value } })
     }
     // #endregion
 
     // #region Collection items
-    private prologueItem(definition: T12.ContextDefinition): Block {
+    private prologueItem(definition: T12.ContextDefinition): State {
         switch (definition.subType) {
             case "prefix":
-                return new Block("prologueitem", this.prefix(definition))
+                return wrap("sparql11_prologueitem", this.prefix(definition))
 
             case "base":
-                return new Block("prologueitem", this.base(definition))
+                return wrap("sparql11_prologueitem", this.base(definition))
 
             case "version":
                 throw new Error("Unsupported SPARQL 1.2 construct: VERSION")
         }
     }
-    private varOrExpressionAsVarItem(variable: T12.TermVariable | T12.PatternBind): Block {
+    private varOrExpressionAsVarItem(variable: T12.TermVariable | T12.PatternBind): State {
         if (variable.type === "pattern")
-            return new Block("varorexpressionasvaritem", this.expressionAsVar(variable.expression, variable.variable))
+            return wrap("sparql11_varorexpressionasvaritem", this.expressionAsVar(variable.expression, variable.variable))
         else
-            return new Block("varorexpressionasvaritem", this.variable(variable))
+            return wrap("sparql11_varorexpressionasvaritem", this.variable(variable))
     }
-    private groupingItem(item: T12.SolutionModifierGroup["groupings"][number]): Block {
+    private groupingItem(item: T12.SolutionModifierGroup["groupings"][number]): State {
         if ("variable" in item)
-            return new Block("groupconditionitem", this.expressionAsVar(item.value, item.variable))
+            return wrap("sparql11_groupconditionitem", this.expressionAsVar(item.value, item.variable))
         else
-            return new Block("groupconditionitem", this.expression(item))
+            return wrap("sparql11_groupconditionitem", this.expression(item))
     }
-    private havingItem(item: T12.Expression): Block {
+    private havingItem(item: T12.Expression): State {
         if (item.type === "term")
-            return new Block("havingconditionitem", this.bracketted(item))
+            return wrap("sparql11_havingconditionitem", this.bracketted(item))
         else
-            return new Block("havingconditionitem", this.bracketArgument(item))
+            return wrap("sparql11_havingconditionitem", this.bracketArgument(item))
     }
-    private orderItem(item: T12.Ordering): Block {
+    private orderItem(item: T12.Ordering): State {
         const [expression, descending] = "descending" in item ? [item.expression, item.descending] : [item, false]
 
         if (descending)
-            return new Block("orderconditionitem", this.descending(expression))
+            return wrap("sparql11_orderconditionitem", this.descending(expression))
         else if (expression.type === "term")
             if (expression.subType === "variable")
-                return new Block("orderconditionitem", this.term(expression))
+                return wrap("sparql11_orderconditionitem", this.term(expression))
             else
-                return new Block("orderconditionitem", this.bracketted(expression))
+                return wrap("sparql11_orderconditionitem", this.bracketted(expression))
         else
-            return new Block("orderconditionitem", this.bracketArgument(expression))
+            return wrap("sparql11_orderconditionitem", this.bracketArgument(expression))
     }
-    private dataBlockValueItem(item: DataValue): Block {
+    private dataBlockValueItem(item: DataValue): State {
         if (item)
-            return new Block("datablockvalueitem", this.term(item))
+            return wrap("sparql11_datablockvalueitem", this.term(item))
         else
-            return new Block("datablockvalueitem", new Block("undef"))
+            return wrap("sparql11_datablockvalueitem", block("sparql11_undef"))
     }
-    private dataBlockValuesItem(values: DataValue[]): Block {
-        const block = new Block("datablockvaluesitem")
-
-        block.addItems("items", values, this.dataBlockValueItem, this)
-
-        return block
+    private dataBlockValuesItem(values: DataValue[]): State {
+        return block("sparql11_datablockvaluesitem", {
+            inputs: {
+                items: { block: chain(values.map(i => this.dataBlockValueItem(i))) }
+            }
+        })
     }
-    private triplesSameSubjectItem(triples: T12.BasicGraphPattern): Block {
-        return new Block("triplessamesubjectitem", this.triplesSameSubject(triples))
+    private triplesSameSubjectItem(triples: T12.BasicGraphPattern): State {
+        return wrap("sparql11_triplessamesubjectitem", this.triplesSameSubject(triples))
     }
-    private varOrIriItem(term: T12.TermVariable | T12.TermIri): Block {
-        return new Block("varoririitem", this.term(term))
+    private varOrIriItem(term: T12.TermVariable | T12.TermIri): State {
+        return wrap("sparql11_varoririitem", this.term(term))
     }
-    private groupItem(pattern: T12.PatternGroup): Block {
-        return new Block("groupgraphpatternitem", this.pattern(pattern))
+    private groupItem(pattern: T12.PatternGroup): State {
+        return wrap("sparql11_groupgraphpatternitem", this.pattern(pattern))
     }
-    private variableItem(variable: string): Block {
-        return new Block("varitem", new Block("var1", variable))
+    private variableItem(variable: string): State {
+        return wrap("sparql11_varitem", block("sparql11_var1", { fields: { value: variable } }))
     }
-    private groupSubItem(pattern: T12.Pattern): Block {
-        return new Block("groupgraphpatternsubitem", this.pattern(pattern))
+    private groupSubItem(pattern: T12.Pattern): State {
+        return wrap("sparql11_groupgraphpatternsubitem", this.pattern(pattern))
     }
-    private propertyList([property, objects]: [T12.Path | T12.TermVariable, T12.GraphNode[]]): Block {
-        const block = new Block("propertylistnotempty")
-
-        block.addValue("predicate", this.verb(property))
-        block.addItems("objects", objects, this.objectListItem, this)
-
-        return block
+    private propertyList([property, objects]: [T12.Path | T12.TermVariable, T12.GraphNode[]]): State {
+        return block("sparql11_propertylistnotempty", {
+            inputs: {
+                predicate: { block: this.verb(property) },
+                objects: { block: chain(objects.map(i => this.objectListItem(i))) }
+            }
+        })
     }
-    private objectListItem(object: T12.GraphNode): Block {
-        return new Block("objectlistitem", this.graphNode(object))
+    private objectListItem(object: T12.GraphNode): State {
+        return wrap("sparql11_objectlistitem", this.graphNode(object))
     }
-    private graphNodeItem(object: T12.GraphNode): Block {
-        return new Block("graphnodeitem", this.graphNode(object))
+    private graphNodeItem(object: T12.GraphNode): State {
+        return wrap("sparql11_graphnodeitem", this.graphNode(object))
     }
-    private expressionListItem(expression: T12.Expression): Block {
-        return new Block("expressionlistitem", this.expression(expression))
+    private expressionListItem(expression: T12.Expression): State {
+        return wrap("sparql11_expressionlistitem", this.expression(expression))
     }
-    private pathAlternativeItem(verb: T12.Path): Block {
-        return new Block("pathalternativeitem", this.verb(verb))
+    private pathAlternativeItem(verb: T12.Path): State {
+        return wrap("sparql11_pathalternativeitem", this.verb(verb))
     }
-    private pathSequenceItem(verb: T12.Path): Block {
+    private pathSequenceItem(verb: T12.Path): State {
         if (verb.type === "path" && verb.subType === "|")
-            return new Block("pathsequencitem", this.brackettedPath(verb))
+            return wrap("sparql11_pathsequencitem", this.brackettedPath(verb))
         else
-            return new Block("pathsequencitem", this.verb(verb))
+            return wrap("sparql11_pathsequencitem", this.verb(verb))
     }
-    private pathOneInPropertySetAlternativeItem(verb: T12.TermIri | T12.PathNegatedElt): Block {
+    private pathOneInPropertySetAlternativeItem(verb: T12.TermIri | T12.PathNegatedElt): State {
         if (verb.type === "path")
-            return new Block("pathoneinpropertysetalternativeitem", this.inversePathOneInPropertySet(verb))
+            return wrap("sparql11_pathoneinpropertysetalternativeitem", this.inversePathOneInPropertySet(verb))
         else
-            return new Block("pathoneinpropertysetalternativeitem", this.verb(verb))
+            return wrap("sparql11_pathoneinpropertysetalternativeitem", this.verb(verb))
     }
     // #endregion
 

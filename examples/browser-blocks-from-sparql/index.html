@@ -51,12 +51,10 @@
 
             if (sparql) {
                 try {
-                    const blocklyDom = SparqlBlockly.sparqlToBlockly(sparql)
+                    const state = SparqlBlockly.sparqlToBlockly(sparql)
                     const workspace = Blockly.getMainWorkspace()
 
-                    workspace.clear()
-
-                    Blockly.Xml.domToWorkspace(blocklyDom, workspace)
+                    Blockly.serialization.workspaces.load(state, workspace)
                 }
                 catch (ex) {
                     parseError.innerText = ex.message

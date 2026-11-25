@@ -9,7 +9,7 @@ import { parseSparql } from "../src/parser.ts"
 function roundTrip(sparql: string): string {
     const block = new BlockGenerator().visit(parseSparql(sparql))
     const workspace = new Blockly.Workspace()
-    Blockly.Xml.domToWorkspace(block.xml, workspace)
+    Blockly.serialization.blocks.append(block, workspace)
 
     return new CodeGenerator().workspaceToCode(workspace)
 }
@@ -72,6 +72,32 @@ describe("VALUES round trip", function () {
             const result = roundTrip(`SELECT * WHERE { ${values} }`)
 
             for (const fragment of expected) assert.ok(result.includes(fragment), result)
+        })
+    }
+})
+
+describe("Save and load", function () {
+    const queries = [
+        "SELECT ?s WHERE { ?s ?p ?o . ?o ?q 1 . FILTER(?s IN (1, 2) && !?o) } ORDER BY ?s LIMIT 5",
+        "SELECT * WHERE { VALUES (?x ?y) { (UNDEF 1) (2 UNDEF) } OPTIONAL { ?a ?b \"c\"@en } }",
+    ]
+
+    function stripIds(state: unknown): unknown {
+        return JSON.parse(JSON.stringify(state, (key, value) => (key === "id" || key === "x" || key === "y" ? undefined : value)))
+    }
+
+    for (const query of queries) {
+        it(query, function () {
+            const first = new Blockly.Workspace()
+            Blockly.serialization.blocks.append(new BlockGenerator().visit(parseSparql(query)), first)
+            const saved = Blockly.serialization.workspaces.save(first)
+
+            const second = new Blockly.Workspace()
+            Blockly.serialization.workspaces.load(saved, second)
+
+            assert.deepEqual(
+                stripIds(Blockly.serialization.workspaces.save(second)),
+                stripIds(saved))
         })
     }
 })

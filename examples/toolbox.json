@@ -1,0 +1,670 @@
+{
+  "kind": "categoryToolbox",
+  "contents": [
+    {
+      "kind": "category",
+      "name": "Queries",
+      "contents": [
+        { "kind": "label", "text": "Query" },
+        { "kind": "block", "type": "sparql11_query" },
+        {
+          "kind": "block",
+          "type": "sparql11_prologueitem",
+          "inputs": {
+            "value": {
+              "block": {
+                "type": "sparql11_base",
+                "inputs": { "value": { "block": { "type": "sparql11_iriref" } } }
+              }
+            }
+          }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_prologueitem",
+          "inputs": {
+            "value": {
+              "block": {
+                "type": "sparql11_prefixdecldefault",
+                "inputs": { "value": { "block": { "type": "sparql11_iriref" } } }
+              }
+            }
+          }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_prologueitem",
+          "inputs": {
+            "value": {
+              "block": {
+                "type": "sparql11_prefixdecl",
+                "inputs": { "value": { "block": { "type": "sparql11_iriref" } } }
+              }
+            }
+          }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_selectquery",
+          "inputs": {
+            "select": {
+              "block": {
+                "type": "sparql11_selectclause",
+                "inputs": { "vars": { "block": { "type": "sparql11_varorexpressionasvaritem" } } }
+              }
+            }
+          }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_expressionasvar",
+          "inputs": { "name": { "block": { "type": "sparql11_var1" } } }
+        },
+        { "kind": "label", "text": "Projection item" },
+        { "kind": "block", "type": "sparql11_varorexpressionasvaritem" },
+        {
+          "kind": "block",
+          "type": "sparql11_describequery",
+          "inputs": { "subject": { "block": { "type": "sparql11_varoririitem" } } }
+        },
+        { "kind": "label", "text": "Var / IRI item" },
+        { "kind": "block", "type": "sparql11_varoririitem" },
+        { "kind": "block", "type": "sparql11_askquery" },
+        {
+          "kind": "block",
+          "type": "sparql11_simpleconstructquery",
+          "inputs": { "where": { "block": { "type": "sparql11_triplessamesubjectitem" } } }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_constructquery",
+          "inputs": { "template": { "block": { "type": "sparql11_triplessamesubjectitem" } } }
+        },
+        { "kind": "label", "text": "Triples same subject item" },
+        { "kind": "block", "type": "sparql11_triplessamesubjectitem" },
+        {
+          "kind": "block",
+          "type": "sparql11_querycommon",
+          "inputs": { "pattern": { "block": { "type": "sparql11_groupgraphpattern" } } }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_datasetclause",
+          "inputs": { "value": { "block": { "type": "sparql11_iriref" } } }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_datasetclause",
+          "inputs": {
+            "value": {
+              "block": {
+                "type": "sparql11_namedgraphclause",
+                "inputs": { "value": { "block": { "type": "sparql11_iriref" } } }
+              }
+            }
+          }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_solutionmodifier",
+          "inputs": {
+            "group": { "block": { "type": "sparql11_groupconditionitem" } },
+            "having": { "block": { "type": "sparql11_havingconditionitem" } },
+            "order": { "block": { "type": "sparql11_orderconditionitem" } },
+            "limit": { "block": { "type": "sparql11_numericliteral" } },
+            "offset": { "block": { "type": "sparql11_numericliteral" } }
+          }
+        },
+        { "kind": "label", "text": "Group condition item" },
+        { "kind": "block", "type": "sparql11_groupconditionitem" },
+        { "kind": "label", "text": "Having condition item" },
+        { "kind": "block", "type": "sparql11_havingconditionitem" },
+        { "kind": "label", "text": "Order condition item" },
+        { "kind": "block", "type": "sparql11_orderconditionitem" },
+        {
+          "kind": "block",
+          "type": "sparql11_ordercondition",
+          "inputs": { "value": { "block": { "type": "sparql11_brackettedexpression" } } }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_inlinedata",
+          "inputs": {
+            "value": {
+              "block": {
+                "type": "sparql11_inlinedataonevar",
+                "inputs": {
+                  "variable": { "block": { "type": "sparql11_var1" } },
+                  "values": {
+                    "block": {
+                      "type": "sparql11_datablockvalueitem",
+                      "inputs": { "value": { "block": { "type": "sparql11_undef" } } }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        { "kind": "label", "text": "Data block value" },
+        { "kind": "block", "type": "sparql11_datablockvalueitem" },
+        {
+          "kind": "block",
+          "type": "sparql11_inlinedata",
+          "inputs": {
+            "value": {
+              "block": {
+                "type": "sparql11_inlinedatafull",
+                "inputs": {
+                  "variables": {
+                    "block": {
+                      "type": "sparql11_varitem",
+                      "inputs": { "value": { "block": { "type": "sparql11_var1" } } },
+                      "next": {
+                        "block": {
+                          "type": "sparql11_varitem",
+                          "inputs": { "value": { "block": { "type": "sparql11_var1" } } }
+                        }
+                      }
+                    }
+                  },
+                  "values": {
+                    "block": {
+                      "type": "sparql11_datablockvaluesitem",
+                      "inputs": {
+                        "items": {
+                          "block": {
+                            "type": "sparql11_datablockvalueitem",
+                            "inputs": { "value": { "block": { "type": "sparql11_undef" } } },
+                            "next": {
+                              "block": {
+                                "type": "sparql11_datablockvalueitem",
+                                "inputs": { "value": { "block": { "type": "sparql11_undef" } } }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        { "kind": "label", "text": "Data block row" },
+        { "kind": "block", "type": "sparql11_datablockvaluesitem" }
+      ]
+    },
+    {
+      "kind": "category",
+      "name": "Patterns",
+      "contents": [
+        { "kind": "label", "text": "Triples same subject" },
+        {
+          "kind": "block",
+          "type": "sparql11_triplessamesubject",
+          "inputs": {
+            "predicates": {
+              "block": {
+                "type": "sparql11_propertylistnotempty",
+                "inputs": { "objects": { "block": { "type": "sparql11_objectlistitem" } } }
+              }
+            }
+          }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_blanknodepropertylist",
+          "inputs": {
+            "predicates": {
+              "block": {
+                "type": "sparql11_propertylistnotempty",
+                "inputs": { "objects": { "block": { "type": "sparql11_objectlistitem" } } }
+              }
+            }
+          }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_collection",
+          "inputs": { "items": { "block": { "type": "sparql11_graphnodeitem" } } }
+        },
+        { "kind": "label", "text": "Property list item" },
+        {
+          "kind": "block",
+          "type": "sparql11_propertylistnotempty",
+          "inputs": { "objects": { "block": { "type": "sparql11_objectlistitem" } } }
+        },
+        { "kind": "label", "text": "Object list item" },
+        { "kind": "block", "type": "sparql11_objectlistitem" },
+        { "kind": "label", "text": "Object list item with annotation pattern" },
+        {
+          "kind": "block",
+          "type": "sparql11_objectlistitemannotationpattern",
+          "inputs": {
+            "annotations": {
+              "block": {
+                "type": "sparql11_propertylistnotempty",
+                "inputs": { "objects": { "block": { "type": "sparql11_objectlistitem" } } }
+              }
+            }
+          }
+        },
+        { "kind": "block", "type": "sparql11_groupgraphpattern" },
+        { "kind": "label", "text": "Group graph pattern sub" },
+        {
+          "kind": "block",
+          "type": "sparql11_groupgraphpatternsub",
+          "inputs": { "items": { "block": { "type": "sparql11_groupgraphpatternsubitem" } } }
+        },
+        { "kind": "label", "text": "Pattern/subquery item" },
+        { "kind": "block", "type": "sparql11_groupgraphpatternsubitem" },
+        { "kind": "label", "text": "Subquery" },
+        {
+          "kind": "block",
+          "type": "sparql11_subselect",
+          "inputs": {
+            "select": { "block": { "type": "sparql11_selectclause" } },
+            "pattern": { "block": { "type": "sparql11_groupgraphpattern" } }
+          }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_bind",
+          "inputs": {
+            "value": {
+              "block": {
+                "type": "sparql11_expressionasvar",
+                "inputs": { "name": { "block": { "type": "sparql11_var1" } } }
+              }
+            }
+          }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_optionalgraphpattern",
+          "inputs": { "value": { "block": { "type": "sparql11_groupgraphpattern" } } }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_graphgraphpattern",
+          "inputs": { "patterns": { "block": { "type": "sparql11_groupgraphpattern" } } }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_servicegraphpattern",
+          "inputs": { "patterns": { "block": { "type": "sparql11_groupgraphpattern" } } }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_minusgraphpattern",
+          "inputs": { "value": { "block": { "type": "sparql11_groupgraphpattern" } } }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_grouporuniongraphpattern",
+          "inputs": {
+            "items": {
+              "block": {
+                "type": "sparql11_groupgraphpatternitem",
+                "inputs": { "value": { "block": { "type": "sparql11_groupgraphpattern" } } }
+              }
+            }
+          }
+        },
+        { "kind": "label", "text": "Union item" },
+        { "kind": "block", "type": "sparql11_groupgraphpatternitem" },
+        { "kind": "block", "type": "sparql11_filter" },
+        {
+          "kind": "block",
+          "type": "sparql11_inlinedata",
+          "inputs": {
+            "value": {
+              "block": {
+                "type": "sparql11_inlinedataonevar",
+                "inputs": {
+                  "variable": { "block": { "type": "sparql11_var1" } },
+                  "values": {
+                    "block": {
+                      "type": "sparql11_datablockvalueitem",
+                      "inputs": { "value": { "block": { "type": "sparql11_undef" } } }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        { "kind": "label", "text": "Data block value" },
+        { "kind": "block", "type": "sparql11_datablockvalueitem" },
+        {
+          "kind": "block",
+          "type": "sparql11_inlinedata",
+          "inputs": {
+            "value": {
+              "block": {
+                "type": "sparql11_inlinedatafull",
+                "inputs": {
+                  "variables": {
+                    "block": {
+                      "type": "sparql11_varitem",
+                      "inputs": { "value": { "block": { "type": "sparql11_var1" } } },
+                      "next": {
+                        "block": {
+                          "type": "sparql11_varitem",
+                          "inputs": { "value": { "block": { "type": "sparql11_var1" } } }
+                        }
+                      }
+                    }
+                  },
+                  "values": {
+                    "block": {
+                      "type": "sparql11_datablockvaluesitem",
+                      "inputs": {
+                        "items": {
+                          "block": {
+                            "type": "sparql11_datablockvalueitem",
+                            "inputs": { "value": { "block": { "type": "sparql11_undef" } } },
+                            "next": {
+                              "block": {
+                                "type": "sparql11_datablockvalueitem",
+                                "inputs": { "value": { "block": { "type": "sparql11_undef" } } }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        { "kind": "label", "text": "Data block row" },
+        { "kind": "block", "type": "sparql11_datablockvaluesitem" }
+      ]
+    },
+    {
+      "kind": "category",
+      "name": "Terms",
+      "contents": [
+        { "kind": "block", "type": "sparql11_var1" },
+        { "kind": "block", "type": "sparql11_var2" },
+        { "kind": "block", "type": "sparql11_irirefdefault" },
+        { "kind": "block", "type": "sparql11_iriref" },
+        { "kind": "block", "type": "sparql11_prefixedname" },
+        { "kind": "block", "type": "sparql11_prefixednameprefix" },
+        { "kind": "block", "type": "sparql11_prefixednamelocalname" },
+        { "kind": "block", "type": "sparql11_prefixednameprefixlocalname" },
+        { "kind": "block", "type": "sparql11_string", "fields": { "value": "lorem ipsum" } },
+        { "kind": "block", "type": "sparql11_numericliteral", "fields": { "value": "42" } },
+        { "kind": "block", "type": "sparql11_booleanliteral" },
+        {
+          "kind": "block",
+          "type": "sparql11_typedliteral",
+          "inputs": { "value": { "block": { "type": "sparql11_string" } } }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_langstring",
+          "fields": { "language": "en" },
+          "inputs": { "value": { "block": { "type": "sparql11_string" } } }
+        },
+        { "kind": "block", "type": "sparql11_blanknodelabel" },
+        { "kind": "block", "type": "sparql11_anon" },
+        { "kind": "block", "type": "sparql11_nil" },
+        {
+          "kind": "block",
+          "type": "sparql11_blanknodepropertylist",
+          "inputs": {
+            "predicates": {
+              "block": {
+                "type": "sparql11_propertylistnotempty",
+                "inputs": { "objects": { "block": { "type": "sparql11_objectlistitem" } } }
+              }
+            }
+          }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_collection",
+          "inputs": { "items": { "block": { "type": "sparql11_graphnodeitem" } } }
+        },
+        { "kind": "label", "text": "Property list item" },
+        {
+          "kind": "block",
+          "type": "sparql11_propertylistnotempty",
+          "inputs": { "objects": { "block": { "type": "sparql11_objectlistitem" } } }
+        },
+        { "kind": "label", "text": "Object list item" },
+        { "kind": "block", "type": "sparql11_objectlistitem" },
+        { "kind": "label", "text": "Object list item with annotation pattern" },
+        {
+          "kind": "block",
+          "type": "sparql11_objectlistitemannotationpattern",
+          "inputs": {
+            "annotations": {
+              "block": {
+                "type": "sparql11_propertylistnotempty",
+                "inputs": { "objects": { "block": { "type": "sparql11_objectlistitem" } } }
+              }
+            }
+          }
+        },
+        { "kind": "block", "type": "sparql11_embtp" }
+      ]
+    },
+    {
+      "kind": "category",
+      "name": "Verbs",
+      "contents": [
+        { "kind": "block", "type": "sparql11_var1" },
+        { "kind": "block", "type": "sparql11_var2" },
+        { "kind": "block", "type": "sparql11_irirefdefault" },
+        { "kind": "block", "type": "sparql11_iriref", "fields": { "value": "" } },
+        { "kind": "block", "type": "sparql11_prefixedname" },
+        { "kind": "block", "type": "sparql11_prefixednameprefix", "fields": { "prefix": "" } },
+        { "kind": "block", "type": "sparql11_prefixednamelocalname", "fields": { "localName": "" } },
+        {
+          "kind": "block",
+          "type": "sparql11_prefixednameprefixlocalname",
+          "fields": { "prefix": "", "localName": "" }
+        },
+        { "kind": "block", "type": "sparql11_a" },
+        { "kind": "block", "type": "sparql11_negatedpath" },
+        { "kind": "block", "type": "sparql11_bracketedpath" },
+        { "kind": "block", "type": "sparql11_pathwithmodifier", "fields": { "modifier": "" } },
+        { "kind": "block", "type": "sparql11_inversepath" },
+        {
+          "kind": "block",
+          "type": "sparql11_pathalternative",
+          "inputs": { "items": { "block": { "type": "sparql11_pathalternativeitem" } } }
+        },
+        { "kind": "label", "text": "Alternative path item" },
+        { "kind": "block", "type": "sparql11_pathalternativeitem" },
+        {
+          "kind": "block",
+          "type": "sparql11_pathsequence",
+          "inputs": { "items": { "block": { "type": "sparql11_pathsequencitem" } } }
+        },
+        { "kind": "label", "text": "Path sequence item" },
+        { "kind": "block", "type": "sparql11_pathsequencitem" },
+        { "kind": "label", "text": "Inverse path (in negated)" },
+        { "kind": "block", "type": "sparql11_inversepathoneinpropertyset" },
+        { "kind": "label", "text": "Alternative path (in negated)" },
+        {
+          "kind": "block",
+          "type": "sparql11_pathoneinpropertysetalternative",
+          "inputs": { "items": { "block": { "type": "sparql11_pathoneinpropertysetalternativeitem" } } }
+        },
+        { "kind": "label", "text": "Alternative path (in negated) item" },
+        { "kind": "block", "type": "sparql11_pathoneinpropertysetalternativeitem" }
+      ]
+    },
+    {
+      "kind": "category",
+      "name": "Expressions",
+      "contents": [
+        { "kind": "block", "type": "sparql11_conditionalorexpression" },
+        { "kind": "block", "type": "sparql11_conditionalandexpression" },
+        { "kind": "block", "type": "sparql11_relationalexpression" },
+        {
+          "kind": "block",
+          "type": "sparql11_relationalexpressionin",
+          "inputs": { "right": { "block": { "type": "sparql11_expressionlistitem" } } }
+        },
+        { "kind": "block", "type": "sparql11_additiveexpression" },
+        { "kind": "block", "type": "sparql11_multiplicativeexpression" },
+        { "kind": "block", "type": "sparql11_unaryexpression" },
+        { "kind": "block", "type": "sparql11_brackettedexpression" },
+        { "kind": "block", "type": "sparql11_builtincall0" },
+        { "kind": "block", "type": "sparql11_builtincall1" },
+        { "kind": "block", "type": "sparql11_builtincall2" },
+        { "kind": "block", "type": "sparql11_builtincall3" },
+        { "kind": "block", "type": "sparql11_builtincall4" },
+        {
+          "kind": "block",
+          "type": "sparql11_bound",
+          "inputs": { "value": { "block": { "type": "sparql11_var1" } } }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_builtincalln",
+          "inputs": { "args": { "block": { "type": "sparql11_expressionlistitem" } } }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_iriorfunction",
+          "inputs": { "args": { "block": { "type": "sparql11_expressionlistitem" } } }
+        },
+        { "kind": "label", "text": "Expression list item" },
+        { "kind": "block", "type": "sparql11_expressionlistitem" },
+        {
+          "kind": "block",
+          "type": "sparql11_exists",
+          "inputs": { "value": { "block": { "type": "sparql11_groupgraphpattern" } } }
+        },
+        { "kind": "block", "type": "sparql11_aggregate" },
+        { "kind": "block", "type": "sparql11_count" },
+        { "kind": "block", "type": "sparql11_group_concat" }
+      ]
+    },
+    {
+      "kind": "category",
+      "name": "Update",
+      "contents": [
+        { "kind": "label", "text": "Update" },
+        {
+          "kind": "block",
+          "type": "sparql11_update",
+          "inputs": { "items": { "block": { "type": "sparql11_updateitem" } } }
+        },
+        { "kind": "label", "text": "Update item" },
+        { "kind": "block", "type": "sparql11_updateitem" },
+        {
+          "kind": "block",
+          "type": "sparql11_prologueitem",
+          "inputs": {
+            "value": {
+              "block": {
+                "type": "sparql11_base",
+                "inputs": { "value": { "block": { "type": "sparql11_iriref" } } }
+              }
+            }
+          }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_prologueitem",
+          "inputs": {
+            "value": {
+              "block": {
+                "type": "sparql11_prefixdecldefault",
+                "inputs": { "value": { "block": { "type": "sparql11_iriref" } } }
+              }
+            }
+          }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_prologueitem",
+          "inputs": {
+            "value": {
+              "block": {
+                "type": "sparql11_prefixdecl",
+                "inputs": { "value": { "block": { "type": "sparql11_iriref" } } }
+              }
+            }
+          }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_modify",
+          "inputs": {
+            "delete": {
+              "block": {
+                "type": "sparql11_quadpattern",
+                "inputs": { "items": { "block": { "type": "sparql11_quadpatternitem" } } }
+              }
+            },
+            "insert": {
+              "block": {
+                "type": "sparql11_quadpattern",
+                "inputs": { "items": { "block": { "type": "sparql11_quadpatternitem" } } }
+              }
+            },
+            "where": { "block": { "type": "sparql11_groupgraphpattern" } }
+          }
+        },
+        { "kind": "label", "text": "Quad pattern item" },
+        { "kind": "block", "type": "sparql11_quadpatternitem" },
+        {
+          "kind": "block",
+          "type": "sparql11_usingclause",
+          "inputs": { "value": { "block": { "type": "sparql11_iriref" } } }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_usingclause",
+          "inputs": {
+            "value": {
+              "block": {
+                "type": "sparql11_namedgraphclause",
+                "inputs": { "value": { "block": { "type": "sparql11_iriref", "fields": { "value": "" } } } }
+              }
+            }
+          }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_insertdeletewhere",
+          "inputs": {
+            "pattern": {
+              "block": {
+                "type": "sparql11_quadpattern",
+                "inputs": { "items": { "block": { "type": "sparql11_quadpatternitem" } } }
+              }
+            }
+          }
+        },
+        {
+          "kind": "block",
+          "type": "sparql11_quadsnottriples",
+          "inputs": { "triples": { "block": { "type": "sparql11_triplessamesubjectitem" } } }
+        },
+        { "kind": "label", "text": "Triples same subject item" },
+        { "kind": "block", "type": "sparql11_triplessamesubjectitem" },
+        { "kind": "block", "type": "sparql11_load" },
+        { "kind": "block", "type": "sparql11_cleardrop" },
+        { "kind": "block", "type": "sparql11_create" },
+        { "kind": "block", "type": "sparql11_addmovecopy" },
+        { "kind": "block", "type": "sparql11_graphordefault" },
+        { "kind": "block", "type": "sparql11_graphrefallall" },
+        { "kind": "block", "type": "sparql11_graphrefallnamed" },
+        { "kind": "block", "type": "sparql11_graphref" }
+      ]
+    }
+  ]
+}

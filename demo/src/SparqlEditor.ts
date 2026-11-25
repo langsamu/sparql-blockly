@@ -35,11 +35,11 @@ export class SparqlEditor extends HTMLElement {
         const query = this.validate()
 
         if (query) {
-            this.dispatchEvent(new CustomEvent<Element>("sparql", { detail: query }))
+            this.dispatchEvent(new CustomEvent<SparqlBlockly.WorkspaceState>("sparql", { detail: query }))
         }
     }
 
-    private validate(): Element {
+    private validate(): SparqlBlockly.WorkspaceState {
         this.error = ""
         this.classList.remove("invalid")
         this.classList.remove("valid")
@@ -48,11 +48,11 @@ export class SparqlEditor extends HTMLElement {
 
         if (sparql) {
             try {
-                const blocklyDom = SparqlBlockly.sparqlToBlockly(sparql)
+                const state = SparqlBlockly.sparqlToBlockly(sparql)
 
                 this.classList.add("valid")
 
-                return blocklyDom
+                return state
             }
             catch (e) {
                 this.error = e.message

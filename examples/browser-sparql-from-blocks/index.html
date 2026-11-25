@@ -61,8 +61,8 @@
         }
 
         async function getToolboxData() {
-            const response = await fetch("../toolbox.xml")
-            return await response.text()
+            const response = await fetch("../toolbox.json")
+            return await response.json()
         }
     </script>
 </head>

@@ -1,8 +1,3 @@
-import type { Block } from "./Block.ts"
-
-export interface Processor<T> {
-    (item: T): Block;
-}
 export type OperatorDefinition = {
     operators: string[];
     higher?: OperatorHierarchy;

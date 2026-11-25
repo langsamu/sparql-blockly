@@ -1,9 +1,9 @@
 import * as SparqlBlockly from "sparql-blockly"
 import * as Blockly from "blockly"
 
-async function getToolboxData(): Promise<string> {
-    const response = await fetch("../../toolbox.xml")
-    return await response.text()
+async function getToolboxData(): Promise<Blockly.utils.toolbox.ToolboxDefinition> {
+    const response = await fetch("../../toolbox.json")
+    return await response.json()
 }
 
 function populateSparql(sparql: string): void {
@@ -51,12 +51,10 @@ function textareaInput(e: InputEvent): void {
 
     if (sparql) {
         try {
-            const blocklyDom = SparqlBlockly.sparqlToBlockly(sparql)
+            const state = SparqlBlockly.sparqlToBlockly(sparql)
             const workspace = Blockly.getMainWorkspace()
 
-            workspace.clear()
-
-            Blockly.Xml.domToWorkspace(blocklyDom, workspace)
+            Blockly.serialization.workspaces.load(state, workspace)
         }
         catch (ex) {
             parseError.innerText = ex.message

@@ -1,5 +1,6 @@
 ﻿import * as Blockly from "blockly"
 import * as SparqlBlockly from "sparql-blockly"
+import { toolbox } from "./toolbox.ts"
 
 const RESIZE_BLOCKLY_EVERY = 1000
 const HORIZONTAL_LAYOUT_THRESHOLD = 768
@@ -12,7 +13,7 @@ export class BlocklyCanvas extends HTMLElement {
 
         const options: Blockly.BlocklyOptions = {
             sounds: false,
-            toolbox: await this.getToolboxData(),
+            toolbox,
             horizontalLayout: window.innerWidth < HORIZONTAL_LAYOUT_THRESHOLD,
             zoom:
             {
@@ -38,20 +39,11 @@ export class BlocklyCanvas extends HTMLElement {
         this.dispatchEvent(new Event("load"))
     }
 
-    public set dom(value: Element) {
+    public set state(value: SparqlBlockly.WorkspaceState) {
         if (value) {
-            const workspace = Blockly.getMainWorkspace() as Blockly.WorkspaceSvg
-            workspace.clear()
-
             this.typing = true
-            Blockly.Xml.domToWorkspace(value, workspace)
+            Blockly.serialization.workspaces.load(value, Blockly.getMainWorkspace())
         }
-    }
-
-    private async getToolboxData(): Promise<string> {
-        const url = this.getAttribute("toolbox-data")
-        const response = await fetch(url)
-        return await response.text()
     }
 
     private workspaceChanged(e: Blockly.Events.Abstract) {
