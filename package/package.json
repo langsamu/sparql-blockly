@@ -41,11 +41,11 @@
     "webpack-cli": "^7.3.1"
   },
   "dependencies": {
-    "@blockly/field-multilineinput": "^13.4.0",
+    "@blockly/field-multilineinput": "^13.5.0",
     "@traqula/parser-sparql-1-2": "1.4.0",
     "@traqula/rules-sparql-1-1": "1.4.0",
     "@traqula/rules-sparql-1-2": "1.4.0",
-    "blockly": "^13.4.0"
+    "blockly": "^13.5.0"
   },
   "engines": {
     "node": ">=22.12.0"
