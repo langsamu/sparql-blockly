@@ -25,6 +25,40 @@ export function graphNodes(parentBlockType: string, inputName: string, prefix?: 
     property(parentBlockType, "sparql11_embtp", inputName, "<< >>", prefix)
     property(parentBlockType, "sparql11_tripleterm", inputName, "<<( )>>", prefix)
 }
+export function tripleTermNodes(parentBlockType: string, inputName: string, prefix?: string): void {
+    vars(parentBlockType, inputName, prefix)
+    terms(parentBlockType, inputName, prefix)
+
+    property(parentBlockType, "sparql11_anon", inputName, "[]", prefix)
+    property(parentBlockType, "sparql11_blanknodelabel", inputName, "_:label", prefix)
+    property(parentBlockType, "sparql11_tripleterm", inputName, "<<( )>>", prefix)
+}
+export function tripleTermVerbs(parentBlockType: string, inputName: string, prefix?: string): void {
+    vars(parentBlockType, inputName, prefix)
+    iris(parentBlockType, inputName, prefix)
+
+    property(parentBlockType, "sparql11_a", inputName, "a", prefix)
+}
+export function tripleTermDataVerbs(parentBlockType: string, inputName: string, prefix?: string): void {
+    iris(parentBlockType, inputName, prefix)
+
+    property(parentBlockType, "sparql11_a", inputName, "a", prefix)
+}
+export function tripleTermDataObjects(parentBlockType: string, inputName: string, prefix?: string): void {
+    terms(parentBlockType, inputName, prefix)
+
+    property(parentBlockType, "sparql11_tripletermdata", inputName, "<<( )>>", prefix)
+}
+export function exprTripleTermSubjects(parentBlockType: string, inputName: string, prefix?: string): void {
+    vars(parentBlockType, inputName, prefix)
+    iris(parentBlockType, inputName, prefix)
+}
+export function exprTripleTermObjects(parentBlockType: string, inputName: string, prefix?: string): void {
+    vars(parentBlockType, inputName, prefix)
+    terms(parentBlockType, inputName, prefix)
+
+    property(parentBlockType, "sparql11_exprtripleterm", inputName, "<<( )>>", prefix)
+}
 export function terms(parentBlockType: string, inputName: string, prefix?: string): void {
     iris(parentBlockType, inputName, prefix)
 
@@ -123,6 +157,8 @@ export function primaryExpressions(parentBlockType: string, inputName: string, p
     vars(parentBlockType, inputName, prefix)
     terms(parentBlockType, inputName, prefix)
     constraints(parentBlockType, inputName, prefix)
+
+    property(parentBlockType, "sparql11_exprtripleterm", inputName, "<<( )>>", prefix)
 }
 export function constraints(parentBlockType: string, inputName: string, prefix?: string): void {
     functionExpressions(parentBlockType, inputName, prefix)

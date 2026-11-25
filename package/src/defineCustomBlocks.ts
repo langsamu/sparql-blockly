@@ -556,7 +556,7 @@ Blocks["sparql11_a"] = {
     init: function () {
         this.appendDummyInput()
             .appendField("a")
-        this.setOutput(true, ["a", "PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath", "PathOneInPropertySet", "PathNegatedPropertySet", "Verb"])
+        this.setOutput(true, ["a", "PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath", "PathOneInPropertySet", "PathNegatedPropertySet", "Verb", "TripleTermDataPredicate"])
         this.setColour(228)
     }
 }
@@ -1112,7 +1112,7 @@ Blocks["sparql11_prefixedname"] = {
         this.appendDummyInput()
             .appendField(":")
         this.setInputsInline(true)
-        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "iri", "VarOrIri", "GraphNode", "VarOrTerm", "GraphTerm", "Verb", "DataBlockValue", "PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath", "PathOneInPropertySet", "PathNegatedPropertySet", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "iriOrFunction", "GraphOrDefault"])
+        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "iri", "VarOrIri", "GraphNode", "VarOrTerm", "GraphTerm", "Verb", "DataBlockValue", "PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath", "PathOneInPropertySet", "PathNegatedPropertySet", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "iriOrFunction", "GraphOrDefault", "TripleTermSubject", "TripleTermObject", "TripleTermDataSubject", "TripleTermDataPredicate", "TripleTermDataObject", "ExprTripleTermSubject", "ExprTripleTermObject"])
         this.setColour(326)
     }
 }
@@ -1122,7 +1122,7 @@ Blocks["sparql11_prefixednameprefix"] = {
             .appendField(new FieldTextInput(""), "prefix")
             .appendField(":")
         this.setInputsInline(true)
-        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "iri", "VarOrIri", "GraphNode", "VarOrTerm", "GraphTerm", "Verb", "DataBlockValue", "PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath", "PathOneInPropertySet", "PathNegatedPropertySet", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "iriOrFunction", "GraphOrDefault"])
+        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "iri", "VarOrIri", "GraphNode", "VarOrTerm", "GraphTerm", "Verb", "DataBlockValue", "PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath", "PathOneInPropertySet", "PathNegatedPropertySet", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "iriOrFunction", "GraphOrDefault", "TripleTermSubject", "TripleTermObject", "TripleTermDataSubject", "TripleTermDataPredicate", "TripleTermDataObject", "ExprTripleTermSubject", "ExprTripleTermObject"])
         this.setColour(326)
     }
 }
@@ -1132,7 +1132,7 @@ Blocks["sparql11_prefixednamelocalname"] = {
             .appendField(":")
             .appendField(new FieldTextInput(""), "localName")
         this.setInputsInline(true)
-        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "iri", "VarOrIri", "GraphNode", "VarOrTerm", "GraphTerm", "Verb", "DataBlockValue", "PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath", "PathOneInPropertySet", "PathNegatedPropertySet", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "iriOrFunction", "GraphOrDefault"])
+        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "iri", "VarOrIri", "GraphNode", "VarOrTerm", "GraphTerm", "Verb", "DataBlockValue", "PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath", "PathOneInPropertySet", "PathNegatedPropertySet", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "iriOrFunction", "GraphOrDefault", "TripleTermSubject", "TripleTermObject", "TripleTermDataSubject", "TripleTermDataPredicate", "TripleTermDataObject", "ExprTripleTermSubject", "ExprTripleTermObject"])
         this.setColour(326)
     }
 }
@@ -1143,7 +1143,7 @@ Blocks["sparql11_prefixednameprefixlocalname"] = {
             .appendField(":")
             .appendField(new FieldTextInput(""), "localName")
         this.setInputsInline(true)
-        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "iri", "VarOrIri", "GraphNode", "VarOrTerm", "GraphTerm", "Verb", "DataBlockValue", "PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath", "PathOneInPropertySet", "PathNegatedPropertySet", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "iriOrFunction", "GraphOrDefault"])
+        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "iri", "VarOrIri", "GraphNode", "VarOrTerm", "GraphTerm", "Verb", "DataBlockValue", "PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath", "PathOneInPropertySet", "PathNegatedPropertySet", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "iriOrFunction", "GraphOrDefault", "TripleTermSubject", "TripleTermObject", "TripleTermDataSubject", "TripleTermDataPredicate", "TripleTermDataObject", "ExprTripleTermSubject", "ExprTripleTermObject"])
         this.setColour(326)
     }
 }
@@ -1166,15 +1166,45 @@ Blocks["sparql11_tripleterm"] = {
     init: function () {
         this.appendValueInput("subject")
             .appendField("<<(")
-            .setCheck("EmbSubjectOrObject")
+            .setCheck("TripleTermSubject")
         this.appendValueInput("predicate")
             .setCheck("Verb")
         this.appendValueInput("object")
-            .setCheck("EmbSubjectOrObject")
+            .setCheck("TripleTermObject")
         this.appendDummyInput()
             .appendField(")>>")
-        this.setOutput(true, ["GraphNode", "GraphNodePath", "VarOrTermOrEmbTP", "EmbSubjectOrObject", "DataBlockValue", "DataValueTerm", "VarOrTerm", "GraphTerm", "Object", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression"])
+        this.setOutput(true, ["GraphNode", "GraphNodePath", "VarOrTermOrEmbTP", "EmbSubjectOrObject", "VarOrTerm", "GraphTerm", "Object", "TripleTerm", "TripleTermSubject", "TripleTermObject"])
         this.setColour(0)
+    }
+}
+Blocks["sparql11_tripletermdata"] = {
+    init: function () {
+        this.appendValueInput("subject")
+            .appendField("<<(")
+            .setCheck("TripleTermDataSubject")
+        this.appendValueInput("predicate")
+            .setCheck("TripleTermDataPredicate")
+        this.appendValueInput("object")
+            .setCheck("TripleTermDataObject")
+        this.appendDummyInput()
+            .appendField(")>>")
+        this.setOutput(true, ["DataBlockValue", "TripleTermData", "TripleTermDataObject"])
+        this.setColour(65)
+    }
+}
+Blocks["sparql11_exprtripleterm"] = {
+    init: function () {
+        this.appendValueInput("subject")
+            .appendField("<<(")
+            .setCheck("ExprTripleTermSubject")
+        this.appendValueInput("predicate")
+            .setCheck("Verb")
+        this.appendValueInput("object")
+            .setCheck("ExprTripleTermObject")
+        this.appendDummyInput()
+            .appendField(")>>")
+        this.setOutput(true, ["ExprTripleTerm", "ExprTripleTermObject", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression"])
+        this.setColour(98)
     }
 }
 Blocks["sparql11_iriref"] = {
@@ -1184,7 +1214,7 @@ Blocks["sparql11_iriref"] = {
             .appendField(new FieldTextInput(""), "value")
             .appendField(">")
         this.setInputsInline(true)
-        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "IRIREF", "iri", "VarOrIri", "GraphNode", "VarOrTerm", "GraphTerm", "Verb", "DataBlockValue", "PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath", "PathOneInPropertySet", "PathNegatedPropertySet", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "iriOrFunction", "GraphOrDefault"])
+        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "IRIREF", "iri", "VarOrIri", "GraphNode", "VarOrTerm", "GraphTerm", "Verb", "DataBlockValue", "PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath", "PathOneInPropertySet", "PathNegatedPropertySet", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "iriOrFunction", "GraphOrDefault", "TripleTermSubject", "TripleTermObject", "TripleTermDataSubject", "TripleTermDataPredicate", "TripleTermDataObject", "ExprTripleTermSubject", "ExprTripleTermObject"])
         this.setColour(326)
     }
 }
@@ -1193,7 +1223,7 @@ Blocks["sparql11_irirefdefault"] = {
         this.appendDummyInput()
             .appendField("<>")
         this.setInputsInline(true)
-        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "IRIREF", "iri", "VarOrIri", "GraphNode", "VarOrTerm", "GraphTerm", "Verb", "DataBlockValue", "PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath", "PathOneInPropertySet", "PathNegatedPropertySet", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "iriOrFunction", "GraphOrDefault"])
+        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "IRIREF", "iri", "VarOrIri", "GraphNode", "VarOrTerm", "GraphTerm", "Verb", "DataBlockValue", "PathPrimary", "PathElt", "PathEltOrInverse", "PathSequence", "Path", "VerbPath", "PathOneInPropertySet", "PathNegatedPropertySet", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "iriOrFunction", "GraphOrDefault", "TripleTermSubject", "TripleTermObject", "TripleTermDataSubject", "TripleTermDataPredicate", "TripleTermDataObject", "ExprTripleTermSubject", "ExprTripleTermObject"])
         this.setColour(326)
     }
 }
@@ -1205,7 +1235,7 @@ Blocks["sparql11_typedliteral"] = {
             .appendField("^^")
             .setCheck("iri")
         this.setInputsInline(true)
-        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "RDFLiteral", "GraphNode", "VarOrTerm", "GraphTerm", "DataBlockValue", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression"])
+        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "RDFLiteral", "GraphNode", "VarOrTerm", "GraphTerm", "DataBlockValue", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "TripleTermSubject", "TripleTermObject", "TripleTermDataObject", "ExprTripleTermObject"])
         this.setColour(163)
     }
 }
@@ -1219,7 +1249,7 @@ Blocks["sparql11_langstring"] = {
             .appendField("@")
             .appendField(language, "language")
         this.setInputsInline(true)
-        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "RDFLiteral", "GraphNode", "VarOrTerm", "GraphTerm", "DataBlockValue", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression"])
+        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "RDFLiteral", "GraphNode", "VarOrTerm", "GraphTerm", "DataBlockValue", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "TripleTermSubject", "TripleTermObject", "TripleTermDataObject", "ExprTripleTermObject"])
         this.setColour(163)
     }
 }
@@ -1248,7 +1278,7 @@ Blocks["sparql11_anon"] = {
     init: function () {
         this.appendDummyInput()
             .appendField("[]")
-        this.setOutput(true, ["EmbSubjectOrObject", "VarOrTermOrEmbTP", "BlankNode", "GraphTerm", "VarOrTerm", "GraphNode", "Object"])
+        this.setOutput(true, ["EmbSubjectOrObject", "VarOrTermOrEmbTP", "BlankNode", "GraphTerm", "VarOrTerm", "GraphNode", "Object", "TripleTermSubject", "TripleTermObject"])
         this.setColour(98)
     }
 }
@@ -1258,7 +1288,7 @@ Blocks["sparql11_blanknodelabel"] = {
             .appendField("_:")
             .appendField(new FieldTextInput(""), "value")
         this.setInputsInline(true)
-        this.setOutput(true, ["EmbSubjectOrObject", "VarOrTermOrEmbTP", "BlankNode", "GraphTerm", "VarOrTerm", "GraphNode"])
+        this.setOutput(true, ["EmbSubjectOrObject", "VarOrTermOrEmbTP", "BlankNode", "GraphTerm", "VarOrTerm", "GraphNode", "TripleTermSubject", "TripleTermObject"])
         this.setColour(98)
     }
 }
@@ -1276,7 +1306,7 @@ Blocks["sparql11_var1"] = {
             .appendField("?")
             .appendField(new FieldTextInput("s"), "value")
         this.setInputsInline(false)
-        this.setOutput(true, ["EmbSubjectOrObject", "VarOrTermOrEmbTP", "Var", "VarOrIri", "Verb", "VarOrTerm", "GraphNode", "Object", "GroupCondition", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression"])
+        this.setOutput(true, ["EmbSubjectOrObject", "VarOrTermOrEmbTP", "Var", "VarOrIri", "Verb", "VarOrTerm", "GraphNode", "Object", "GroupCondition", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "TripleTermSubject", "TripleTermObject", "ExprTripleTermSubject", "ExprTripleTermObject"])
         this.setColour(33)
     }
 }
@@ -1286,7 +1316,7 @@ Blocks["sparql11_var2"] = {
             .appendField("$")
             .appendField(new FieldTextInput("s"), "value")
         this.setInputsInline(false)
-        this.setOutput(true, ["EmbSubjectOrObject", "VarOrTermOrEmbTP", "Var", "VarOrIri", "Verb", "VarOrTerm", "GraphNode", "Object", "GroupCondition", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression"])
+        this.setOutput(true, ["EmbSubjectOrObject", "VarOrTermOrEmbTP", "Var", "VarOrIri", "Verb", "VarOrTerm", "GraphNode", "Object", "GroupCondition", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "TripleTermSubject", "TripleTermObject", "ExprTripleTermSubject", "ExprTripleTermObject"])
         this.setColour(33)
     }
 }
@@ -1297,7 +1327,7 @@ Blocks["sparql11_numericliteral"] = {
         this.appendDummyInput()
             .appendField(valueField, "value")
         this.setInputsInline(true)
-        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "NumericLiteral", "RDFLiteral", "GraphNode", "VarOrTerm", "GraphTerm", "DataBlockValue", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression"])
+        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "NumericLiteral", "RDFLiteral", "GraphNode", "VarOrTerm", "GraphTerm", "DataBlockValue", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "TripleTermSubject", "TripleTermObject", "TripleTermDataObject", "ExprTripleTermObject"])
         this.setColour(163)
     }
 }
@@ -1306,7 +1336,7 @@ Blocks["sparql11_booleanliteral"] = {
         this.appendDummyInput()
             .appendField(new FieldCheckbox("TRUE"), "value")
         this.setInputsInline(true)
-        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "RDFLiteral", "GraphNode", "VarOrTerm", "GraphTerm", "DataBlockValue", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression"])
+        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "RDFLiteral", "GraphNode", "VarOrTerm", "GraphTerm", "DataBlockValue", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "TripleTermSubject", "TripleTermObject", "TripleTermDataObject", "ExprTripleTermObject"])
         this.setColour(163)
     }
 }
@@ -1315,7 +1345,7 @@ Blocks["sparql11_string"] = {
         this.appendDummyInput()
             .appendField(new FieldMultilineInput(""), "value")
         this.setInputsInline(true)
-        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "string", "RDFLiteral", "GraphNode", "VarOrTerm", "GraphTerm", "DataBlockValue", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression"])
+        this.setOutput(true, ["EmbSubjectOrObject", "DataValueTerm", "VarOrTermOrEmbTP", "string", "RDFLiteral", "GraphNode", "VarOrTerm", "GraphTerm", "DataBlockValue", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression", "TripleTermSubject", "TripleTermObject", "TripleTermDataObject", "ExprTripleTermObject"])
         this.setColour(163)
     }
 }

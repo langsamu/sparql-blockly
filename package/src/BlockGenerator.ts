@@ -9,7 +9,9 @@ const F = new AstFactory()
 
 type State = serialization.blocks.State
 
-type DataValue = T12.TermIri | T12.TermLiteral | undefined
+type DataValue = T12.TermIri | T12.TermLiteral | T12.TermTriple | undefined
+
+type TripleContext = "pattern" | "data" | "expression"
 
 const shortForms = {
     [CommonIRIs.INTEGER]: /^[+-]?[0-9]+$/,
@@ -588,7 +590,7 @@ export default class BlockGenerator {
     // #region Expressions
     private expression(expression: T12.Expression): State {
         if (expression.type === "term")
-            return this.term(expression)
+            return this.term(expression, "expression")
 
         switch (expression.subType) {
             case "operation":
@@ -910,7 +912,7 @@ export default class BlockGenerator {
     // #endregion
 
     // #region Terms
-    private term(term: T12.Term): State {
+    private term(term: T12.Term, context: TripleContext = "pattern"): State {
         switch (term.subType) {
             case "variable":
                 return this.variable(term)
@@ -928,7 +930,7 @@ export default class BlockGenerator {
                 return this.literal(term)
 
             case "triple":
-                return this.triple(term)
+                return this.triple(term, context)
         }
     }
     private graphNode(node: T12.GraphNode): State {
@@ -956,12 +958,14 @@ export default class BlockGenerator {
         else
             return block("sparql11_irirefdefault")
     }
-    private triple(term: T12.TermTriple): State {
-        return block("sparql11_tripleterm", {
+    private triple(term: T12.TermTriple, context: TripleContext): State {
+        const type = { pattern: "sparql11_tripleterm", data: "sparql11_tripletermdata", expression: "sparql11_exprtripleterm" }[context]
+
+        return block(type, {
             inputs: {
-                subject: { block: this.term(term.subject) },
+                subject: { block: this.term(term.subject, context) },
                 predicate: { block: this.verb(term.predicate) },
-                object: { block: this.term(term.object) }
+                object: { block: this.term(term.object, context) }
             }
         })
     }
@@ -1091,7 +1095,7 @@ export default class BlockGenerator {
     }
     private dataBlockValueItem(item: DataValue): State {
         if (item)
-            return wrap("sparql11_datablockvalueitem", this.term(item))
+            return wrap("sparql11_datablockvalueitem", this.term(item, "data"))
         else
             return wrap("sparql11_datablockvalueitem", block("sparql11_undef"))
     }

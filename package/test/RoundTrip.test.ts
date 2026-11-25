@@ -102,15 +102,35 @@ describe("Save and load", function () {
     }
 })
 
+function blockTypes(state: unknown): string[] {
+    const types: string[] = []
+    JSON.stringify(state, (key, value) => {
+        if (key === "type" && typeof value === "string") types.push(value)
+        return value
+    })
+
+    return types
+}
+
 describe("Triple term round trip", function () {
-    const cases: [string, string, string][] = [
-        ["triple term in BIND", "SELECT * { BIND (<<( ?p <x:a> ?a )>> AS ?t) }", "BIND (<<( ?p <x:a> ?a )>> AS ?t)"],
-        ["triple term as object", "SELECT * { ?s ?p <<( ?a <x:a> ?b )>> }", "?s ?p <<( ?a <x:a> ?b )>>"],
-        ["reified triple", "SELECT * { << ?a <x:a> ?b >> ?p ?o }", "<< ?a <x:a> ?b >> ?p ?o"],
+    const cases: [string, string, string, string[], string[]][] = [
+        ["triple term in BIND", "SELECT * { BIND (<<( ?p <x:a> ?a )>> AS ?t) }", "BIND (<<( ?p <x:a> ?a )>> AS ?t)", ["sparql11_exprtripleterm"], ["sparql11_tripleterm", "sparql11_tripletermdata"]],
+        ["triple term in FILTER", "SELECT * { FILTER (?t = <<( ?p <x:a> 1 )>>) }", "FILTER (?t = <<( ?p <x:a> 1 )>>)", ["sparql11_exprtripleterm"], ["sparql11_tripleterm", "sparql11_tripletermdata"]],
+        ["nested triple term in BIND", "SELECT * { BIND (<<( <x:s> <x:a> <<( <x:s> a ?o )>> )>> AS ?t) }", "BIND (<<( <x:s> <x:a> <<( <x:s> a ?o )>> )>> AS ?t)", ["sparql11_exprtripleterm"], ["sparql11_tripleterm", "sparql11_tripletermdata"]],
+        ["triple term as object", "SELECT * { ?s ?p <<( ?a <x:a> ?b )>> }", "?s ?p <<( ?a <x:a> ?b )>>", ["sparql11_tripleterm"], ["sparql11_tripletermdata", "sparql11_exprtripleterm"]],
+        ["nested triple term as object", "SELECT * { ?s ?p <<( _:a <x:a> <<( ?a <x:b> 1 )>> )>> }", "?s ?p <<( _:e_a <x:a> <<( ?a <x:b> 1 )>> )>>", ["sparql11_tripleterm"], ["sparql11_tripletermdata", "sparql11_exprtripleterm"]],
+        ["triple term in VALUES, one variable", "SELECT * { VALUES ?t { <<( <x:s> <x:a> 1 )>> UNDEF } }", "<<( <x:s> <x:a> 1 )>>", ["sparql11_tripletermdata"], ["sparql11_tripleterm", "sparql11_exprtripleterm"]],
+        ["triple term in VALUES, more than one variable", "SELECT * { VALUES (?t ?u) { (<<( <x:s> a <<( <x:s> <x:a> \"b\" )>> )>> 2) } }", "<<( <x:s> a <<( <x:s> <x:a> 'b' )>> )>>", ["sparql11_tripletermdata"], ["sparql11_tripleterm", "sparql11_exprtripleterm"]],
+        ["reified triple", "SELECT * { << ?a <x:a> ?b >> ?p ?o }", "<< ?a <x:a> ?b >> ?p ?o", ["sparql11_embtp"], ["sparql11_tripleterm", "sparql11_tripletermdata", "sparql11_exprtripleterm"]],
     ]
 
-    for (const [name, sparql, expected] of cases) {
+    for (const [name, sparql, expected, used, unused] of cases) {
         it(name, function () {
+            const state = new BlockGenerator().visit(parseSparql(sparql))
+            const types = blockTypes(state)
+            for (const type of used) assert.ok(types.includes(type), `${type} in ${types}`)
+            for (const type of unused) assert.ok(!types.includes(type), `${type} in ${types}`)
+
             const actual = roundTrip(sparql)
             assert.ok(actual.includes(expected), actual)
             parseSparql(actual)
