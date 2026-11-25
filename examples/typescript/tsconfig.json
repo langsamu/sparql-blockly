@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
-    "target": "ES6",
-    "lib": [ "ES6", "dom" ],
-    "skipLibCheck": true,
+    "strict": false,
     "rootDir": "src",
     "outDir": "out"
   },
