@@ -192,7 +192,6 @@ vars("sparql11_varitem", "value")
 
 property("sparql11_datablockvalueitem", "sparql11_undef", "value", "Undefined")
 terms("sparql11_datablockvalueitem", "value")
-property("sparql11_datablockvalueitem", "sparql11_embtp", "value", "<< >>")
 property("sparql11_datablockvalueitem", "sparql11_tripleterm", "value", "<<( )>>")
 
 collection("sparql11_datablockvaluesitem", "sparql11_datablockvalueitem", "items", "Cell")
@@ -239,7 +238,6 @@ collection("sparql11_selectclause", "sparql11_varorexpressionasvaritem", "vars",
 vars("sparql11_expressionasvar", "name", "Name")
 separator("sparql11_expressionasvar")
 expressions("sparql11_expressionasvar", "value")
-property("sparql11_expressionasvar", "sparql11_embtp", "value", "<< >>")
 property("sparql11_expressionasvar", "sparql11_tripleterm", "value", "<<( )>>")
 
 property("sparql11_datasetclause", "sparql11_namedgraphclause", "value", "Named")

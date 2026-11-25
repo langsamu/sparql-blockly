@@ -705,7 +705,7 @@ Blocks["sparql11_selectclause"] = {
 Blocks["sparql11_expressionasvar"] = {
     init: function () {
         this.appendValueInput("value")
-            .setCheck(["Expression", "EmbTP"])
+            .setCheck("Expression")
             .appendField("(")
         this.appendDummyInput()
             .appendField("AS")
@@ -1151,14 +1151,14 @@ Blocks["sparql11_embtp"] = {
     init: function () {
         this.appendValueInput("subject")
             .appendField("<<")
-            .setCheck("EmbSubjectOrObject")
+            .setCheck(["EmbSubjectOrObject", "ReifiedTriple"])
         this.appendValueInput("predicate")
             .setCheck("Verb")
         this.appendValueInput("object")
-            .setCheck("EmbSubjectOrObject")
+            .setCheck(["EmbSubjectOrObject", "ReifiedTriple"])
         this.appendDummyInput()
             .appendField(">>")
-        this.setOutput(true, ["GraphNode", "GraphNodePath", "VarOrTermOrEmbTP", "EmbSubjectOrObject", "EmbTP", "DataBlockValue"])
+        this.setOutput(true, ["GraphNode", "GraphNodePath", "VarOrTermOrEmbTP", "ReifiedTriple"])
         this.setColour(0)
     }
 }
