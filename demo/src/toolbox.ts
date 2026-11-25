@@ -1475,7 +1475,7 @@ export const toolbox = {
                     kind: "button",
                     text: "GraphDB: SPARQL*",
                     callbackKey: "example",
-                    query: "# See https://graphdb.ontotext.com/documentation/9.2/free/devhub/rdf-sparql-star.html\r\n\r\nPREFIX foaf: <http://xmlns.com/foaf/0.1/>\r\nPREFIX ex: <http://example.com/>\r\n\r\nSELECT ?p ?a ?c\r\nWHERE {\r\n\tBIND (<< ?p foaf:age ?a >> AS ?t) .\r\n\t?t ex:certainty ?c\r\n}"
+                    query: "# See https://graphdb.ontotext.com/documentation/9.2/free/devhub/rdf-sparql-star.html\r\n\r\nPREFIX foaf: <http://xmlns.com/foaf/0.1/>\r\nPREFIX ex: <http://example.com/>\r\n\r\nSELECT ?p ?a ?c\r\nWHERE {\r\n\tBIND (<<( ?p foaf:age ?a )>> AS ?t) .\r\n\t?t ex:certainty ?c\r\n}"
                 },
                 {
                     kind: "button",
