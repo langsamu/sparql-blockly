@@ -1162,6 +1162,21 @@ Blocks["sparql11_embtp"] = {
         this.setColour(0)
     }
 }
+Blocks["sparql11_tripleterm"] = {
+    init: function () {
+        this.appendValueInput("subject")
+            .appendField("<<(")
+            .setCheck("EmbSubjectOrObject")
+        this.appendValueInput("predicate")
+            .setCheck("Verb")
+        this.appendValueInput("object")
+            .setCheck("EmbSubjectOrObject")
+        this.appendDummyInput()
+            .appendField(")>>")
+        this.setOutput(true, ["GraphNode", "GraphNodePath", "VarOrTermOrEmbTP", "EmbSubjectOrObject", "DataBlockValue", "DataValueTerm", "VarOrTerm", "GraphTerm", "Object", "Expression", "ConditionalOrExpression", "ConditionalAndExpression", "RelationalExpression", "AdditiveExpression", "MultiplicativeExpression", "UnaryExpression", "PrimaryExpression"])
+        this.setColour(0)
+    }
+}
 Blocks["sparql11_iriref"] = {
     init: function () {
         this.appendDummyInput()

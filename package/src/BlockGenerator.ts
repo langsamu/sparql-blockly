@@ -957,7 +957,7 @@ export default class BlockGenerator {
             return block("sparql11_irirefdefault")
     }
     private triple(term: T12.TermTriple): State {
-        return block("sparql11_embtp", {
+        return block("sparql11_tripleterm", {
             inputs: {
                 subject: { block: this.term(term.subject) },
                 predicate: { block: this.verb(term.predicate) },

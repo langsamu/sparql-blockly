@@ -193,6 +193,7 @@ vars("sparql11_varitem", "value")
 property("sparql11_datablockvalueitem", "sparql11_undef", "value", "Undefined")
 terms("sparql11_datablockvalueitem", "value")
 property("sparql11_datablockvalueitem", "sparql11_embtp", "value", "<< >>")
+property("sparql11_datablockvalueitem", "sparql11_tripleterm", "value", "<<( )>>")
 
 collection("sparql11_datablockvaluesitem", "sparql11_datablockvalueitem", "items", "Cell")
 // #endregion
@@ -239,6 +240,7 @@ vars("sparql11_expressionasvar", "name", "Name")
 separator("sparql11_expressionasvar")
 expressions("sparql11_expressionasvar", "value")
 property("sparql11_expressionasvar", "sparql11_embtp", "value", "<< >>")
+property("sparql11_expressionasvar", "sparql11_tripleterm", "value", "<<( )>>")
 
 property("sparql11_datasetclause", "sparql11_namedgraphclause", "value", "Named")
 separator("sparql11_datasetclause")
@@ -351,6 +353,12 @@ separator("sparql11_embtp")
 verbs("sparql11_embtp", "predicate", "Predicate")
 separator("sparql11_embtp")
 graphNodes("sparql11_embtp", "object", "Object")
+
+graphNodes("sparql11_tripleterm", "subject", "Subject")
+separator("sparql11_tripleterm")
+verbs("sparql11_tripleterm", "predicate", "Predicate")
+separator("sparql11_tripleterm")
+graphNodes("sparql11_tripleterm", "object", "Object")
 
 property("sparql11_typedliteral", "sparql11_string", "value", "''", "Value")
 separator("sparql11_typedliteral")

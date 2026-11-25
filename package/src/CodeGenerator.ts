@@ -784,6 +784,15 @@ export default class CodeGenerator extends Blockly.Generator {
 
         return codeTuple(code)
     }
+    public sparqlTripleTerm(block: Blockly.Block): CodeTuple {
+        const subject = this.valueToCode(block, "subject")
+        const predicate = this.valueToCode(block, "predicate")
+        const object = this.valueToCode(block, "object")
+
+        const code = joinO(" ", "<<(", subject, predicate, object, ")>>")
+
+        return codeTuple(code)
+    }
     public sparqlObjectListItemAnnotationPattern(block: Blockly.Block): string {
         const value = this.valueToCode(block, "value")
         const annotations = this.statementToCode(block, "annotations")

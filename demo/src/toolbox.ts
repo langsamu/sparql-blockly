@@ -467,7 +467,8 @@ export const toolbox = {
                         }
                     }
                 },
-                { kind: "block", type: "sparql11_embtp" }
+                { kind: "block", type: "sparql11_embtp" },
+                { kind: "block", type: "sparql11_tripleterm" }
             ]
         },
         {

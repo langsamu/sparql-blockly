@@ -101,3 +101,19 @@ describe("Save and load", function () {
         })
     }
 })
+
+describe("Triple term round trip", function () {
+    const cases: [string, string, string][] = [
+        ["triple term in BIND", "SELECT * { BIND (<<( ?p <x:a> ?a )>> AS ?t) }", "BIND (<<( ?p <x:a> ?a )>> AS ?t)"],
+        ["triple term as object", "SELECT * { ?s ?p <<( ?a <x:a> ?b )>> }", "?s ?p <<( ?a <x:a> ?b )>>"],
+        ["reified triple", "SELECT * { << ?a <x:a> ?b >> ?p ?o }", "<< ?a <x:a> ?b >> ?p ?o"],
+    ]
+
+    for (const [name, sparql, expected] of cases) {
+        it(name, function () {
+            const actual = roundTrip(sparql)
+            assert.ok(actual.includes(expected), actual)
+            parseSparql(actual)
+        })
+    }
+})

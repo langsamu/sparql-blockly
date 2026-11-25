@@ -23,6 +23,7 @@ export function graphNodes(parentBlockType: string, inputName: string, prefix?: 
     triplesNodes(parentBlockType, inputName, prefix)
 
     property(parentBlockType, "sparql11_embtp", inputName, "<< >>", prefix)
+    property(parentBlockType, "sparql11_tripleterm", inputName, "<<( )>>", prefix)
 }
 export function terms(parentBlockType: string, inputName: string, prefix?: string): void {
     iris(parentBlockType, inputName, prefix)
