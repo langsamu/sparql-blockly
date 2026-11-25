@@ -4,3 +4,4 @@ node_modules
 obj
 bin
 demo/public/app.js
+demo/dist

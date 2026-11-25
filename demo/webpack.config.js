@@ -1,6 +1,6 @@
 /** @type {import("webpack").Configuration} */
 export default {
-    entry: "./src/index.ts",
+    entry: "./dist/index.js",
     output: {
         path: import.meta.dirname + "/public",
         filename: "app.js",
@@ -8,18 +8,5 @@ export default {
     externals: {
         "blockly": "Blockly",
         "sparql-blockly": "SparqlBlockly"
-    },
-    resolve: {
-        extensions: [".ts", ".js"],
-        extensionAlias: {
-            ".js": [".ts", ".js"]
-        }
-    },
-    module: {
-        rules: [
-            {
-                test: /\.ts$/, loader: "ts-loader"
-            }
-        ]
     }
 }

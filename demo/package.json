@@ -4,13 +4,12 @@
   "homepage": "https://langsamu.github.io/sparql-blockly/",
   "scripts": {
     "start": "http-server public",
-    "build": "webpack --mode production",
+    "build": "tsc && webpack --mode production",
     "clean": "tsc --build --clean"
   },
   "devDependencies": {
     "@types/node": "^22.20.5",
     "http-server": "^14.1.1",
-    "ts-loader": "^9.4.4",
     "typescript": "^6.0.3",
     "webpack": "^5.88.2",
     "webpack-cli": "^7.3.1"

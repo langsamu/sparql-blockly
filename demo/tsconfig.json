@@ -7,6 +7,9 @@
     "strict": false,
     "erasableSyntaxOnly": true,
     "rewriteRelativeImportExtensions": true,
-    "verbatimModuleSyntax": true
-  }
+    "verbatimModuleSyntax": true,
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": [ "src" ]
 }

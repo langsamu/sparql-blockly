@@ -2,6 +2,10 @@
   "compilerOptions": {
     "module": "CommonJS",
     "target": "ES6",
-    "lib": [ "ES6", "dom" ]
-  }
+    "lib": [ "ES6", "dom" ],
+    "skipLibCheck": true,
+    "rootDir": "src",
+    "outDir": "out"
+  },
+  "include": [ "src" ]
 }
