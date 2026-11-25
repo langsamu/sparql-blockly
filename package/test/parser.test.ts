@@ -13,7 +13,7 @@ describe("Parser", function () {
         assert.ok(query.context.some(definition => definition.type === "contextDef" && definition.subType === "prefix"))
 
         const bgp = query.where.patterns[0] as T12.PatternBgp
-        const triples = bgp.triples as T12.TripleNesting[]
+        const triples = bgp.triples as [T12.TripleNesting, T12.TripleNesting]
         assert.equal(triples.length, 2)
         assert.equal(factory.isSourceLocationNoMaterialize(triples[0].subject.loc), false)
         assert.equal(factory.isSourceLocationNoMaterialize(triples[1].subject.loc), true)

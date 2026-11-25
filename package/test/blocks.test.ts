@@ -81,6 +81,7 @@ describe("blocks", function () {
         it("emits next after the other keys", function () {
             const state = chain([block("a", { fields: { x: "y" }, inputs: { v: { block: block("c") } } }), block("b")])
 
+            assert.ok(state)
             assert.deepStrictEqual(Object.keys(state), ["type", "fields", "inputs", "next"])
         })
     })

@@ -11,7 +11,7 @@ function join(delimiter: string, ...clauses: string[]) {
 function joinO(delimiter: string, ...clauses: Array<[any, string] | string>): string {
     return clauses.filter(clause => clause instanceof Array ? clause[0] : clause).map(clause => clause instanceof Array ? clause[1] : clause).join(delimiter)
 }
-function prefixedName(prefix, localName): CodeTuple {
+function prefixedName(prefix: string, localName: string): CodeTuple {
     const code = `${prefix}:${localName}`
 
     return codeTuple(code)
@@ -33,26 +33,18 @@ export default class CodeGenerator extends Blockly.Generator {
     }
 
     private addCodeGeneratorProperties() {
-        const prefix = "sparql"
-        const isGenerator = name => name.startsWith(prefix)
-        const toPropertyName = name => name.replace(prefix, "sparql11_").toLowerCase()
-        const toWrappedGenerator = generatorName => block => this[generatorName](block)
-        const addPropertyName = generatorName => [toPropertyName(generatorName), generatorName]
-        const closeOverThis = ([propertyName, generatorName]) => [propertyName, toWrappedGenerator(generatorName)]
-        const addToInstance = ([propertyName, generatorFunction]) => this.forBlock[propertyName] = generatorFunction
-
         // Generator functions on this class are the ones prefixed with 'sparql'.
         // Blockly expects them to be properties of the generator instance.
         // They need to be named exactly as the block type.
         // They're called without 'this': `generator.call(block, block)`, so we need to wrap them capture it.
-        Object.getOwnPropertyNames(CodeGenerator.prototype)
-            .filter(isGenerator)
-            .map(addPropertyName)
-            .map(closeOverThis)
-            .forEach(addToInstance)
+        for (const name of Object.getOwnPropertyNames(CodeGenerator.prototype).filter(name => name.startsWith("sparql"))) {
+            const generator: (block: Blockly.Block) => string | CodeTuple = Reflect.get<object, string>(this, name)
+
+            this.forBlock[name.replace("sparql", "sparql11_").toLowerCase()] = block => generator.call(this, block)
+        }
     }
 
-    public scrub_(block: Blockly.Block, code: string, thisOnly?: boolean): string {
+    public override scrub_(block: Blockly.Block, code: string, thisOnly?: boolean): string {
         if (!thisOnly) {
             const next = block.getNextBlock();
 
@@ -874,12 +866,11 @@ export default class CodeGenerator extends Blockly.Generator {
         return this.item(" .\n", block)
     }
 
-    public valueToCode(block: Blockly.Block, name: string): string {
+    public override valueToCode(block: Blockly.Block, name: string): string {
         return super.valueToCode(block, name, Order.Atomic)
     }
     private indent(code: string): string {
-        if (code)
-            return this.prefixLines(code, "\t")
+        return code ? this.prefixLines(code, "\t") : code
     }
     private var(block: Blockly.Block, prefix: string): CodeTuple {
         const value = block.getFieldValue("value")

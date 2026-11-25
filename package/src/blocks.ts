@@ -4,17 +4,17 @@ type State = serialization.blocks.State
 
 interface Parts {
     fields?: Record<string, string | boolean | undefined>
-    inputs?: Record<string, { block?: State }>
+    inputs?: Record<string, { block?: State | undefined }>
 }
 
 export function block(type: string, { fields = {}, inputs = {} }: Parts = {}): State {
-    const definedFields = Object.entries(fields).filter(([, value]) => value !== undefined && value !== "")
-    const definedInputs = Object.entries(inputs).filter(([, input]) => input.block !== undefined)
+    const definedFields = Object.entries(fields).flatMap(([name, value]) => value !== undefined && value !== "" ? [[name, value] as const] : [])
+    const definedInputs = Object.entries(inputs).flatMap(([name, input]) => input.block ? [[name, { block: input.block }] as const] : [])
 
     return {
         type,
         ...(definedFields.length && { fields: Object.fromEntries(definedFields) }),
-        ...(definedInputs.length && { inputs: Object.fromEntries(definedInputs.map(([name, { block }]) => [name, { block }])) })
+        ...(definedInputs.length && { inputs: Object.fromEntries(definedInputs) })
     }
 }
 

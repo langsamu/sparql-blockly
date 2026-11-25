@@ -178,7 +178,7 @@ export function primaryPaths(parentBlockType: string, inputName: string, prefix?
 export function separator(parentBlockType: string): void {
     const menuItem = {
         displayText: () => "==========",
-        preconditionFn: (scope: Blockly.ContextMenuRegistry.Scope) => scope.block.type === parentBlockType ? "disabled" : "hidden",
+        preconditionFn: (scope: Blockly.ContextMenuRegistry.Scope) => scope.block?.type === parentBlockType ? "disabled" : "hidden",
         callback: () => { },
         scopeType: Blockly.ContextMenuRegistry.ScopeType.BLOCK,
         id: `separator${++separatorCounter}`,
@@ -192,7 +192,11 @@ export function workspace(displayText: string, newBlockType: string): void {
         displayText: () => displayText,
         preconditionFn: () => "enabled",
         callback: (scope: Blockly.ContextMenuRegistry.Scope) => {
-            const block = scope.workspace.newBlock(newBlockType);
+            const block = scope.workspace?.newBlock(newBlockType);
+            if (!block) {
+                return
+            }
+
             block.initSvg();
             block.render();
         },
@@ -203,30 +207,35 @@ export function workspace(displayText: string, newBlockType: string): void {
 }
 export function property(parentBlockType: string, newBlockType: string, inputName: string, displayText: string, prefix?: string): void {
     const callback = (scope: Blockly.ContextMenuRegistry.Scope) => {
-        const block = scope.block.workspace.newBlock(newBlockType);
+        const sb = scope.block as Blockly.BlockSvg | undefined
+        const target = sb?.getInput(inputName)?.connection
+        if (!sb || !target) {
+            return
+        }
+
+        const block = sb.workspace.newBlock(newBlockType);
         block.initSvg();
         block.render();
 
-        const sb = scope.block as Blockly.BlockSvg;
-        block.outputConnection.connect(sb.getInput(inputName).connection);
+        block.outputConnection?.connect(target);
     }
 
     block(parentBlockType, newBlockType, inputName, displayText, callback, prefix)
 }
 export function collection(parentBlockType: string, newBlockType: string, inputName: string, displayText: string, prefix?: string): void {
     const callback = (scope: Blockly.ContextMenuRegistry.Scope) => {
-        const block = scope.block.workspace.newBlock(newBlockType);
+        const sb = scope.block as Blockly.BlockSvg | undefined
+        const x = sb?.getInput(inputName)?.connection
+        if (!sb || !x) {
+            return
+        }
+
+        const block = sb.workspace.newBlock(newBlockType);
         block.initSvg();
         block.render();
 
-        const sb = scope.block as Blockly.BlockSvg;
-        const x = sb.getInput(inputName).connection;
-        const xtb = x.targetBlock();
-        if (xtb)
-            block.previousConnection.connect(xtb.lastConnectionInStack(true));
-
-        else
-            block.previousConnection.connect(x);
+        const last = x.targetBlock()?.lastConnectionInStack(true) ?? x
+        block.previousConnection?.connect(last);
     }
 
     block(parentBlockType, newBlockType, inputName, displayText, callback, prefix)
@@ -239,7 +248,7 @@ function block(parentBlockType: string, newBlockType: string, inputName: string,
 
     const menuItem = {
         displayText: () => displayText,
-        preconditionFn: (scope: Blockly.ContextMenuRegistry.Scope) => scope.block.type === parentBlockType ? "enabled" : "hidden",
+        preconditionFn: (scope: Blockly.ContextMenuRegistry.Scope) => scope.block?.type === parentBlockType ? "enabled" : "hidden",
         callback,
         scopeType: Blockly.ContextMenuRegistry.ScopeType.BLOCK,
         id: parentBlockType + newBlockType + inputName,

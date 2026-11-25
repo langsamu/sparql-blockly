@@ -1,13 +1,17 @@
 {
   "compilerOptions": {
-    "module": "NodeNext",
-    "target": "ES2024",
+    "module": "nodenext",
     "types": [ "node" ],
-    "strict": false,
     "erasableSyntaxOnly": true,
-    "rewriteRelativeImportExtensions": true,
     "verbatimModuleSyntax": true,
-    "noEmit": true
+    "rewriteRelativeImportExtensions": true,
+    "noEmit": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true
   },
-  "include": [ "src", "test", "support" ]
+  "include": [ "src", "test" ]
 }

@@ -11,7 +11,7 @@ type State = serialization.blocks.State
 
 type DataValue = T12.TermIri | T12.TermLiteral | undefined
 
-const shortForms: Record<string, RegExp> = {
+const shortForms = {
     [CommonIRIs.INTEGER]: /^[+-]?[0-9]+$/,
     [CommonIRIs.DECIMAL]: /^[+-]?[0-9]*\.[0-9]+$/,
     [CommonIRIs.DOUBLE]: /^[+-]?([0-9]+\.[0-9]*|\.?[0-9]+)[eE][+-]?[0-9]+$/,
@@ -26,7 +26,7 @@ export default class BlockGenerator {
         deletedata: "DELETE DATA",
         deletewhere: "DELETE WHERE"
     }
-    private static hierarchy: OperatorHierarchy = {
+    private static hierarchy = {
         unaryexpression: {
             operators: ["uminus", "uplus", "!"],
             higher: {
@@ -152,6 +152,9 @@ export default class BlockGenerator {
         })
     }
     private queryCommon(query: T12.Query): State {
+        if (!query.where)
+            throw new Error("Unsupported syntax: query without WHERE")
+
         return block("sparql11_querycommon", {
             inputs: {
                 pattern: { block: this.group(query.where.patterns) },
@@ -349,10 +352,12 @@ export default class BlockGenerator {
     private group(patterns: T12.Pattern[]): State {
         const normalisedPatterns = BlockGenerator.normalisePatterns(patterns)
 
-        if (normalisedPatterns.length === 0)
+        const [first] = normalisedPatterns
+
+        if (!first)
             return block("sparql11_groupgraphpattern")
         else if (normalisedPatterns.length === 1)
-            return wrap("sparql11_groupgraphpattern", this.pattern(normalisedPatterns[0]))
+            return wrap("sparql11_groupgraphpattern", this.pattern(first))
         else
             return wrap("sparql11_groupgraphpattern", this.groupGraphPatternSub(normalisedPatterns))
     }
@@ -413,6 +418,9 @@ export default class BlockGenerator {
     private triplesSameSubject(triples: T12.BasicGraphPattern): State {
         const [head, ...tail] = triples
 
+        if (!head)
+            throw new Error("Unsupported syntax: empty triples")
+
         if (head.type === "tripleCollection") {
             return block("sparql11_triplessamesubject", {
                 inputs: {
@@ -463,6 +471,9 @@ export default class BlockGenerator {
             throw new Error("Unsupported syntax: explicit reifier")
 
         const triple = collection.triples[0]
+
+        if (!triple)
+            throw new Error("Unsupported syntax: empty reified triple")
 
         return block("sparql11_embtp", {
             inputs: {
@@ -691,13 +702,13 @@ export default class BlockGenerator {
         })
     }
     private bound(expression: T12.ExpressionOperation): State {
-        return wrap("sparql11_bound", this.expression(expression.args[0]))
+        return wrap("sparql11_bound", this.expression(BlockGenerator.argument(expression, 0)))
     }
     private bracketted(expression: T12.Expression): State {
         return wrap("sparql11_brackettedexpression", this.expression(expression))
     }
     private unibinary(expression: T12.ExpressionOperation, hierarchy: OperatorHierarchy = BlockGenerator.hierarchy): State {
-        const [name, definition] = Object.entries(hierarchy)[0]
+        const [name, definition] = BlockGenerator.firstLevel(hierarchy)
 
         if (definition.operators.includes(expression.operator)) {
             return block(`sparql11_${name}`, {
@@ -705,8 +716,8 @@ export default class BlockGenerator {
                     operator: ["&&", "||"].includes(expression.operator) ? undefined : BlockGenerator.operatorField(expression.operator)
                 },
                 inputs: {
-                    left: { block: this.bracketArgument(expression.args[0], definition) },
-                    right: { block: expression.args.length > 1 ? this.bracketArgument(expression.args[1], definition) : undefined }
+                    left: { block: this.bracketArgument(BlockGenerator.argument(expression, 0), definition) },
+                    right: { block: expression.args.length > 1 ? this.bracketArgument(BlockGenerator.argument(expression, 1), definition) : undefined }
                 }
             })
         }
@@ -721,7 +732,7 @@ export default class BlockGenerator {
             }
 
             if (definition.higher) {
-                const [, higher] = Object.entries(definition.higher)[0]
+                const [, higher] = BlockGenerator.firstLevel(definition.higher)
                 return this.bracketArgument(argument, higher)
             }
         }
@@ -730,6 +741,9 @@ export default class BlockGenerator {
     }
     private in(expression: T12.ExpressionOperation): State {
         const [left, ...right] = expression.args
+
+        if (!left)
+            throw new Error("Unsupported syntax: missing operand of IN")
 
         return block("sparql11_relationalexpressionin", {
             fields: {
@@ -844,6 +858,8 @@ export default class BlockGenerator {
                 }
             })
         }
+
+        return undefined
     }
     private descending(expression: T12.Expression): State {
         return block("sparql11_ordercondition", {
@@ -860,8 +876,10 @@ export default class BlockGenerator {
         const variables = vars.map(variable => variable.value)
         const values = rows.map(row => variables.map(variable => row[variable]))
 
-        if (variables.length === 1)
-            return wrap("sparql11_inlinedata", this.inlineDataOneVar(variables[0], values.flat()))
+        const [variable] = variables
+
+        if (variable !== undefined && variables.length === 1)
+            return wrap("sparql11_inlinedata", this.inlineDataOneVar(variable, values.flat()))
         else
             return wrap("sparql11_inlinedata", this.inlineDataFull(variables, values))
     }
@@ -1165,6 +1183,22 @@ export default class BlockGenerator {
     }
     private static normaliseQuads(quads: T12.Quads[]): T12.Quads[] {
         return quads.flatMap((quad): T12.Quads[] => quad.type === "pattern" ? BlockGenerator.splitBgp(quad) : [quad])
+    }
+    private static argument(expression: T12.ExpressionOperation, index: number): T12.Expression {
+        const argument = expression.args[index]
+
+        if (!argument)
+            throw new Error(`Unsupported syntax: missing operand of ${expression.operator}`)
+
+        return argument
+    }
+    private static firstLevel(hierarchy: OperatorHierarchy): [string, OperatorDefinition] {
+        const level = Object.entries(hierarchy)[0]
+
+        if (!level)
+            throw new Error("Unsupported syntax: operator")
+
+        return level
     }
     private static normalisePatterns(patterns: T12.Pattern[]): T12.Pattern[] {
         return patterns.flatMap((pattern): T12.Pattern[] => pattern.subType === "bgp" ? BlockGenerator.splitBgp(pattern) : [pattern])
